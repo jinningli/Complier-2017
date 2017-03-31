@@ -1,4 +1,4 @@
-// Generated from /Users/lijinning/Desktop/MMP/src/Compiler/FrontEnd/MMP.g4 by ANTLR 4.6
+// Generated from /Users/lijinning/Desktop/Compiler - 2017/src/Compiler/FrontEnd/MMP.g4 by ANTLR 4.6
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**

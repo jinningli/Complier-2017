@@ -60,7 +60,7 @@ whileStmt:  WHILE exprBkt
 expr:       exprBkt                                                                 # ExprWithBracket
             | constant                                                              # ConstantValue
             | ID                                                                    # Identifier
-            | expr '(' (expr (',' expr)*)? ')'                                      # ExpressionList
+            | ID '(' (expr (',' expr)*)? ')'                                        # ExpressionList
             | expr DOT ID                                                           # CallMember
             | expr DOT ID '(' type ptrBracket ID ( ',' type ptrBracket ID )* ')'    # CallFunction
             | 'new' type ('[' expr ']' ptrBracket)?                                 # NewOperation
@@ -96,13 +96,6 @@ constant:   NULL
 
 /*****************************    Declare of Lexer    *****************************/
 
-// Type Lexer
-INT         : DIGIT+;
-BOOL        : 'true' | 'false';
-NULL        : 'null';
-STRING      : '"' (ESC | .)*? '"';
-ID          : LETTER (LETTER | DIGIT)*;
-
 //Structure Lexer
 IF          : 'if';
 ELSE        : 'else';
@@ -113,6 +106,15 @@ CONTINUE    : 'continue';
 BREAK       : 'break';
 RETURN      : 'return';
 VOID        : 'void';
+
+
+// Type Lexer
+INT         : DIGIT+;
+BOOL        : 'true' | 'false';
+NULL        : 'null';
+STRING      : '"' (ESC | .)*? '"';
+ID          : LETTER (LETTER | DIGIT)*;
+
 
 
 //Calculating Operator
