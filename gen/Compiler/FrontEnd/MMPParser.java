@@ -1,16 +1,20 @@
-// Generated from /Users/lijinning/Desktop/Compiler - 2017/src/Compiler/FrontEnd/MMP.g4 by ANTLR 4.6
-import org.antlr.v4.runtime.atn.*;
-import org.antlr.v4.runtime.dfa.DFA;
+package Compiler.FrontEnd;// Generated from ../src/Compiler/FrontEnd/MMP.g4 by ANTLR 4.7
+
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
-import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.atn.ATN;
+import org.antlr.v4.runtime.atn.ATNDeserializer;
+import org.antlr.v4.runtime.atn.ParserATNSimulator;
+import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class MMPParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.6", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -113,15 +117,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_program; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterProgram(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterProgram(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitProgram(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitProgram(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitProgram(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitProgram(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -178,15 +182,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_decl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterDecl(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterDecl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitDecl(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitDecl(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitDecl(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitDecl(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -249,15 +253,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_varDecl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterVarDecl(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterVarDecl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitVarDecl(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitVarDecl(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitVarDecl(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitVarDecl(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -323,15 +327,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_classDecl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterClassDecl(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterClassDecl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitClassDecl(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitClassDecl(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitClassDecl(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitClassDecl(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -388,15 +392,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_funcDecl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterFuncDecl(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterFuncDecl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitFuncDecl(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitFuncDecl(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitFuncDecl(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitFuncDecl(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -499,15 +503,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_block; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterBlock(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterBlock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitBlock(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitBlock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitBlock(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitBlock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -569,15 +573,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_classBlock; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterClassBlock(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterClassBlock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitClassBlock(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitClassBlock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitClassBlock(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitClassBlock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -642,15 +646,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_exprBkt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterExprBkt(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterExprBkt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitExprBkt(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitExprBkt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitExprBkt(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitExprBkt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -685,7 +689,7 @@ public class MMPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_stmt; }
-	 
+
 		public StmtContext() { }
 		public void copyFrom(StmtContext ctx) {
 			super.copyFrom(ctx);
@@ -698,15 +702,15 @@ public class MMPParser extends Parser {
 		public IfStatementContext(StmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterIfStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterIfStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitIfStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitIfStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitIfStatement(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitIfStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -717,15 +721,15 @@ public class MMPParser extends Parser {
 		public VarDeclareContext(StmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterVarDeclare(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterVarDeclare(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitVarDeclare(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitVarDeclare(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitVarDeclare(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitVarDeclare(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -740,15 +744,15 @@ public class MMPParser extends Parser {
 		public ControlStatementContext(StmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterControlStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterControlStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitControlStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitControlStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitControlStatement(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitControlStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -759,15 +763,15 @@ public class MMPParser extends Parser {
 		public ExprStatementContext(StmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterExprStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterExprStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitExprStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitExprStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitExprStatement(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitExprStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -778,15 +782,15 @@ public class MMPParser extends Parser {
 		public BlockStatementContext(StmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterBlockStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterBlockStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitBlockStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitBlockStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitBlockStatement(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitBlockStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -797,15 +801,15 @@ public class MMPParser extends Parser {
 		public WhileStatementContext(StmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterWhileStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterWhileStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitWhileStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitWhileStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitWhileStatement(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitWhileStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -816,15 +820,15 @@ public class MMPParser extends Parser {
 		public ForStatementContext(StmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterForStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterForStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitForStatement(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitForStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitForStatement(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitForStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -972,15 +976,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_ifStmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterIfStmt(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterIfStmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitIfStmt(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitIfStmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitIfStmt(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitIfStmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1058,15 +1062,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_forStmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterForStmt(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterForStmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitForStmt(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitForStmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitForStmt(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitForStmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1147,15 +1151,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_whileStmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterWhileStmt(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterWhileStmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitWhileStmt(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitWhileStmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitWhileStmt(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitWhileStmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1190,7 +1194,7 @@ public class MMPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expr; }
-	 
+
 		public ExprContext() { }
 		public void copyFrom(ExprContext ctx) {
 			super.copyFrom(ctx);
@@ -1206,15 +1210,15 @@ public class MMPParser extends Parser {
 		public ArrIndexContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterArrIndex(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterArrIndex(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitArrIndex(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitArrIndex(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitArrIndex(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitArrIndex(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1232,15 +1236,15 @@ public class MMPParser extends Parser {
 		public BinaryBitOperationContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterBinaryBitOperation(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterBinaryBitOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitBinaryBitOperation(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitBinaryBitOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitBinaryBitOperation(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitBinaryBitOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1254,15 +1258,15 @@ public class MMPParser extends Parser {
 		public SignExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterSignExpression(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterSignExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitSignExpression(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitSignExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitSignExpression(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitSignExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1279,15 +1283,15 @@ public class MMPParser extends Parser {
 		public BinaryBitMovContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterBinaryBitMov(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterBinaryBitMov(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitBinaryBitMov(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitBinaryBitMov(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitBinaryBitMov(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitBinaryBitMov(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1299,15 +1303,15 @@ public class MMPParser extends Parser {
 		public BitNotOperationContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterBitNotOperation(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterBitNotOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitBitNotOperation(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitBitNotOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitBitNotOperation(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitBitNotOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1319,15 +1323,15 @@ public class MMPParser extends Parser {
 		public NotOperationContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterNotOperation(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterNotOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitNotOperation(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitNotOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitNotOperation(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitNotOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1338,15 +1342,15 @@ public class MMPParser extends Parser {
 		public ExprWithBracketContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterExprWithBracket(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterExprWithBracket(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitExprWithBracket(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitExprWithBracket(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitExprWithBracket(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitExprWithBracket(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1363,15 +1367,15 @@ public class MMPParser extends Parser {
 		public NewOperationContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterNewOperation(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterNewOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitNewOperation(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitNewOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitNewOperation(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitNewOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1385,15 +1389,15 @@ public class MMPParser extends Parser {
 		public PostSelfOpContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterPostSelfOp(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterPostSelfOp(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitPostSelfOp(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitPostSelfOp(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitPostSelfOp(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitPostSelfOp(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1407,15 +1411,15 @@ public class MMPParser extends Parser {
 		public PreSelfOpContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterPreSelfOp(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterPreSelfOp(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitPreSelfOp(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitPreSelfOp(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitPreSelfOp(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitPreSelfOp(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1424,15 +1428,15 @@ public class MMPParser extends Parser {
 		public IdentifierContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterIdentifier(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterIdentifier(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitIdentifier(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitIdentifier(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitIdentifier(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitIdentifier(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1452,15 +1456,15 @@ public class MMPParser extends Parser {
 		public BinaryExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterBinaryExpression(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterBinaryExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitBinaryExpression(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitBinaryExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitBinaryExpression(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitBinaryExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1483,15 +1487,15 @@ public class MMPParser extends Parser {
 		public LogicExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterLogicExpression(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterLogicExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitLogicExpression(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitLogicExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitLogicExpression(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitLogicExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1504,15 +1508,15 @@ public class MMPParser extends Parser {
 		public CallMemberContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterCallMember(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterCallMember(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitCallMember(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitCallMember(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitCallMember(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitCallMember(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1526,15 +1530,15 @@ public class MMPParser extends Parser {
 		public AssignContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterAssign(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterAssign(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitAssign(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitAssign(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitAssign(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitAssign(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1545,15 +1549,15 @@ public class MMPParser extends Parser {
 		public ConstantValueContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterConstantValue(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterConstantValue(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitConstantValue(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitConstantValue(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitConstantValue(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitConstantValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1581,15 +1585,15 @@ public class MMPParser extends Parser {
 		public CallFunctionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterCallFunction(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterCallFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitCallFunction(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitCallFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitCallFunction(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitCallFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1604,15 +1608,15 @@ public class MMPParser extends Parser {
 		public ExpressionListContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterExpressionList(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterExpressionList(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitExpressionList(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitExpressionList(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitExpressionList(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitExpressionList(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1797,7 +1801,7 @@ public class MMPParser extends Parser {
 			setState(257);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,23,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+			while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
@@ -2052,7 +2056,7 @@ public class MMPParser extends Parser {
 						}
 						break;
 					}
-					} 
+					}
 				}
 				setState(259);
 				_errHandler.sync(this);
@@ -2082,15 +2086,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_type; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterType(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitType(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitType(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2132,15 +2136,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_ptrBracket; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterPtrBracket(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterPtrBracket(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitPtrBracket(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitPtrBracket(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitPtrBracket(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitPtrBracket(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2155,14 +2159,14 @@ public class MMPParser extends Parser {
 			setState(265);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,24,_ctx);
-			while ( _alt!=1 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+			while ( _alt!=1 && _alt!= ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1+1 ) {
 					{
 					{
 					setState(262);
 					match(T__11);
 					}
-					} 
+					}
 				}
 				setState(267);
 				_errHandler.sync(this);
@@ -2192,15 +2196,15 @@ public class MMPParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_constant; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).enterConstant(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).enterConstant(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MMPListener ) ((MMPListener)listener).exitConstant(this);
+			if ( listener instanceof MMPListener) ((MMPListener)listener).exitConstant(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MMPVisitor ) return ((MMPVisitor<? extends T>)visitor).visitConstant(this);
+			if ( visitor instanceof MMPVisitor) return ((MMPVisitor<? extends T>)visitor).visitConstant(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2273,7 +2277,7 @@ public class MMPParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\65\u0111\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\65\u0111\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\3\2\7\2"+
 		"$\n\2\f\2\16\2\'\13\2\3\2\3\2\3\3\3\3\3\3\5\3.\n\3\3\4\3\4\3\4\3\4\3\4"+
@@ -2295,81 +2299,81 @@ public class MMPParser extends Parser {
 		"\n\16\f\16\16\16\u0105\13\16\3\17\3\17\3\20\7\20\u010a\n\20\f\20\16\20"+
 		"\u010d\13\20\3\21\3\21\3\21\3\u010b\3\32\22\2\4\6\b\n\f\16\20\22\24\26"+
 		"\30\32\34\36 \2\r\3\2\24\25\3\2\35\36\3\2()\3\2\37!\4\2./\61\61\3\2\62"+
-		"\63\4\2\"#&\'\3\2$%\3\2+,\4\2\30\31\33\34\3\2\30\33\u0131\2%\3\2\2\2\4"+
-		"-\3\2\2\2\6;\3\2\2\2\b=\3\2\2\2\nE\3\2\2\2\f[\3\2\2\2\16d\3\2\2\2\20n"+
-		"\3\2\2\2\22\u0082\3\2\2\2\24\u0084\3\2\2\2\26\u0094\3\2\2\2\30\u00a4\3"+
-		"\2\2\2\32\u00ca\3\2\2\2\34\u0106\3\2\2\2\36\u010b\3\2\2\2 \u010e\3\2\2"+
-		"\2\"$\5\4\3\2#\"\3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&(\3\2\2\2\'%\3"+
-		"\2\2\2()\7\2\2\3)\3\3\2\2\2*.\5\6\4\2+.\5\n\6\2,.\5\b\5\2-*\3\2\2\2-+"+
-		"\3\2\2\2-,\3\2\2\2.\5\3\2\2\2/\60\5\34\17\2\60\61\5\36\20\2\61\62\7\34"+
-		"\2\2\62\63\7\3\2\2\63<\3\2\2\2\64\65\5\34\17\2\65\66\5\36\20\2\66\67\7"+
-		"\34\2\2\678\7\4\2\289\5\32\16\29:\7\3\2\2:<\3\2\2\2;/\3\2\2\2;\64\3\2"+
-		"\2\2<\7\3\2\2\2=>\7\5\2\2>?\7\34\2\2?@\5\16\b\2@\t\3\2\2\2AB\5\34\17\2"+
-		"BC\5\36\20\2CF\3\2\2\2DF\7\27\2\2EA\3\2\2\2ED\3\2\2\2FG\3\2\2\2GH\7\34"+
-		"\2\2HV\7\6\2\2IJ\5\34\17\2JK\5\36\20\2KS\7\34\2\2LM\7\7\2\2MN\5\34\17"+
-		"\2NO\5\36\20\2OP\7\34\2\2PR\3\2\2\2QL\3\2\2\2RU\3\2\2\2SQ\3\2\2\2ST\3"+
-		"\2\2\2TW\3\2\2\2US\3\2\2\2VI\3\2\2\2VW\3\2\2\2WX\3\2\2\2XY\7\b\2\2YZ\5"+
-		"\f\7\2Z\13\3\2\2\2[_\7\t\2\2\\^\5\22\n\2]\\\3\2\2\2^a\3\2\2\2_]\3\2\2"+
-		"\2_`\3\2\2\2`b\3\2\2\2a_\3\2\2\2bc\7\n\2\2c\r\3\2\2\2di\7\t\2\2eh\5\6"+
-		"\4\2fh\5\n\6\2ge\3\2\2\2gf\3\2\2\2hk\3\2\2\2ig\3\2\2\2ij\3\2\2\2jl\3\2"+
-		"\2\2ki\3\2\2\2lm\7\n\2\2m\17\3\2\2\2no\7\6\2\2op\5\32\16\2pq\7\b\2\2q"+
-		"\21\3\2\2\2rt\5\32\16\2sr\3\2\2\2st\3\2\2\2tu\3\2\2\2u\u0083\7\3\2\2v"+
-		"\u0083\5\f\7\2w\u0083\5\24\13\2x\u0083\5\26\f\2y\u0083\5\30\r\2z|\7\26"+
-		"\2\2{}\5\32\16\2|{\3\2\2\2|}\3\2\2\2}~\3\2\2\2~\u0083\7\3\2\2\177\u0080"+
-		"\t\2\2\2\u0080\u0083\7\3\2\2\u0081\u0083\5\6\4\2\u0082s\3\2\2\2\u0082"+
-		"v\3\2\2\2\u0082w\3\2\2\2\u0082x\3\2\2\2\u0082y\3\2\2\2\u0082z\3\2\2\2"+
-		"\u0082\177\3\2\2\2\u0082\u0081\3\2\2\2\u0083\23\3\2\2\2\u0084\u0085\7"+
-		"\17\2\2\u0085\u0086\5\20\t\2\u0086\u0092\5\22\n\2\u0087\u0088\7\21\2\2"+
-		"\u0088\u0089\5\20\t\2\u0089\u008a\5\22\n\2\u008a\u008c\3\2\2\2\u008b\u0087"+
-		"\3\2\2\2\u008c\u008f\3\2\2\2\u008d\u008b\3\2\2\2\u008d\u008e\3\2\2\2\u008e"+
-		"\u0090\3\2\2\2\u008f\u008d\3\2\2\2\u0090\u0091\7\20\2\2\u0091\u0093\5"+
-		"\22\n\2\u0092\u008d\3\2\2\2\u0092\u0093\3\2\2\2\u0093\25\3\2\2\2\u0094"+
-		"\u0095\7\23\2\2\u0095\u0097\7\6\2\2\u0096\u0098\5\32\16\2\u0097\u0096"+
-		"\3\2\2\2\u0097\u0098\3\2\2\2\u0098\u0099\3\2\2\2\u0099\u009b\7\3\2\2\u009a"+
-		"\u009c\5\32\16\2\u009b\u009a\3\2\2\2\u009b\u009c\3\2\2\2\u009c\u009d\3"+
-		"\2\2\2\u009d\u009f\7\3\2\2\u009e\u00a0\5\32\16\2\u009f\u009e\3\2\2\2\u009f"+
-		"\u00a0\3\2\2\2\u00a0\u00a1\3\2\2\2\u00a1\u00a2\7\b\2\2\u00a2\u00a3\5\22"+
-		"\n\2\u00a3\27\3\2\2\2\u00a4\u00a5\7\22\2\2\u00a5\u00a6\5\20\t\2\u00a6"+
-		"\u00a7\5\22\n\2\u00a7\31\3\2\2\2\u00a8\u00a9\b\16\1\2\u00a9\u00cb\5\20"+
-		"\t\2\u00aa\u00cb\5 \21\2\u00ab\u00cb\7\34\2\2\u00ac\u00ad\7\34\2\2\u00ad"+
-		"\u00b6\7\6\2\2\u00ae\u00b3\5\32\16\2\u00af\u00b0\7\7\2\2\u00b0\u00b2\5"+
-		"\32\16\2\u00b1\u00af\3\2\2\2\u00b2\u00b5\3\2\2\2\u00b3\u00b1\3\2\2\2\u00b3"+
-		"\u00b4\3\2\2\2\u00b4\u00b7\3\2\2\2\u00b5\u00b3\3\2\2\2\u00b6\u00ae\3\2"+
-		"\2\2\u00b6\u00b7\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00cb\7\b\2\2\u00b9"+
-		"\u00ba\7\13\2\2\u00ba\u00c0\5\34\17\2\u00bb\u00bc\7\f\2\2\u00bc\u00bd"+
-		"\5\32\16\2\u00bd\u00be\7\r\2\2\u00be\u00bf\5\36\20\2\u00bf\u00c1\3\2\2"+
-		"\2\u00c0\u00bb\3\2\2\2\u00c0\u00c1\3\2\2\2\u00c1\u00cb\3\2\2\2\u00c2\u00c3"+
-		"\t\3\2\2\u00c3\u00cb\5\32\16\20\u00c4\u00c5\t\4\2\2\u00c5\u00cb\5\32\16"+
-		"\b\u00c6\u00c7\7-\2\2\u00c7\u00cb\5\32\16\5\u00c8\u00c9\7\60\2\2\u00c9"+
-		"\u00cb\5\32\16\4\u00ca\u00a8\3\2\2\2\u00ca\u00aa\3\2\2\2\u00ca\u00ab\3"+
-		"\2\2\2\u00ca\u00ac\3\2\2\2\u00ca\u00b9\3\2\2\2\u00ca\u00c2\3\2\2\2\u00ca"+
-		"\u00c4\3\2\2\2\u00ca\u00c6\3\2\2\2\u00ca\u00c8\3\2\2\2\u00cb\u0103\3\2"+
-		"\2\2\u00cc\u00cd\f\17\2\2\u00cd\u00ce\t\3\2\2\u00ce\u0102\5\32\16\20\u00cf"+
-		"\u00d0\f\16\2\2\u00d0\u00d1\t\5\2\2\u00d1\u0102\5\32\16\17\u00d2\u00d3"+
-		"\f\r\2\2\u00d3\u00d4\t\6\2\2\u00d4\u0102\5\32\16\16\u00d5\u00d6\f\f\2"+
-		"\2\u00d6\u00d7\t\7\2\2\u00d7\u0102\5\32\16\r\u00d8\u00d9\f\13\2\2\u00d9"+
-		"\u00da\t\b\2\2\u00da\u0102\5\32\16\f\u00db\u00dc\f\n\2\2\u00dc\u00dd\t"+
-		"\t\2\2\u00dd\u0102\5\32\16\13\u00de\u00df\f\t\2\2\u00df\u00e0\t\n\2\2"+
-		"\u00e0\u0102\5\32\16\n\u00e1\u00e2\f\3\2\2\u00e2\u00e3\7\4\2\2\u00e3\u0102"+
-		"\5\32\16\3\u00e4\u00e5\f\23\2\2\u00e5\u00e6\7*\2\2\u00e6\u0102\7\34\2"+
-		"\2\u00e7\u00e8\f\22\2\2\u00e8\u00e9\7*\2\2\u00e9\u00ea\7\34\2\2\u00ea"+
-		"\u00eb\7\6\2\2\u00eb\u00ec\5\34\17\2\u00ec\u00ed\5\36\20\2\u00ed\u00f5"+
-		"\7\34\2\2\u00ee\u00ef\7\7\2\2\u00ef\u00f0\5\34\17\2\u00f0\u00f1\5\36\20"+
-		"\2\u00f1\u00f2\7\34\2\2\u00f2\u00f4\3\2\2\2\u00f3\u00ee\3\2\2\2\u00f4"+
-		"\u00f7\3\2\2\2\u00f5\u00f3\3\2\2\2\u00f5\u00f6\3\2\2\2\u00f6\u00f8\3\2"+
-		"\2\2\u00f7\u00f5\3\2\2\2\u00f8\u00f9\7\b\2\2\u00f9\u0102\3\2\2\2\u00fa"+
-		"\u00fb\f\7\2\2\u00fb\u0102\t\4\2\2\u00fc\u00fd\f\6\2\2\u00fd\u00fe\7\f"+
-		"\2\2\u00fe\u00ff\5\32\16\2\u00ff\u0100\7\r\2\2\u0100\u0102\3\2\2\2\u0101"+
-		"\u00cc\3\2\2\2\u0101\u00cf\3\2\2\2\u0101\u00d2\3\2\2\2\u0101\u00d5\3\2"+
-		"\2\2\u0101\u00d8\3\2\2\2\u0101\u00db\3\2\2\2\u0101\u00de\3\2\2\2\u0101"+
-		"\u00e1\3\2\2\2\u0101\u00e4\3\2\2\2\u0101\u00e7\3\2\2\2\u0101\u00fa\3\2"+
-		"\2\2\u0101\u00fc\3\2\2\2\u0102\u0105\3\2\2\2\u0103\u0101\3\2\2\2\u0103"+
-		"\u0104\3\2\2\2\u0104\33\3\2\2\2\u0105\u0103\3\2\2\2\u0106\u0107\t\13\2"+
-		"\2\u0107\35\3\2\2\2\u0108\u010a\7\16\2\2\u0109\u0108\3\2\2\2\u010a\u010d"+
-		"\3\2\2\2\u010b\u010c\3\2\2\2\u010b\u0109\3\2\2\2\u010c\37\3\2\2\2\u010d"+
-		"\u010b\3\2\2\2\u010e\u010f\t\f\2\2\u010f!\3\2\2\2\33%-;ESV_gis|\u0082"+
-		"\u008d\u0092\u0097\u009b\u009f\u00b3\u00b6\u00c0\u00ca\u00f5\u0101\u0103"+
-		"\u010b";
+		"\63\4\2\"#&\'\3\2$%\3\2+,\4\2\30\31\33\34\3\2\30\33\2\u0131\2%\3\2\2\2"+
+		"\4-\3\2\2\2\6;\3\2\2\2\b=\3\2\2\2\nE\3\2\2\2\f[\3\2\2\2\16d\3\2\2\2\20"+
+		"n\3\2\2\2\22\u0082\3\2\2\2\24\u0084\3\2\2\2\26\u0094\3\2\2\2\30\u00a4"+
+		"\3\2\2\2\32\u00ca\3\2\2\2\34\u0106\3\2\2\2\36\u010b\3\2\2\2 \u010e\3\2"+
+		"\2\2\"$\5\4\3\2#\"\3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&(\3\2\2\2\'"+
+		"%\3\2\2\2()\7\2\2\3)\3\3\2\2\2*.\5\6\4\2+.\5\n\6\2,.\5\b\5\2-*\3\2\2\2"+
+		"-+\3\2\2\2-,\3\2\2\2.\5\3\2\2\2/\60\5\34\17\2\60\61\5\36\20\2\61\62\7"+
+		"\34\2\2\62\63\7\3\2\2\63<\3\2\2\2\64\65\5\34\17\2\65\66\5\36\20\2\66\67"+
+		"\7\34\2\2\678\7\4\2\289\5\32\16\29:\7\3\2\2:<\3\2\2\2;/\3\2\2\2;\64\3"+
+		"\2\2\2<\7\3\2\2\2=>\7\5\2\2>?\7\34\2\2?@\5\16\b\2@\t\3\2\2\2AB\5\34\17"+
+		"\2BC\5\36\20\2CF\3\2\2\2DF\7\27\2\2EA\3\2\2\2ED\3\2\2\2FG\3\2\2\2GH\7"+
+		"\34\2\2HV\7\6\2\2IJ\5\34\17\2JK\5\36\20\2KS\7\34\2\2LM\7\7\2\2MN\5\34"+
+		"\17\2NO\5\36\20\2OP\7\34\2\2PR\3\2\2\2QL\3\2\2\2RU\3\2\2\2SQ\3\2\2\2S"+
+		"T\3\2\2\2TW\3\2\2\2US\3\2\2\2VI\3\2\2\2VW\3\2\2\2WX\3\2\2\2XY\7\b\2\2"+
+		"YZ\5\f\7\2Z\13\3\2\2\2[_\7\t\2\2\\^\5\22\n\2]\\\3\2\2\2^a\3\2\2\2_]\3"+
+		"\2\2\2_`\3\2\2\2`b\3\2\2\2a_\3\2\2\2bc\7\n\2\2c\r\3\2\2\2di\7\t\2\2eh"+
+		"\5\6\4\2fh\5\n\6\2ge\3\2\2\2gf\3\2\2\2hk\3\2\2\2ig\3\2\2\2ij\3\2\2\2j"+
+		"l\3\2\2\2ki\3\2\2\2lm\7\n\2\2m\17\3\2\2\2no\7\6\2\2op\5\32\16\2pq\7\b"+
+		"\2\2q\21\3\2\2\2rt\5\32\16\2sr\3\2\2\2st\3\2\2\2tu\3\2\2\2u\u0083\7\3"+
+		"\2\2v\u0083\5\f\7\2w\u0083\5\24\13\2x\u0083\5\26\f\2y\u0083\5\30\r\2z"+
+		"|\7\26\2\2{}\5\32\16\2|{\3\2\2\2|}\3\2\2\2}~\3\2\2\2~\u0083\7\3\2\2\177"+
+		"\u0080\t\2\2\2\u0080\u0083\7\3\2\2\u0081\u0083\5\6\4\2\u0082s\3\2\2\2"+
+		"\u0082v\3\2\2\2\u0082w\3\2\2\2\u0082x\3\2\2\2\u0082y\3\2\2\2\u0082z\3"+
+		"\2\2\2\u0082\177\3\2\2\2\u0082\u0081\3\2\2\2\u0083\23\3\2\2\2\u0084\u0085"+
+		"\7\17\2\2\u0085\u0086\5\20\t\2\u0086\u0092\5\22\n\2\u0087\u0088\7\21\2"+
+		"\2\u0088\u0089\5\20\t\2\u0089\u008a\5\22\n\2\u008a\u008c\3\2\2\2\u008b"+
+		"\u0087\3\2\2\2\u008c\u008f\3\2\2\2\u008d\u008b\3\2\2\2\u008d\u008e\3\2"+
+		"\2\2\u008e\u0090\3\2\2\2\u008f\u008d\3\2\2\2\u0090\u0091\7\20\2\2\u0091"+
+		"\u0093\5\22\n\2\u0092\u008d\3\2\2\2\u0092\u0093\3\2\2\2\u0093\25\3\2\2"+
+		"\2\u0094\u0095\7\23\2\2\u0095\u0097\7\6\2\2\u0096\u0098\5\32\16\2\u0097"+
+		"\u0096\3\2\2\2\u0097\u0098\3\2\2\2\u0098\u0099\3\2\2\2\u0099\u009b\7\3"+
+		"\2\2\u009a\u009c\5\32\16\2\u009b\u009a\3\2\2\2\u009b\u009c\3\2\2\2\u009c"+
+		"\u009d\3\2\2\2\u009d\u009f\7\3\2\2\u009e\u00a0\5\32\16\2\u009f\u009e\3"+
+		"\2\2\2\u009f\u00a0\3\2\2\2\u00a0\u00a1\3\2\2\2\u00a1\u00a2\7\b\2\2\u00a2"+
+		"\u00a3\5\22\n\2\u00a3\27\3\2\2\2\u00a4\u00a5\7\22\2\2\u00a5\u00a6\5\20"+
+		"\t\2\u00a6\u00a7\5\22\n\2\u00a7\31\3\2\2\2\u00a8\u00a9\b\16\1\2\u00a9"+
+		"\u00cb\5\20\t\2\u00aa\u00cb\5 \21\2\u00ab\u00cb\7\34\2\2\u00ac\u00ad\7"+
+		"\34\2\2\u00ad\u00b6\7\6\2\2\u00ae\u00b3\5\32\16\2\u00af\u00b0\7\7\2\2"+
+		"\u00b0\u00b2\5\32\16\2\u00b1\u00af\3\2\2\2\u00b2\u00b5\3\2\2\2\u00b3\u00b1"+
+		"\3\2\2\2\u00b3\u00b4\3\2\2\2\u00b4\u00b7\3\2\2\2\u00b5\u00b3\3\2\2\2\u00b6"+
+		"\u00ae\3\2\2\2\u00b6\u00b7\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00cb\7\b"+
+		"\2\2\u00b9\u00ba\7\13\2\2\u00ba\u00c0\5\34\17\2\u00bb\u00bc\7\f\2\2\u00bc"+
+		"\u00bd\5\32\16\2\u00bd\u00be\7\r\2\2\u00be\u00bf\5\36\20\2\u00bf\u00c1"+
+		"\3\2\2\2\u00c0\u00bb\3\2\2\2\u00c0\u00c1\3\2\2\2\u00c1\u00cb\3\2\2\2\u00c2"+
+		"\u00c3\t\3\2\2\u00c3\u00cb\5\32\16\20\u00c4\u00c5\t\4\2\2\u00c5\u00cb"+
+		"\5\32\16\b\u00c6\u00c7\7-\2\2\u00c7\u00cb\5\32\16\5\u00c8\u00c9\7\60\2"+
+		"\2\u00c9\u00cb\5\32\16\4\u00ca\u00a8\3\2\2\2\u00ca\u00aa\3\2\2\2\u00ca"+
+		"\u00ab\3\2\2\2\u00ca\u00ac\3\2\2\2\u00ca\u00b9\3\2\2\2\u00ca\u00c2\3\2"+
+		"\2\2\u00ca\u00c4\3\2\2\2\u00ca\u00c6\3\2\2\2\u00ca\u00c8\3\2\2\2\u00cb"+
+		"\u0103\3\2\2\2\u00cc\u00cd\f\17\2\2\u00cd\u00ce\t\3\2\2\u00ce\u0102\5"+
+		"\32\16\20\u00cf\u00d0\f\16\2\2\u00d0\u00d1\t\5\2\2\u00d1\u0102\5\32\16"+
+		"\17\u00d2\u00d3\f\r\2\2\u00d3\u00d4\t\6\2\2\u00d4\u0102\5\32\16\16\u00d5"+
+		"\u00d6\f\f\2\2\u00d6\u00d7\t\7\2\2\u00d7\u0102\5\32\16\r\u00d8\u00d9\f"+
+		"\13\2\2\u00d9\u00da\t\b\2\2\u00da\u0102\5\32\16\f\u00db\u00dc\f\n\2\2"+
+		"\u00dc\u00dd\t\t\2\2\u00dd\u0102\5\32\16\13\u00de\u00df\f\t\2\2\u00df"+
+		"\u00e0\t\n\2\2\u00e0\u0102\5\32\16\n\u00e1\u00e2\f\3\2\2\u00e2\u00e3\7"+
+		"\4\2\2\u00e3\u0102\5\32\16\3\u00e4\u00e5\f\23\2\2\u00e5\u00e6\7*\2\2\u00e6"+
+		"\u0102\7\34\2\2\u00e7\u00e8\f\22\2\2\u00e8\u00e9\7*\2\2\u00e9\u00ea\7"+
+		"\34\2\2\u00ea\u00eb\7\6\2\2\u00eb\u00ec\5\34\17\2\u00ec\u00ed\5\36\20"+
+		"\2\u00ed\u00f5\7\34\2\2\u00ee\u00ef\7\7\2\2\u00ef\u00f0\5\34\17\2\u00f0"+
+		"\u00f1\5\36\20\2\u00f1\u00f2\7\34\2\2\u00f2\u00f4\3\2\2\2\u00f3\u00ee"+
+		"\3\2\2\2\u00f4\u00f7\3\2\2\2\u00f5\u00f3\3\2\2\2\u00f5\u00f6\3\2\2\2\u00f6"+
+		"\u00f8\3\2\2\2\u00f7\u00f5\3\2\2\2\u00f8\u00f9\7\b\2\2\u00f9\u0102\3\2"+
+		"\2\2\u00fa\u00fb\f\7\2\2\u00fb\u0102\t\4\2\2\u00fc\u00fd\f\6\2\2\u00fd"+
+		"\u00fe\7\f\2\2\u00fe\u00ff\5\32\16\2\u00ff\u0100\7\r\2\2\u0100\u0102\3"+
+		"\2\2\2\u0101\u00cc\3\2\2\2\u0101\u00cf\3\2\2\2\u0101\u00d2\3\2\2\2\u0101"+
+		"\u00d5\3\2\2\2\u0101\u00d8\3\2\2\2\u0101\u00db\3\2\2\2\u0101\u00de\3\2"+
+		"\2\2\u0101\u00e1\3\2\2\2\u0101\u00e4\3\2\2\2\u0101\u00e7\3\2\2\2\u0101"+
+		"\u00fa\3\2\2\2\u0101\u00fc\3\2\2\2\u0102\u0105\3\2\2\2\u0103\u0101\3\2"+
+		"\2\2\u0103\u0104\3\2\2\2\u0104\33\3\2\2\2\u0105\u0103\3\2\2\2\u0106\u0107"+
+		"\t\13\2\2\u0107\35\3\2\2\2\u0108\u010a\7\16\2\2\u0109\u0108\3\2\2\2\u010a"+
+		"\u010d\3\2\2\2\u010b\u010c\3\2\2\2\u010b\u0109\3\2\2\2\u010c\37\3\2\2"+
+		"\2\u010d\u010b\3\2\2\2\u010e\u010f\t\f\2\2\u010f!\3\2\2\2\33%-;ESV_gi"+
+		"s|\u0082\u008d\u0092\u0097\u009b\u009f\u00b3\u00b6\u00c0\u00ca\u00f5\u0101"+
+		"\u0103\u010b";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

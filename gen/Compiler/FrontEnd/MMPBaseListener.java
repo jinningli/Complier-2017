@@ -1,4 +1,4 @@
-// Generated from /Users/lijinning/Desktop/Compiler - 2017/src/Compiler/FrontEnd/MMP.g4 by ANTLR 4.6
+package Compiler.FrontEnd;// Generated from ../src/Compiler/FrontEnd/MMP.g4 by ANTLR 4.7
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
