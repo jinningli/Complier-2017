@@ -81,9 +81,9 @@ expr:       exprBkt                                                             
             ;
 
 // Other Parser
-type:       BOOL
-            | INT
-            | STRING
+type:       'bool'
+            | 'int'
+            | 'string'
             | ID
             ;
 ptrBracket: '[]'*?;
@@ -108,7 +108,7 @@ RETURN      : 'return';
 VOID        : 'void';
 
 
-// BaseType Lexer
+// Type Lexer
 INT         : DIGIT+;
 BOOL        : 'true' | 'false';
 NULL        : 'null';
