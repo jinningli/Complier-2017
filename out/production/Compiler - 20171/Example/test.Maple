@@ -1,0 +1,14 @@
+class chips{
+    int a = 0;
+    int b()
+    {
+        return 0;
+    }
+}
+class chips{
+    
+}
+int main()
+{
+    return 0;
+}
