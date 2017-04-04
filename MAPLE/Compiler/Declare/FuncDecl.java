@@ -11,6 +11,7 @@ public class FuncDecl implements Declare {
     public String name;
     public Position pos;
 
+
     public String getname(){
         return name;
     }

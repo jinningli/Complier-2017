@@ -48,6 +48,26 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitClassDecl(MapleParser.ClassDeclContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MapleParser#typePro}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypePro(MapleParser.TypeProContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#typePro}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypePro(MapleParser.TypeProContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#funcList}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncList(MapleParser.FuncListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#funcList}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncList(MapleParser.FuncListContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MapleParser#funcDecl}.
 	 * @param ctx the parse tree
 	 */

@@ -14,11 +14,16 @@ decl:         varDecl
             ;
 
 // Declare of Variable, Class and Function
-varDecl:      type ptrBracket ID ';'
-            | type ptrBracket ID '=' expr ';'
+varDecl:      typePro ID ';'
+            | typePro ID '=' expr ';'
             ;
 classDecl:  'class' ID classBlock;
-funcDecl:   (type ptrBracket | VOID) ID '(' ( type ptrBracket ID ( ',' type ptrBracket ID )* )?')' block;
+
+typePro: type ptrBracket;
+
+funcList:    '(' ( typePro ID ( ',' typePro ID )* )?')' ;
+
+funcDecl:  typePro  ID  funcList block;
 
 //Block for General and Class
 block:      '{' stmt* '}';
@@ -62,7 +67,7 @@ expr:       exprBkt                                                             
             | ID                                                                    # Identifier
             | ID '(' (expr (',' expr)*)? ')'                                        # FunctionCall
             | expr DOT ID                                                           # Member
-            | expr DOT ID '(' type ptrBracket ID ( ',' type ptrBracket ID )* ')'    # MemberFunction
+            | expr DOT ID '(' typePro ID ( ',' typePro ID )* ')'    # MemberFunction
             | 'new' type ('[' expr ']' ptrBracket)?                                 # NewOperation
             | operation = (MINUS | PLUS)                                    expr    # SignExpression
             | expr operation = (PLUS   | MINUS)                             expr    # BinaryExpression
@@ -85,6 +90,7 @@ type:       'bool'
             | 'int'
             | 'string'
             | ID
+            | VOID
             ;
 ptrBracket: '[]'*?;
 constant:   NULL

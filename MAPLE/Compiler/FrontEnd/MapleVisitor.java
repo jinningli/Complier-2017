@@ -35,6 +35,18 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassDecl(MapleParser.ClassDeclContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#typePro}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypePro(MapleParser.TypeProContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#funcList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncList(MapleParser.FuncListContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#funcDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

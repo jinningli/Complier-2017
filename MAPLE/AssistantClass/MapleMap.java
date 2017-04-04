@@ -51,6 +51,7 @@ public class MapleMap {
                     System.err.println("Class Redefined:    " + _d.getpos()._String());
                     return false;
                 }
+                break;
             case FunctionInGrobal:
                 if (!DeclNameSpace.get(1).containsKey(name)) {
                     DeclNameSpace.get(1).put(name, _d);
@@ -58,6 +59,7 @@ public class MapleMap {
                     System.err.println("Function Redefined:    " + _d.getpos()._String());
                     return false;
                 }
+                break;
             case FunctionInClass:
                 if (!DeclNameSpace.get(2).containsKey(name)) {
                     DeclNameSpace.get(2).put(name, _d);
@@ -65,6 +67,7 @@ public class MapleMap {
                     System.err.println("Function Redefined:    " + _d.getpos()._String());
                     return false;
                 }
+                break;
             default:
                 break;
         }
@@ -80,6 +83,7 @@ public class MapleMap {
                     System.err.println("Statement Redefined:    " + _s.getpos()._String());
                     return false;
                 }
+                break;
             case StatementInClass:
                 if (!StatementNameSpace.get(1).containsKey(name)) {
                     StatementNameSpace.get(1).put(name, _s);
@@ -87,6 +91,7 @@ public class MapleMap {
                     System.err.println("Statement Redefined:    " + _s.getpos()._String());
                     return false;
                 }
+                break;
             case StatementInFunction:
                 if (!StatementNameSpace.get(2).containsKey(name)) {
                     StatementNameSpace.get(2).put(name, _s);
@@ -94,6 +99,7 @@ public class MapleMap {
                     System.err.println("Statement Redefined:    " + _s.getpos()._String());
                     return false;
                 }
+                break;
             case StatementInStatement:
                 if (!StatementStack.peek().containsKey(_s.getname())) {
                     StatementStack.peek().put(_s.getname(), _s);

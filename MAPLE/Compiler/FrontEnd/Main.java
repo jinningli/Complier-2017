@@ -3,6 +3,7 @@ package Compiler.FrontEnd;
 import Compiler.Listener.ClassStdlizer;
 import AssistantClass.*;
 
+import Compiler.Listener.FunctionStdlizer;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -45,5 +46,7 @@ public class Main
         ClassStdlizer CSL = new ClassStdlizer(FMap);
         ParseTreeWalker walker = new ParseTreeWalker();
         walker.walk(CSL, tree);
+        FunctionStdlizer FSL = new FunctionStdlizer(SMap);
+        walker.walk(FSL, tree);
     }
 }
