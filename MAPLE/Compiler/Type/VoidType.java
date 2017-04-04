@@ -16,5 +16,9 @@ public class VoidType implements Type {
     public String getname(){return name;};
     public int getint(){return 0;};
     public boolean getbool(){return false;};
+    public String _String(){
+        return "VoidType " + pos._String() + "\tWith name: " + name;
+    }
+    public TypeList getType(){return TypeList.Void;}
 
 }

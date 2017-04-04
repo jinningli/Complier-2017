@@ -2,8 +2,11 @@ package AssistantClass;
 
 import java.util.*;
 import Compiler.Declare.*;
+import Compiler.Error.DefineWrongPos;
+import Compiler.Error.ReDefine;
 import Compiler.Statement.*;
 import AssistantClass.*;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Redefinable;
 import org.antlr.v4.codegen.model.decl.Decl;
 
 import javax.swing.plaf.nimbus.State;
@@ -49,7 +52,7 @@ public class MapleMap {
                     DeclNameSpace.get(0).put(name, _d);
                 } else {
                     System.err.println("Class Redefined:    " + _d.getpos()._String());
-                    return false;
+                    throw new ReDefine();
                 }
                 break;
             case FunctionInGrobal:
@@ -57,7 +60,7 @@ public class MapleMap {
                     DeclNameSpace.get(1).put(name, _d);
                 } else{
                     System.err.println("Function Redefined:    " + _d.getpos()._String());
-                    return false;
+                    throw new ReDefine();
                 }
                 break;
             case FunctionInClass:
@@ -65,7 +68,7 @@ public class MapleMap {
                     DeclNameSpace.get(2).put(name, _d);
                 } else{
                     System.err.println("Function Redefined:    " + _d.getpos()._String());
-                    return false;
+                    throw new ReDefine();
                 }
                 break;
             default:
@@ -81,7 +84,7 @@ public class MapleMap {
                     StatementNameSpace.get(0).put(name, _s);
                 } else{
                     System.err.println("Statement Redefined:    " + _s.getpos()._String());
-                    return false;
+                    throw new ReDefine();
                 }
                 break;
             case StatementInClass:
@@ -89,7 +92,7 @@ public class MapleMap {
                     StatementNameSpace.get(1).put(name, _s);
                 } else{
                     System.err.println("Statement Redefined:    " + _s.getpos()._String());
-                    return false;
+                    throw new ReDefine();
                 }
                 break;
             case StatementInFunction:
@@ -97,7 +100,7 @@ public class MapleMap {
                     StatementNameSpace.get(2).put(name, _s);
                 } else{
                     System.err.println("Statement Redefined:    " + _s.getpos()._String());
-                    return false;
+                    throw new ReDefine();
                 }
                 break;
             case StatementInStatement:
@@ -105,7 +108,7 @@ public class MapleMap {
                     StatementStack.peek().put(_s.getname(), _s);
                 } else{
                     System.err.println("Statement Redefined:    " + _s.getpos()._String());
-                    return false;
+                    throw new ReDefine();
                 }
             default:
                 break;
@@ -116,15 +119,15 @@ public class MapleMap {
     public boolean StepIn(ClassDecl _c){
         if(inClass){
             System.err.println("Define Class in Class:    " + _c.getpos()._String());
-            return false;
+            throw new DefineWrongPos();
         }
         if(inFunction){
             System.err.println("Define Class in Function:    " + _c.getpos()._String());
-            return false;
+            throw new DefineWrongPos();
         }
         if(inStatement){
             System.err.println("Define Class in Statement:    " + _c.getpos()._String());
-            return false;
+            throw new DefineWrongPos();
         }
         inClass = true;
         return put(_c.name, _c, MapleMapType.ClassInGrobal);
@@ -138,11 +141,11 @@ public class MapleMap {
     public boolean StepIn(FuncDecl _f) {
         if(inFunction){
             System.err.println("Define Function in Function:    " + _f.getpos()._String());
-            return false;
+            throw new DefineWrongPos();
         }
         if(inStatement){
             System.err.println("Define Function in Statement:    " + _f.getpos()._String());
-            return false;
+            throw new DefineWrongPos();
         }
         inFunction = true;
         if(!inClass){

@@ -14,6 +14,12 @@ public class ArrType implements Type {
         stdtype = _t;
         pos = _p;
     }
+    public String _String(){
+        return "ArrType " + pos._String() + "\tWith Type: " + dimension + " Dimension: " + dimension;
+    }
+    public TypeList getType(){
+        return TypeList.Arr;
+    }
     public Position getpos(){return pos;};
     public String getname(){return "";};
     public int getint(){return 0;};

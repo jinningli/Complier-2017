@@ -24,6 +24,12 @@ public class StringType implements Type {
         data = "";
         pos = _pos;
     }
+    public String _String(){
+        return "StringType " + pos._String() + "\tWith Value: " + data;
+    }
+    public TypeList getType(){
+        return TypeList.String;
+    }
     public Position getpos(){
         return pos;
     }

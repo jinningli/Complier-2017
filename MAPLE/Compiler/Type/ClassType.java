@@ -12,6 +12,12 @@ public class ClassType implements Type{
         name = _n;
         pos = _p;
     }
+    public String _String(){
+        return "ClassType " + pos._String() + "\tWith name: " + name;
+    }
+    public TypeList getType(){
+        return TypeList.Class;
+    }
     public Position getpos(){return pos;};
     public String getname(){return name;};
     public int getint(){return 0;};

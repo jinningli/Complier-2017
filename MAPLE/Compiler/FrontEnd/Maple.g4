@@ -60,6 +60,7 @@ whileStmt:  WHILE exprBkt
             stmt
             ;
 
+exprList:   '(' expr ( ',' expr )* ')' ;
 
 // Expression
 expr:       exprBkt                                                                 # ExprWithBracket
@@ -67,7 +68,7 @@ expr:       exprBkt                                                             
             | ID                                                                    # Identifier
             | ID '(' (expr (',' expr)*)? ')'                                        # FunctionCall
             | expr DOT ID                                                           # Member
-            | expr DOT ID '(' typePro ID ( ',' typePro ID )* ')'    # MemberFunction
+            | expr DOT ID exprList                                                  # MemberFunction
             | 'new' type ('[' expr ']' ptrBracket)?                                 # NewOperation
             | operation = (MINUS | PLUS)                                    expr    # SignExpression
             | expr operation = (PLUS   | MINUS)                             expr    # BinaryExpression

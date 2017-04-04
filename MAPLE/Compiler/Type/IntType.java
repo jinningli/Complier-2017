@@ -24,6 +24,12 @@ public class IntType implements Type {
         data = 0;
         pos = _pos;
     }
+    public String _String(){
+        return "IntType " + pos._String() + "\tWith value: " + data;
+    }
+    public TypeList getType(){
+        return TypeList.Int;
+    }
     public Position getpos(){return pos;};
     public String getname(){return "";};
     public int getint(){return data;};

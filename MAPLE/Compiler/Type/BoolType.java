@@ -17,6 +17,12 @@ public class BoolType implements Type {
         data = _d;
         pos = _p;
     }
+    public String _String(){
+        return "BoolType " + pos._String() + "\tWith value: " + data;
+    }
+    public TypeList getType(){
+        return TypeList.Bool;
+    }
     public Position getpos(){return pos;};
     public String getname(){return "";};
     public int getint(){return 0;};
