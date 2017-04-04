@@ -4,7 +4,7 @@
 # if you would like to print some debug information, please go to stderr.
 
 set -e
-cd "$(Maple "$0")"
-export CCHK="java -classpath ./lib/antlr-4.6-complete.jar:./bin Compiler.FrontEnd.Main"
+cd "$(dirname "$0")"
+export CCHK="java -classpath ./lib/antlr-4.7-complete.jar:./bin Compiler.FrontEnd.Main"
 cat > program.txt   # save everything in stdin to program.txt
 $CCHK

@@ -2,6 +2,6 @@
 # no argument will be passed in.
 
 set -e
-cd "$(Maple "$0")"
+cd "$(dirname "$0")"
 mkdir -p bin
-find ./Maple -name *.java | javac -d bin -classpath "lib/antlr-4.6-complete.jar" @/dev/stdin
+find ./Maple -name *.java | javac -d bin -classpath "lib/antlr-4.7-complete.jar" @/dev/stdin
