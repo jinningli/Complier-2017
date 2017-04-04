@@ -9,7 +9,6 @@ import AssistantClass.*;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Redefinable;
 import org.antlr.v4.codegen.model.decl.Decl;
 
-import javax.swing.plaf.nimbus.State;
 
 
 /**
@@ -20,31 +19,24 @@ import javax.swing.plaf.nimbus.State;
 
 public class MapleMap {
     public enum MapleMapType {
-        ClassInGrobal, FunctionInGrobal, StatementInGrobal, FunctionInClass, StatementInClass, StatementInFunction, StatementInStatement
+        ClassInGrobal, FunctionInGrobal, VarInGrobal, FunctionInClass, VarInClass, VarInFunction, VarInStatement
     }
     private List<Map<String, Declare>> DeclNameSpace;
-    private List<Map<String, Statement>> StatementNameSpace;
-    private Stack<Map<String, Statement>>  StatementStack;
+    private Stack<Map<String, Declare>>  StatementStack;
     private boolean inClass = false;
     private boolean inFunction = false;
     private boolean inStatement = false;
-
     public MapleMap()
     {
         DeclNameSpace = new LinkedList<>();
-        StatementNameSpace = new LinkedList<>();
         StatementStack = new Stack<>();
-        for(int i = 0; i < 3; i ++)
+        for(int i = 0; i < 6; i ++)
         {
             DeclNameSpace.add(new HashMap<>());
         }
-        for(int i = 0; i < 3; i ++)
-        {
-            StatementNameSpace.add(new HashMap<>());
-        }
     }
 
-    public boolean put(String name, Declare _d, MapleMapType _type)
+    public void put(String name, Declare _d, MapleMapType _type)
     {
         switch (_type) {
             case ClassInGrobal:
@@ -71,52 +63,44 @@ public class MapleMap {
                     throw new ReDefine();
                 }
                 break;
+            case VarInGrobal:
+                if (!DeclNameSpace.get(3).containsKey(name)) {
+                    DeclNameSpace.get(3).put(name, _d);
+                } else{
+                    System.err.println("Statement Redefined:    " + _d.getpos()._String());
+                    throw new ReDefine();
+                }
+                break;
+            case VarInClass:
+                if (!DeclNameSpace.get(4).containsKey(name)) {
+                    DeclNameSpace.get(4).put(name, _d);
+                } else{
+                    System.err.println("Statement Redefined:    " + _d.getpos()._String());
+                    throw new ReDefine();
+                }
+                break;
+            case VarInFunction:
+                if (!DeclNameSpace.get(5).containsKey(name)) {
+                    DeclNameSpace.get(5).put(name, _d);
+                } else{
+                    System.err.println("Statement Redefined:    " + _d.getpos()._String());
+                    throw new ReDefine();
+                }
+                break;
+            case VarInStatement:
+                if (!StatementStack.peek().containsKey(_d.getname())) {
+                    StatementStack.peek().put(_d.getname(), _d);
+                } else{
+                    System.err.println("Statement Redefined:    " + _d.getpos()._String());
+                    throw new ReDefine();
+                }
+                break;
             default:
                 break;
         }
-        return true;
-    }
-    public boolean put(String name, Statement _s, MapleMapType _type)
-    {
-        switch (_type) {
-            case StatementInGrobal:
-                if (!StatementNameSpace.get(0).containsKey(name)) {
-                    StatementNameSpace.get(0).put(name, _s);
-                } else{
-                    System.err.println("Statement Redefined:    " + _s.getpos()._String());
-                    throw new ReDefine();
-                }
-                break;
-            case StatementInClass:
-                if (!StatementNameSpace.get(1).containsKey(name)) {
-                    StatementNameSpace.get(1).put(name, _s);
-                } else{
-                    System.err.println("Statement Redefined:    " + _s.getpos()._String());
-                    throw new ReDefine();
-                }
-                break;
-            case StatementInFunction:
-                if (!StatementNameSpace.get(2).containsKey(name)) {
-                    StatementNameSpace.get(2).put(name, _s);
-                } else{
-                    System.err.println("Statement Redefined:    " + _s.getpos()._String());
-                    throw new ReDefine();
-                }
-                break;
-            case StatementInStatement:
-                if (!StatementStack.peek().containsKey(_s.getname())) {
-                    StatementStack.peek().put(_s.getname(), _s);
-                } else{
-                    System.err.println("Statement Redefined:    " + _s.getpos()._String());
-                    throw new ReDefine();
-                }
-            default:
-                break;
-        }
-        return true;
     }
 
-    public boolean StepIn(ClassDecl _c){
+    public void StepIn(ClassDecl _c){
         if(inClass){
             System.err.println("Define Class in Class:    " + _c.getpos()._String());
             throw new DefineWrongPos();
@@ -130,7 +114,7 @@ public class MapleMap {
             throw new DefineWrongPos();
         }
         inClass = true;
-        return put(_c.name, _c, MapleMapType.ClassInGrobal);
+        put(_c.name, _c, MapleMapType.ClassInGrobal);
     }
 
     public boolean StepOutClass(){
@@ -138,7 +122,7 @@ public class MapleMap {
         return true;
     }
 
-    public boolean StepIn(FuncDecl _f) {
+    public void StepIn(FuncDecl _f) {
         if(inFunction){
             System.err.println("Define Function in Function:    " + _f.getpos()._String());
             throw new DefineWrongPos();
@@ -149,9 +133,9 @@ public class MapleMap {
         }
         inFunction = true;
         if(!inClass){
-            return put(_f.name, _f, MapleMapType.FunctionInGrobal);
+            put(_f.name, _f, MapleMapType.FunctionInGrobal);
         }else{
-            return put(_f.name, _f, MapleMapType.FunctionInClass);
+            put(_f.name, _f, MapleMapType.FunctionInClass);
         }
     }
 
@@ -160,19 +144,19 @@ public class MapleMap {
         return true;
     }
 
-    public boolean StepIn(Statement _s){
+    public void StepIn(VarDecl _v){
         StatementStack.push(new HashMap<>());
         if(!inStatement){
             if(!inFunction){
                 if(!inClass){
-                    return put(_s.getname(), _s, MapleMapType.StatementInGrobal);
+                    put(_v.getname(), _v, MapleMapType.VarInGrobal);
                 }
-                return put(_s.getname(), _s, MapleMapType.StatementInClass);
+                put(_v.getname(), _v, MapleMapType.VarInClass);
             }
-            return put(_s.getname(), _s, MapleMapType.StatementInFunction);
+            put(_v.getname(), _v, MapleMapType.VarInFunction);
         }
         inStatement = true;
-        return put(_s.getname(), _s, MapleMapType.StatementInStatement);
+        put(_v.getname(), _v, MapleMapType.VarInStatement);
     }
 
     public  boolean StepOutStatement(){
@@ -189,13 +173,13 @@ public class MapleMap {
                 return DeclNameSpace.get(1).containsKey(name);
             case FunctionInClass:
                 return DeclNameSpace.get(2).containsKey(name);
-            case StatementInGrobal:
-                return StatementNameSpace.get(0).containsKey(name);
-            case StatementInClass:
-                return StatementNameSpace.get(1).containsKey(name);
-            case StatementInFunction:
-                return StatementNameSpace.get(2).containsKey(name);
-            case StatementInStatement:
+            case VarInGrobal:
+                return DeclNameSpace.get(3).containsKey(name);
+            case VarInClass:
+                return DeclNameSpace.get(4).containsKey(name);
+            case VarInFunction:
+                return DeclNameSpace.get(5).containsKey(name);
+            case VarInStatement:
                 return StatementStack.peek().containsKey(name);
         }
         return false;

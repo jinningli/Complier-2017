@@ -22,7 +22,7 @@ public class ClassStdlizer extends MapleBaseListener {
     @Override
     public void enterClassDecl(MapleParser.ClassDeclContext ctx) {
         ClassDecl Entering = new ClassDecl(ctx);//to store?
-        Right = maple.StepIn(Entering);//to throw?
+        maple.StepIn(Entering);//to throw?
         //System.out.println(ctx.getRuleIndex());
     }
     @Override

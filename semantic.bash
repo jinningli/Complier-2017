@@ -5,6 +5,5 @@
 
 set -e
 cd "$(dirname "$0")"
-export CCHK="java -classpath ./lib/antlr-4.7-complete.jar:./bin Compiler.FrontEnd.Main"
-cat > program.txt   # save everything in stdin to program.txt
-$CCHK
+#cat > program.txt   # save everything in stdin to program.txt
+java -cp ./lib/*:./bin Compiler.FrontEnd.Main
