@@ -14,7 +14,6 @@ import org.antlr.v4.codegen.model.decl.Decl;
 /**
  * Compiler - 2017
  * lijinning, 2017.04.02, Shanghai.
- * 定义了MapleMap类，使用StepIn函数可以保持相关的状态。
  */
 
 public class MapleMap {

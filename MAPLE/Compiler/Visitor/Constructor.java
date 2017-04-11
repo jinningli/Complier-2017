@@ -224,8 +224,8 @@ public class Constructor extends MapleBaseVisitor<Project> {
         ne.add((Expr) visit(ctx.expr()));
         ne.setDimension(ctx.ptrBracket().getChildCount() + 1);
 //        System.err.println(ctx.ptrBracket().getChildCount());
-        return ne;// 这里代表是 new int[2][][];
-    }//非数组 - 1维
+        return ne;// here is about new int[2][][];
+    }//stdtype: dimension = 1
 // in arrIndex should check if new operation
     @Override public Project visitPostSelfOp(MapleParser.PostSelfOpContext ctx) {
         return new PostSingleExpr((Expr)visit(ctx.expr()),
