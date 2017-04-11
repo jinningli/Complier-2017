@@ -19,7 +19,7 @@ public class Main
     public static boolean infunction = false;
     public static void main(String[] args) throws Exception
     {
-        InputStream Filein = new FileInputStream("MAPLE/Example/test.Maple");
+//        InputStream Filein = new FileInputStream("MAPLE/Example/test.Maple");
 //        try {
 //            compile(System.in, System.out);
 //        } catch (Exception e) {
@@ -27,7 +27,7 @@ public class Main
 //        }
 //        System.exit(0);
 
-        compile(Filein, System.out);
+        compile(System.in, System.out);
     }
     public static void compile(InputStream in, OutputStream out) throws Exception
     {
@@ -38,8 +38,8 @@ public class Main
         MapleParser parser = new MapleParser(tokens);
         parser.setErrorHandler(new BailErrorStrategy());
         ParseTree tree = parser.program();
-        System.out.println("\n***String Tree:");
-        System.out.println(tree.toStringTree(parser) + "\n***");
+//        System.out.println("\n***String Tree:");
+//        System.out.println(tree.toStringTree(parser) + "\n***");
 
         Constructor v = new Constructor();
         Program root = (Program) v.visit(tree);

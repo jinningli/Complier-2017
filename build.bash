@@ -4,4 +4,4 @@
 set -e
 cd "$(dirname "$0")"
 mkdir -p bin
-find ./src -name *.java | javac -d bin -cp "./lib/*" @/dev/stdin
+find ./MAPLE -name *.java | javac -d bin -cp "./lib/*" @/dev/stdin
