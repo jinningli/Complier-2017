@@ -2,12 +2,7 @@ package AssistantClass;
 
 import java.util.*;
 import Compiler.Declare.*;
-import Compiler.Error.DefineWrongPos;
 import Compiler.Error.ReDefine;
-import Compiler.Statement.*;
-import AssistantClass.*;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Redefinable;
-import org.antlr.v4.codegen.model.decl.Decl;
 
 
 
