@@ -1,8 +1,20 @@
 package Compiler.Expression;
 
+import AssistantClass.Position;
+import Compiler.Type.Type;
+
 /**
- *    Compiler - 2017
- *    lijinning, 2017.04.02, Shanghai.
+ * Compiler - 2017
+ * lijinning, 2017.04.07, Shanghai.
  */
-public class ConstantExpr {
+public class ConstantExpr extends Expr {
+    private Type type;
+    private Position pos;
+    public ConstantExpr(Type _t){
+        type = _t;
+        pos = _t.getpos();
+    }
+    public Type getretype() {
+        return type;
+    }
 }

@@ -1,4 +1,4 @@
-// Generated from /Users/lijinning/Desktop/Compiler - 2017/MAPLE/Compiler/FrontEnd/Maple.g4 by ANTLR 4.6
+// Generated from /Users/lijinning/Desktop/Compiler - 2017/MAPLE/Compiler/FrontEnd/Maple.g4 by ANTLR 4.7
 package Compiler.FrontEnd;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -88,15 +88,15 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitBlock(MapleParser.BlockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MapleParser#classBlock}.
+	 * Enter a parse tree produced by {@link MapleParser#blockDecl}.
 	 * @param ctx the parse tree
 	 */
-	void enterClassBlock(MapleParser.ClassBlockContext ctx);
+	void enterBlockDecl(MapleParser.BlockDeclContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MapleParser#classBlock}.
+	 * Exit a parse tree produced by {@link MapleParser#blockDecl}.
 	 * @param ctx the parse tree
 	 */
-	void exitClassBlock(MapleParser.ClassBlockContext ctx);
+	void exitBlockDecl(MapleParser.BlockDeclContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MapleParser#exprBkt}.
 	 * @param ctx the parse tree
@@ -167,6 +167,18 @@ public interface MapleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWhileStatement(MapleParser.WhileStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ReturnStatement}
+	 * labeled alternative in {@link MapleParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnStatement(MapleParser.ReturnStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ReturnStatement}
+	 * labeled alternative in {@link MapleParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnStatement(MapleParser.ReturnStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ControlStatement}
 	 * labeled alternative in {@link MapleParser#stmt}.

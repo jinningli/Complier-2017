@@ -1,4 +1,4 @@
-// Generated from /Users/lijinning/Desktop/Compiler - 2017/MAPLE/Compiler/FrontEnd/Maple.g4 by ANTLR 4.6
+// Generated from /Users/lijinning/Desktop/Compiler - 2017/MAPLE/Compiler/FrontEnd/Maple.g4 by ANTLR 4.7
 package Compiler.FrontEnd;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -59,11 +59,11 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBlock(MapleParser.BlockContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#classBlock}.
+	 * Visit a parse tree produced by {@link MapleParser#blockDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitClassBlock(MapleParser.ClassBlockContext ctx);
+	T visitBlockDecl(MapleParser.BlockDeclContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#exprBkt}.
 	 * @param ctx the parse tree
@@ -105,6 +105,13 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitWhileStatement(MapleParser.WhileStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ReturnStatement}
+	 * labeled alternative in {@link MapleParser#stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnStatement(MapleParser.ReturnStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ControlStatement}
 	 * labeled alternative in {@link MapleParser#stmt}.

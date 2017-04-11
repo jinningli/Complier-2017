@@ -9,33 +9,32 @@ import java.util.List;
 /**
  * Created by lijinning on 2017/4/2.
  */
-public class ClassDecl implements Declare{
-    public  String name;
+public class ClassDecl extends Declare{
+    public String name;
     public Position pos;
-    public List<FuncDecl> funcDeclList;
-    public List<VarDecl> varDeclList;
+    public List<Declare> DeclList;
     public ClassDecl (MapleParser.ClassDeclContext ctx){
         name = ctx.ID().getText();
         pos = new Position(ctx.ID().getSymbol());
-        funcDeclList = new LinkedList<>();
-        varDeclList = new LinkedList<>();
+        DeclList = new LinkedList<>();
     }
     public ClassDecl(String _s, Position _p) {
         name = _s;
         pos = _p;
-        funcDeclList = new LinkedList<>();
-        varDeclList = new LinkedList<>();
+        DeclList = new LinkedList<>();
     }
-    public void add(FuncDecl _f){
-        funcDeclList.add(_f);
-    }
-    public void add(VarDecl _v){
-        varDeclList.add(_v);
+    public void add(Declare _d){
+        DeclList.add(_d);
     }
     public String getname(){
         return name;
     }
     public Position getpos(){
         return pos;
+    }
+    public void check(){
+        for(Declare d : DeclList){
+            d.check();
+        }
     }
 }

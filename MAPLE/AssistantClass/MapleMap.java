@@ -19,17 +19,17 @@ import org.antlr.v4.codegen.model.decl.Decl;
 
 public class MapleMap {
     public enum MapleMapType {
-        ClassInGrobal, FunctionInGrobal, VarInGrobal, FunctionInClass, VarInClass, VarInFunction, VarInStatement
+        ClassInGrobal, FunctionInGrobal, VarInGrobal, FunctionInClass, VarInClass, VarInFunction
+//        , VarInStatement
     }
     private List<Map<String, Declare>> DeclNameSpace;
-    private Stack<Map<String, Declare>>  StatementStack;
-    private boolean inClass = false;
-    private boolean inFunction = false;
-    private boolean inStatement = false;
+//    private List<Map<String, Declare>> VarDeclInStmt;
+//    private boolean inClass = false;
+//    private boolean inFunction = false;
+//    private boolean inStatement = false;
     public MapleMap()
     {
         DeclNameSpace = new LinkedList<>();
-        StatementStack = new Stack<>();
         for(int i = 0; i < 6; i ++)
         {
             DeclNameSpace.add(new HashMap<>());
@@ -86,84 +86,63 @@ public class MapleMap {
                     System.err.println("Statement Redefined:    " + _d.getpos()._String());
                     throw new ReDefine();
                 }
-                break;
-            case VarInStatement:
-                if (!StatementStack.peek().containsKey(_d.getname())) {
-                    StatementStack.peek().put(_d.getname(), _d);
-                } else{
-                    System.err.println("Statement Redefined:    " + _d.getpos()._String());
-                    throw new ReDefine();
-                }
-                break;
+//            case VarInStatement:
+//
+//                break;// var in function : included   var in statement: solve by list
             default:
                 break;
         }
     }
+//
+//    public void StepIn(ClassDecl _c){
+//        if(inClass){
+//            System.err.println("Define Class in Class:    " + _c.getpos()._String());
+//            throw new DefineWrongPos();
+//        }
+//        if(inFunction){
+//            System.err.println("Define Class in Function:    " + _c.getpos()._String());
+//            throw new DefineWrongPos();
+//        }
+//        inClass = true;
+//        put(_c.name, _c, MapleMapType.ClassInGrobal);
+//    }
+//
+//    public boolean StepOutClass(){
+//        inClass = false;
+//        return true;
+//    }
+//
+//    public void StepIn(FuncDecl _f) {
+//        if(inFunction){
+//            System.err.println("Define Function in Function:    " + _f.getpos()._String());
+//            throw new DefineWrongPos();
+//        }
+//        inFunction = true;
+//        if(!inClass){
+//            put(_f.name, _f, MapleMapType.FunctionInGrobal);
+//        }else{
+//            put(_f.name, _f, MapleMapType.FunctionInClass);
+//        }
+//    }
+//
+//    public boolean StepOutFunction(){
+//        inFunction = false;
+//        return true;
+//    }
+//
+//    public void StepIn(VarDecl _v){
+//        if(!inStatement) {
+//            if (!inFunction) {
+//                if (!inClass) {
+//                    put(_v.getname(), _v, MapleMapType.VarInGrobal);
+//                }
+//                put(_v.getname(), _v, MapleMapType.VarInClass);
+//            }
+//            put(_v.getname(), _v, MapleMapType.VarInFunction);
+//        }
+//
+//    }
 
-    public void StepIn(ClassDecl _c){
-        if(inClass){
-            System.err.println("Define Class in Class:    " + _c.getpos()._String());
-            throw new DefineWrongPos();
-        }
-        if(inFunction){
-            System.err.println("Define Class in Function:    " + _c.getpos()._String());
-            throw new DefineWrongPos();
-        }
-        if(inStatement){
-            System.err.println("Define Class in Statement:    " + _c.getpos()._String());
-            throw new DefineWrongPos();
-        }
-        inClass = true;
-        put(_c.name, _c, MapleMapType.ClassInGrobal);
-    }
-
-    public boolean StepOutClass(){
-        inClass = false;
-        return true;
-    }
-
-    public void StepIn(FuncDecl _f) {
-        if(inFunction){
-            System.err.println("Define Function in Function:    " + _f.getpos()._String());
-            throw new DefineWrongPos();
-        }
-        if(inStatement){
-            System.err.println("Define Function in Statement:    " + _f.getpos()._String());
-            throw new DefineWrongPos();
-        }
-        inFunction = true;
-        if(!inClass){
-            put(_f.name, _f, MapleMapType.FunctionInGrobal);
-        }else{
-            put(_f.name, _f, MapleMapType.FunctionInClass);
-        }
-    }
-
-    public boolean StepOutFunction(){
-        inFunction = false;
-        return true;
-    }
-
-    public void StepIn(VarDecl _v){
-        StatementStack.push(new HashMap<>());
-        if(!inStatement){
-            if(!inFunction){
-                if(!inClass){
-                    put(_v.getname(), _v, MapleMapType.VarInGrobal);
-                }
-                put(_v.getname(), _v, MapleMapType.VarInClass);
-            }
-            put(_v.getname(), _v, MapleMapType.VarInFunction);
-        }
-        inStatement = true;
-        put(_v.getname(), _v, MapleMapType.VarInStatement);
-    }
-
-    public  boolean StepOutStatement(){
-        inStatement = false;
-        StatementStack.pop();
-        return true;
-    }
 
     public boolean contains(String name, MapleMapType type){
         switch (type){
@@ -179,8 +158,6 @@ public class MapleMap {
                 return DeclNameSpace.get(4).containsKey(name);
             case VarInFunction:
                 return DeclNameSpace.get(5).containsKey(name);
-            case VarInStatement:
-                return StatementStack.peek().containsKey(name);
         }
         return false;
     }

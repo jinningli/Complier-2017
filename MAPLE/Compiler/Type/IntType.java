@@ -1,14 +1,21 @@
 package Compiler.Type;
 
 import AssistantClass.Position;
+import AssistantClass.Project;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
  * Compiler - 2017
  * lijinning, 2017.04.02, Shanghai.
  */
-public class IntType implements Type {
+public class IntType extends Project implements Type {
     private int data;
     private Position pos;
+
+    public IntType(TerminalNode ctx){
+        data = Integer.parseInt(ctx.getText());
+        pos = new Position(ctx.getSymbol());
+    }
     public IntType(int _d)
     {
         data = _d;
@@ -27,11 +34,11 @@ public class IntType implements Type {
     public String _String(){
         return "IntType " + pos._String() + "\tWith value: " + data;
     }
-    public TypeList getType(){
-        return TypeList.Int;
-    }
     public Position getpos(){return pos;};
     public String getname(){return "";};
     public int getint(){return data;};
     public boolean getbool(){return false;};
+    public String typename() {
+        return "int";
+    }
 }

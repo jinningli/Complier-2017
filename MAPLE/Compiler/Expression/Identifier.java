@@ -1,7 +1,40 @@
 package Compiler.Expression;
 
+import AssistantClass.Position;
+import Compiler.Declare.ClassDecl;
+import Compiler.Declare.Declare;
+import Compiler.Declare.FuncDecl;
+import Compiler.Declare.VarDecl;
+import Compiler.Error.ExpressionError;
+import Compiler.Error.NullPtr;
+import Compiler.FrontEnd.Main;
+import Compiler.Type.ClassType;
+import Compiler.Type.Type;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
+import java.util.Objects;
+
 /**
  * Created by lijinning on 2017/4/2.
  */
-public class Identifier {
+public class Identifier extends Expr {
+    public String name = "";
+    public Position pos;
+    public Identifier(TerminalNode ctx){
+        name = ctx.getText();
+        pos = new Position(ctx.getSymbol());
+    }
+    public Type getretype() {
+        if(Objects.equals(name, "")){
+            throw new NullPtr();
+        }//maybe something wrong
+        Declare d = Main.grobal.what(name);
+        if(d instanceof ClassDecl){
+            return new ClassType(d.getname(), pos);
+        }
+        if(d instanceof FuncDecl){
+            throw new ExpressionError();
+        }
+        return ((VarDecl)d).type;
+    }
 }

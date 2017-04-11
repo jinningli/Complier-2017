@@ -1,11 +1,11 @@
-class chips{
+class A{
     int a = 0;
-    int b(chips a, int b){}
-    int c(){}
-    int d = 0;
+    int B(int b){
+        int c = 0;
+    }
 }
-class chips{}
-int main()
-{
-    return 0;
+
+int d = 0;
+int main(){
+return 0;
 }

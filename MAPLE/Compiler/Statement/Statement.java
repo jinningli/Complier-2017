@@ -1,11 +1,11 @@
 package Compiler.Statement;
 
-import AssistantClass.Position;
-
+import AssistantClass.*;
 /**
  * Created by lijinning on 2017/4/2.
  */
-public interface Statement {
-    public String getname();
-    public Position getpos();
+public abstract class Statement extends Project{
+    public abstract String getname();
+    public abstract Position getpos();
+    public abstract void  check();
 }

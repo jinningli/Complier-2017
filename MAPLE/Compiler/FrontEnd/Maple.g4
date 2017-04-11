@@ -17,7 +17,7 @@ decl:         varDecl
 varDecl:      typePro ID ';'
             | typePro ID '=' expr ';'
             ;
-classDecl:  'class' ID classBlock;
+classDecl:  'class' ID '{' blockDecl* '}';
 
 typePro: type ptrBracket;
 
@@ -27,7 +27,7 @@ funcDecl:  typePro  ID  funcList block;
 
 //Block for General and Class
 block:      '{' stmt* '}';
-classBlock: '{' (varDecl | funcDecl)* '}';
+blockDecl:  varDecl | funcDecl ;
 exprBkt:    '(' expr ')';
 
 //Statement Implement
@@ -36,7 +36,7 @@ stmt:       expr? ';'                                        # ExprStatement
             | ifStmt                                         # IfStatement
             | forStmt                                        # ForStatement
             | whileStmt                                      # WhileStatement
-            | RETURN expr? ';'                               # ControlStatement
+            | RETURN expr? ';'                               # ReturnStatement
             | operation = (BREAK | CONTINUE) ';'             # ControlStatement
             | varDecl                                        # VarDeclare
             ;
@@ -45,12 +45,12 @@ stmt:       expr? ';'                                        # ExprStatement
 ifStmt:     IF exprBkt
             stmt
             (
-            (
-            ELSEIF exprBkt
-            stmt
-            )*
-            ELSE
-            stmt
+                (
+                    ELSEIF exprBkt
+                     stmt
+                )*
+             ELSE
+             stmt
             )?
             ;
 forStmt:    FOR '(' expr? ';' expr? ';' expr? ')'
@@ -63,27 +63,27 @@ whileStmt:  WHILE exprBkt
 exprList:   '(' expr ( ',' expr )* ')' ;
 
 // Expression
-expr:       exprBkt                                                                 # ExprWithBracket
-            | constant                                                              # ConstantValue
-            | ID                                                                    # Identifier
-            | ID '(' (expr (',' expr)*)? ')'                                        # FunctionCall
-            | expr DOT ID                                                           # Member
-            | expr DOT ID exprList                                                  # MemberFunction
+expr:       exprBkt                                                                 # ExprWithBracket//
+            | constant                                                              # ConstantValue//
+            | ID                                                                    # Identifier//
+            | ID exprList                                                           # FunctionCall//
+            | expr DOT ID                                                           # Member//
+            | expr DOT ID exprList                                                  # MemberFunction//
             | 'new' type ('[' expr ']' ptrBracket)?                                 # NewOperation
-            | operation = (MINUS | PLUS)                                    expr    # SignExpression
-            | expr operation = (PLUS   | MINUS)                             expr    # BinaryExpression
-            | expr operation = (MUL    | DIV    | MOD)                      expr    # BinaryExpression
-            | expr operation = (BAND   | BXOR   | BOR)                      expr    # BinaryBitOperation
-            | expr operation = (BMOV_L | BMOV_R)                            expr    # BinaryBitMov
-            | expr operation = (LESS   | LARGE  | LESSEQ | LARGEEQ)         expr    # LogicExpression
-            | expr operation = (EQ     | NEQ)                               expr    # LogicExpression
-            | expr operation = (AND    | OR)                                expr    # LogicExpression
-            | operation      = (PLUSPLUS        | MINUSMINUS)               expr    # PreSelfOp
-            | expr operation = (PLUSPLUS        | MINUSMINUS)                       # PostSelfOp
-            | expr '[' expr ']'                                                     # ArrIndex
-            | NOT expr                                                              # NotOperation
-            | BNOT expr                                                             # BitNotOperation
-            | <assoc=right> expr '=' expr                                           # Assign
+            | operation = (MINUS | PLUS)                                    expr        # SignExpression//
+            | expr operation = (PLUS   | MINUS)                             expr    # BinaryExpression//
+            | expr operation = (MUL    | DIV    | MOD)                      expr    # BinaryExpression//
+            | expr operation = (BAND   | BXOR   | BOR)                      expr    # BinaryBitOperation//
+            | expr operation = (BMOV_L | BMOV_R)                            expr    # BinaryBitMov//
+            | expr operation = (LESS   | LARGE  | LESSEQ | LARGEEQ)         expr    # LogicExpression//
+            | expr operation = (EQ     | NEQ)                               expr    # LogicExpression//
+            | expr operation = (AND    | OR)                                expr    # LogicExpression//
+            | operation      = (PLUSPLUS        | MINUSMINUS)               expr        # PreSelfOp//
+            | expr operation = (PLUSPLUS        | MINUSMINUS)                       # PostSelfOp//
+            | expr '[' expr ']'                                                     # ArrIndex//
+            | NOT expr                                                                  # NotOperation//
+            | BNOT expr                                                                 # BitNotOperation//
+            | <assoc=right> expr '=' expr                                           # Assign//
             ;
 
 // Other Parser

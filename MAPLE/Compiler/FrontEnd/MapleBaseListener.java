@@ -1,4 +1,4 @@
-// Generated from /Users/lijinning/Desktop/Compiler - 2017/MAPLE/Compiler/FrontEnd/Maple.g4 by ANTLR 4.6
+// Generated from /Users/lijinning/Desktop/Compiler - 2017/MAPLE/Compiler/FrontEnd/Maple.g4 by ANTLR 4.7
 package Compiler.FrontEnd;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -112,13 +112,13 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterClassBlock(MapleParser.ClassBlockContext ctx) { }
+	@Override public void enterBlockDecl(MapleParser.BlockDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitClassBlock(MapleParser.ClassBlockContext ctx) { }
+	@Override public void exitBlockDecl(MapleParser.BlockDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -191,6 +191,18 @@ public class MapleBaseListener implements MapleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitWhileStatement(MapleParser.WhileStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReturnStatement(MapleParser.ReturnStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReturnStatement(MapleParser.ReturnStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

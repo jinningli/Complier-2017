@@ -1,14 +1,20 @@
 package Compiler.Type;
 
 import AssistantClass.Position;
+import AssistantClass.Project;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
  * Compiler - 2017
  * lijinning, 2017.04.02, Shanghai.
  */
-public class StringType implements Type {
+public class StringType extends Project implements Type {
     public String data;
     public Position pos;
+    public StringType(TerminalNode ctx){
+        data = ctx.getText();
+        pos = new Position(ctx.getSymbol());
+    }
     public StringType(String _d)
     {
         data = _d;
@@ -27,9 +33,6 @@ public class StringType implements Type {
     public String _String(){
         return "StringType " + pos._String() + "\tWith Value: " + data;
     }
-    public TypeList getType(){
-        return TypeList.String;
-    }
     public Position getpos(){
         return pos;
     }
@@ -38,4 +41,7 @@ public class StringType implements Type {
     }
     public int getint(){return 0;};
     public boolean getbool(){return false;};
+    public String typename() {
+        return "string";
+    }
 }
