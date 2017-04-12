@@ -26,7 +26,7 @@ public class PreSingleExpr extends Expr {
         if (!(body.getretype() instanceof IntType || body.getretype() instanceof BoolType)) {
             throw new TypeNotMatch();
         }
-        if(Objects.equals(opt, "++") || Objects.equals(opt, "--")){
+        if(Objects.equals(opt, "++") || Objects.equals(opt, "--") || Objects.equals(opt, "-") || Objects.equals(opt, "+")){
             return body.getretype();
         }
         throw new TypeNotMatch();

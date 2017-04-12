@@ -29,6 +29,11 @@ public class Member extends Expr {
         if(body == null || Objects.equals(name, "")){
             throw new NullPtr();
         }
+        if(body instanceof Identifier){
+            if(Objects.equals(((Identifier) body).name, "this")){
+                return ((VarDecl)Main.grobal.what(Main.nowclass + "-" + name)).type;
+            }
+        }
         Type t = body.getretype();
         if(t instanceof ClassType) {
             if(Objects.equals(t.getname(), "")){

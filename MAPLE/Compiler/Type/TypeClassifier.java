@@ -12,13 +12,6 @@ import java.util.Objects;
 public class TypeClassifier {
     private Type output;
     public Type Classify(MapleParser.TypeProContext ctx){
-            if(ctx.type().VOID()!=null){
-                output = new VoidType(new Position(ctx.getStart()));
-                if(!(Objects.equals(ctx.ptrBracket().getText(), ""))){
-                    System.err.println("Define Error: Void Array:    " +output.getpos()._String());
-                    throw new NoDefined();
-                }
-            }
            // System.err.print(ctx.type().getText());
             switch (ctx.type().getText()){
                 case "int":
@@ -30,6 +23,13 @@ public class TypeClassifier {
                 case "bool":
                     output = new BoolType(new Position(ctx.getStart()));
                      break;
+                case "void":
+                    output = new VoidType(new Position(ctx.getStart()));
+                    if(!(Objects.equals(ctx.ptrBracket().getText(), ""))){
+                        System.err.println("Define Error: Void Array:    " +output.getpos()._String());
+                        throw new NoDefined();
+                    }
+                    break;
                 default:
                     String name = ctx.type().ID().getText();
                     Position pos = new Position(ctx.getStart());

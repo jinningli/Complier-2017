@@ -11,6 +11,7 @@ import Compiler.Type.IntType;
 import Compiler.Type.StringType;
 import Compiler.Type.Type;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +27,7 @@ public class MemberFunction extends Expr {
     public MemberFunction(MapleParser.MemberFunctionContext ctx){
         name = ctx.ID().getText();
         pos = new Position(ctx.getStart());
+        flist = new LinkedList<>();
     }
     public void listadd(Expr _es) {
         if(left == null){

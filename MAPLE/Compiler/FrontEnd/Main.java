@@ -22,12 +22,6 @@ public class Main
     public static void main(String[] args) throws Exception
     {
 //        InputStream Filein = new FileInputStream("MAPLE/Example/test.Maple");
-//        try {
-//            compile(System.in, System.out);
-//        } catch (Exception e) {
-//            System.exit(1);
-//        }
-//        System.exit(0);
 //        compile(Filein, System.out);
         compile(System.in, System.out);
     }

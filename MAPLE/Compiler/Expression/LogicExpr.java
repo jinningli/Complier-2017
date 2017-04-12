@@ -9,7 +9,8 @@ import Compiler.Type.Type;
 import java.util.Objects;
 
 /**
- * Created by lijinning on 2017/4/2.
+ *    Compiler - 2017
+ *    lijinning, 2017.04.12, Shanghai.
  */
 public class LogicExpr extends Expr {
     private Expr left = null;
@@ -31,6 +32,14 @@ public class LogicExpr extends Expr {
         }
         Type lt = left.getretype();
         Type rt = right.getretype();
+        if(Objects.equals(opt, "&&") || Objects.equals(opt, "||")) {
+            if (!(lt instanceof BoolType)) {
+                throw new TypeNotMatch();
+            }
+            if (!(rt instanceof BoolType)) {
+                throw new TypeNotMatch();
+            }
+        }
         if(!Objects.equals(lt.typename(), rt.typename())){
             throw new TypeNotMatch();
         }

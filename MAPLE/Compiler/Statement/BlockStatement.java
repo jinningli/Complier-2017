@@ -28,6 +28,7 @@ public class BlockStatement extends Statement {
         return pos;
     }
     public void add(Statement _s){
+        if(_s == null) return;
         stmtlist.add(_s);
     }
     public void check(){

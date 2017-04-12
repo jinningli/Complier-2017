@@ -72,10 +72,13 @@ public class Constructor extends MapleBaseVisitor<Project> {
         FuncDecl func = new FuncDecl(ctx);
         for(ParserRuleContext child :  ctx.block().stmt()){
             Statement stmt = (Statement)visit(child);
+            if(stmt == null) continue;
             func.add(stmt);
         }
         if(inclass){
             maple.define(nowclass + "-" + func.getname(), func);
+        }else{
+            maple.define(func.getname(), func);
         }
         return func;
     }
@@ -93,6 +96,9 @@ public class Constructor extends MapleBaseVisitor<Project> {
 //    @Override public Project visitExprBkt(MapleParser.ExprBktContext ctx) { return visit(ctx.expr()); }
 
     @Override public Project visitExprStatement(MapleParser.ExprStatementContext ctx) {
+        if(ctx.expr() == null){
+           return null;
+        }
         return new ExprStatement((Expr) visit(ctx.expr()),
                 new Position(ctx.getStart()));
     }
@@ -164,8 +170,10 @@ public class Constructor extends MapleBaseVisitor<Project> {
     @Override public Project visitMemberFunction(MapleParser.MemberFunctionContext ctx) {
         MemberFunction fc = new MemberFunction(ctx);
         fc.listadd((Expr) visit(ctx.expr()));
-        for (ParserRuleContext child : ctx.exprList().expr()){
-            fc.listadd((Expr) visit(child));
+        if(!ctx.exprList().expr().isEmpty()) {
+            for (ParserRuleContext child : ctx.exprList().expr()) {
+                fc.listadd((Expr) visit(child));
+            }
         }
         return fc;
     }

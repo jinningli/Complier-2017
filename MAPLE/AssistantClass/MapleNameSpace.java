@@ -28,8 +28,10 @@ public class MapleNameSpace {
 
     public Declare what(String name){
         Stack<Declare> sd = namestack.get(name);
-       if(sd == null || sd.isEmpty())
+       if(sd == null || sd.isEmpty()){
            throw new NoDefined();
+       }
+
        return sd.peek();
     }
 
@@ -89,6 +91,9 @@ public class MapleNameSpace {
         }
         nowlayer --;
         layer.pop();
+    }
+    public boolean containsKey(String name){
+        return namestack.containsKey(name);
     }
 
 }

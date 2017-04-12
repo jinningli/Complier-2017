@@ -1,8 +1,10 @@
 package Compiler.Expression;
 
 import AssistantClass.Position;
+import Compiler.Error.ExpressionError;
 import Compiler.Error.NullPtr;
 import Compiler.Error.TypeNotMatch;
+import Compiler.Type.ArrType;
 import Compiler.Type.Type;
 
 import java.util.Objects;
@@ -22,6 +24,11 @@ public class AssignExpr extends Expr {
     public Type getretype(){
         if(left == null || right == null){
             throw new NullPtr();
+        }
+
+        if(!(left instanceof Identifier || left instanceof ArrIndex || left instanceof Member)){
+            System.err.println(pos._String());
+            throw new ExpressionError();
         }
         Type lt = left.getretype();
         Type rt = right.getretype();

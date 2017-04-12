@@ -54,6 +54,7 @@ public class FuncDecl extends Declare {
         return pos;
     }
     public void check(){
+        Main.infunction = true;
         Main.grobal.newLayer();
         if(retype instanceof ClassDecl){
             Main.grobal.what(retype.getname());
@@ -76,7 +77,9 @@ public class FuncDecl extends Declare {
         }
         for(Statement s : stmtlist){
             s.check();
+//            System.err.println(s.getpos()._String());
         }
         Main.grobal.exitLayer();
+        Main.infunction = false;
     }
 }

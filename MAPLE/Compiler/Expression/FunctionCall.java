@@ -42,6 +42,8 @@ public class FunctionCall extends Expr {
             throw new NumberNotMatch();
         }
         for(int i = 0; i < flist.size() ; i ++){
+//            System.err.println(flist.get(i).getretype().typename());
+//            System.err.println(func.flist.get(i).getFirst().typename());
             if(!Objects.equals(flist.get(i).getretype().typename(), func.flist.get(i).getFirst().typename())){
                 throw new TypeNotMatch();
             }

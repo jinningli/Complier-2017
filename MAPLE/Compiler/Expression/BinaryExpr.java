@@ -2,9 +2,13 @@ package Compiler.Expression;
 
 import AssistantClass.Position;
 import Compiler.Error.NullPtr;
+import Compiler.Error.TypeNotMatch;
 import Compiler.Error.WrongType;
+import Compiler.Type.BoolType;
 import Compiler.Type.IntType;
 import Compiler.Type.Type;
+
+import java.util.Objects;
 
 /**
  *    Compiler - 2017
@@ -25,10 +29,7 @@ public class BinaryExpr extends Expr {
         if(left == null || right == null){
             throw new NullPtr();
         }
-        if(!(left.getretype() instanceof IntType)){
-            throw new WrongType();
-        }
-        if(!(right.getretype()instanceof IntType)){
+        if(!Objects.equals(left.getretype().typename(), right.getretype().typename())) {
             throw new WrongType();
         }
         return left.getretype();
