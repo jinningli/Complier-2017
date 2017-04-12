@@ -164,12 +164,20 @@ public class Constructor extends MapleBaseVisitor<Project> {
         ForStatement fs = new ForStatement(
                 (Statement)visit(ctx.stmt()),
                 new Position(ctx.getStart()));
-        for(int i = 0; i < 3; i ++){
-            if(ctx.expr(i) == null){
-                fs.add(new ConstantExpr(new NullType(fs.pos)));
-            }else{
-                fs.add((Expr)visit(ctx.expr(i)));
-            }
+        if(ctx.first == null){
+            fs.add(new ConstantExpr(new NullType(fs.pos)));
+        }else{
+            fs.add((Expr)visit(ctx.first));
+        }
+        if(ctx.second == null){
+            fs.add(new ConstantExpr(new NullType(fs.pos)));
+        }else{
+            fs.add((Expr)visit(ctx.second));
+        }
+        if(ctx.thirld == null){
+            fs.add(new ConstantExpr(new NullType(fs.pos)));
+        }else{
+            fs.add((Expr)visit(ctx.thirld));
         }
         return fs;
     }

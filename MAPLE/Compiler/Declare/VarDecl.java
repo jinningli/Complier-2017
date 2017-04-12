@@ -55,12 +55,15 @@ public class VarDecl extends Declare {
 //                throw new NoDefined();
 //            }
         }
-        if(expr != null && (!(expr.getretype() instanceof NullType))){
-            if(!Objects.equals(expr.getretype().typename(), type.typename())){
+
+        if(expr != null && (!(expr.getretype() instanceof NullType))) {
+            if (!Objects.equals(expr.getretype().typename(), type.typename())) {
                 System.err.println(pos._String());
-                throw  new TypeNotMatch();
+                throw new TypeNotMatch();
             }
-        }
+        }else if(!(type instanceof ClassType)){
+                throw new TypeNotMatch();
+            }
         if(Main.inclass){
             if(Main.infunction){
                 Main.grobal.define(name, this);

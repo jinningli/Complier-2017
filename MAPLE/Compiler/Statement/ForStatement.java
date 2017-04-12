@@ -38,19 +38,25 @@ public class ForStatement extends Statement{
     }
     public void check(){
         Main.incircle.push(0);
+        if(!(stmt instanceof BlockStatement))
+            Main.grobal.newLayer();
         for(int i = 0; i < expr.size(); i ++){
             if(!(expr.get(i).getretype() instanceof NullType))
-            type.add(expr.get(i).getretype());
+                type.add(expr.get(i).getretype());
+            else
+                type.add(new NullType(pos));
         }
-//        if(!(expr.get(0).getretype() instanceof NullType || expr.get(0) instanceof AssignExpr)){ ////can three expr empty?
-//            System.err.println(pos._String());
-//            throw new TypeNotMatch();
-//        }
-//        if(!(expr.get(1).getretype() instanceof NullType || type.get(1) instanceof BoolType)){
-//            throw new TypeNotMatch();
-//        }
+        if(!(expr.get(0).getretype() instanceof NullType || expr.get(0) instanceof AssignExpr)){ ////can three expr empty?
+            System.err.println(pos._String());
+            throw new TypeNotMatch();
+        }
+        if(!(expr.get(1).getretype() instanceof NullType || type.get(1) instanceof BoolType)){
+            throw new TypeNotMatch();
+        }
         if(stmt != null)
             stmt.check();
+        if(!(stmt instanceof BlockStatement))
+            Main.grobal.exitLayer();
        Main.incircle.pop();
     }
 }

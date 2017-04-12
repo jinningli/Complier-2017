@@ -53,7 +53,7 @@ ifStmt:     IF exprBkt
              stmt
             )?
             ;
-forStmt:    FOR '(' expr? ';' expr? ';' expr? ')'
+forStmt:    FOR '(' first = expr? ';' second = expr? ';' thirld = expr? ')'
             stmt
             ;
 whileStmt:  WHILE exprBkt

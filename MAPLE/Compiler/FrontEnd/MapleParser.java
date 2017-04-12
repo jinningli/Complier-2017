@@ -1124,6 +1124,9 @@ public class MapleParser extends Parser {
 	}
 
 	public static class ForStmtContext extends ParserRuleContext {
+		public ExprContext first;
+		public ExprContext second;
+		public ExprContext thirld;
 		public TerminalNode FOR() { return getToken(MapleParser.FOR, 0); }
 		public StmtContext stmt() {
 			return getRuleContext(StmtContext.class,0);
@@ -1170,7 +1173,7 @@ public class MapleParser extends Parser {
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__5) | (1L << T__10) | (1L << INT) | (1L << BOOL) | (1L << NULL) | (1L << STRING) | (1L << ID) | (1L << PLUS) | (1L << MINUS) | (1L << PLUSPLUS) | (1L << MINUSMINUS) | (1L << NOT) | (1L << BNOT))) != 0)) {
 				{
 				setState(153);
-				expr(0);
+				((ForStmtContext)_localctx).first = expr(0);
 				}
 			}
 
@@ -1182,7 +1185,7 @@ public class MapleParser extends Parser {
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__5) | (1L << T__10) | (1L << INT) | (1L << BOOL) | (1L << NULL) | (1L << STRING) | (1L << ID) | (1L << PLUS) | (1L << MINUS) | (1L << PLUSPLUS) | (1L << MINUSMINUS) | (1L << NOT) | (1L << BNOT))) != 0)) {
 				{
 				setState(157);
-				expr(0);
+				((ForStmtContext)_localctx).second = expr(0);
 				}
 			}
 
@@ -1194,7 +1197,7 @@ public class MapleParser extends Parser {
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__5) | (1L << T__10) | (1L << INT) | (1L << BOOL) | (1L << NULL) | (1L << STRING) | (1L << ID) | (1L << PLUS) | (1L << MINUS) | (1L << PLUSPLUS) | (1L << MINUSMINUS) | (1L << NOT) | (1L << BNOT))) != 0)) {
 				{
 				setState(161);
-				expr(0);
+				((ForStmtContext)_localctx).thirld = expr(0);
 				}
 			}
 
