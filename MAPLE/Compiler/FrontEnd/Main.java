@@ -21,9 +21,9 @@ public class Main
     public static String nowclass = "";
     public static void main(String[] args) throws Exception
     {
-        InputStream Filein = new FileInputStream("MAPLE/Example/test.Maple");
-        compile(Filein, System.out);
-//        compile(System.in, System.out);
+//        InputStream Filein = new FileInputStream("MAPLE/Example/test.Maple");
+//        compile(Filein, System.out);
+        compile(System.in, System.out);
     }
     public static void compile(InputStream in, OutputStream out) throws Exception
     {
