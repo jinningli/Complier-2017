@@ -6,6 +6,7 @@ import Compiler.Error.TypeNotMatch;
 import Compiler.Error.WrongType;
 import Compiler.Type.BoolType;
 import Compiler.Type.IntType;
+import Compiler.Type.StringType;
 import Compiler.Type.Type;
 
 import java.util.Objects;
@@ -18,6 +19,8 @@ public class BinaryExpr extends Expr {
     private Expr left = null;
     private Expr right = null;
     private String opt = "";
+    private Type lt = null;
+    private Type rt = null;
     private Position pos;
     public BinaryExpr(Expr _l, Expr _r, String _o, Position _p){
         left = _l;
@@ -29,9 +32,25 @@ public class BinaryExpr extends Expr {
         if(left == null || right == null){
             throw new NullPtr();
         }
-        if(!Objects.equals(left.getretype().typename(), right.getretype().typename())) {
+        lt = left.getretype();
+        rt = right.getretype();
+        switch (opt){
+            case "+":
+                if((!(lt instanceof IntType))&& !(lt instanceof StringType)){
+                    throw new WrongType();
+                }
+                if((!(rt instanceof IntType))&& !(rt instanceof StringType)){
+                    throw new WrongType();
+                }
+                break;
+            default:
+                if((!(lt instanceof IntType))||(!(rt instanceof IntType))){
+                    throw new WrongType();
+                }
+        }
+        if(!Objects.equals(lt.typename(), rt.typename())) {
             throw new WrongType();
         }
-        return left.getretype();
+        return lt;
     }
 }

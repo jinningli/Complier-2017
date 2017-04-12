@@ -28,14 +28,15 @@ public class WhileStatement extends Statement{
         return pos;
     }
     public void check(){
-        Main.incircle = true;
+        Main.incircle.push(0);
         if(expr == null){
             throw new NullPtr();
         }
         if(!(expr.getretype() instanceof BoolType)){
             throw new TypeNotMatch();
         }
+        if(stmt != null)
         stmt.check();
-        Main.incircle = false;
+        Main.incircle.pop();
     }
 }

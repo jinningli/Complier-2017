@@ -21,7 +21,7 @@ public class ContinueStatement extends Statement {
         return pos;
     }
     public void check(){
-        if(!Main.incircle){
+        if(Main.incircle.empty()){
             throw new NoDefined();
         }
     }

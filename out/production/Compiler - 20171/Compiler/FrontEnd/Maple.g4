@@ -19,7 +19,7 @@ varDecl:      typePro ID ';'
             ;
 classDecl:  'class' ID '{' blockDecl* '}';
 
-typePro: type ptrBracket;
+typePro: type? ptrBracket;
 
 funcList:    '(' ( typePro ID ( ',' typePro ID )* )?')' ;
 

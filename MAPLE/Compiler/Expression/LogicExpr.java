@@ -4,6 +4,7 @@ import AssistantClass.Position;
 import Compiler.Error.NullPtr;
 import Compiler.Error.TypeNotMatch;
 import Compiler.Type.BoolType;
+import Compiler.Type.NullType;
 import Compiler.Type.Type;
 
 import java.util.Objects;
@@ -40,9 +41,13 @@ public class LogicExpr extends Expr {
                 throw new TypeNotMatch();
             }
         }
+        if(lt instanceof NullType || rt instanceof NullType){
+            return new BoolType(true, pos);
+        }
         if(!Objects.equals(lt.typename(), rt.typename())){
+            System.err.println(pos._String());
             throw new TypeNotMatch();
         }
-        return new BoolType(new Position(-1, -1));
+        return new BoolType(pos);
     }
 }

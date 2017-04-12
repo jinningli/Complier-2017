@@ -21,6 +21,6 @@ public class ClassType extends Project implements Type{
     public int getint(){return 0;};
     public boolean getbool(){return false;};
     public String typename() {
-        return "class";
+        return "class:" + name;
     }
 }

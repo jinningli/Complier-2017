@@ -1,5 +1,6 @@
 package Compiler.Expression;
 
+import AssistantClass.Position;
 import Compiler.Error.NullPtr;
 import Compiler.Error.TypeNotMatch;
 import Compiler.Type.BoolType;
@@ -15,9 +16,11 @@ import java.util.Objects;
 public class PreSingleExpr extends Expr {
     private String opt = "";
     private Expr body = null;
-    public PreSingleExpr(Expr _b, String _o){
+    private Position pos;
+    public PreSingleExpr(Expr _b, String _o, Position _p){
         body = _b;
         opt = _o;
+        pos = _p;
     }
     public Type getretype() {
         if ((Objects.equals(opt, "")) || (body == null)) {
@@ -26,9 +29,15 @@ public class PreSingleExpr extends Expr {
         if (!(body.getretype() instanceof IntType || body.getretype() instanceof BoolType)) {
             throw new TypeNotMatch();
         }
-        if(Objects.equals(opt, "++") || Objects.equals(opt, "--") || Objects.equals(opt, "-") || Objects.equals(opt, "+")){
-            return body.getretype();
-        }
-        throw new TypeNotMatch();
+//        if(Objects.equals(opt, "++") ||
+//                Objects.equals(opt, "--") ||
+//                Objects.equals(opt, "-") ||
+//                Objects.equals(opt, "+") ||
+//                Objects.equals(opt, "!")){
+//            return body.getretype();
+//        }
+    //    System.err.println(pos._String());
+        return body.getretype();
+//        throw new TypeNotMatch();
     }
 }

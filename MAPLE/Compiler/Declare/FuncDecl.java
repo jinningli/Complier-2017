@@ -10,6 +10,7 @@ import Compiler.Statement.ReturnStatement;
 import Compiler.Statement.Statement;
 import Compiler.Type.*;
 import AssistantClass.*;
+import org.antlr.v4.codegen.model.decl.Decl;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -34,13 +35,18 @@ public class FuncDecl extends Declare {
     public void addlist(Type _t, String _s){
         flist.add(new Pair<>(_t, _s));
     }
-    public FuncDecl (MapleParser.FuncDeclContext ctx){
+    public FuncDecl (MapleParser.FuncDeclContext ctx, boolean inclass){
         stmtlist = new LinkedList<>();
         flist = new LinkedList<>();
         name = ctx.ID().getText();
         pos = new Position(ctx.ID().getSymbol());
         TypeClassifier TC = new TypeClassifier();
-        retype = TC.Classify(ctx.typePro());
+        if(ctx.typePro().type() == null){
+            if(!inclass){
+                throw new DeclLost();
+            }
+        }
+        else retype = TC.Classify(ctx.typePro());
         int k = 0;
         while (ctx.funcList().typePro(k)!=null){
             flist.add(new Pair<>(TC.Classify(ctx.funcList().typePro(k)), ctx.funcList().ID(k).getText()));
@@ -62,7 +68,9 @@ public class FuncDecl extends Declare {
     }
     public void check(){
         Main.infunction = true;
+        Main.nowfunc = this;
         Main.grobal.newLayer();
+//        Main.returned = false;
         if(retype instanceof ClassType){
             Main.grobal.what(retype.getname());
         }
@@ -82,18 +90,17 @@ public class FuncDecl extends Declare {
             vd.setType(flist.get(i).getFirst());
             Main.grobal.define(flist.get(i).getSecond(), vd);
         }
-        boolean returned = false;
+//        boolean returned = false;
         for(Statement s : stmtlist){
-            if(s instanceof ReturnStatement){
-                returned = true;
-            }
             s.check();
 //            System.err.println(s.getpos()._String());
         }
-        if((!(retype instanceof VoidType)) && (!returned) && !Objects.equals(name, "main")){
-            throw new DeclLost();
-        }
+//        if((!(retype instanceof VoidType)) && (!Main.returned) && !Objects.equals(name, "main")){
+//            System.err.println(pos._String());
+//            throw new DeclLost();
+//        }
         Main.grobal.exitLayer();
         Main.infunction = false;
+//        Main.returned = false;
     }
 }

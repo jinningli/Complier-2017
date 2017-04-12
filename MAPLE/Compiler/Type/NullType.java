@@ -11,6 +11,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 public class NullType extends Project implements Type {
     public String name = "null";
     public Position pos;
+    public NullType(Position _p){pos = _p;}
     public  NullType(TerminalNode ctx){
         pos = new Position(ctx.getSymbol());
     }

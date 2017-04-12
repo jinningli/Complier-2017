@@ -7,7 +7,11 @@ import Compiler.Expression.AssignExpr;
 import Compiler.Expression.Expr;
 import Compiler.FrontEnd.Main;
 import Compiler.Type.BoolType;
+import Compiler.Type.NullType;
 import Compiler.Type.Type;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by lijinning on
@@ -17,12 +21,14 @@ public class ForStatement extends Statement{
     public String name = "for";
     public Position pos;
     public Statement stmt;
-    public Expr[] expr = new Expr[3];
-    public Type[] type = new Type[3];
-    public ForStatement(Expr _e1, Expr _e2, Expr _e3,Statement _s, Position _p){
-        expr[0] = _e1;  expr[1] = _e2;  expr[2] = _e3;
+    public List<Expr> expr = new LinkedList<>();
+    public List<Type> type = new LinkedList<>();
+    public ForStatement(Statement _s, Position _p){
         stmt = _s;
         pos = _p;
+    }
+    public void add(Expr _e){
+        expr.add(_e);
     }
     public String getname(){
         return name;
@@ -31,17 +37,20 @@ public class ForStatement extends Statement{
         return pos;
     }
     public void check(){
-       Main.incircle = true;
-       for(int i = 0; i < 3; i ++){
-           type[i] = expr[i].getretype();
+        Main.incircle.push(0);
+        for(int i = 0; i < expr.size(); i ++){
+            if(!(expr.get(i).getretype() instanceof NullType))
+            type.add(expr.get(i).getretype());
         }
-        if(!(expr[0] instanceof AssignExpr)){ ////can three expr empty?
-           throw new TypeNotMatch();
-        }
-        if(!(type[1] instanceof BoolType)){
-            throw new TypeNotMatch();
-        }
-       stmt.check();
-       Main.incircle = false;
+//        if(!(expr.get(0).getretype() instanceof NullType || expr.get(0) instanceof AssignExpr)){ ////can three expr empty?
+//            System.err.println(pos._String());
+//            throw new TypeNotMatch();
+//        }
+//        if(!(expr.get(1).getretype() instanceof NullType || type.get(1) instanceof BoolType)){
+//            throw new TypeNotMatch();
+//        }
+        if(stmt != null)
+            stmt.check();
+       Main.incircle.pop();
     }
 }

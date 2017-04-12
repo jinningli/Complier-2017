@@ -21,7 +21,8 @@ public class BreakStatement extends Statement{
         return pos;
     }
     public void check(){
-        if(!Main.incircle){
+        if(Main.incircle.empty()){
+            System.err.println(pos._String());
             throw new NoDefined();
         }
     }

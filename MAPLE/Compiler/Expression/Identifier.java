@@ -9,6 +9,7 @@ import Compiler.Error.ExpressionError;
 import Compiler.Error.NullPtr;
 import Compiler.FrontEnd.Main;
 import Compiler.Type.ClassType;
+import Compiler.Type.NullType;
 import Compiler.Type.Type;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -28,6 +29,9 @@ public class Identifier extends Expr {
         if(Objects.equals(name, "")){
             throw new NullPtr();
         }//maybe something wrong
+        if(Objects.equals(name, "null")){
+            return new NullType(pos);
+        }
         //System.err.println(pos._String());
         Declare d;
         //System.err.println(pos._String());

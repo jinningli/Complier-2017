@@ -22,6 +22,7 @@ import java.util.Objects;
 public class Constructor extends MapleBaseVisitor<Project> {
     private MapleNameSpace maple = Main.grobal;
     boolean inclass = false;
+    boolean infunction = false;
     String nowclass = "";
 
     @Override public Project visitProgram(MapleParser.ProgramContext ctx) {
@@ -41,9 +42,11 @@ public class Constructor extends MapleBaseVisitor<Project> {
         if(!(ctx.expr()==null)) {
             vd.setExpr((Expr)visit(ctx.expr()));
         }
-//        if(inclass){
-//            maple.define(nowclass + "-" + vd.getname(), vd);
-//        }else{
+//        System.err.println(vd.pos._String());
+        if(inclass&&!infunction){
+            maple.define(nowclass + "-" + vd.getname(), vd);
+        }
+// else{
 //            maple.define(vd.getname(), vd);
 //        }
         //System.err.println(ctx.getParent().getText());
@@ -69,7 +72,8 @@ public class Constructor extends MapleBaseVisitor<Project> {
 //    @Override public Project visitFuncList(MapleParser.FuncListContext ctx) { return visitChildren(ctx); }
 
     @Override public Project visitFuncDecl(MapleParser.FuncDeclContext ctx) {
-        FuncDecl func = new FuncDecl(ctx);
+        infunction = true;
+        FuncDecl func = new FuncDecl(ctx, inclass);
         for(ParserRuleContext child :  ctx.block().stmt()){
             Statement stmt = (Statement)visit(child);
             if(stmt == null) continue;
@@ -80,6 +84,7 @@ public class Constructor extends MapleBaseVisitor<Project> {
         }else{
             maple.define(func.getname(), func);
         }
+        infunction = false;
         return func;
     }
 
@@ -129,6 +134,10 @@ public class Constructor extends MapleBaseVisitor<Project> {
         throw new NullPtr();
     }
     @Override public Project visitReturnStatement(MapleParser.ReturnStatementContext ctx) {
+        if(ctx.expr() == null){
+            return new ReturnStatement(null, new Position(ctx.getStart()));
+
+        }
         return new ReturnStatement((Expr)visit(ctx.expr()), new Position(ctx.getStart()));
     }
 
@@ -151,11 +160,17 @@ public class Constructor extends MapleBaseVisitor<Project> {
     }
 
     @Override public Project visitForStmt(MapleParser.ForStmtContext ctx) {
-        ForStatement fs = new ForStatement((Expr)visit(ctx.expr(0)),
-                (Expr)visit(ctx.expr(1)),
-                (Expr)visit(ctx.expr(2)),
+      //  System.err.println(new Position(ctx.getStart())._String());
+        ForStatement fs = new ForStatement(
                 (Statement)visit(ctx.stmt()),
                 new Position(ctx.getStart()));
+        for(int i = 0; i < 3; i ++){
+            if(ctx.expr(i) == null){
+                fs.add(new ConstantExpr(new NullType(fs.pos)));
+            }else{
+                fs.add((Expr)visit(ctx.expr(i)));
+            }
+        }
         return fs;
     }
 
@@ -179,7 +194,7 @@ public class Constructor extends MapleBaseVisitor<Project> {
     }
 
     @Override public Project visitArrIndex(MapleParser.ArrIndexContext ctx) {
-        if(ctx.expr(0)instanceof MapleParser.NewOperationContext){
+        if((Expr)visit(ctx.expr(0)) instanceof NewExpr){
             NewExpr ne = (NewExpr) visit(ctx.expr(0));
             Expr index = (Expr) visit(ctx.expr(1));
             if (index == null){
@@ -203,7 +218,7 @@ public class Constructor extends MapleBaseVisitor<Project> {
 
     @Override public Project visitSignExpression(MapleParser.SignExpressionContext ctx) {
         return new PreSingleExpr((Expr)visit(ctx.expr()),
-                ctx.operation.getText());
+                ctx.operation.getText(), new Position(ctx.getStart()));
     }
 
     @Override public Project visitBinaryBitMov(MapleParser.BinaryBitMovContext ctx) {
@@ -215,12 +230,12 @@ public class Constructor extends MapleBaseVisitor<Project> {
 
     @Override public Project visitBitNotOperation(MapleParser.BitNotOperationContext ctx) {
         return new PreSingleExpr((Expr)visit(ctx.expr()),
-                ctx.BNOT().getText());
+                ctx.BNOT().getText(), new Position(ctx.getStart()));
     }
 
     @Override public Project visitNotOperation(MapleParser.NotOperationContext ctx) {
         return new PreSingleExpr((Expr)visit(ctx.expr()),
-                ctx.NOT().getText());
+                ctx.NOT().getText(), new Position(ctx.getStart()));
     }
 
     @Override public Project visitExprWithBracket(MapleParser.ExprWithBracketContext ctx) {
@@ -253,7 +268,7 @@ public class Constructor extends MapleBaseVisitor<Project> {
 
     @Override public Project visitPreSelfOp(MapleParser.PreSelfOpContext ctx) {
         return new PreSingleExpr((Expr)visit(ctx.expr()),
-                ctx.operation.getText());
+                ctx.operation.getText(), new Position(ctx.getStart()));
     }
 
     @Override public Project visitIdentifier(MapleParser.IdentifierContext ctx) {
