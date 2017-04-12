@@ -2,44 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14b62dbc-5fd0-437e-adfa-f452019a4a45" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Declare/VarDecl.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Declare/VarDecl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ArrIndexContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ArrIndexContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$AssignContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$AssignContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$BinaryBitMovContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$BinaryBitMovContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$BinaryBitOperationContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$BinaryBitOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$BinaryExpressionContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$BinaryExpressionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$BitNotOperationContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$BitNotOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ConstantContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ConstantContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ConstantValueContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ConstantValueContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ExprContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ExprContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ExprListContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ExprListContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ExprWithBracketContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ExprWithBracketContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ForStmtContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$ForStmtContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$FunctionCallContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$FunctionCallContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$IdentifierContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$IdentifierContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$LogicExpressionContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$LogicExpressionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$MemberContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$MemberContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$MemberFunctionContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$MemberFunctionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$NewOperationContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$NewOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$NotOperationContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$NotOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$PostSelfOpContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$PostSelfOpContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$PreSelfOpContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$PreSelfOpContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$PtrBracketContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$PtrBracketContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$SignExpressionContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$SignExpressionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$TypeContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$TypeContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$WhileStmtContext.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser$WhileStmtContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/MapleParser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Statement/ForStatement.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Statement/ForStatement.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Visitor/Constructor.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Visitor/Constructor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Maple.g4" afterPath="$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Maple.g4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/MapleParser.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/MapleParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Statement/ForStatement.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Statement/ForStatement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Visitor/Constructor.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Visitor/Constructor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Example/test.Maple" afterPath="$PROJECT_DIR$/MAPLE/Example/test.Maple" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/Maple.g4" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/Maple.g4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Example/test.Maple" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Example/test.Maple" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,8 +34,8 @@
           <file leaf-file-name="VarDecl.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="525">
-                  <caret line="53" column="29" lean-forward="false" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
+                <state relative-caret-position="377">
+                  <caret line="63" column="32" lean-forward="false" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
                   <folding />
                 </state>
               </provider>
@@ -82,7 +46,9 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="300">
                   <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-                  <folding />
+                  <folding>
+                    <marker date="1492019820000" expanded="true" signature="796:907" ph="..." />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -167,8 +133,8 @@
           <file leaf-file-name="test.Maple" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/MAPLE/Example/test.Maple">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="60">
-                  <caret line="4" column="1" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+                <state relative-caret-position="255">
+                  <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -261,11 +227,11 @@
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/WhileStatement.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/LogicExpr.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/ReturnStatement.java" />
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java" />
-        <option value="$PROJECT_DIR$/MAPLE/Example/test.Maple" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Maple.g4" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Visitor/Constructor.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/ForStatement.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Example/test.Maple" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Main.java" />
       </list>
     </option>
@@ -1060,12 +1026,12 @@
       <workItem from="1491962461670" duration="146000" />
       <workItem from="1491962668813" duration="15187000" />
       <workItem from="1491987943063" duration="122000" />
-      <workItem from="1491988087030" duration="13648000" />
+      <workItem from="1491988087030" duration="13947000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="181599000" />
+    <option name="totallyTimeSpent" value="181898000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1495,22 +1461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Example/test.Maple">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="1" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="53" column="29" lean-forward="false" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Visitor/Constructor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
@@ -1535,11 +1485,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Example/test.Maple">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="63" column="32" lean-forward="false" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding />
+          <folding>
+            <marker date="1492019820000" expanded="true" signature="796:907" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

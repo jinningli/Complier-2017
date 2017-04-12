@@ -61,7 +61,8 @@ public class VarDecl extends Declare {
                 System.err.println(pos._String());
                 throw new TypeNotMatch();
             }
-        }else if(!(type instanceof ClassType)){
+        }else if(expr != null &&(!(type instanceof ClassType))){
+            System.err.println(pos._String());
                 throw new TypeNotMatch();
             }
         if(Main.inclass){
