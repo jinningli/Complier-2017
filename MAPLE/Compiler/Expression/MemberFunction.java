@@ -6,10 +6,7 @@ import Compiler.Declare.FuncDecl;
 import Compiler.Error.*;
 import Compiler.FrontEnd.Main;
 import Compiler.FrontEnd.MapleParser;
-import Compiler.Type.ClassType;
-import Compiler.Type.IntType;
-import Compiler.Type.StringType;
-import Compiler.Type.Type;
+import Compiler.Type.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -71,6 +68,9 @@ public class MemberFunction extends Expr {
             }else if(Objects.equals(name, "ord")){
                 return new IntType(0);
             }else throw new NoDefined();
+        }
+        if(t instanceof ArrType && Objects.equals(name, "size")){
+            return new IntType(0);
         }
         throw new NameNotMatch();
     }

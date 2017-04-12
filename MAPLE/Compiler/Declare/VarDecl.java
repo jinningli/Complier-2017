@@ -1,6 +1,7 @@
 package Compiler.Declare;
 
 import AssistantClass.Position;
+import Compiler.Error.ExpressionError;
 import Compiler.Error.NoDefined;
 import Compiler.Error.TypeNotMatch;
 import Compiler.Expression.Expr;
@@ -8,6 +9,7 @@ import Compiler.FrontEnd.Main;
 import Compiler.Type.ArrType;
 import Compiler.Type.ClassType;
 import Compiler.Type.Type;
+import Compiler.Type.VoidType;
 
 import java.util.Objects;
 
@@ -38,6 +40,9 @@ public class VarDecl extends Declare {
         return pos;
     }
     public void check(){
+        if(type instanceof VoidType){
+            throw new ExpressionError();
+        }
         if(type instanceof ClassType){
             Declare d = Main.grobal.what(type.getname());
             if(!(d instanceof ClassDecl)){

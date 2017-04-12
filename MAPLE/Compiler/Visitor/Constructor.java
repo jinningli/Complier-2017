@@ -229,10 +229,21 @@ public class Constructor extends MapleBaseVisitor<Project> {
 
     @Override public Project visitNewOperation(MapleParser.NewOperationContext ctx) {
         NewExpr ne = new NewExpr(ctx.type());
-        ne.add((Expr) visit(ctx.expr()));
-        ne.setDimension(ctx.ptrBracket().getChildCount() + 2);
-//        System.err.println(ctx.ptrBracket().getChildCount());
-        return ne;// here is about new int[2][][];
+        if(ctx.expr() != null) {
+            ne.add((Expr) visit(ctx.expr()));
+            if(ctx.ptrBracket() != null) {
+                ne.setDimension(ctx.ptrBracket().getChildCount() + 2);
+                return ne;
+            }else{
+                ne.setDimension(2);
+                return ne;
+            }
+        }else {
+            ne.setDimension(1);
+            return ne;
+        }
+//  System.err.println(ctx.ptrBracket().getChildCount());
+       // here is about new int[2][][];
     }//stdtype: dimension = 1
 // in arrIndex should check if new operation
     @Override public Project visitPostSelfOp(MapleParser.PostSelfOpContext ctx) {

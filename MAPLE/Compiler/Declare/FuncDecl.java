@@ -2,14 +2,18 @@ package Compiler.Declare;
 
 
 import AssistantClass.Position;
+import Compiler.Error.ConstructError;
+import Compiler.Error.DeclLost;
 import Compiler.FrontEnd.Main;
 import Compiler.FrontEnd.MapleParser;
+import Compiler.Statement.ReturnStatement;
 import Compiler.Statement.Statement;
 import Compiler.Type.*;
 import AssistantClass.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *    Compiler - 2017
@@ -43,6 +47,9 @@ public class FuncDecl extends Declare {
            // System.err.println(typelist.get(k)._String());
             k++;
         }
+        if(Objects.equals(name, "main") && (!(retype instanceof IntType))){
+            throw new ConstructError();
+        }
     }
     public void add(Statement _s){
         stmtlist.add(_s);
@@ -56,7 +63,7 @@ public class FuncDecl extends Declare {
     public void check(){
         Main.infunction = true;
         Main.grobal.newLayer();
-        if(retype instanceof ClassDecl){
+        if(retype instanceof ClassType){
             Main.grobal.what(retype.getname());
         }
         int nflist = flist.size();
@@ -75,9 +82,16 @@ public class FuncDecl extends Declare {
             vd.setType(flist.get(i).getFirst());
             Main.grobal.define(flist.get(i).getSecond(), vd);
         }
+        boolean returned = false;
         for(Statement s : stmtlist){
+            if(s instanceof ReturnStatement){
+                returned = true;
+            }
             s.check();
 //            System.err.println(s.getpos()._String());
+        }
+        if((!(retype instanceof VoidType)) && (!returned) && !Objects.equals(name, "main")){
+            throw new DeclLost();
         }
         Main.grobal.exitLayer();
         Main.infunction = false;

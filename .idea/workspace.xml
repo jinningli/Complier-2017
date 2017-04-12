@@ -2,33 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14b62dbc-5fd0-437e-adfa-f452019a4a45" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/AssistantClass/MapleNameSpace.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/AssistantClass/MapleNameSpace.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Error/ConstructError.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Error/NoMain.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Declare/FuncDecl.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Declare/FuncDecl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/AssignExpr.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/AssignExpr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/BinaryExpr.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/BinaryExpr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/FunctionCall.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/FunctionCall.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/LogicExpr.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/LogicExpr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/Member.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/Member.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Declare/Program.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Declare/Program.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Declare/VarDecl.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Declare/VarDecl.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/MemberFunction.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/MemberFunction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/PreSingleExpr.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/PreSingleExpr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/Main.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/FrontEnd/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Statement/BlockStatement.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Statement/BlockStatement.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Type/TypeClassifier.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Type/TypeClassifier.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/NewExpr.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Expression/NewExpr.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Visitor/Constructor.class" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Compiler/Visitor/Constructor.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/AssistantClass/MapleNameSpace.java" afterPath="$PROJECT_DIR$/MAPLE/AssistantClass/MapleNameSpace.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Declare/FuncDecl.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Declare/FuncDecl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Declare/Program.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Declare/Program.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Expression/AssignExpr.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Expression/AssignExpr.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Expression/BinaryExpr.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Expression/BinaryExpr.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Expression/FunctionCall.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Expression/FunctionCall.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Expression/Identifier.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Expression/Identifier.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Expression/LogicExpr.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Expression/LogicExpr.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Expression/Member.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Expression/Member.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Expression/MemberFunction.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Expression/MemberFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Expression/PreSingleExpr.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Expression/PreSingleExpr.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Expression/NewExpr.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Expression/NewExpr.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Main.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Statement/BlockStatement.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Statement/BlockStatement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Type/TypeClassifier.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Type/TypeClassifier.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Compiler/Visitor/Constructor.java" afterPath="$PROJECT_DIR$/MAPLE/Compiler/Visitor/Constructor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAPLE/Example/test.Maple" afterPath="$PROJECT_DIR$/MAPLE/Example/test.Maple" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Compiler - 20171/Example/test.Maple" afterPath="$PROJECT_DIR$/out/production/Compiler - 20171/Example/test.Maple" />
@@ -46,34 +35,14 @@
     <favorites_list name="Compiler - 2017" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.64285713">
+    <splitter split-orientation="horizontal" split-proportion="0.56148285">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Identifier.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/Identifier.java">
+          <file leaf-file-name="Maple.g4" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Maple.g4">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="375">
-                  <caret line="37" column="17" lean-forward="false" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Pair.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/MAPLE/AssistantClass/Pair.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="90">
-                  <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Main.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+                <state relative-caret-position="120">
+                  <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
                   <folding />
                 </state>
               </provider>
@@ -82,51 +51,81 @@
           <file leaf-file-name="VarDecl.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="298">
-                  <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+                <state relative-caret-position="330">
+                  <caret line="43" column="21" lean-forward="false" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="21" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MapleNameSpace.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/MAPLE/AssistantClass/MapleNameSpace.java">
+          <file leaf-file-name="Constructor.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Visitor/Constructor.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="185">
-                  <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+                <state relative-caret-position="554">
+                  <caret line="309" column="0" lean-forward="false" selection-start-line="309" selection-start-column="0" selection-end-line="309" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MapleParser.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/MapleParser.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="149">
+                  <caret line="1728" column="0" lean-forward="false" selection-start-line="1728" selection-start-column="0" selection-end-line="1728" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AssignExpr.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/AssignExpr.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="345">
+                  <caret line="31" column="39" lean-forward="true" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AbstractParseTreeVisitor.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$PROJECT_DIR$/MAPLE/lib/antlr-4.7-complete.jar!/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="330">
+                  <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
                   <folding>
-                    <element signature="e#2689#2690#0" expanded="true" />
-                    <element signature="e#2739#2740#0" expanded="true" />
+                    <element signature="e#307#308#0" expanded="true" />
+                    <element signature="e#347#348#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Member.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/Member.java">
+          <file leaf-file-name="MapleBaseVisitor.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/MapleBaseVisitor.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="32" column="65" lean-forward="true" selection-start-line="32" selection-start-column="65" selection-end-line="32" selection-end-column="65" />
+                <state relative-caret-position="1046">
+                  <caret line="285" column="81" lean-forward="false" selection-start-line="285" selection-start-column="81" selection-end-line="285" selection-end-column="81" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="AssignExpr.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/AssignExpr.java">
+          <file leaf-file-name="NullType.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Type/NullType.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="405">
-                  <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+                <state relative-caret-position="120">
+                  <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ReturnStatement.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Statement/ReturnStatement.java">
+          <file leaf-file-name="MemberFunction.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/MemberFunction.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="454">
-                  <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+                <state relative-caret-position="765">
+                  <caret line="61" column="36" lean-forward="false" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
                   <folding />
                 </state>
               </provider>
@@ -135,18 +134,8 @@
           <file leaf-file-name="FuncDecl.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/FuncDecl.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="429">
-                  <caret line="78" column="22" lean-forward="true" selection-start-line="78" selection-start-column="22" selection-end-line="78" selection-end-column="22" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="WhileStatement.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Statement/WhileStatement.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="405">
-                  <caret line="37" column="11" lean-forward="true" selection-start-line="37" selection-start-column="11" selection-end-line="37" selection-end-column="11" />
+                <state relative-caret-position="1065">
+                  <caret line="91" column="9" lean-forward="false" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
                   <folding />
                 </state>
               </provider>
@@ -159,8 +148,8 @@
           <file leaf-file-name="test.Maple" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/MAPLE/Example/test.Maple">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="35">
-                  <caret line="24" column="18" lean-forward="true" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+                <state relative-caret-position="270">
+                  <caret line="18" column="0" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="18" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -193,6 +182,7 @@
       <find>bkt</find>
       <find>exprbkt</find>
       <find>visitexprwith</find>
+      <find>nulltype</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -206,9 +196,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/Expr.java" />
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Error/NullPtr.java" />
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Error/IndexNotInt.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Error/WrongType.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Listener/Constructor.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Error/WrongIndex.java" />
@@ -224,39 +211,42 @@
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/PostSingleExpr.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/ConstantExpr.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/ExprStatement.java" />
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/NewExpr.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Error/NumberNotMatch.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/Statement.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/BreakStatement.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/ContinueStatement.java" />
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/ReturnStatement.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/WhileStatement.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Declare/Declare.java" />
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Declare/Program.java" />
         <option value="$PROJECT_DIR$/MAPLE/AssistantClass/MapleMap.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Declare/ClassDecl.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Type/ArrType.java" />
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/ForStatement.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/ArrIndex.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/IfStatement.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Type/VoidType.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Maple.g4" />
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Declare/FuncDecl.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/FunctionCall.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/PreSingleExpr.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/BinaryExpr.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/LogicExpr.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Type/TypeClassifier.java" />
-        <option value="$PROJECT_DIR$/MAPLE/Example/test.Maple" />
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/MemberFunction.java" />
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Visitor/Constructor.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/BlockStatement.java" />
-        <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/AssignExpr.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/Member.java" />
         <option value="$PROJECT_DIR$/MAPLE/AssistantClass/MapleNameSpace.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/Identifier.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Error/GeneralError.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Error/ConstructError.java" />
         <option value="$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Main.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Statement/ReturnStatement.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Error/NoMain.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Declare/Program.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Visitor/Constructor.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/NewExpr.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Declare/FuncDecl.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/MemberFunction.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Compiler/Expression/AssignExpr.java" />
+        <option value="$PROJECT_DIR$/MAPLE/Example/test.Maple" />
       </list>
     </option>
   </component>
@@ -288,9 +278,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -531,6 +518,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -539,7 +529,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
@@ -1048,12 +1038,14 @@
       <workItem from="1491906375224" duration="6375000" />
       <workItem from="1491914986453" duration="7591000" />
       <workItem from="1491962461670" duration="146000" />
-      <workItem from="1491962668813" duration="12210000" />
+      <workItem from="1491962668813" duration="15187000" />
+      <workItem from="1491987943063" duration="122000" />
+      <workItem from="1491988087030" duration="300000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164852000" />
+    <option name="totallyTimeSpent" value="168251000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1071,26 +1063,26 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27228916" sideWeight="0.5028612" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27228916" sideWeight="0.5028612" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43493977" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43373495" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" x="21" y="270" width="1398" height="360" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.49713877" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17710844" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17710844" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27228916" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19319728" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20886981" sideWeight="0.49487555" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27228916" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19277108" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21459228" sideWeight="0.49487555" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21959943" sideWeight="0.50512445" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1109,7 +1101,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="52" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java</url>
+          <line>62</line>
+          <properties />
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="60" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1118,30 +1118,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Error/ExpressionError.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="42" lean-forward="false" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Error/NameNotMatch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="39" lean-forward="false" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Error/NoDefined.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/PostSingleExpr.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1203,14 +1179,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Type/NullType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Type/StringType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1245,30 +1213,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/MapleBaseVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="138" column="75" lean-forward="false" selection-start-line="138" selection-start-column="75" selection-end-line="138" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/NewExpr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="34" column="29" lean-forward="true" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/MapleParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="1628" column="0" lean-forward="false" selection-start-line="1628" selection-start-column="0" selection-end-line="1628" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/ClassDecl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
@@ -1282,7 +1226,7 @@
         <state relative-caret-position="180">
           <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1291,14 +1235,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
           <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/Program.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1348,8 +1284,8 @@
         <state relative-caret-position="240">
           <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
           <folding>
-            <element signature="e#357#358#0" expanded="true" />
-            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#357#358#0" expanded="false" />
+            <element signature="e#384#385#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1362,44 +1298,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Maple.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-894">
-          <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Type/TypeClassifier.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="34" column="64" lean-forward="false" selection-start-line="34" selection-start-column="64" selection-end-line="34" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/MemberFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="29" column="35" lean-forward="false" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/MAPLE/lib/antlr-4.7-complete.jar!/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="e#347#348#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Visitor/Constructor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-365">
-          <caret line="74" column="38" lean-forward="false" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -1460,61 +1362,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/AssignExpr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MAPLE/AssistantClass/Pair.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/AssistantClass/MapleNameSpace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#2689#2690#0" expanded="true" />
-            <element signature="e#2739#2740#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Statement/ReturnStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Example/test.Maple">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="24" column="18" lean-forward="true" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/FuncDecl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="78" column="22" lean-forward="true" selection-start-line="78" selection-start-column="22" selection-end-line="78" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1535,10 +1386,153 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Error/GeneralError.java" />
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Error/ConstructError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        <state relative-caret-position="180">
+          <caret line="20" column="39" lean-forward="false" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Statement/ReturnStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/AssistantClass/MapleNameSpace.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="20" column="52" lean-forward="true" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
+          <folding>
+            <element signature="e#2689#2690#0" expanded="false" />
+            <element signature="e#2739#2740#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Error/NoMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="33" lean-forward="false" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/Program.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/NewExpr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="39" column="52" lean-forward="false" selection-start-line="39" selection-start-column="52" selection-end-line="39" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/FuncDecl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1065">
+          <caret line="91" column="9" lean-forward="false" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/MemberFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="61" column="36" lean-forward="false" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Type/NullType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Declare/VarDecl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="43" column="21" lean-forward="false" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/Maple.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/MAPLE/lib/antlr-4.7-complete.jar!/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#307#308#0" expanded="true" />
+            <element signature="e#347#348#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/MapleParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="1728" column="0" lean-forward="false" selection-start-line="1728" selection-start-column="0" selection-end-line="1728" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/FrontEnd/MapleBaseVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1046">
+          <caret line="285" column="81" lean-forward="false" selection-start-line="285" selection-start-column="81" selection-end-line="285" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Visitor/Constructor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="309" column="0" lean-forward="false" selection-start-line="309" selection-start-column="0" selection-end-line="309" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Example/test.Maple">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MAPLE/Compiler/Expression/AssignExpr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="31" column="39" lean-forward="true" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
           <folding />
         </state>
       </provider>

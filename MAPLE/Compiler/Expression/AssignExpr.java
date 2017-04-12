@@ -5,6 +5,7 @@ import Compiler.Error.ExpressionError;
 import Compiler.Error.NullPtr;
 import Compiler.Error.TypeNotMatch;
 import Compiler.Type.ArrType;
+import Compiler.Type.NullType;
 import Compiler.Type.Type;
 
 import java.util.Objects;
@@ -32,7 +33,7 @@ public class AssignExpr extends Expr {
         }
         Type lt = left.getretype();
         Type rt = right.getretype();
-        if(!Objects.equals(lt.typename(), rt.typename())){
+        if((!Objects.equals(lt.typename(), rt.typename()))&&(!(rt instanceof NullType))){
             throw new TypeNotMatch();
         }
         return left.getretype();
