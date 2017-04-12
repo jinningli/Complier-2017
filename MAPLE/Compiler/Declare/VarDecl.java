@@ -45,15 +45,27 @@ public class VarDecl extends Declare {
             }
         }
         if(type instanceof ArrType){
-            Declare d = Main.grobal.what(((ArrType) type).stdtype.getname());
-            if(!(d instanceof ClassDecl)){
-                throw new NoDefined();
+            Type stdtype = ((ArrType) type).stdtype;
+            if(stdtype instanceof ClassType){
+                Main.grobal.what(stdtype.getname());
             }
+//            if(!(d instanceof ClassDecl)){
+//                throw new NoDefined();
+//            }
         }
         if(expr != null){
             if(!Objects.equals(expr.getretype().typename(), type.typename())){
                 throw  new TypeNotMatch();
             }
+        }
+        if(Main.inclass){
+            if(Main.infunction){
+                Main.grobal.define(name, this);
+            }else{
+                Main.grobal.define(Main.nowclass + "-" + name, this);
+            }
+        }else{
+            Main.grobal.define(name, this);
         }
     }
 }

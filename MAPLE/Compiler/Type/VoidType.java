@@ -10,6 +10,7 @@ import AssistantClass.Project;
 public class VoidType extends Project implements Type {
     public final String name = "void";
     public Position pos;
+    public VoidType(){}
     public VoidType(Position _p){
         pos = _p;
     }

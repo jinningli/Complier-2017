@@ -35,7 +35,7 @@ public class ForStatement extends Statement{
        for(int i = 0; i < 3; i ++){
            type[i] = expr[i].getretype();
         }
-        if(!(type[0] instanceof AssignExpr)){ ////can three expr empty?
+        if(!(expr[0] instanceof AssignExpr)){ ////can three expr empty?
            throw new TypeNotMatch();
         }
         if(!(type[1] instanceof BoolType)){

@@ -1,9 +1,13 @@
 package AssistantClass;
 
 import Compiler.Declare.Declare;
+import Compiler.Declare.FuncDecl;
 import Compiler.Error.DeclLost;
 import Compiler.Error.NoDefined;
 import Compiler.Error.ReDefine;
+import Compiler.Type.IntType;
+import Compiler.Type.StringType;
+import Compiler.Type.VoidType;
 
 import java.util.*;
 
@@ -31,6 +35,25 @@ public class MapleNameSpace {
 
     public void grobalLayerInit(){
         layer.push(new HashSet<>());
+        FuncDecl builtin;
+        builtin = new FuncDecl("print",
+                new VoidType());
+        builtin.addlist(new StringType(""),"str");
+        define("print", builtin);
+        builtin = new FuncDecl("println",
+                new VoidType());
+        builtin.addlist(new StringType(""),"str");
+        define("println", builtin);
+        builtin = new FuncDecl("getString",
+                new StringType(""));
+        define("getString", builtin);
+        builtin = new FuncDecl("getInt",
+                new IntType(0));
+        define("getInt", builtin);
+        builtin = new FuncDecl("toString",
+                new StringType(""));
+        builtin.addlist(new IntType(0), "i");
+        define("toString", builtin);
     }
 
     public void define(String _n, Declare _d){

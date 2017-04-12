@@ -60,7 +60,7 @@ whileStmt:  WHILE exprBkt
             stmt
             ;
 
-exprList:   '(' expr ( ',' expr )* ')' ;
+exprList:   '(' expr? ( ',' expr )* ')' ;
 
 // Expression
 expr:       exprBkt                                                                 # ExprWithBracket//
@@ -69,20 +69,20 @@ expr:       exprBkt                                                             
             | ID exprList                                                           # FunctionCall//
             | expr DOT ID                                                           # Member//
             | expr DOT ID exprList                                                  # MemberFunction//
+            | expr '[' expr ']'                                                     # ArrIndex//
             | 'new' type ('[' expr ']' ptrBracket)?                                 # NewOperation
-            | operation = (MINUS | PLUS)                                    expr        # SignExpression//
-            | expr operation = (PLUS   | MINUS)                             expr    # BinaryExpression//
+            | operation = (MINUS | PLUS)                                    expr    # SignExpression//
             | expr operation = (MUL    | DIV    | MOD)                      expr    # BinaryExpression//
+            | expr operation = (PLUS   | MINUS)                             expr    # BinaryExpression//
             | expr operation = (BAND   | BXOR   | BOR)                      expr    # BinaryBitOperation//
             | expr operation = (BMOV_L | BMOV_R)                            expr    # BinaryBitMov//
             | expr operation = (LESS   | LARGE  | LESSEQ | LARGEEQ)         expr    # LogicExpression//
             | expr operation = (EQ     | NEQ)                               expr    # LogicExpression//
             | expr operation = (AND    | OR)                                expr    # LogicExpression//
-            | operation      = (PLUSPLUS        | MINUSMINUS)               expr        # PreSelfOp//
+            | operation      = (PLUSPLUS        | MINUSMINUS)               expr    # PreSelfOp//
             | expr operation = (PLUSPLUS        | MINUSMINUS)                       # PostSelfOp//
-            | expr '[' expr ']'                                                     # ArrIndex//
-            | NOT expr                                                                  # NotOperation//
-            | BNOT expr                                                                 # BitNotOperation//
+            | NOT expr                                                              # NotOperation//
+            | BNOT expr                                                             # BitNotOperation//
             | <assoc=right> expr '=' expr                                           # Assign//
             ;
 

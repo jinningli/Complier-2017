@@ -38,14 +38,14 @@ public class Constructor extends MapleBaseVisitor<Project> {
         VarDecl vd = new VarDecl(new Position(ctx.getStart()));
         vd.setName(ctx.ID().getText());
         vd.setType(new TypeClassifier().Classify(ctx.typePro()));
-        if(!Objects.equals(ctx.expr().getText(), "")) {
+        if(!(ctx.expr()==null)) {
             vd.setExpr((Expr)visit(ctx.expr()));
         }
-        if(inclass){
-            maple.define(nowclass + "-" + vd.getname(), vd);
-        }else{
-            maple.define(vd.getname(), vd);
-        }
+//        if(inclass){
+//            maple.define(nowclass + "-" + vd.getname(), vd);
+//        }else{
+//            maple.define(vd.getname(), vd);
+//        }
         //System.err.println(ctx.getParent().getText());
         return vd;
     }
@@ -90,7 +90,7 @@ public class Constructor extends MapleBaseVisitor<Project> {
 
 //    @Override public Project visitBlockDecl(MapleParser.BlockDeclContext ctx) { return visitChildren(ctx); }
 
-//    @Override public Project visitExprBkt(MapleParser.ExprBktContext ctx) { return visitChildren(ctx); }
+//    @Override public Project visitExprBkt(MapleParser.ExprBktContext ctx) { return visit(ctx.expr()); }
 
     @Override public Project visitExprStatement(MapleParser.ExprStatementContext ctx) {
         return new ExprStatement((Expr) visit(ctx.expr()),
@@ -134,11 +134,11 @@ public class Constructor extends MapleBaseVisitor<Project> {
         IfStatement is = new IfStatement(new Position(ctx.getStart()));
         is.add((Expr)visit(ctx.exprBkt(0).expr()), (Statement)visit(ctx.stmt(0)));
         int k = 1;
-        while(!Objects.equals(ctx.exprBkt(k).getText(), "")){
+        while(!(ctx.exprBkt(k) == null)){
             is.add((Expr)visit(ctx.exprBkt(k).expr()), (Statement)visit(ctx.stmt(k)));
             k ++;
         }
-        if(!Objects.equals(ctx.stmt(k).getText(), "")){
+        if(!(ctx.stmt(k)==null)){
             is.setElseStmt((Statement) visit(ctx.stmt(k)));
         }
         return is;
@@ -215,14 +215,14 @@ public class Constructor extends MapleBaseVisitor<Project> {
                 ctx.NOT().getText());
     }
 
-//    @Override public Project visitExprWithBracket(MapleParser.ExprWithBracketContext ctx) {
-//        return visitChildren(ctx);
-//    }
+    @Override public Project visitExprWithBracket(MapleParser.ExprWithBracketContext ctx) {
+        return visit(ctx.exprBkt().expr());
+    }
 
     @Override public Project visitNewOperation(MapleParser.NewOperationContext ctx) {
         NewExpr ne = new NewExpr(ctx.type());
         ne.add((Expr) visit(ctx.expr()));
-        ne.setDimension(ctx.ptrBracket().getChildCount() + 1);
+        ne.setDimension(ctx.ptrBracket().getChildCount() + 2);
 //        System.err.println(ctx.ptrBracket().getChildCount());
         return ne;// here is about new int[2][][];
     }//stdtype: dimension = 1
@@ -242,10 +242,11 @@ public class Constructor extends MapleBaseVisitor<Project> {
     }
 
     @Override public Project visitBinaryExpression(MapleParser.BinaryExpressionContext ctx) {
-        return new BinaryExpr((Expr) visit(ctx.expr(0)),
+        BinaryExpr be =  new BinaryExpr((Expr) visit(ctx.expr(0)),
                 (Expr) visit(ctx.expr(1)),
                 ctx.operation.getText(),
                 new Position(ctx.getStart()));
+        return be;
     }
 
     @Override public Project visitLogicExpression(MapleParser.LogicExpressionContext ctx) {

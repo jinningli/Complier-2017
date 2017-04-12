@@ -50,6 +50,7 @@ public class IfStatement extends Statement{
             }
             iflist.get(i).getSecond().check();
         }
+        if(elsestmt!=null)
         elsestmt.check();
     }
 }

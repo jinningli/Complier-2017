@@ -16,11 +16,20 @@ import java.util.List;
  *    lijinning, 2017.04.02, Shanghai.
  */
 public class FuncDecl extends Declare {
-    public String name;
+    public String name = "";
     public Position pos;
-    public Type retype;
-    public List<Pair<Type, String>> flist;
-    public List<Statement> stmtlist;
+    public Type retype = null;
+    public List<Pair<Type, String>> flist = null;
+    public List<Statement> stmtlist = null;
+    public FuncDecl(String _n, Type _rt){
+        name = _n;
+        retype = _rt;
+        stmtlist = new LinkedList<>();
+        flist = new LinkedList<>();
+    }
+    public void addlist(Type _t, String _s){
+        flist.add(new Pair<>(_t, _s));
+    }
     public FuncDecl (MapleParser.FuncDeclContext ctx){
         stmtlist = new LinkedList<>();
         flist = new LinkedList<>();

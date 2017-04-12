@@ -49,8 +49,7 @@ public class ArrIndex extends Expr {
             return ((ArrType) br).stdtype;
         }else{
             ArrType rbr = (ArrType) br;
-            rbr.dimension --;
-            return rbr;
+            return new ArrType(rbr.dimension - 1, rbr.stdtype, rbr.pos);
         }
     }
 }

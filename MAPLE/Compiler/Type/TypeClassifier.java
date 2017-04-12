@@ -41,6 +41,7 @@ public class TypeClassifier {
             int k = 0;
             while(ctx.ptrBracket().getChild(k)!=null)
                 k++;
+            k ++;
             output = new ArrType(k, output, new Position(ctx.getStart()));
         return output;
     }

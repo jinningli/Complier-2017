@@ -1,11 +1,4 @@
-class A{
-    int a = 0;
-    int B(int b){
-        int c = 0;
-    }
-}
-
-int d = 0;
-int main(){
-return 0;
+int main()
+{
+    "abc".length();
 }

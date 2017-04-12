@@ -1,6 +1,7 @@
 package Compiler.Declare;
 
 import AssistantClass.Position;
+import Compiler.FrontEnd.Main;
 import Compiler.FrontEnd.MapleParser;
 
 import java.util.LinkedList;
@@ -33,8 +34,12 @@ public class ClassDecl extends Declare{
         return pos;
     }
     public void check(){
+        Main.inclass = true;
+        Main.nowclass = name;
         for(Declare d : DeclList){
             d.check();
         }
+        Main.inclass = false;
+        Main.nowclass = "";
     }
 }
