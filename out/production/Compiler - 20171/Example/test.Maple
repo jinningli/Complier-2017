@@ -1,4 +1,6 @@
 int main()
 {
-    "abc".length();
+	a = 0;
+	return a;
 }
+int a;
