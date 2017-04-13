@@ -36,6 +36,15 @@ public class PreSingleExpr extends Expr {
 //                Objects.equals(opt, "!")){
 //            return body.getretype();
 //        }
+        if(Objects.equals(opt, "!")){
+            return new BoolType(new Position(-1, -1));
+        }else if(Objects.equals(opt, "~")){
+            return body.getretype();
+        }else if(Objects.equals(opt, "-") || Objects.equals(opt, "+")){
+            return body.getretype();
+        }else if(Objects.equals(opt, "--") || Objects.equals(opt, "++")){
+            return body.getretype();
+        }
     //    System.err.println(pos._String());
         return body.getretype();
 //        throw new TypeNotMatch();

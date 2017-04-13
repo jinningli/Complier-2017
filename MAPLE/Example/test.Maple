@@ -1,17 +1,59 @@
-int tak(int x, int y, int z) {
-	if ( y < x ) return 1 + tak( tak(x-1, y, z), tak(y-1, z, x), tak(z-1, x, y) );
-	else return z;
+class Node
+{
+    int num;
+    Node()
+    {
+        num = 1;
+    }
+    Node work(int p)
+    {
+        int i = 10;
+        for (; i <= this.num; i++)
+        {
+            return this;
+        }
+		return this;
+    }
 }
-
-int main(){
-	int a;
-	int b;
-	int c;
-	a=getInt();
-	b=getInt();
-	c=getInt();
-	println(toString(tak(a,b,c)));
-	return 0;
+Node[] a = new Node[723];
+Node[] b = null;
+string str = "19asdojkhkj1";
+int [][] map = new int [153][144];
+void work()
+{
+    int i = 11;
+    int tmp1 = i;
+    a[tmp1].work(i);
+	return ;
 }
+int main()
+{
+    int i;
+    int n = 10213;
+    for (i = 0; i < n; i++)
+    {
+        int flag = n * i - 13;
+        if(flag < a[i].num)
+        {
 
+           //print("%d", (flag - a[i].num) * 14);
+        }
+        else if(false)
+        {
+            a[i - 1].work(flag);
+            break;
+        }
+        else
+        {
+            if(true)
+            {
+                a[i] = a[i + 1].work(flag);
+                work();
+                continue;
+            }
+        }
+
+    }
+    return 0;
+}
 

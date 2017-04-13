@@ -40,7 +40,11 @@ public class ReturnStatement extends Statement{
             if(Main.nowfunc.retype instanceof VoidType){
                 retype = new VoidType(pos);
                 return;
-            }else{
+            }else if(Main.nowfunc.retype == null && Objects.equals(Main.nowfunc.getname(), Main.nowclass)){
+                retype = null;
+                return;
+            }
+            else{
                 System.err.println(pos._String());
                 throw new TypeNotMatch();
             }
@@ -54,6 +58,9 @@ public class ReturnStatement extends Statement{
                 return;
             }else throw new TypeNotMatch();
         }
+//        System.err.println(expr.getretype().typename());
+//        System.err.println( Main.nowfunc.retype.typename());
+
         if(!Objects.equals(expr.getretype().typename(), Main.nowfunc.retype.typename())){
             System.err.println(pos._String());
             throw new TypeNotMatch();

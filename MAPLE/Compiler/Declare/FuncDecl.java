@@ -26,6 +26,7 @@ public class FuncDecl extends Declare {
     public Type retype = null;
     public List<Pair<Type, String>> flist = null;
     public List<Statement> stmtlist = null;
+    public boolean constructFunc = false;
     public FuncDecl(String _n, Type _rt){
         name = _n;
         retype = _rt;
@@ -35,16 +36,21 @@ public class FuncDecl extends Declare {
     public void addlist(Type _t, String _s){
         flist.add(new Pair<>(_t, _s));
     }
-    public FuncDecl (MapleParser.FuncDeclContext ctx, boolean inclass){
+    public FuncDecl (MapleParser.FuncDeclContext ctx, boolean inclass, String nowclass){
         stmtlist = new LinkedList<>();
         flist = new LinkedList<>();
         name = ctx.ID().getText();
         pos = new Position(ctx.ID().getSymbol());
         TypeClassifier TC = new TypeClassifier();
+
         if(ctx.typePro().type() == null){
             if(!inclass){
                 throw new DeclLost();
             }
+            if(!Objects.equals(name, nowclass)){
+                throw new DeclLost();
+            }
+            constructFunc = true;
         }
         else retype = TC.Classify(ctx.typePro());
         int k = 0;
@@ -90,6 +96,8 @@ public class FuncDecl extends Declare {
             vd.setType(flist.get(i).getFirst());
             Main.grobal.define(flist.get(i).getSecond(), vd);
         }
+
+
 //        boolean returned = false;
         for(Statement s : stmtlist){
             s.check();

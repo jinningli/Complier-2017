@@ -48,6 +48,7 @@ public class IfStatement extends Statement{
             if(!(iflist.get(i).getFirst().getretype() instanceof BoolType)){
                 throw new TypeNotMatch();
             }
+            if(iflist.get(i).getSecond() != null)
             iflist.get(i).getSecond().check();
         }
         if(elsestmt!=null)

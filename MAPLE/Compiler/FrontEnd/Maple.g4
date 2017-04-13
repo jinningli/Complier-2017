@@ -93,7 +93,7 @@ type:       'bool'
             | ID
             | VOID
             ;
-ptrBracket: '[]'*?;
+ptrBracket: ('[' ']')*?;
 constant:   NULL
             | INT
             | STRING

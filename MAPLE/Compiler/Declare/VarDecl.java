@@ -7,6 +7,7 @@ import Compiler.Error.TypeNotMatch;
 import Compiler.Expression.Expr;
 import Compiler.FrontEnd.Main;
 import Compiler.Type.*;
+import com.sun.tools.classfile.Synthetic_attribute;
 
 import java.util.Objects;
 
@@ -58,22 +59,19 @@ public class VarDecl extends Declare {
 
         if(expr != null && (!(expr.getretype() instanceof NullType))) {
             if (!Objects.equals(expr.getretype().typename(), type.typename())) {
+//                System.err.println(expr.getretype().typename());
+//                System.err.println(type.typename());
                 System.err.println(pos._String());
                 throw new TypeNotMatch();
             }
-        }else if(expr != null &&(!(type instanceof ClassType))){
-            System.err.println(pos._String());
+        }else if(expr != null &&(!(type instanceof ClassType || type instanceof ArrType))){
+                System.err.println(pos._String());
                 throw new TypeNotMatch();
             }
-        if(Main.inclass){
-            if(Main.infunction){
-                Main.grobal.define(name, this);
-            }
-//            else{
-//                Main.grobal.define(Main.nowclass + "-" + name, this);
-//            }
-        }else{
+
+      //  if(Main.inclass){
+        if(!(Main.inclass && !Main.infunction))
             Main.grobal.define(name, this);
-        }
+       // }
     }
 }

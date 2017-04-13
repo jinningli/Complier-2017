@@ -34,6 +34,7 @@ public class AssignExpr extends Expr {
         Type lt = left.getretype();
         Type rt = right.getretype();
         if((!Objects.equals(lt.typename(), rt.typename()))&&(!(rt instanceof NullType))){
+            System.err.println(pos._String());
             throw new TypeNotMatch();
         }
         return left.getretype();

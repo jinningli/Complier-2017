@@ -34,16 +34,16 @@ public class Identifier extends Expr {
         }
         //System.err.println(pos._String());
         Declare d;
-        //System.err.println(pos._String());
+//        System.err.println(pos._String());
         if(Main.inclass){
             if(Objects.equals(name, "this")){
-                return new ClassType(name, pos);
+                return new ClassType(Main.nowclass, pos);
             }
-            String inclassname = Main.nowclass + "-" + name;
-            if(Main.grobal.containsKey(inclassname)){
-                d = Main.grobal.what(inclassname);
-                return ((VarDecl)d).type;
-            }
+//            String inclassname = Main.nowclass + "-" + name;
+//            if(Main.grobal.containsKey(inclassname)){
+//                d = Main.grobal.what(inclassname);
+//                return ((VarDecl)d).type;
+//            }
         }
         d = Main.grobal.what(name);///////////
         if(d instanceof ClassDecl){

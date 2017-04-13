@@ -21,9 +21,9 @@ import java.util.Objects;
  */
 public class Constructor extends MapleBaseVisitor<Project> {
     private MapleNameSpace maple = Main.grobal;
-    boolean inclass = false;
-    boolean infunction = false;
-    String nowclass = "";
+    private boolean inclass = false;
+    private boolean infunction = false;
+    private String nowclass = "";
 
     @Override public Project visitProgram(MapleParser.ProgramContext ctx) {
         Program prog = new Program();
@@ -73,7 +73,7 @@ public class Constructor extends MapleBaseVisitor<Project> {
 
     @Override public Project visitFuncDecl(MapleParser.FuncDeclContext ctx) {
         infunction = true;
-        FuncDecl func = new FuncDecl(ctx, inclass);
+        FuncDecl func = new FuncDecl(ctx, inclass, nowclass);
         for(ParserRuleContext child :  ctx.block().stmt()){
             Statement stmt = (Statement)visit(child);
             if(stmt == null) continue;
@@ -202,7 +202,7 @@ public class Constructor extends MapleBaseVisitor<Project> {
     }
 
     @Override public Project visitArrIndex(MapleParser.ArrIndexContext ctx) {
-        if((Expr)visit(ctx.expr(0)) instanceof NewExpr){
+        if((Expr)visit(ctx.expr(0)) instanceof NewExpr && !(ctx.expr(0) instanceof MapleParser.ExprWithBracketContext)){
             NewExpr ne = (NewExpr) visit(ctx.expr(0));
             Expr index = (Expr) visit(ctx.expr(1));
             if (index == null){
@@ -255,7 +255,7 @@ public class Constructor extends MapleBaseVisitor<Project> {
         if(ctx.expr() != null) {
             ne.add((Expr) visit(ctx.expr()));
             if(ctx.ptrBracket() != null) {
-                ne.setDimension(ctx.ptrBracket().getChildCount() + 2);
+                ne.setDimension(ctx.ptrBracket().getChildCount() / 2 + 2);
                 return ne;
             }else{
                 ne.setDimension(2);
@@ -271,7 +271,7 @@ public class Constructor extends MapleBaseVisitor<Project> {
 // in arrIndex should check if new operation
     @Override public Project visitPostSelfOp(MapleParser.PostSelfOpContext ctx) {
         return new PostSingleExpr((Expr)visit(ctx.expr()),
-                ctx.operation.getText());
+                ctx.operation.getText(), new Position(ctx.getStart()));
     }
 
     @Override public Project visitPreSelfOp(MapleParser.PreSelfOpContext ctx) {

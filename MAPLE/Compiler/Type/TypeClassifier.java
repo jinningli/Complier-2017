@@ -10,7 +10,7 @@ import java.util.Objects;
  * lijinning, 2017.04.03, Shanghai.
  */
 public class TypeClassifier {
-    private Type output;
+    private Type output = null;
     public Type Classify(MapleParser.TypeProContext ctx){
            // System.err.print(ctx.type().getText());
             switch (ctx.type().getText()){
@@ -41,6 +41,7 @@ public class TypeClassifier {
             int k = 0;
             while(ctx.ptrBracket().getChild(k)!=null)
                 k++;
+            k /= 2;
             k ++;
             output = new ArrType(k, output, new Position(ctx.getStart()));
         return output;

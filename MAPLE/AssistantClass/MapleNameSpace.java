@@ -2,9 +2,11 @@ package AssistantClass;
 
 import Compiler.Declare.Declare;
 import Compiler.Declare.FuncDecl;
+import Compiler.Declare.VarDecl;
 import Compiler.Error.DeclLost;
 import Compiler.Error.NoDefined;
 import Compiler.Error.ReDefine;
+import Compiler.Type.BoolType;
 import Compiler.Type.IntType;
 import Compiler.Type.StringType;
 import Compiler.Type.VoidType;
@@ -37,25 +39,48 @@ public class MapleNameSpace {
 
     public void grobalLayerInit(){
         layer.push(new HashSet<>());
-        FuncDecl builtin;
-        builtin = new FuncDecl("print",
+        FuncDecl builtinFunc;
+        builtinFunc = new FuncDecl("print",
                 new VoidType());
-        builtin.addlist(new StringType(""),"str");
-        define("print", builtin);
-        builtin = new FuncDecl("println",
+        builtinFunc.addlist(new StringType(""),"str");
+        define("print", builtinFunc);
+        builtinFunc = new FuncDecl("println",
                 new VoidType());
-        builtin.addlist(new StringType(""),"str");
-        define("println", builtin);
-        builtin = new FuncDecl("getString",
+        builtinFunc.addlist(new StringType(""),"str");
+        define("println", builtinFunc);
+        builtinFunc = new FuncDecl("getString",
                 new StringType(""));
-        define("getString", builtin);
-        builtin = new FuncDecl("getInt",
+        define("getString", builtinFunc);
+        builtinFunc = new FuncDecl("getInt",
                 new IntType(0));
-        define("getInt", builtin);
-        builtin = new FuncDecl("toString",
+        define("getInt", builtinFunc);
+        builtinFunc = new FuncDecl("toString",
                 new StringType(""));
-        builtin.addlist(new IntType(0), "i");
-        define("toString", builtin);
+        builtinFunc.addlist(new IntType(0), "i");
+        define("toString", builtinFunc);
+
+//        define("bool", new VarDecl(new Position(-1, -1)));
+//        define("int", new VarDecl(new Position(-1, -1)));
+//        define("string", new VarDecl(new Position(-1, -1)));
+//        define("null", new VarDecl(new Position(-1, -1)));
+//        define("void", new VarDecl(new Position(-1, -1)));
+//        define("true", new VarDecl(new Position(-1, -1)));
+//        define("false", new VarDecl(new Position(-1, -1)));
+//        define("if", new VarDecl(new Position(-1, -1)));
+//        define("for", new VarDecl(new Position(-1, -1)));
+//        define("while", new VarDecl(new Position(-1, -1)));
+//        define("break", new VarDecl(new Position(-1, -1)));
+//        define("continue", new VarDecl(new Position(-1, -1)));
+//        define("return", new VarDecl(new Position(-1, -1)));
+//        define("new", new VarDecl(new Position(-1, -1)));
+//        define("class", new VarDecl(new Position(-1, -1)));
+        define("this", new VarDecl(new Position(-1, -1)));
+
+//        bool int string null void
+//        true false
+//        if for while
+//        break continue return
+//                new class this
     }
 
     public void define(String _n, Declare _d){

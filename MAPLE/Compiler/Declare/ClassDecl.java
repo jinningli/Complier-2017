@@ -8,7 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by lijinning on 2017/4/2.
+ *    Compiler - 2017
+ *    lijinning, 2017.04.13, Shanghai.
  */
 public class ClassDecl extends Declare{
     public String name;
@@ -36,9 +37,16 @@ public class ClassDecl extends Declare{
     public void check(){
         Main.inclass = true;
         Main.nowclass = name;
+        Main.grobal.newLayer();
+        for(Declare d : DeclList){
+            if(d instanceof VarDecl){
+                Main.grobal.define(d.getname(), d);
+            }
+        }
         for(Declare d : DeclList){
             d.check();
         }
+        Main.grobal.exitLayer();;
         Main.inclass = false;
         Main.nowclass = "";
     }
