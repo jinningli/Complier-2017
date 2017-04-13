@@ -1,7 +1,6 @@
 package Compiler.Declare;
 
 import AssistantClass.Position;
-import AssistantClass.Project;
 import Compiler.Statement.Statement;
 
 /**

@@ -7,7 +7,6 @@ import Compiler.Error.TypeNotMatch;
 import Compiler.Expression.Expr;
 import Compiler.FrontEnd.Main;
 import Compiler.Type.*;
-import com.sun.tools.classfile.Synthetic_attribute;
 
 import java.util.Objects;
 
