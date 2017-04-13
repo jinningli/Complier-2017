@@ -4,6 +4,7 @@ package Compiler.Visitor;
 import AssistantClass.*;
 import Compiler.Declare.*;
 import Compiler.Error.NullPtr;
+import Compiler.Error.ReDefine;
 import Compiler.FrontEnd.Main;
 import Compiler.Statement.*;
 import Compiler.Expression.*;
@@ -80,6 +81,9 @@ public class Constructor extends MapleBaseVisitor<Project> {
             func.add(stmt);
         }
         if(inclass){
+            if(Objects.equals(func.getname(), "this")){
+                throw new ReDefine();
+            }
             maple.define(nowclass + "-" + func.getname(), func);
         }else{
             maple.define(func.getname(), func);
