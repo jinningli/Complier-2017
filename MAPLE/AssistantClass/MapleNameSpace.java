@@ -1,5 +1,6 @@
 package AssistantClass;
 
+import Compiler.Declare.ClassDecl;
 import Compiler.Declare.Declare;
 import Compiler.Declare.FuncDecl;
 import Compiler.Declare.VarDecl;
@@ -75,7 +76,8 @@ public class MapleNameSpace {
 //        define("new", new VarDecl(new Position(-1, -1)));
 //        define("class", new VarDecl(new Position(-1, -1)));
         define("this", new VarDecl(new Position(-1, -1)));
-
+        define("this", new FuncDecl("this", new IntType(0)));
+        define("this", new ClassDecl("this", new Position(-1, -1)));
 //        bool int string null void
 //        true false
 //        if for while

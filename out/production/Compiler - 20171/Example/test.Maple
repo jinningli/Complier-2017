@@ -1,3 +1,6 @@
-int main(){
-return 0;
+class A {
+    void this() {  // "this" is a reserved word
+        return;
+    }
 }
+int main() {}
