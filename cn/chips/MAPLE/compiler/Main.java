@@ -1,12 +1,12 @@
 package cn.chips.MAPLE.compiler;
 
 
-import cn.chips.MAPLE.ast.Declare.FuncDecl;
-import cn.chips.MAPLE.ast.Root.Program;
-import cn.chips.MAPLE.builder.AstBuilder;
+import cn.chips.MAPLE.ast.declare.FuncDecl;
+import cn.chips.MAPLE.ast.root.AST;
 import cn.chips.MAPLE.utils.MapleNameSpace;
 import cn.chips.MAPLE.parser.*;
 
+import cn.chips.MAPLE.utils.scope.ScopeTree;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -18,7 +18,7 @@ import java.util.Stack;
 
 public class Main
 {
-    public static MapleNameSpace grobal = new MapleNameSpace();
+    public static ScopeTree grobal = new ScopeTree();
     public static Stack<Integer> incircle = new Stack<>();
     public static boolean infunction = false;
     public static boolean inclass = false;
@@ -44,7 +44,7 @@ public class Main
 //        System.out.println(tree.toStringTree(parser) + "\n***");
 
         AstBuilder v = new AstBuilder();
-        Program root = (Program) v.visit(tree);
+        AST root = (AST) v.visit(tree);
         root.check();
 //      Walk
 //      ParseTreeWalker walker = new ParseTreeWalker();

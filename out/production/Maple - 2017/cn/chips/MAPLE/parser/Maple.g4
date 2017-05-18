@@ -4,7 +4,7 @@ grammar Maple;
     Created by Jinning Li, 2017, Shanghai
 */
 
-/*****************************    Declare of Parser    *****************************/
+/*****************************    declare of Parser    *****************************/
 
 program:      decl* EOF
             ;
@@ -13,7 +13,7 @@ decl:         varDecl
             | classDecl
             ;
 
-// Declare of Variable, Class and Function
+// declare of Variable, Class and Function
 varDecl:      typePro ID ';'
             | typePro ID '=' expr ';'
             ;
@@ -30,7 +30,7 @@ block:      '{' stmt* '}';
 blockDecl:  varDecl | funcDecl ;
 exprBkt:    '(' expr ')';
 
-//Statement Implement
+//statement Implement
 stmt:       expr? ';'                                        # ExprStatement
             | block                                          # BlockStatement
             | ifStmt                                         # IfStatement
@@ -62,7 +62,7 @@ whileStmt:  WHILE exprBkt
 
 exprList:   '(' expr? ( ',' expr )* ')' ;
 
-// Expression
+// expression
 expr:       exprBkt                                                                 # ExprWithBracket//
             | constant                                                              # ConstantValue//
             | ID                                                                    # Identifier//
@@ -101,7 +101,7 @@ constant:   NULL
             ;
 
 
-/*****************************    Declare of Lexer    *****************************/
+/*****************************    declare of Lexer    *****************************/
 
 //Structure Lexer
 IF          : 'if';
@@ -115,7 +115,7 @@ RETURN      : 'return';
 VOID        : 'void';
 
 
-// Type Lexer
+// type Lexer
 INT         : DIGIT+;
 BOOL        : 'true' | 'false';
 NULL        : 'null';

@@ -1,8 +1,8 @@
 package cn.chips.MAPLE.utils;
 
 import java.util.*;
-import cn.chips.MAPLE.ast.Declare.*;
-import cn.chips.MAPLE.ast.Type.*;
+import cn.chips.MAPLE.ast.declare.*;
+import cn.chips.MAPLE.ast.type.*;
 import cn.chips.MAPLE.exception.*;
 /**
  * Compiler - 2017
