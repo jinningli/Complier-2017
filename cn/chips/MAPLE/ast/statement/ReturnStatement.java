@@ -29,15 +29,16 @@ public class ReturnStatement extends Statement{
         return pos;
     }
     public void check(){
+        setNowScope(grobalVariable.grobal.now);
 //        Main.returned = true;
-        if(!Main.infunction){
+        if(!grobalVariable.infunction){
             throw new NoDefined();
         }
         if(expr == null){
-            if(Main.nowfunc.retype instanceof VoidType){
+            if(grobalVariable.nowfunc.retype instanceof VoidType){
                 retype = new VoidType(pos);
                 return;
-            }else if(Main.nowfunc.retype == null && Objects.equals(Main.nowfunc.getname(), Main.nowclass)){
+            }else if(grobalVariable.nowfunc.retype == null && Objects.equals(grobalVariable.nowfunc.getname(), grobalVariable.nowclass)){
                 retype = null;
                 return;
             }
@@ -49,16 +50,16 @@ public class ReturnStatement extends Statement{
             retype = new NullType(pos);
             return;
         }
-        if(Main.inclass && Objects.equals(expr.getretype().getname(), "this")){
-            if(Objects.equals(Main.nowfunc.retype.typename(), "class:" +Main.nowclass)){
-                retype = Main.nowfunc.retype;
+        if(grobalVariable.inclass && Objects.equals(expr.getretype().getname(), "this")){
+            if(Objects.equals(grobalVariable.nowfunc.retype.typename(), "class:" +grobalVariable.nowclass)){
+                retype = grobalVariable.nowfunc.retype;
                 return;
             }else throw new TypeNotMatch();
         }
 //        System.err.println(expr.getretype().typename());
-//        System.err.println( Main.nowfunc.retype.typename());
+//        System.err.println( grobalVariable.nowfunc.retype.typename());
 
-        if(!Objects.equals(expr.getretype().typename(), Main.nowfunc.retype.typename())){
+        if(!Objects.equals(expr.getretype().typename(), grobalVariable.nowfunc.retype.typename())){
             System.err.println(pos._String());
             throw new TypeNotMatch();
         }

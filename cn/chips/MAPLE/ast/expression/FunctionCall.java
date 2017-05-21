@@ -25,19 +25,20 @@ public class FunctionCall extends Expr {
         flist.add(_es);
     }
     public Type getretype() {
+        setNowScope(grobalVariable.grobal.now);
         if(Objects.equals(name, "")){
             throw new NullPtr();
         }
        //System.err.println(pos._String());
         Declare d;
-        if(Main.inclass) {
-            String inclassname = Main.nowclass + "-" + name;
-            if (Main.grobal.containsKey(inclassname)) {
-                d = Main.grobal.what(inclassname);
+        if(grobalVariable.inclass) {
+            String inclassname = grobalVariable.nowclass + "-" + name;
+            if (grobalVariable.grobal.containsKey(inclassname)) {
+                d = grobalVariable.grobal.what(inclassname);
                 return ((FuncDecl) d).retype;
             }
         }
-        d = Main.grobal.what(name);
+        d = grobalVariable.grobal.what(name);
         if(!(d instanceof FuncDecl)){
             throw new NameNotMatch();
         }

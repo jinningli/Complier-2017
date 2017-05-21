@@ -1,5 +1,6 @@
 package cn.chips.MAPLE.ast.expression;
 
+import cn.chips.MAPLE.compiler.Main;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -31,6 +32,7 @@ public class NewExpr extends Expr {
         return dimension;
     }
     public Type getretype() {
+        setNowScope(grobalVariable.grobal.now);
         for(Expr k : exprlist){
             if(!(k.getretype() instanceof IntType)){
                 throw new WrongIndex();

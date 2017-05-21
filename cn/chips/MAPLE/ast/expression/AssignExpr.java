@@ -1,5 +1,6 @@
 package cn.chips.MAPLE.ast.expression;
 
+import cn.chips.MAPLE.compiler.Main;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -19,6 +20,7 @@ public class AssignExpr extends Expr {
         pos = _p;
     }
     public Type getretype(){
+        setNowScope(grobalVariable.grobal.now);
         if(left == null || right == null){
             throw new NullPtr();
         }

@@ -20,6 +20,7 @@ public class Identifier extends Expr {
         pos = new Position(ctx.getSymbol());
     }
     public Type getretype() {
+        setNowScope(grobalVariable.grobal.now);
         if(Objects.equals(name, "")){
             throw new NullPtr();
         }//maybe something wrong
@@ -29,17 +30,17 @@ public class Identifier extends Expr {
         //System.err.println(pos._String());
         Declare d;
 //        System.err.println(pos._String());
-        if(Main.inclass){
+        if(grobalVariable.inclass){
             if(Objects.equals(name, "this")){
-                return new ClassType(Main.nowclass, pos);
+                return new ClassType(grobalVariable.nowclass, pos);
             }
-//            String inclassname = Main.nowclass + "-" + name;
-//            if(Main.grobal.containsKey(inclassname)){
-//                d = Main.grobal.what(inclassname);
+//            String inclassname = grobalVariable.nowclass + "-" + name;
+//            if(grobalVariable.grobal.containsKey(inclassname)){
+//                d = grobalVariable.grobal.what(inclassname);
 //                return ((VarDecl)d).type;
 //            }
         }
-        d = Main.grobal.what(name);///////////
+        d = grobalVariable.grobal.what(name);///////////
         if(d instanceof ClassDecl){
             return new ClassType(d.getname(), pos);
         }

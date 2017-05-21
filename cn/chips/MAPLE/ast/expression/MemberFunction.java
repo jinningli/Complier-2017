@@ -33,6 +33,7 @@ public class MemberFunction extends Expr {
         }
     }
     public Type getretype() {
+        setNowScope(grobalVariable.grobal.now);
         if(Objects.equals(name, "") || left == null){
             throw new NullPtr();
         }
@@ -42,7 +43,7 @@ public class MemberFunction extends Expr {
                 throw new NullPtr();
             }
             String n = t.getname() + "-" + name;
-            Declare nd = Main.grobal.what(n);
+            Declare nd = grobalVariable.grobal.what(n);
             if(!(nd instanceof FuncDecl)){
                 throw new NameNotMatch();
             }

@@ -30,7 +30,7 @@ public class AST extends Declare {
         return pos;
     }
     public void check(){
-        if(!Main.grobal.containsKey("main")){
+        if(!grobalVariable.grobal.containsKey("main")){
             throw new NoMain();
         }
         for(Declare d : DeclList){

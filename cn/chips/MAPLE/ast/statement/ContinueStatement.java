@@ -20,8 +20,9 @@ public class ContinueStatement extends Statement {
         return pos;
     }
     public void check(){
-        if(Main.incircle.empty()){
+        if(grobalVariable.incircle.empty()){
             throw new NoDefined();
         }
+        setNowScope(grobalVariable.grobal.now);
     }
 }

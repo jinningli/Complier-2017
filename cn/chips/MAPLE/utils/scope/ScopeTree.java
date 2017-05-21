@@ -37,22 +37,26 @@ public class ScopeTree extends Project{
         builtinFunc = new FuncDecl("print",
                 new VoidType());
         builtinFunc.addlist(new StringType(""),"str");
+        builtinFunc.pos = new Position(-1, -1);
         root.define("print", builtinFunc);
         builtinFunc = new FuncDecl("println",
                 new VoidType());
         builtinFunc.addlist(new StringType(""),"str");
+        builtinFunc.pos = new Position(-1, -1);
         root.define("println", builtinFunc);
         builtinFunc = new FuncDecl("getString",
                 new StringType(""));
+        builtinFunc.pos = new Position(-1, -1);
         root.define("getString", builtinFunc);
         builtinFunc = new FuncDecl("getInt",
                 new IntType(0));
+        builtinFunc.pos = new Position(-1, -1);
         root.define("getInt", builtinFunc);
         builtinFunc = new FuncDecl("toString",
                 new StringType(""));
         builtinFunc.addlist(new IntType(0), "i");
+        builtinFunc.pos = new Position(-1, -1);
         root.define("toString", builtinFunc);
-
 //        define("bool", new VarDecl(new Position(-1, -1)));
 //        define("int", new VarDecl(new Position(-1, -1)));
 //        define("string", new VarDecl(new Position(-1, -1)));
@@ -87,6 +91,8 @@ public class ScopeTree extends Project{
             throw new NullPtr();
         }
         now = node.parent;
+//        System.out.println("The Layer Include:");
+//        now.travers();
         return node;
     }
 
@@ -113,6 +119,5 @@ public class ScopeTree extends Project{
         }
         return false;
     }
-
 
 }

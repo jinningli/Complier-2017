@@ -1,5 +1,6 @@
 package cn.chips.MAPLE.ast.expression;
 
+import cn.chips.MAPLE.compiler.Main;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.ast.type.*;
 
@@ -15,6 +16,7 @@ public class ConstantExpr extends Expr {
         pos = _t.getpos();
     }
     public Type getretype() {
+        setNowScope(grobalVariable.grobal.now);
         return type;
     }
 }

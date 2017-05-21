@@ -34,9 +34,10 @@ public class ForStatement extends Statement{
         return pos;
     }
     public void check(){
-        Main.incircle.push(0);
+        setNowScope(grobalVariable.grobal.now);
+        grobalVariable.incircle.push(0);
         if(!(stmt instanceof BlockStatement))
-            Main.grobal.newLayer();
+            grobalVariable.grobal.newLayer();
         for(int i = 0; i < expr.size(); i ++){
             if(!(expr.get(i).getretype() instanceof NullType))
                 type.add(expr.get(i).getretype());
@@ -53,7 +54,7 @@ public class ForStatement extends Statement{
         if(stmt != null)
             stmt.check();
         if(!(stmt instanceof BlockStatement))
-            Main.grobal.exitLayer();
-       Main.incircle.pop();
+            grobalVariable.grobal.exitLayer();
+       grobalVariable.incircle.pop();
     }
 }

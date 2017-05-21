@@ -3,7 +3,7 @@ package cn.chips.MAPLE.ast.statement;
 
 import cn.chips.MAPLE.ast.expression.Expr;
 import cn.chips.MAPLE.ast.type.BoolType;
-import cn.chips.MAPLE.compiler.Main;
+import cn.chips.MAPLE.utils.grobalVariable;
 import cn.chips.MAPLE.exception.NullPtr;
 import cn.chips.MAPLE.exception.TypeNotMatch;
 import cn.chips.MAPLE.utils.Position;
@@ -29,7 +29,8 @@ public class WhileStatement extends Statement{
         return pos;
     }
     public void check(){
-        Main.incircle.push(0);
+        setNowScope(grobalVariable.grobal.now);
+        grobalVariable.incircle.push(0);
         if(expr == null){
             throw new NullPtr();
         }
@@ -38,6 +39,6 @@ public class WhileStatement extends Statement{
         }
         if(stmt != null)
         stmt.check();
-        Main.incircle.pop();
+        grobalVariable.incircle.pop();
     }
 }

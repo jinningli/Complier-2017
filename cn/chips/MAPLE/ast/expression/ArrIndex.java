@@ -6,7 +6,8 @@ import cn.chips.MAPLE.ast.type.*;
 import cn.chips.MAPLE.compiler.Main;
 
 /**
- * Created by lijinning on 2017/4/2.
+ *    Maple - 2017
+ *    lijinning, 2017.05.18, Shanghai.
  */
 public class ArrIndex extends Expr {
     public Expr body = null;
@@ -19,6 +20,7 @@ public class ArrIndex extends Expr {
         pos = _p;
     }
     public Type getretype(){
+        setNowScope(grobalVariable.grobal.now);
         if(retype != null)
             return retype;
         if(index == null || body == null)
@@ -34,7 +36,7 @@ public class ArrIndex extends Expr {
         Type brstdtype = ((ArrType)br).stdtype;
         if(brstdtype instanceof ClassType){
             String n = ((ClassType)brstdtype).getname();
-            Main.grobal.what(n);
+            grobalVariable.grobal.what(n);
         }
         if(((ArrType) br).dimension == 1){
             throw new WrongIndex();

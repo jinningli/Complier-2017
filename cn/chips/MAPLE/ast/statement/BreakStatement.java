@@ -21,9 +21,10 @@ public class BreakStatement extends Statement{
         return pos;
     }
     public void check(){
-        if(Main.incircle.empty()){
+        if(grobalVariable.incircle.empty()){
             System.err.println(pos._String());
             throw new NoDefined();
         }
+        setNowScope(grobalVariable.grobal.now);
     }
 }

@@ -28,7 +28,8 @@ public class BlockStatement extends Statement {
         stmtlist.add(_s);
     }
     public void check(){
-        Main.grobal.newLayer();
+        grobalVariable.grobal.newLayer();
+        setNowScope(grobalVariable.grobal.now);
         for(Statement stmt : stmtlist){
            if(stmt instanceof Declare){
                if(stmt instanceof ClassDecl || stmt instanceof FuncDecl){
@@ -42,6 +43,6 @@ public class BlockStatement extends Statement {
                stmt.check();
            }
         }
-        Main.grobal.exitLayer();
+        grobalVariable.grobal.exitLayer();
     }
 }

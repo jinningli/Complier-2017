@@ -1,6 +1,7 @@
 package cn.chips.MAPLE.ast.statement;
 
 import cn.chips.MAPLE.ast.expression.Expr;
+import cn.chips.MAPLE.compiler.Main;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -39,6 +40,7 @@ public class IfStatement extends Statement{
         return pos;
     }
     public void check(){
+        setNowScope(grobalVariable.grobal.now);
         int size = iflist.size();
         for(int i = 0; i < size; i ++){
             if(!(iflist.get(i).getFirst().getretype() instanceof BoolType)){

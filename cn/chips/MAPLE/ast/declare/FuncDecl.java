@@ -70,28 +70,29 @@ public class FuncDecl extends Declare {
         return pos;
     }
     public void check(){
-        Main.infunction = true;
-        Main.nowfunc = this;
-        Main.grobal.newLayer();
+        grobalVariable.infunction = true;
+        grobalVariable.nowfunc = this;
+        grobalVariable.grobal.newLayer();
+        setNowScope(grobalVariable.grobal.now);
 //        Main.returned = false;
         if(retype instanceof ClassType){
-            Main.grobal.what(retype.getname());
+            grobalVariable.grobal.what(retype.getname());
         }
         int nflist = flist.size();
         for(int i = 0; i < nflist; i ++){
             Type t = flist.get(i).getFirst();
             if(t instanceof ClassType){
-                Main.grobal.what(t.getname());
+                grobalVariable.grobal.what(t.getname());
             }
             if(t instanceof  ArrType){
                 if (((ArrType)t).stdtype instanceof ClassType){
-                    Main.grobal.what(((ArrType)t).stdtype.getname());
+                    grobalVariable.grobal.what(((ArrType)t).stdtype.getname());
                 }
             }
             VarDecl vd = new VarDecl(pos);
             vd.setName(flist.get(i).getSecond());
             vd.setType(flist.get(i).getFirst());
-            Main.grobal.define(flist.get(i).getSecond(), vd);
+            grobalVariable.grobal.define(flist.get(i).getSecond(), vd);
         }
 
 
@@ -104,8 +105,8 @@ public class FuncDecl extends Declare {
 //            System.err.println(pos._String());
 //            throw new DeclLost();
 //        }
-        Main.grobal.exitLayer();
-        Main.infunction = false;
+        grobalVariable.grobal.exitLayer();
+        grobalVariable.infunction = false;
 //        Main.returned = false;
     }
 }

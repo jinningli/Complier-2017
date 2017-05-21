@@ -34,11 +34,12 @@ public class VarDecl extends Declare {
         return pos;
     }
     public void check(){
+        setNowScope(grobalVariable.grobal.now);
         if(type instanceof VoidType){
             throw new ExpressionError();
         }
         if(type instanceof ClassType){
-            Declare d = Main.grobal.what(type.getname());
+            Declare d = grobalVariable.grobal.what(type.getname());
             if(!(d instanceof ClassDecl)){
                 throw new NoDefined();
             }
@@ -46,7 +47,7 @@ public class VarDecl extends Declare {
         if(type instanceof ArrType){
             Type stdtype = ((ArrType) type).stdtype;
             if(stdtype instanceof ClassType){
-                Main.grobal.what(stdtype.getname());
+                grobalVariable.grobal.what(stdtype.getname());
             }
 //            if(!(d instanceof ClassDecl)){
 //                throw new NoDefined();
@@ -65,9 +66,10 @@ public class VarDecl extends Declare {
                 throw new TypeNotMatch();
             }
 
-      //  if(Main.inclass){
-        if(!(Main.inclass && !Main.infunction))
-            Main.grobal.define(name, this);
+      //  if(grobalVariable.inclass){
+        if(!(grobalVariable.inclass && !grobalVariable.infunction))
+            grobalVariable.grobal.define(name, this);
        // }
+
     }
 }

@@ -3,6 +3,7 @@ package cn.chips.MAPLE.ast.declare;
 import  cn.chips.MAPLE.compiler.*;
 import  cn.chips.MAPLE.parser.*;
 import  cn.chips.MAPLE.utils.*;
+import cn.chips.MAPLE.utils.scope.ScopeNode;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -35,19 +36,20 @@ public class ClassDecl extends Declare{
         return pos;
     }
     public void check(){
-        Main.inclass = true;
-        Main.nowclass = name;
-        Main.grobal.newLayer();
+        grobalVariable.inclass = true;
+        grobalVariable.nowclass = name;
+        grobalVariable.grobal.newLayer();
+        setNowScope(grobalVariable.grobal.now);
         for(Declare d : DeclList){
             if(d instanceof VarDecl){
-                Main.grobal.define(d.getname(), d);
+                grobalVariable.grobal.define(d.getname(), d);
             }
         }
         for(Declare d : DeclList){
             d.check();
         }
-        Main.grobal.exitLayer();;
-        Main.inclass = false;
-        Main.nowclass = "";
+        grobalVariable.grobal.exitLayer();;
+        grobalVariable.inclass = false;
+        grobalVariable.nowclass = "";
     }
 }

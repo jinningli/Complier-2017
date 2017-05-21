@@ -19,7 +19,6 @@ public class ScopeNode{
     public ScopeNode parent = null;
 
     public ScopeNode(){}
-
     public Declare what(String _s){
         ScopeNode node = parent;
         if(namestore.containsKey(_s)){
@@ -57,5 +56,21 @@ public class ScopeNode{
             throw new ReDefine();
         }
         namestore.put(_n, _d);
+    }
+    public void travers(){
+        System.out.println("---------------------\nThe Scope: " + this +" Contains: ");
+        for(Map.Entry<String, Declare> data : namestore.entrySet()){
+            String n = data.getKey();
+            Declare d = data.getValue();
+            System.out.println("The Key:  " + n
+                    + "  direct to  " + d.getname()
+                    + "  in initial line:  " + d.getpos()._String());
+        }
+        System.out.println("---------------------\n");
+        ScopeNode node = parent;
+        while(node != null) {
+            node.travers();
+            node = node.parent;
+        }
     }
 }

@@ -21,12 +21,13 @@ public class Member extends Expr {
         pos = _p;
     }
     public Type getretype() {
+        setNowScope(grobalVariable.grobal.now);
         if(body == null || Objects.equals(name, "")){
             throw new NullPtr();
         }
         if(body instanceof Identifier){
             if(Objects.equals(((Identifier) body).name, "this")){
-                return ((VarDecl)Main.grobal.what(Main.nowclass + "-" + name)).type;
+                return ((VarDecl)grobalVariable.grobal.what(grobalVariable.nowclass + "-" + name)).type;
             }
         }
         Type t = body.getretype();
@@ -35,7 +36,7 @@ public class Member extends Expr {
                 throw new NullPtr();
             }
             String n = t.getname() + "-" + name;
-            Declare dn = Main.grobal.what(n);
+            Declare dn = grobalVariable.grobal.what(n);
             if (!(dn instanceof VarDecl)) {
                 throw new NameNotMatch();
             }

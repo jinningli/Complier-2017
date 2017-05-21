@@ -20,7 +20,7 @@ import java.util.Objects;
  * lijinning, 2017.04.06, Shanghai.
  */
 public class AstBuilder extends MapleBaseVisitor<Project> {
-    private ScopeTree maple = Main.grobal;
+    private ScopeTree maple = grobalVariable.grobal;
     private boolean inclass = false;
     private boolean infunction = false;
     private String nowclass = "";

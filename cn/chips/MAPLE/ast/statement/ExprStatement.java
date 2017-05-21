@@ -1,6 +1,7 @@
 package cn.chips.MAPLE.ast.statement;
 
 import cn.chips.MAPLE.ast.expression.Expr;
+import cn.chips.MAPLE.compiler.Main;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -19,6 +20,7 @@ public class ExprStatement extends Statement {
         expr = _e;
     }
     public void check(){
+        setNowScope(grobalVariable.grobal.now);
         if(expr == null){
             throw new NullPtr();
         }
