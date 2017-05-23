@@ -13,8 +13,8 @@ import cn.chips.MAPLE.ast.type.*;
 public class ExprStatement extends Statement {
     public String name = "expression";
     public Position pos;
-    private Expr expr = null;
-    private Type retype = null;
+    public Expr expr = null;
+    public Type retype = null;
     public ExprStatement(Expr _e, Position _p){
         pos = _p;
         expr = _e;
@@ -31,5 +31,19 @@ public class ExprStatement extends Statement {
     }
     public Position getpos(){
         return pos;
+    }
+    public void print(int depth) {
+        String indent = "";
+        int dep = depth;
+        while (dep > 0) {
+            indent += "\t";
+            dep--;
+        }
+        System.out.println(indent + "ExprStmt:" + pos._String());
+        if(expr == null){
+            System.out.println(indent + "\tNULL");
+        }else{
+            expr.print(depth + 1);
+        }
     }
 }

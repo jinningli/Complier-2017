@@ -18,4 +18,5 @@ public abstract class Expr extends Project{
     public void setNowScope(ScopeNode _s){
         nowScope = _s;
     }
+    public abstract void print(int depth);
 }

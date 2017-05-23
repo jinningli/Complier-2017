@@ -2,6 +2,8 @@ package cn.chips.MAPLE.ast.declare;
 
 
 import cn.chips.MAPLE.compiler.Main;
+import cn.chips.MAPLE.ir.Entity;
+import cn.chips.MAPLE.ir.STMT;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.parser.*;
@@ -17,13 +19,20 @@ import java.util.Objects;
  *    Compiler - 2017
  *    lijinning, 2017.04.02, Shanghai.
  */
-public class FuncDecl extends Declare {
+public class FuncDecl extends Declare implements Entity{
     public String name = "";
     public Position pos;
     public Type retype = null;
     public List<Pair<Type, String>> flist = null;
     public List<Statement> stmtlist = null;
     public boolean constructFunc = false;
+    public List<STMT> ir;
+
+
+    public void setIR(List<STMT> _stmts){
+        ir = _stmts;
+    }
+
     public FuncDecl(String _n, Type _rt){
         name = _n;
         retype = _rt;
@@ -65,6 +74,9 @@ public class FuncDecl extends Declare {
     }
     public String getname(){
         return name;
+    }
+    public String _String(){
+        return "FuncDecl:: " + name;
     }
     public Position getpos() {
         return pos;
@@ -108,5 +120,22 @@ public class FuncDecl extends Declare {
         grobalVariable.grobal.exitLayer();
         grobalVariable.infunction = false;
 //        Main.returned = false;
+    }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Function: " + name + " defined in: " + pos._String());
+        System.out.println(indent + "\t------Parameter------");
+        for(Pair<Type, String> p: flist){
+            System.out.println(indent + "\t" + "Parameter: " + p.getFirst()._String() + " " + p.getSecond());
+        }
+        System.out.println(indent + "\t------Parameter End------");
+        for(Statement s: stmtlist) {
+            s.print(depth + 1);
+        }
     }
 }

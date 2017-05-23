@@ -45,4 +45,20 @@ public class Member extends Expr {
             throw new NameNotMatch();
         }
     }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Member: " + pos._String());
+        System.out.println(indent + "Body:");
+        if(body == null){
+            System.out.println(indent + "\tnull");
+        }else {
+            body.print(depth + 1);
+        }
+        System.out.println(indent + "dot." + name);
+    }
 }

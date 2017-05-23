@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * lijinning, 2017.04.02, Shanghai.
  */
 public class IntType extends Project implements Type {
-    private int data;
+    private int data = 0;
     private Position pos;
 
     public IntType(TerminalNode ctx){

@@ -48,4 +48,31 @@ public class ArrIndex extends Expr {
             return new ArrType(rbr.dimension - 1, rbr.stdtype, rbr.pos);
         }
     }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "ArrIndex:");
+        System.out.println(indent + "body:");
+        if(body == null){
+            System.out.println(indent + "\tnull");
+        }else {
+            body.print(depth + 1);
+        }
+        System.out.println(indent + "index:");
+        if(body == null){
+            System.out.println(indent + "\tnull");
+        }else {
+            index.print(depth + 1);
+        }
+        System.out.println(indent + "retype:");
+        if(body == null){
+            System.out.println(indent + "\tnull");
+        }else {
+            retype._String();
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package cn.chips.MAPLE.ast.expression;
 
+import cn.chips.MAPLE.ir.Entity;
+import cn.chips.MAPLE.utils.scope.ScopeNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.Objects;
 import cn.chips.MAPLE.utils.*;
@@ -15,12 +17,15 @@ import cn.chips.MAPLE.ast.declare.*;
 public class Identifier extends Expr {
     public String name = "";
     public Position pos;
+    public Declare ent = null;
     public Identifier(TerminalNode ctx){
         name = ctx.getText();
         pos = new Position(ctx.getSymbol());
     }
     public Type getretype() {
         setNowScope(grobalVariable.grobal.now);
+//        ent = nowScope.what(name); // convert to declare ???constant?
+//        System.out.println(name + " -> " + ent._String());
         if(Objects.equals(name, "")){
             throw new NullPtr();
         }//maybe something wrong
@@ -48,5 +53,14 @@ public class Identifier extends Expr {
             throw new ExpressionError();
         }
         return ((VarDecl)d).type;
+    }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Identifier: " + name + pos._String());
     }
 }

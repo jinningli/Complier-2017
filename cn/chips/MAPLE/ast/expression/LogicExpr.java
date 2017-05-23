@@ -49,4 +49,26 @@ public class LogicExpr extends Expr {
         }
         return new BoolType(pos);
     }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Logic: " + pos._String());
+        System.out.println(indent + "left:");
+        if(left == null){
+            System.out.println(indent + "\tnull");
+        }else {
+            left.print(depth + 1);
+        }
+        System.out.println(indent + "right:");
+        if(right == null){
+            System.out.println(indent + "\tnull");
+        }else {
+            right.print(depth + 1);
+        }
+        System.out.println(indent + "opt:\n" + indent + opt);
+    }
 }

@@ -24,9 +24,11 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     private boolean inclass = false;
     private boolean infunction = false;
     private String nowclass = "";
+    private AST root = null;
 
     @Override public Project visitProgram(MapleParser.ProgramContext ctx) {
         AST prog = new AST();
+        root = prog;
         for(ParserRuleContext child : ctx.decl()){
             prog.add((Declare) visit(child));
         }
@@ -49,6 +51,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
 // else{
 //            maple.define(vd.getname(), vd);
 //        }
+        root.getDecls().addVars(vd);
         //System.err.println(ctx.getParent().getText());
         return vd;
     }
@@ -63,6 +66,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
         inclass = false;
         nowclass = "";
         maple.define(cls.getname(), cls);
+        root.getDecls().addClass(cls);
         //maple.StepIn(cls);
         return cls;
     }
@@ -88,6 +92,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
             maple.define(func.getname(), func);
         }
         infunction = false;
+        root.getDecls().addFuns(func);
         return func;
     }
 
@@ -328,14 +333,23 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
 //    @Override public Project visitPtrBracket(MapleParser.PtrBracketContext ctx) { return visitChildren(ctx); }
 
     @Override public Project visitConstant(MapleParser.ConstantContext ctx) {
+        ConstantExpr c;
             if(ctx.INT() != null){
-                return new ConstantExpr(new IntType(ctx.INT()));
+                c = new ConstantExpr(new IntType(ctx.INT()));
+                root.getDecls().addConst(c);
+                return c;
             }else if(ctx.BOOL() != null){
-                return new ConstantExpr(new BoolType(ctx.BOOL()));
+                c = new ConstantExpr(new BoolType(ctx.BOOL()));
+                root.getDecls().addConst(c);
+                return c;
             }else if(ctx.NULL() != null){
-                return new ConstantExpr(new NullType(ctx.NULL()));
+                c = new ConstantExpr(new NullType(ctx.NULL()));
+                root.getDecls().addConst(c);
+                return c;
             }else if(ctx.STRING() != null){
-                return new ConstantExpr(new StringType(ctx.STRING()));
+                c = new ConstantExpr(new StringType(ctx.STRING()));
+                root.getDecls().addConst(c);
+                return c;
             }
             return visitChildren(ctx);
     }

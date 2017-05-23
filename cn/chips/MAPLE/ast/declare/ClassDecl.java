@@ -35,10 +35,14 @@ public class ClassDecl extends Declare{
     public Position getpos(){
         return pos;
     }
+    public String _String(){
+        return "ClassDecl:: " + name;
+    }
     public void check(){
         grobalVariable.inclass = true;
         grobalVariable.nowclass = name;
         grobalVariable.grobal.newLayer();
+
         setNowScope(grobalVariable.grobal.now);
         for(Declare d : DeclList){
             if(d instanceof VarDecl){
@@ -51,5 +55,18 @@ public class ClassDecl extends Declare{
         grobalVariable.grobal.exitLayer();;
         grobalVariable.inclass = false;
         grobalVariable.nowclass = "";
+    }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Class: " + name + " defined in: " + pos._String());
+        for(Declare d: DeclList){
+            d.print(depth + 1);
+        }
+
     }
 }

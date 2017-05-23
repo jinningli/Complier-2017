@@ -33,4 +33,14 @@ public class PostSingleExpr extends Expr {
         }
         return body.getretype();
     }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "PostExpr: " + opt + pos._String());
+        body.print(depth + 1);
+    }
 }

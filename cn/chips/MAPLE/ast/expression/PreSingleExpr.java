@@ -48,4 +48,14 @@ public class PreSingleExpr extends Expr {
         return body.getretype();
 //        throw new TypeNotMatch();
     }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "PreExpr: " + opt + pos._String());
+        body.print(depth + 1);
+    }
 }

@@ -54,4 +54,18 @@ public class NewExpr extends Expr {
             return true;
         else return false;
     }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "New: "+"dimension: " + dimension  + pos._String());
+        System.out.println(indent + "Type:" + type._String());
+        for(Expr e: exprlist){
+            e.print(depth + 1);
+        }
+
+    }
 }

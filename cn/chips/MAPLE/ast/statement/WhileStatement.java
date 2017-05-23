@@ -41,4 +41,19 @@ public class WhileStatement extends Statement{
         stmt.check();
         grobalVariable.incircle.pop();
     }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "While: " + pos._String());
+        if(expr == null){
+            System.out.println(indent + "\tNULL");
+        }else{
+            expr.print(depth + 1);
+        }
+        stmt.print(depth + 1);
+    }
 }

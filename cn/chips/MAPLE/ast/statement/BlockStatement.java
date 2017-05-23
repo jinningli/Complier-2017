@@ -11,9 +11,10 @@ import java.util.*;
  * lijinning, 2017.04.08, Shanghai.
  */
 public class BlockStatement extends Statement {
-    private String name = "block";
-    private Position pos;
-    private List<Statement> stmtlist = new LinkedList<>();
+    public String name = "block";
+    public Position pos;
+    public List<Statement> stmtlist = new LinkedList<>();
+
     public BlockStatement(Position _p){
         pos = _p;
     }
@@ -44,5 +45,17 @@ public class BlockStatement extends Statement {
            }
         }
         grobalVariable.grobal.exitLayer();
+    }
+    public void print(int depth) {
+        String indent = "";
+        int dep = depth;
+        while (dep > 0) {
+            indent += "\t";
+            dep--;
+        }
+        System.out.println(indent + "BlockStmt:" + pos._String());
+        for(Statement s: stmtlist){
+            s.print(depth + 1);
+        }
     }
 }

@@ -36,6 +36,8 @@ public class Main
         AstBuilder v = new AstBuilder();
         AST root = (AST) v.visit(tree);
         root.check();
+//        root.getDecls().traverse();
+//        root.print(0);
 //      Walk
 //      ParseTreeWalker walker = new ParseTreeWalker();
     }

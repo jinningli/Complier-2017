@@ -3,14 +3,14 @@ package cn.chips.MAPLE.ast.expression;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
-import cn.chips.MAPLE.compiler.Main;
 import cn.chips.MAPLE.parser.*;
 import cn.chips.MAPLE.ast.declare.*;
 
 import java.util.*;
 
 /**
- * Created by lijinning on 2017/4/2.
+ *    Maple - 2017
+ *    lijinning, 2017.05.21, Shanghai.
  */
 public class FunctionCall extends Expr {
     private String name = "";
@@ -60,5 +60,16 @@ public class FunctionCall extends Expr {
         /// to be continued;
         return func.retype;
     }
-
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "FunctionCall: " + name + pos._String());
+        for(Expr e: flist){
+            e.print(depth + 1);
+        }
+    }
 }

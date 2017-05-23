@@ -15,6 +15,7 @@ public abstract class Statement extends Project {
     public abstract String getname();
     public abstract Position getpos();
     public abstract void  check();
+    public abstract void print(int depth);
     public ScopeNode getNowScope(){
         return nowScope;
     }

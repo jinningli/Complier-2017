@@ -57,4 +57,17 @@ public class ForStatement extends Statement{
             grobalVariable.grobal.exitLayer();
        grobalVariable.incircle.pop();
     }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "For: " + pos._String());
+        System.out.println(indent + "List:");
+        for(Expr e: expr){
+            e.print(depth + 1);
+        }
+    }
 }

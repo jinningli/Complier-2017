@@ -15,6 +15,7 @@ public class AST extends Declare {
     public String name;
     public Position pos;
     private List<Declare> DeclList;
+    private Declarations decls = new Declarations();
     public AST(){
         name = "AST";
         pos = new Position(0, 0);
@@ -29,6 +30,9 @@ public class AST extends Declare {
     public Position getpos() {
         return pos;
     }
+    public String _String(){
+        return name;
+    }
     public void check(){
         if(!grobalVariable.grobal.containsKey("main")){
             throw new NoMain();
@@ -36,5 +40,20 @@ public class AST extends Declare {
         for(Declare d : DeclList){
             d.check();
         }
+    }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "----------Print Process----------\n");
+        for(Declare d: DeclList){
+            d.print(depth + 1);
+        }
+    }
+    public Declarations getDecls(){
+        return decls;
     }
 }

@@ -27,4 +27,13 @@ public class BreakStatement extends Statement{
         }
         setNowScope(grobalVariable.grobal.now);
     }
+    public void print(int depth) {
+        String indent = "";
+        int dep = depth;
+        while (dep > 0) {
+            indent += "\t";
+            dep--;
+        }
+        System.out.println(indent + "Break!" + pos._String());
+    }
 }

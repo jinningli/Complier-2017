@@ -52,4 +52,24 @@ public class IfStatement extends Statement{
         if(elsestmt!=null)
         elsestmt.check();
     }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "If: with elseif: " + elseIfCnt + " " + pos._String());
+        for(Pair<Expr, Statement> p : iflist){
+            p.getFirst().print(depth + 1);
+            p.getSecond().print(depth + 1);
+            System.out.println(indent + "\t--------------");
+        }
+        System.out.println(indent + "elsestmt:");
+        if(elsestmt == null){
+            System.out.println(indent + "\tNULL");
+        }else{
+            elsestmt.print(depth + 1);
+        }
+    }
 }

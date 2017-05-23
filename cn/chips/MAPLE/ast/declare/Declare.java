@@ -13,10 +13,12 @@ public abstract class Declare extends Statement {
     public abstract String getname();
     public abstract Position getpos();
     public abstract void check();
+    public abstract void print(int depth);
     public ScopeNode getNowScope(){
         return nowScope;
     }
     public void setNowScope(ScopeNode _s){
         nowScope = _s;
     }
+    public abstract String _String();
 }

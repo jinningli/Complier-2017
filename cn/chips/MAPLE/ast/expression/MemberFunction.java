@@ -74,4 +74,24 @@ public class MemberFunction extends Expr {
         }
         throw new NameNotMatch();
     }
+    public void print(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "MemberFunction: " + pos._String());
+        System.out.println(indent + "Body:");
+        if(left == null){
+            System.out.println(indent + "\tnull");
+        }else {
+            left.print(depth + 1);
+        }
+        System.out.println(indent + "dot." + name);
+        System.out.println(indent + "\t" + "Parameter: ");
+        for(Expr e: flist){
+            e.print(depth + 1);
+        }
+    }
 }

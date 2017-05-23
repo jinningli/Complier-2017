@@ -16,7 +16,7 @@ public class ClassType extends Project implements Type{
         pos = _p;
     }
     public String _String(){
-        return "ClassType " + pos._String() + "\tWith name: " + name;
+        return "ClassType " + pos._String() + "\tWith type name: " + name;
     }
     public Position getpos(){return pos;};
     public String getname(){return name;};
