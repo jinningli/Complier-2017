@@ -1,5 +1,6 @@
 package cn.chips.MAPLE.ast.expression;
 
+import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -13,11 +14,11 @@ import java.util.*;
  *    lijinning, 2017.05.21, Shanghai.
  */
 public class FunctionCall extends Expr {
-    private String name = "";
-    private Position pos;
-    private List<Expr> flist;
+    public Identifier id;
+    public Position pos;
+    public List<Expr> flist;
     public FunctionCall(MapleParser.FunctionCallContext ctx){
-        name = ctx.ID().getText();
+        id = new Identifier(ctx.ID());
         pos = new Position(ctx.getStart());
         flist = new LinkedList<>();
     }
@@ -26,6 +27,7 @@ public class FunctionCall extends Expr {
     }
     public Type getretype() {
         setNowScope(grobalVariable.grobal.now);
+        String name = id.name;
         if(Objects.equals(name, "")){
             throw new NullPtr();
         }
@@ -67,7 +69,7 @@ public class FunctionCall extends Expr {
             indent += "\t";
             dep --;
         }
-        System.out.println(indent + "FunctionCall: " + name + pos._String());
+        System.out.println(indent + "FunctionCall: " + id.name + pos._String());
         for(Expr e: flist){
             e.print(depth + 1);
         }

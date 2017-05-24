@@ -153,18 +153,28 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
 //    return visitChildren(ctx);
 //    }
 
+
+
+
     @Override public Project visitIfStmt(MapleParser.IfStmtContext ctx) {
-        IfStatement is = new IfStatement(new Position(ctx.getStart()));
-        is.add((Expr)visit(ctx.exprBkt(0).expr()), (Statement)visit(ctx.stmt(0)));
-        int k = 1;
-        while(!(ctx.exprBkt(k) == null)){
-            is.add((Expr)visit(ctx.exprBkt(k).expr()), (Statement)visit(ctx.stmt(k)));
-            k ++;
+        int k = ctx.exprBkt().size() - 1;
+        IfStatement outer = new IfStatement(new Position(ctx.getStart()));
+        outer.setExpr((Expr)visit(ctx.exprBkt(k).expr()));
+        outer.setThenBody((Statement)visit(ctx.stmt(k)));
+        if(ctx.stmt(k + 1)!=null){
+            outer.setElseBody((Statement) visit(ctx.stmt(k)));
         }
-        if(!(ctx.stmt(k)==null)){
-            is.setElseStmt((Statement) visit(ctx.stmt(k)));
+        k --;
+        IfStatement inner = new IfStatement(new Position(ctx.getStart()));
+        while(k >= 0){
+            inner.setExpr((Expr)visit(ctx.exprBkt(k).expr()));
+            inner.setThenBody((Statement)visit(ctx.stmt(k)));
+            inner.setElseBody(outer);
+            outer = inner;
+            inner = new IfStatement(new Position(ctx.getStart()));
+            k --;
         }
-        return is;
+        return outer;
     }
 
     @Override public Project visitForStmt(MapleParser.ForStmtContext ctx) {

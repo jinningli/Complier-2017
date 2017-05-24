@@ -17,9 +17,9 @@ public class Main
 //    public static boolean returned = false;
     public static void main(String[] args) throws Exception
     {
-        InputStream Filein = new FileInputStream("cn/chips/MAPLE/testcase/test.cpp");
-        compile(Filein, System.out);
-//        compile(System.in, System.out);
+//        InputStream Filein = new FileInputStream("cn/chips/MAPLE/testcase/test.cpp");
+//        compile(Filein, System.out);
+        compile(System.in, System.out);
     }
     public static void compile(InputStream in, OutputStream out) throws Exception
     {

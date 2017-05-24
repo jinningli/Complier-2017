@@ -12,9 +12,9 @@ import java.util.Objects;
  * lijinning, 2017.04.07, Shanghai.
  */
 public class PreSingleExpr extends Expr {
-    private String opt = "";
-    private Expr body = null;
-    private Position pos;
+    public String opt = "";
+    public Expr body = null;
+    public Position pos;
     public PreSingleExpr(Expr _b, String _o, Position _p){
         body = _b;
         opt = _o;

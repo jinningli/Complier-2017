@@ -6,7 +6,7 @@ package cn.chips.MAPLE.ir;
  */
 public class Int extends EXPR {
     private long value = 0;
-    public Int(int k){
+    public Int(long k){
         value = k;
     }
 }

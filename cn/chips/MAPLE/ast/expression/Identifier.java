@@ -17,14 +17,15 @@ import cn.chips.MAPLE.ast.declare.*;
 public class Identifier extends Expr {
     public String name = "";
     public Position pos;
-    public Declare ent = null;
+    public Entity ent = null;
+
     public Identifier(TerminalNode ctx){
         name = ctx.getText();
         pos = new Position(ctx.getSymbol());
     }
     public Type getretype() {
         setNowScope(grobalVariable.grobal.now);
-//        ent = nowScope.what(name); // convert to declare ???constant?
+        ent = (Entity) nowScope.what(name); // convert to declare ???constant?
 //        System.out.println(name + " -> " + ent._String());
         if(Objects.equals(name, "")){
             throw new NullPtr();
@@ -49,9 +50,9 @@ public class Identifier extends Expr {
         if(d instanceof ClassDecl){
             return new ClassType(d.getname(), pos);
         }
-        if(d instanceof FuncDecl){
-            throw new ExpressionError();
-        }
+//        if(d instanceof FuncDecl){
+//            throw new ExpressionError();
+//        }
         return ((VarDecl)d).type;
     }
     public void print(int depth){

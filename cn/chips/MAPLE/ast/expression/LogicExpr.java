@@ -12,10 +12,10 @@ import java.util.Objects;
  *    lijinning, 2017.04.12, Shanghai.
  */
 public class LogicExpr extends Expr {
-    private Expr left = null;
-    private Expr right = null;
-    private String opt = "";
-    private Position pos;
+    public Expr left = null;
+    public Expr right = null;
+    public String opt = "";
+    public Position pos;
     public LogicExpr(Expr _l, Expr _r, String _o, Position _p){
         left = _l;
         right = _r;

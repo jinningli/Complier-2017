@@ -6,9 +6,13 @@ package cn.chips.MAPLE.ir;
  */
 public class Var extends EXPR {
     protected Entity ent = null;
+    public int size = 0;
 
     public Var(Entity _ent){
         ent = _ent;
     }
-
+    public Var(int type, Entity _ent) {
+        size = type;
+        ent = _ent;
+    }
 }

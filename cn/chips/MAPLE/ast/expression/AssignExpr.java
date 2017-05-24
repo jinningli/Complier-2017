@@ -11,9 +11,9 @@ import java.util.Objects;
  * Created by lijinning on 2017/4/2.
  */
 public class AssignExpr extends Expr {
-    private Expr left = null;
-    private Expr right = null;
-    private Position pos = null;
+    public Expr left = null;
+    public Expr right = null;
+    public Position pos = null;
     public AssignExpr(Expr _l, Expr _r, Position _p){
         left = _l;
         right = _r;

@@ -8,7 +8,7 @@ public class Label extends IR {
     public static int labelcnt = 0;
     public String str = "";
     public  int id = labelcnt ++;
-
+    public Label(){}
     public Label(String _str){
         str = _str;
     }

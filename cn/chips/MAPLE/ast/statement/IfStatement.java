@@ -16,22 +16,28 @@ import java.util.List;
 public class IfStatement extends Statement{
     public String name = "if";
     public Position pos;
-    public List<Pair<Expr, Statement>> iflist = new LinkedList<>();
-    public Statement elsestmt = null;
-    int elseIfCnt = 0;
+    public Expr expr = null;
+    public Statement thenbody = null;
+    public Statement elsebody = null;
+
     public IfStatement(Position _p){
         pos = _p;
     }
-    public void setElseStmt(Statement _s){
-        elsestmt = _s;
+
+    public void setElseBody(Statement _s){
+        elsebody = _s;
     }
+
+    public void setThenBody(Statement _s){
+        thenbody = _s;
+    }
+
+    public void setExpr(Expr _e){
+        expr = _e;
+    }
+
     public boolean ElseEmpty(){
-        return elsestmt == null;
-    }
-    public void add(Expr _e, Statement _s){
-        if(!iflist.isEmpty())
-            elseIfCnt ++;
-        iflist.add(new Pair<>(_e, _s));
+        return elsebody == null;
     }
     public String getname(){
         return name;
@@ -41,16 +47,15 @@ public class IfStatement extends Statement{
     }
     public void check(){
         setNowScope(grobalVariable.grobal.now);
-        int size = iflist.size();
-        for(int i = 0; i < size; i ++){
-            if(!(iflist.get(i).getFirst().getretype() instanceof BoolType)){
-                throw new TypeNotMatch();
-            }
-            if(iflist.get(i).getSecond() != null)
-            iflist.get(i).getSecond().check();
+        if(!(expr.getretype() instanceof BoolType)){
+            throw new TypeNotMatch();
         }
-        if(elsestmt!=null)
-        elsestmt.check();
+        if(thenbody != null){
+            thenbody.check();
+        }
+        if(elsebody != null){
+            elsebody.check();
+        }
     }
     public void print(int depth){
         String indent = "";
@@ -59,17 +64,16 @@ public class IfStatement extends Statement{
             indent += "\t";
             dep --;
         }
-        System.out.println(indent + "If: with elseif: " + elseIfCnt + " " + pos._String());
-        for(Pair<Expr, Statement> p : iflist){
-            p.getFirst().print(depth + 1);
-            p.getSecond().print(depth + 1);
-            System.out.println(indent + "\t--------------");
-        }
-        System.out.println(indent + "elsestmt:");
-        if(elsestmt == null){
+        System.out.println(indent + "If: " + pos._String());
+        System.out.println(indent + " Cond: ");
+        expr.print(depth + 1);
+        System.out.println(indent + " Then: ");
+        thenbody.print(depth + 1);
+        System.out.println(indent + " Else: ");
+        if(elsebody == null){
             System.out.println(indent + "\tNULL");
         }else{
-            elsestmt.print(depth + 1);
+            elsebody.print(depth + 1);
         }
     }
 }
