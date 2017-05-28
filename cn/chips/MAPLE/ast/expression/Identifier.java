@@ -37,6 +37,9 @@ public class Identifier extends Expr {
             return vartype;
         }
         setNowScope(grobalVariable.grobal.now);
+        if(Objects.equals(name, "this")){
+           int b = 1;
+        }
         ent = (Entity) nowScope.what(name); // convert to declare ???constant?
 //        System.out.println(name + " -> " + ent._String());
         if(Objects.equals(name, "")){

@@ -55,10 +55,10 @@ public class ClassDecl extends Declare{
         }
         for(Declare d : DeclList){
             d.check();
-            if(d instanceof VarDecl){
-                ((VarDecl) d).offset = size;
-                size += ((VarDecl) d).length();
-            }
+//            if(d instanceof VarDecl){
+//                ((VarDecl) d).offset = size;
+//                size += ((VarDecl) d).length();
+//            }
         }
         grobalVariable.grobal.exitLayer();;
         grobalVariable.inclass = false;
