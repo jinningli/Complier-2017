@@ -10,6 +10,9 @@ class C
 {
 	int a;
 	string b;
+	int what(int c){
+	    return a + c;
+	}
 }
 int main()
 {
@@ -20,6 +23,8 @@ int main()
 	b.c = c;
 	c.a = 0;
 	c.b = getString();
+	int d = 2;
+	c.what(d);
 	if(a.c.b + b.c.b == c.b + c.b)
 	{
 		c.b = c.b + c.b;

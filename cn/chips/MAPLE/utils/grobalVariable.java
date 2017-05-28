@@ -16,4 +16,5 @@ public class grobalVariable extends Project {
     public static boolean inclass = false;
     public static String nowclass = "";
     public static FuncDecl nowfunc = null;
+    public static boolean inClassFunc = false;
 }

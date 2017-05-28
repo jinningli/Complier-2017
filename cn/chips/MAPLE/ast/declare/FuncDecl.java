@@ -54,6 +54,7 @@ public class FuncDecl extends Declare implements Entity{
         if(inclass){
             classFunc = true;
             thisptr = nowclass;
+            name = nowclass.name + "-" + ctx.ID().getText();
 //            Type thistype = new ClassType(nowclass.name, pos);
 //            flist.add(new Pair<>(thistype, "this"));
         }
@@ -62,7 +63,7 @@ public class FuncDecl extends Declare implements Entity{
             if(!inclass){
                 throw new DeclLost();
             }
-            if(!Objects.equals(name, nowclass.name)){
+            if(!Objects.equals(name, nowclass.name + "-" + nowclass.name)){
                 throw new DeclLost();
             }
             constructFunc = true;

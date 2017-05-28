@@ -88,10 +88,8 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
             if(Objects.equals(func.getname(), "this")){
                 throw new ReDefine();
             }
-            maple.define(nowclass.name + "-" + func.getname(), func);
-        }else{
-            maple.define(func.getname(), func);
         }
+        maple.define(func.getname(), func);
         infunction = false;
         root.getDecls().addFuns(func);
         return func;
