@@ -210,16 +210,14 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     @Override public Project visitExprList(MapleParser.ExprListContext ctx) { return visitChildren(ctx); }
 
     @Override public Project visitMemberFunction(MapleParser.MemberFunctionContext ctx) {
-        FunctionCall funcall = new FunctionCall(ctx);
-        Expr leftexpr = (Expr) visit(ctx.expr());
-        funcall.listadd(leftexpr);
-
+        MemberFunction fc = new MemberFunction(ctx);
+        fc.listadd((Expr) visit(ctx.expr()));
         if(!ctx.exprList().expr().isEmpty()) {
             for (ParserRuleContext child : ctx.exprList().expr()) {
-                funcall.listadd((Expr) visit(child));
+                fc.listadd((Expr) visit(child));
             }
         }
-        return funcall;
+        return fc;
     }
 
     @Override public Project visitArrIndex(MapleParser.ArrIndexContext ctx) {

@@ -47,15 +47,15 @@ public class FuncDecl extends Declare implements Entity{
     public FuncDecl (MapleParser.FuncDeclContext ctx, boolean inclass, ClassDecl nowclass){
         stmtlist = new LinkedList<>();
         flist = new LinkedList<>();
-        name = nowclass.name + "-" + ctx.ID().getText();
+        name = ctx.ID().getText();
         pos = new Position(ctx.ID().getSymbol());
         TypeClassifier TC = new TypeClassifier();
 
         if(inclass){
             classFunc = true;
             thisptr = nowclass;
-            Type thistype = new ClassType(nowclass.name, pos);
-            flist.add(new Pair<>(thistype, "this"));
+//            Type thistype = new ClassType(nowclass.name, pos);
+//            flist.add(new Pair<>(thistype, "this"));
         }
 
         if(ctx.typePro().type() == null){

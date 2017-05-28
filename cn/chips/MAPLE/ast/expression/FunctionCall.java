@@ -27,11 +27,6 @@ public class FunctionCall extends Expr {
         pos = new Position(ctx.getStart());
         flist = new LinkedList<>();
     }
-    public FunctionCall(MapleParser.MemberFunctionContext ctx){
-        id = new Identifier(ctx.ID());
-        pos = new Position(ctx.getStart());
-        flist = new LinkedList<>();
-    }
     public void listadd(Expr _es){
         flist.add(_es);
     }
