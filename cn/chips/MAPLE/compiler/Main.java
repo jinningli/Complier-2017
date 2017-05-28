@@ -17,9 +17,9 @@ public class Main
 //    public static boolean returned = false;
     public static void main(String[] args) throws Exception
     {
-//        InputStream Filein = new FileInputStream("cn/chips/MAPLE/testcase/test.cpp");
-//        compile(Filein, System.out);
-        compile(System.in, System.out);
+        InputStream Filein = new FileInputStream("cn/chips/MAPLE/testcase/test.cpp");
+        compile(Filein, System.out);
+//        compile(System.in, System.out);
     }
     public static void compile(InputStream in, OutputStream out) throws Exception
     {
@@ -36,10 +36,10 @@ public class Main
         AstBuilder v = new AstBuilder();
         AST root = (AST) v.visit(tree);
         root.check();
-//        IRGenerator r = new IRGenerator(root);
-//        r.generate();
+        root.print(0);
+        IRGenerator r = new IRGenerator(root);
+        r.generate();
 //        root.getDecls().traverse();
-//        root.print(0);
 //      Walk
 //      ParseTreeWalker walker = new ParseTreeWalker();
     }
