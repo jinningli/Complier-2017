@@ -4,6 +4,7 @@ import cn.chips.MAPLE.ast.declare.ClassDecl;
 import cn.chips.MAPLE.ast.declare.FuncDecl;
 import cn.chips.MAPLE.ast.declare.VarDecl;
 import cn.chips.MAPLE.ast.expression.ConstantExpr;
+import cn.chips.MAPLE.ir.IRTraverse;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -62,6 +63,15 @@ public class Declarations {
         }
         for(ConstantExpr c: constants){
             System.out.println("Const:: " + c._String() + " " );
+        }
+    }
+    public void IRtraverse(){
+        IRTraverse k = new IRTraverse();
+        System.out.println("\n------------- IR Traverse -------------\n");
+        for(FuncDecl f: funs){
+            System.out.println("********** In the Function: " + f.name + " **********");
+            k.setIrstream(f.ir);
+            k.traverse();
         }
     }
 }

@@ -55,8 +55,8 @@ public class FuncDecl extends Declare implements Entity{
             classFunc = true;
             thisptr = nowclass;
             name = nowclass.name + "-" + ctx.ID().getText();
-//            Type thistype = new ClassType(nowclass.name, pos);
-//            flist.add(new Pair<>(thistype, "this"));
+            Type thistype = new ClassType(nowclass.name, pos);
+            flist.add(new Pair<>(thistype, "This"));
         }
 
         if(ctx.typePro().type() == null){
@@ -150,5 +150,14 @@ public class FuncDecl extends Declare implements Entity{
         for(Statement s: stmtlist) {
             s.print(depth + 1);
         }
+    }
+    public void traverse(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Function: " + name + " defined in: " + pos._String());
     }
 }

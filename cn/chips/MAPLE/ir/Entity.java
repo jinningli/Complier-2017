@@ -6,5 +6,5 @@ package cn.chips.MAPLE.ir;
  * lijinning, 2017.05.23, Shanghai.
  */
 public interface Entity {
-
+    public void traverse(int depth);
 }

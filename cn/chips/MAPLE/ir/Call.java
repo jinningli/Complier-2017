@@ -10,6 +10,7 @@ import java.util.List;
 public class Call extends EXPR {
     public EXPR expr = null;                       //represent the function
     public List<EXPR> args = new LinkedList<>();   //represent the argument list
+
     public Call(EXPR _e){
         expr = _e;
     }
@@ -19,5 +20,20 @@ public class Call extends EXPR {
     }
     public void addArgs(EXPR _arg){
         args.add(_arg);
+    }
+    public void traverse(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Call:");
+        System.out.println(indent + "Function:");
+        expr.traverse(depth + 1);
+        System.out.println(indent + "args:");
+        for(EXPR e: args){
+           e.traverse(depth + 1);
+        }
     }
 }

@@ -35,6 +35,7 @@ public class FunctionCall extends Expr {
             return funcretype;
         }
         setNowScope(grobalVariable.grobal.now);
+        id.setNowScope(grobalVariable.grobal.now);
         String name = id.name;
         if(Objects.equals(name, "")){
             throw new NullPtr();
@@ -68,7 +69,6 @@ public class FunctionCall extends Expr {
                 throw new TypeNotMatch();
             }
         }
-        id.setNowScope(grobalVariable.grobal.now);
         funcretype = func.retype;
         return funcretype;
     }

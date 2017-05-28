@@ -37,7 +37,7 @@ public class IntType extends Project implements Type {
         return intsize;
     }
     public String _String(){
-        return "IntType " + pos._String() + "\tWith value: " + data;
+        return "IntType " + "\tWith value: " + data + "\t" + pos._String();
     }
     public Position getpos(){return pos;};
     public String getname(){return "";};

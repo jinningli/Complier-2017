@@ -39,7 +39,8 @@ public class Main
         root.print(0);
         IRGenerator r = new IRGenerator(root);
         r.generate();
-//        root.getDecls().traverse();
+
+        root.getDecls().IRtraverse();
 //      Walk
 //      ParseTreeWalker walker = new ParseTreeWalker();
     }

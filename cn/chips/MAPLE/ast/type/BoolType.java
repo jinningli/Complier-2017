@@ -27,7 +27,7 @@ public class BoolType extends Project implements Type {
         pos = _p;
     }
     public String _String(){
-        return "BoolType " + pos._String() + "\tWith value: " + data;
+        return "BoolType " + "With value: " + data + "\t" + pos._String() ;
     }
     public Position getpos(){return pos;};
     public String getname(){return "";};

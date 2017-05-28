@@ -297,6 +297,16 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     }
 
     @Override public Project visitIdentifier(MapleParser.IdentifierContext ctx) {
+        String id = ctx.getText();
+        if(inclass && infunction){
+            if(maple.containsKey(nowclass.name + "-" + id)){
+                Member k = new Member(
+                        new Identifier("This", new Position(ctx.getStart())),
+                        id,
+                        new Position(ctx.getStart()));
+                return k;
+            }
+        }
         return new Identifier(ctx.ID());
     }
 

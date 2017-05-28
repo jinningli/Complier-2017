@@ -25,6 +25,11 @@ public class Identifier extends Expr {
         pos = new Position(ctx.getSymbol());
     }
 
+    public Identifier(String _name, Position _pos){
+        name = _name;
+        pos = _pos;
+    }
+
     public Entity getEnt(){
         if(ent == null){
             ent = (Entity) nowScope.what(name);
@@ -37,9 +42,6 @@ public class Identifier extends Expr {
             return vartype;
         }
         setNowScope(grobalVariable.grobal.now);
-        if(Objects.equals(name, "this")){
-           int b = 1;
-        }
         ent = (Entity) nowScope.what(name); // convert to declare ???constant?
 //        System.out.println(name + " -> " + ent._String());
         if(Objects.equals(name, "")){

@@ -10,4 +10,14 @@ public class Return extends STMT {
     public Return(EXPR _e){
         expr = _e;
     }
+    public void traverse(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Return:");
+        expr.traverse(depth + 1);
+    }
 }

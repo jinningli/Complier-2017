@@ -10,4 +10,14 @@ public class Mem extends EXPR {
     public Mem(EXPR _e){
         expr = _e;
     }
+    public void traverse(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Mem:");
+        expr.traverse(depth + 1);
+    }
 }

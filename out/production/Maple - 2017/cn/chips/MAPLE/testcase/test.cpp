@@ -9,30 +9,20 @@ class B
 class C
 {
 	int a;
-	string b;
+	int b;
 	int what(int c){
-	    return a + c;
+	    return b + c;
 	}
 }
 int main()
 {
-	A a = new A;
+	A[] a = new A[233];
 	B b = new B;
 	C c = new C;
-	a.c = c;
+	a[1].c = c;
 	b.c = c;
 	c.a = 0;
-	c.b = getString();
 	int d = 2;
 	c.what(d);
-	if(a.c.b + b.c.b == c.b + c.b)
-	{
-		c.b = c.b + c.b;
-	}
-	c.b = toString("123.456".parseInt());
-	if(c.b == toString(123))
-	{
-		println(c.b);
-	}
 	return 0;
 }

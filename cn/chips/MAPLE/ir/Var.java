@@ -15,4 +15,15 @@ public class Var extends EXPR {
         size = type;
         ent = _ent;
     }
+    public void traverse(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Var with size: " + size);
+        ent.traverse(depth + 1);
+    }
+
 }

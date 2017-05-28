@@ -131,12 +131,6 @@ public class IRGenerator {
     }
 
     public EXPR visit(Project node){
-        if(node instanceof ClassDecl){
-            return visit((ClassDecl)node);
-        }
-        if(node instanceof FuncDecl){
-            return visit((FuncDecl)node);
-        }
         if(node instanceof VarDecl){
             return visit((VarDecl)node);
         }
@@ -292,7 +286,23 @@ public class IRGenerator {
         }
     }
 
-    public EXPR visit(MemberFunction node){ //here !!!!!!
+    public EXPR visit(MemberFunction node){
+        List<EXPR> args = new ArrayList<>();
+        for(Expr arg: node.flist){
+            args.add(0, visitExpr(arg));
+        }
+        EXPR call = new Call(visitExpr(node.id), args);
+        if(isStatement()){
+            stmts.add(new ExprStmt(call));
+        }else{
+            VarDecl tmp = new VarDecl(node.pos);
+            tmp.type = node.getretype();
+            tmp.setNowScope(node.nowScope);
+            Var adds = new Var(tmp);
+
+            assign(adds, call);
+            return adds;
+        }
         return null;
     }
 
@@ -312,7 +322,7 @@ public class IRGenerator {
             label(endLabel);
             return isStatement() ? null : adds;
         }
-        return null;
+        return new Bin(node.opt, visitExpr(node.left), visitExpr(node.right));/////
     }
 
     public EXPR visit(PostSingleExpr node){

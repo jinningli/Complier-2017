@@ -4,11 +4,15 @@ package cn.chips.MAPLE.ir;
  * Maple - 2017
  * lijinning, 2017.05.23, Shanghai.
  */
-public class Label extends IR {
+public class Label extends EXPR {
     public static int labelcnt = 0;
-    public String str = "";
-    public  int id = labelcnt ++;
-    public Label(){}
+    public String str;
+    public int id = 0;
+
+    public Label(){
+        id = labelcnt ++;
+        str = "Label" + id;
+    }
     public Label(String _str){
         str = _str;
     }
@@ -24,5 +28,15 @@ public class Label extends IR {
     }
     public String toString(){
         return str;
+    }
+    public void traverse(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Label:");
+        System.out.println(indent + "Id: " + str);
     }
 }

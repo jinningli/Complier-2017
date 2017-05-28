@@ -67,25 +67,7 @@ public class VarDecl extends Declare implements Entity{
     }
     public void check(){
         setNowScope(grobalVariable.grobal.now);
-        if(type instanceof VoidType){
-            throw new ExpressionError();
-        }
-        if(type instanceof ClassType){
-            Declare d = grobalVariable.grobal.what(type.getname());
-            if(!(d instanceof ClassDecl)){
-                throw new NoDefined();
-            }
-            ((ClassType) type).setClass((ClassDecl)d);
-        }
-        if(type instanceof ArrType){
-            Type stdtype = ((ArrType) type).stdtype;
-            if(stdtype instanceof ClassType){
-                grobalVariable.grobal.what(stdtype.getname());
-            }
-//            if(!(d instanceof ClassDecl)){
-//                throw new NoDefined();
-//            }
-        }
+
         if(expr != null) {
             Type exprRetype = expr.getretype();
             if (!(exprRetype instanceof NullType)) {
@@ -102,6 +84,27 @@ public class VarDecl extends Declare implements Entity{
             if (expr instanceof NewExpr && exprRetype instanceof ArrType) {
                 type = exprRetype;
             }
+        }
+
+        if(type instanceof VoidType){
+            throw new ExpressionError();
+        }
+        if(type instanceof ClassType){
+            Declare d = grobalVariable.grobal.what(type.getname());
+            if(!(d instanceof ClassDecl)){
+                throw new NoDefined();
+            }
+            ((ClassType) type).setClass((ClassDecl)d);
+        }
+        if(type instanceof ArrType){
+            Type stdtype = ((ArrType) type).stdtype;
+            if(stdtype instanceof ClassType){
+                Declare d = grobalVariable.grobal.what(stdtype.getname());
+                ((ClassType)stdtype).setClass((ClassDecl)d);
+            }
+//            if(!(d instanceof ClassDecl)){
+//                throw new NoDefined();
+//            }
         }
       //  if(grobalVariable.inclass){
         if(!(grobalVariable.inclass && !grobalVariable.infunction)) {
@@ -129,5 +132,15 @@ public class VarDecl extends Declare implements Entity{
             expr.print(depth + 1);
         }
 
+    }
+
+    public void traverse(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Define Variable: "+ name  + "\t"+ type._String() );
     }
 }

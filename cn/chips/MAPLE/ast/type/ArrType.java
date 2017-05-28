@@ -24,7 +24,7 @@ public class ArrType extends Project implements Type{
         dmsList = _dmsl;
     }
     public String _String(){
-        return "ArrType " + pos._String() + "\tWith type: " + dimension + " Dimension: " + dimension;
+        return "ArrType " + "With type: " + dimension + " Dimension: " + dimension + "\t" + pos._String();
     }
     public Position getpos(){return pos;};
     public String getname(){return "";};

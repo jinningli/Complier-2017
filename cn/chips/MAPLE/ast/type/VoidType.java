@@ -20,7 +20,7 @@ public class VoidType extends Project implements Type {
     public int getint(){return 0;};
     public boolean getbool(){return false;};
     public String _String(){
-        return "VoidType " + pos._String() + "\tWith name: " + name;
+        return "VoidType " + "\tWith name: " + name + "\t" + pos._String();
     }
     public String typename() {
         return "void";

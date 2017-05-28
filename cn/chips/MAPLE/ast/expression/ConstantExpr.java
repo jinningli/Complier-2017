@@ -64,4 +64,14 @@ public class ConstantExpr extends Expr implements Entity{
         }
         return "NULL";
     }
+
+    public void traverse(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Constant Variable: "+ type._String());
+    }
 }

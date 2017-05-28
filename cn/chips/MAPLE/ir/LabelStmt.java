@@ -7,7 +7,18 @@ package cn.chips.MAPLE.ir;
  */
 public class LabelStmt extends STMT{
     private Label label;
+
     public LabelStmt(Label _p){
         label = _p;
+    }
+    public void traverse(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "LabelSTMT:");
+        label.traverse(depth + 1);
     }
 }

@@ -37,7 +37,7 @@ public class StringType extends Project implements Type {
         return data.length() * charsize;
     }
     public String _String(){
-        return "StringType " + pos._String() + "\tWith Value: " + data;
+        return "StringType " + "\tWith Value: " + data + "\t" + pos._String();
     }
     public Position getpos(){
         return pos;

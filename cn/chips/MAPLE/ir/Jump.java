@@ -10,4 +10,15 @@ public class Jump extends STMT {
     public Jump(Label _label){
         label = _label;
     }
+    public void traverse(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Jump:");
+        System.out.println(indent + "toLabel:");
+        label.traverse(depth + 1);
+    }
 }

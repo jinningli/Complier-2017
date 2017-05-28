@@ -13,4 +13,19 @@ public class Bin extends EXPR {
         rhs = _r;
         op = _op;
     }
+    public void traverse(int depth){
+        String indent = "";
+        int dep = depth;
+        while(dep > 0){
+            indent += "\t";
+            dep --;
+        }
+        System.out.println(indent + "Bin:");
+        System.out.println(indent + "lhs:");
+        lhs.traverse(depth + 1);
+        System.out.println(indent + "rhs:");
+        rhs.traverse(depth + 1);
+        System.out.println(indent + "op:");
+        System.out.println(indent + op);
+    }
 }
