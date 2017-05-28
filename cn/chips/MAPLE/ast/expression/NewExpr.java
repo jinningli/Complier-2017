@@ -1,6 +1,7 @@
 package cn.chips.MAPLE.ast.expression;
 
 import cn.chips.MAPLE.compiler.Main;
+import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -17,7 +18,13 @@ public class NewExpr extends Expr {
     private Type type = null;
     public List<Expr> exprlist = new LinkedList<>();
     private int dimension = 0;
+    public Type retype = null;
     public Position pos;
+
+    public Entity getEnt(){
+        return null;
+    }
+
     public NewExpr(MapleParser.TypeContext ctx){
         type = new TypeClassifier().Classify(ctx);
         pos = new Position(ctx.getStart());
@@ -32,6 +39,9 @@ public class NewExpr extends Expr {
         return dimension;
     }
     public Type getretype() {
+        if(retype != null){
+            return  retype;
+        }
         setNowScope(grobalVariable.grobal.now);
         for(Expr k : exprlist){
             if(!(k.getretype() instanceof IntType)){
@@ -42,12 +52,21 @@ public class NewExpr extends Expr {
             throw new NullPtr();
         }
         if(dimension > 1) {
-            return new ArrType(dimension, type, new Position(-1, -1));
+            List<IntType> intlist = new LinkedList<>();
+            for(Expr e : exprlist){
+                intlist.add((IntType)(e.getretype()));
+            }
+            if(retype == null){
+                retype = new ArrType(dimension, type, new Position(-1, -1), intlist);
+            }
+            return retype;
         }
         else {
+            retype = type;
             return type;
         }
     }
+
     public boolean issugur(){
         int size = exprlist.size();
         if(size + 1 == dimension)

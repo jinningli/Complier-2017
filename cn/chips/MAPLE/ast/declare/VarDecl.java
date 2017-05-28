@@ -22,6 +22,8 @@ public class VarDecl extends Declare implements Entity{
     public Type type;
     public Expr expr = null;
     public EXPR ir = null;
+    public long offset = 0;
+    public boolean isGrobal = false;
 
     public VarDecl(Position _p){
         pos = _p;
@@ -45,6 +47,18 @@ public class VarDecl extends Declare implements Entity{
 
     public String getname() {return name;}
 
+    public long length(){
+        return type.length();
+    }
+    public long elemsize(){
+        if(type instanceof ArrType)
+            return ((ArrType) type).stdtype.length();
+        else
+            return type.length();
+    }
+    public long getOffset(){
+        return offset;
+    }
     public String _String(){
         return "VarDecl:: " + name;
     }
@@ -61,6 +75,7 @@ public class VarDecl extends Declare implements Entity{
             if(!(d instanceof ClassDecl)){
                 throw new NoDefined();
             }
+            ((ClassType) type).setClass((ClassDecl)d);
         }
         if(type instanceof ArrType){
             Type stdtype = ((ArrType) type).stdtype;
@@ -71,22 +86,31 @@ public class VarDecl extends Declare implements Entity{
 //                throw new NoDefined();
 //            }
         }
-
-        if(expr != null && (!(expr.getretype() instanceof NullType))) {
-            if (!Objects.equals(expr.getretype().typename(), type.typename())) {
+        if(expr != null) {
+            Type exprRetype = expr.getretype();
+            if (!(exprRetype instanceof NullType)) {
+                if (!Objects.equals(expr.getretype().typename(), type.typename())) {
 //                System.err.println(expr.getretype().typename());
 //                System.err.println(type.typename());
+                    System.err.println(pos._String());
+                    throw new TypeNotMatch();
+                }
+            } else if (!(type instanceof ClassType || type instanceof ArrType)) {
                 System.err.println(pos._String());
                 throw new TypeNotMatch();
             }
-        }else if(expr != null &&(!(type instanceof ClassType || type instanceof ArrType))){
-                System.err.println(pos._String());
-                throw new TypeNotMatch();
+            if (expr instanceof NewExpr && exprRetype instanceof ArrType) {
+                type = exprRetype;
             }
-
+        }
       //  if(grobalVariable.inclass){
-        if(!(grobalVariable.inclass && !grobalVariable.infunction))
+        if(!(grobalVariable.inclass && !grobalVariable.infunction)) {
             grobalVariable.grobal.define(name, this);
+        }
+
+        if(!grobalVariable.inclass && !grobalVariable.infunction){
+            isGrobal = true;
+        }
        // }
 
     }

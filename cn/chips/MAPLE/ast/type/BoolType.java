@@ -12,6 +12,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 public class BoolType extends Project implements Type {
     private boolean data;
     private Position pos;
+    public final static long boolsize = 8;
     public BoolType(TerminalNode ctx){
         String bl = ctx.getText();
         data = bl.equals("true");
@@ -34,5 +35,8 @@ public class BoolType extends Project implements Type {
     public boolean getbool(){return data;}
     public String typename(){
         return "bool";
+    }
+    public long length(){
+        return boolsize;
     }
 }

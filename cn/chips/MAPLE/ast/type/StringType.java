@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 public class StringType extends Project implements Type {
     public String data;
     public Position pos;
+    public final static long charsize = 1;
     public StringType(TerminalNode ctx){
         data = ctx.getText();
         pos = new Position(ctx.getSymbol());
@@ -31,6 +32,9 @@ public class StringType extends Project implements Type {
     {
         data = "";
         pos = _pos;
+    }
+    public long length(){
+        return data.length() * charsize;
     }
     public String _String(){
         return "StringType " + pos._String() + "\tWith Value: " + data;

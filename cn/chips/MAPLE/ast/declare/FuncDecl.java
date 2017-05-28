@@ -26,6 +26,8 @@ public class FuncDecl extends Declare implements Entity{
     public List<Pair<Type, String>> flist = null;
     public List<Statement> stmtlist = null;
     public boolean constructFunc = false;
+    public boolean classFunc = false;
+    public ClassDecl thisptr = null;
     public List<STMT> ir;
 
 
@@ -42,22 +44,30 @@ public class FuncDecl extends Declare implements Entity{
     public void addlist(Type _t, String _s){
         flist.add(new Pair<>(_t, _s));
     }
-    public FuncDecl (MapleParser.FuncDeclContext ctx, boolean inclass, String nowclass){
+    public FuncDecl (MapleParser.FuncDeclContext ctx, boolean inclass, ClassDecl nowclass){
         stmtlist = new LinkedList<>();
         flist = new LinkedList<>();
-        name = ctx.ID().getText();
+        name = nowclass.name + "-" + ctx.ID().getText();
         pos = new Position(ctx.ID().getSymbol());
         TypeClassifier TC = new TypeClassifier();
+
+        if(inclass){
+            classFunc = true;
+            thisptr = nowclass;
+            Type thistype = new ClassType(nowclass.name, pos);
+            flist.add(new Pair<>(thistype, "this"));
+        }
 
         if(ctx.typePro().type() == null){
             if(!inclass){
                 throw new DeclLost();
             }
-            if(!Objects.equals(name, nowclass)){
+            if(!Objects.equals(name, nowclass.name + "-" + nowclass.name)){
                 throw new DeclLost();
             }
             constructFunc = true;
         }
+
         else retype = TC.Classify(ctx.typePro());
         int k = 0;
         while (ctx.funcList().typePro(k)!=null){
@@ -65,6 +75,7 @@ public class FuncDecl extends Declare implements Entity{
            // System.err.println(typelist.get(k)._String());
             k++;
         }
+
         if(Objects.equals(name, "main") && (!(retype instanceof IntType))){
             throw new ConstructError();
         }
@@ -81,6 +92,7 @@ public class FuncDecl extends Declare implements Entity{
     public Position getpos() {
         return pos;
     }
+
     public void check(){
         grobalVariable.infunction = true;
         grobalVariable.nowfunc = this;

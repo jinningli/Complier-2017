@@ -5,6 +5,7 @@ import cn.chips.MAPLE.exception.NoDefined;
 import cn.chips.MAPLE.parser.MapleParser;
 import cn.chips.MAPLE.utils.Position;
 
+import java.util.LinkedList;
 import java.util.Objects;
 
 /**
@@ -45,7 +46,7 @@ public class TypeClassifier {
                 k++;
             k /= 2;
             k ++;
-            output = new ArrType(k, output, new Position(ctx.getStart()));
+            output = new ArrType(k, output, new Position(ctx.getStart()), new LinkedList<>());
         return output;
     }
     public Type Classify(MapleParser.TypeContext ctx){

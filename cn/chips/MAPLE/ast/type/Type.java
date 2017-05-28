@@ -13,4 +13,5 @@ public interface Type {
     public int getint();
     public boolean getbool();
     public String typename();
+    public long length();
 }

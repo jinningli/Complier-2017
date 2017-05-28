@@ -72,7 +72,7 @@ public class ScopeTree extends Project{
 //        define("return", new VarDecl(new Position(-1, -1)));
 //        define("new", new VarDecl(new Position(-1, -1)));
 //        define("class", new VarDecl(new Position(-1, -1)));
-        root.define("this", new VarDecl(new Position(-1, -1)));
+//        root.define("this", new VarDecl(new Position(-1, -1)));  this????
     }
 
 //    public Scope pushScope(){

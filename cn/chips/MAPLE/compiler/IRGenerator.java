@@ -10,6 +10,7 @@ import cn.chips.MAPLE.exception.TypeNotMatch;
 import cn.chips.MAPLE.ir.*;
 import cn.chips.MAPLE.utils.Project;
 import cn.chips.MAPLE.utils.scope.ScopeNode;
+import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -22,22 +23,28 @@ import java.util.Objects;
  */
 public class IRGenerator {
     private AST root;
-    Label MainLabel = null;
-    List<STMT> stmts = new LinkedList<>();
-    LinkedList<Label> breakStack = new LinkedList<>();
-    LinkedList<Label> continueStack = new LinkedList<>();
+    List<STMT> stmts;
+    LinkedList<Label> breakStack;
+    LinkedList<Label> continueStack;
 
     public IRGenerator(AST _root){
         root = _root;
-        MainLabel = new Label("main", true);
     }
 
-    public AST generate(AST root){
+    public AST generate(){
+        stmts = new LinkedList<>();
+        breakStack = new LinkedList<>();
+        continueStack = new LinkedList<>();
         for(VarDecl vd: root.getDecls().getVars()){
-            //??? var.hasInitializer?
-            if(vd.expr != null)
-            vd.setIR(transformExpr(vd.expr));
+            if(!vd.isGrobal) continue;
+            if(vd.expr != null) {
+                EXPR expr = visitExpr(vd.expr);
+                vd.setIR(expr);
+                stmts.add(new ExprStmt(expr));
+            }
         }
+        root.setGrobalVarIR(stmts);
+
         for(FuncDecl fd: root.getDecls().getFuns()){
             fd.setIR(compileFunctionBody(fd));
         }
@@ -45,23 +52,25 @@ public class IRGenerator {
     }
 
     public List<STMT> compileFunctionBody(FuncDecl f){
+        stmts = new LinkedList<>();
+        breakStack = new LinkedList<>();
+        continueStack = new LinkedList<>();
         for(Statement s: f.stmtlist){
-            transformStmt(s);
+            visitStmt(s);
         }
         return stmts;
     }
 
-    public void transformStmt(Statement _s){
+    public void visitStmt(Statement _s){
         visit(_s);
     }
 
-    public void transformStmt(Expr _expr){
+    public void visitStmt(Expr _expr){
         visit(_expr);
     }
 
-
     private int exprLevel = 0;
-    public EXPR transformExpr(Expr expr){
+    public EXPR visitExpr(Expr expr){
         exprLevel ++;
         EXPR exprir = visit(expr);
         exprLevel --;
@@ -200,26 +209,50 @@ public class IRGenerator {
         throw new NoDefined();
     }
 
-    public EXPR visit(ClassDecl node){
-        return null;
-    }
-
-    public EXPR visit(FuncDecl node){
-        return null;
-    }
-
     public EXPR visit(VarDecl node){
+        if(node.expr != null){
+            node.setIR(visitExpr(node.expr));
+        }
+        EXPR lhs = new Var(node);
+        assign(lhs, node.ir);
         return null;
     }
 
     public EXPR visit(ArrIndex node){
-        return null;
+        EXPR expr = visitExpr(node.body);
+        EXPR offset = new Bin("*", new Int(node.elemsize()), new Int(node.offset()));
+                Bin addr = new Bin("+", expr, offset);
+        return new Mem(addr);
     }
+
+    public EXPR visit(ConstantExpr node){
+        return new Var(node);
+    }
+
+    public EXPR visit(Member node){
+        EXPR expr = memAddr(visitExpr(node.body));
+        EXPR offset = new Int(node.getoffset());
+        EXPR addr = new Bin("+", expr, offset);
+        return new Mem(addr); // type addr?
+    }
+
+    public EXPR visit(NewExpr node){
+        VarDecl tmp = new VarDecl(node.pos);
+        tmp.type = node.getretype();
+        tmp.setNowScope(node.nowScope);
+
+        return new Mem(new Var(tmp));
+    }
+
+    public EXPR visit(Identifier node){
+        return new Var(node.getEnt());
+    }
+
 
     public EXPR visit(AssignExpr node){
         if(isStatement()){
-            EXPR rhs = transformExpr(node.right);
-            EXPR lhs = transformExpr(node.left);
+            EXPR rhs = visitExpr(node.right);
+            EXPR lhs = visitExpr(node.left);
             assign(lhs, rhs);
             return null;
         }else{
@@ -227,36 +260,42 @@ public class IRGenerator {
             tmp.type = node.right.getretype();
             tmp.setNowScope(node.nowScope);
             Var adds = new Var(tmp);
-            assign(adds, transformExpr(node.right));
-            assign(transformExpr(node.left), adds);
+            assign(adds, visitExpr(node.right));
+            assign(visitExpr(node.left), adds);
             return adds;
         }
     }
 
     public EXPR visit(BinaryExpr node){
-        return null;
+        EXPR rhs = visitExpr(node.right);
+        EXPR lhs = visitExpr(node.left);
+        String op = node.opt;
+
+        return new Bin(op, lhs, rhs);
     }
 
-    public EXPR visit(ConstantExpr node){
-        return null;
-    }
 
     public EXPR visit(FunctionCall node){
         List<EXPR> args = new ArrayList<>();
         for(Expr arg: node.flist){
-            args.add(0, transformExpr(arg));
+            args.add(0, visitExpr(arg));
         }
-        EXPR call = new Call(transformExpr(node.id), args);
+        EXPR call = new Call(visitExpr(node.id), args);
         if(isStatement()){
             stmts.add(new ExprStmt(call));
             return null;
         }else{
+            VarDecl tmp = new VarDecl(node.pos);
+            tmp.type = node.getretype();
+            tmp.setNowScope(node.nowScope);
+            Var adds = new Var(tmp);
 
+            assign(adds, call);
+            return adds;
         }
-        return null;
     }
 
-    public EXPR visit(Identifier node){
+    public EXPR visit(MemberFunction node){ //here !!!!!!
         return null;
     }
 
@@ -269,34 +308,22 @@ public class IRGenerator {
             tmp.setNowScope(node.nowScope);
             Var adds = new Var(tmp);
 
-            assign(adds, transformExpr(node.left));///?????
+            assign(adds, visitExpr(node.left));///?????
             cjump(adds, rightLabel, endLabel);
             label(rightLabel);
-            assign(adds, transformExpr(node.right));
+            assign(adds, visitExpr(node.right));
             label(endLabel);
             return isStatement() ? null : adds;
         }
         return null;
     }
 
-    public EXPR visit(Member node){
-        return null;
-    }
-
-    public EXPR visit(MemberFunction node){
-        return null;
-    }
-
-    public EXPR visit(NewExpr node){
-        return null;
-    }
-
     public EXPR visit(PostSingleExpr node){
-        EXPR body = transformExpr(node.body);
+        EXPR body = visitExpr(node.body);
         String op = node.opt;
         if(Objects.equals(op, "++")){
             op = "+";
-        }else{
+        }else if(Objects.equals(op, "--")){
             op = "-";
         }
 
@@ -316,12 +343,22 @@ public class IRGenerator {
     }
 
     public EXPR visit(PreSingleExpr node){
-        EXPR lhs = transformExpr(node.body);
-        EXPR rhs = imm(1);
-        if(Objects.equals(node.opt, "++"))
-            return transformOpAssign("+", lhs, rhs);
-        else
-            return transformOpAssign("-", lhs, rhs);
+        EXPR body = visitExpr(node.body);
+        EXPR im = imm(1);
+        String op = node.opt;
+        if(Objects.equals(op, "++"))
+            return transformOpAssign("+", body, im);
+        else if (Objects.equals(op, "--"))
+            return transformOpAssign("-", body, im);
+        else if(Objects.equals(op, "+")){
+            return body;
+        }
+        else if (Objects.equals(op, "-")
+                || Objects.equals(op, "~")
+                || Objects.equals(op, "!")){
+            return new Uni(op, body);
+        }
+        throw new NoDefined();
     }
 
     private EXPR transformOpAssign(String op, EXPR lhs, EXPR rhs){
@@ -329,10 +366,6 @@ public class IRGenerator {
         return isStatement() ? null : lhs;
     }
 
-
-    public EXPR visit(AST node){
-        return null;
-    }
 
     public EXPR visit(BlockStatement node){
         for(Statement s: node.stmtlist){
@@ -365,17 +398,17 @@ public class IRGenerator {
         Label cont = new Label();
         Label end = new Label();
 
-        transformStmt(node.expr.get(0));
+        visitStmt(node.expr.get(0));
         label(beg);
-        cjump(transformExpr(node.expr.get(1)), body, end);
+        cjump(visitExpr(node.expr.get(1)), body, end);
         label(body);
         pushBreak(end);
         pushContinue(cont);
-        transformStmt(node.stmt);
+        visitStmt(node.stmt);
         popBreak();
         popContinue();
         label(cont);
-        transformStmt(node.expr.get(2));
+        visitStmt(node.expr.get(2));
         jump(beg);
         label(end);
         return null;
@@ -385,19 +418,19 @@ public class IRGenerator {
         Label thenLabel = new Label();
         Label elseLabel = new Label();
         Label endLabel = new Label();
-        EXPR cond = transformExpr(node.expr);
+        EXPR cond = visitExpr(node.expr);
         if(node.elsebody == null){
             cjump(cond, thenLabel, elseLabel);
             label(thenLabel);
-            transformStmt(node.thenbody);
+            visitStmt(node.thenbody);
             label(endLabel);
         }else{
             cjump(cond, thenLabel, elseLabel);
             label(thenLabel);
-            transformStmt(node.thenbody);
+            visitStmt(node.thenbody);
             jump(endLabel);
             label(elseLabel);
-            transformStmt(node.elsebody);
+            visitStmt(node.elsebody);
             label(endLabel);
         }
         return null;
@@ -407,7 +440,7 @@ public class IRGenerator {
         if(node.expr == null){
             stmts.add(new Return(null));
         }else{
-            stmts.add(new Return(transformExpr(node.expr)));
+            stmts.add(new Return(visitExpr(node.expr)));
         }
         return null;
     }
@@ -418,11 +451,11 @@ public class IRGenerator {
         Label end = new Label();
 
         label(beg);
-        cjump(transformExpr(node.expr), body, end);
+        cjump(visitExpr(node.expr), body, end);
         label(body);
         pushContinue(beg);
         pushBreak(end);
-        transformStmt(node.stmt);
+        visitStmt(node.stmt);
         popBreak();
         popContinue();
         jump(beg);
@@ -433,5 +466,13 @@ public class IRGenerator {
     private Int imm(long n){
         return new Int(n);
     }
-
+    private EXPR memAddr(EXPR expr){
+        if(expr instanceof Mem){
+            return ((Mem)expr).expr;
+        }
+        if(expr instanceof Var){
+            return new Addr(((Var) expr).ent);
+        }
+        throw new NoDefined();
+    }
 }

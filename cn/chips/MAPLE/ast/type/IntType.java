@@ -12,6 +12,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 public class IntType extends Project implements Type {
     private int data = 0;
     private Position pos;
+    public final static long intsize = 8;
 
     public IntType(TerminalNode ctx){
         data = Integer.parseInt(ctx.getText());
@@ -31,6 +32,9 @@ public class IntType extends Project implements Type {
     {
         data = 0;
         pos = _pos;
+    }
+    public long length(){
+        return intsize;
     }
     public String _String(){
         return "IntType " + pos._String() + "\tWith value: " + data;

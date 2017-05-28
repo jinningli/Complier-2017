@@ -1,6 +1,5 @@
 package cn.chips.MAPLE.ast.expression;
 
-import cn.chips.MAPLE.compiler.Main;
 import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -12,11 +11,16 @@ import cn.chips.MAPLE.ast.type.*;
 public class ConstantExpr extends Expr implements Entity{
     private Type type;
     private Position pos;
+
+    public Entity getEnt(){
+        return this;
+    }
     public ConstantExpr(Type _t){
         type = _t;
         pos = _t.getpos();
     }
     public Type getretype() {
+        if(nowScope == null)
         setNowScope(grobalVariable.grobal.now);
         return type;
     }

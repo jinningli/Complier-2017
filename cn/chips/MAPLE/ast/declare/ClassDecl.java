@@ -16,6 +16,7 @@ public class ClassDecl extends Declare{
     public String name;
     public Position pos;
     public List<Declare> DeclList;
+    public long size = 0;
     public ClassDecl (MapleParser.ClassDeclContext ctx){
         name = ctx.ID().getText();
         pos = new Position(ctx.ID().getSymbol());
@@ -38,6 +39,9 @@ public class ClassDecl extends Declare{
     public String _String(){
         return "ClassDecl:: " + name;
     }
+    public long length(){
+        return size;
+    }
     public void check(){
         grobalVariable.inclass = true;
         grobalVariable.nowclass = name;
@@ -51,6 +55,10 @@ public class ClassDecl extends Declare{
         }
         for(Declare d : DeclList){
             d.check();
+            if(d instanceof VarDecl){
+                ((VarDecl) d).offset = size;
+                size += ((VarDecl) d).length();
+            }
         }
         grobalVariable.grobal.exitLayer();;
         grobalVariable.inclass = false;

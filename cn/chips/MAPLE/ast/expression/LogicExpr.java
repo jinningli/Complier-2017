@@ -1,6 +1,7 @@
 package cn.chips.MAPLE.ast.expression;
 
 import cn.chips.MAPLE.compiler.Main;
+import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -16,6 +17,11 @@ public class LogicExpr extends Expr {
     public Expr right = null;
     public String opt = "";
     public Position pos;
+    public Type retype = null;
+
+    public Entity getEnt(){
+        return left.getEnt();
+    }
     public LogicExpr(Expr _l, Expr _r, String _o, Position _p){
         left = _l;
         right = _r;
@@ -23,6 +29,9 @@ public class LogicExpr extends Expr {
         pos = _p;
     }
     public Type getretype() {
+        if(retype != null){
+            return retype;
+        }
         setNowScope(grobalVariable.grobal.now);
         if(Objects.equals(opt, "")){
             throw new NullPtr();
@@ -41,13 +50,15 @@ public class LogicExpr extends Expr {
             }
         }
         if(lt instanceof NullType || rt instanceof NullType){
-            return new BoolType(true, pos);
+            retype = new BoolType(true, pos);
+            return retype;
         }
         if(!Objects.equals(lt.typename(), rt.typename())){
             System.err.println(pos._String());
             throw new TypeNotMatch();
         }
-        return new BoolType(pos);
+        retype = new BoolType(pos);
+        return retype;
     }
     public void print(int depth){
         String indent = "";

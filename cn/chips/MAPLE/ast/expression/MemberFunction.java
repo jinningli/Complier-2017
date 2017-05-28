@@ -1,5 +1,6 @@
 package cn.chips.MAPLE.ast.expression;
 
+import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -16,10 +17,19 @@ import java.util.Objects;
  *    lijinning, 2017.04.11, Shanghai.
  */
 public class MemberFunction extends Expr {
-    private Expr left = null;
-    private String name = "";
-    private Position pos;
-    private List<Expr> flist;
+    public Expr left = null;
+    public String name = "";
+    public Position pos;
+    public List<Expr> flist;
+    public Entity ent = null;
+    public Type funcretype = null;
+
+    public Entity getEnt(){
+        if(ent == null){
+            ent = (Entity) nowScope.what(name);
+        }
+        return ent;
+    }
     public MemberFunction(MapleParser.MemberFunctionContext ctx){
         name = ctx.ID().getText();
         pos = new Position(ctx.getStart());
@@ -56,7 +66,9 @@ public class MemberFunction extends Expr {
                     throw new TypeNotMatch();
                 }
             }
-            return ((FuncDecl)nd).retype;
+            ent = (Entity) nd;
+            funcretype = ((FuncDecl)nd).retype;
+            return funcretype;
         }
         if(t instanceof StringType){
             if(Objects.equals(name, "length")){

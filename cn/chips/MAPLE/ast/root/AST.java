@@ -1,4 +1,5 @@
 package cn.chips.MAPLE.ast.root;
+import cn.chips.MAPLE.ir.STMT;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.compiler.Main;
@@ -14,8 +15,10 @@ import java.util.List;
 public class AST extends Declare {
     public String name;
     public Position pos;
-    private List<Declare> DeclList;
-    private Declarations decls = new Declarations();
+    public List<Declare> DeclList;
+    public Declarations decls = new Declarations();
+    public List<STMT> grobalVarIR;
+
     public AST(){
         name = "AST";
         pos = new Position(0, 0);
@@ -55,5 +58,8 @@ public class AST extends Declare {
     }
     public Declarations getDecls(){
         return decls;
+    }
+    public void setGrobalVarIR(List<STMT> gvr){
+        grobalVarIR = gvr;
     }
 }

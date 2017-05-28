@@ -34,4 +34,5 @@ public class NullType extends Project implements Type {
     public String typename() {
         return "null";
     }
+    public long length(){ return 0; }
 }

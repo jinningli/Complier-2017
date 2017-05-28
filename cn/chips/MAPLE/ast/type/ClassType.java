@@ -1,6 +1,8 @@
 package cn.chips.MAPLE.ast.type;
 
 
+import cn.chips.MAPLE.ast.declare.ClassDecl;
+import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.Position;
 import cn.chips.MAPLE.utils.Project;
 
@@ -11,6 +13,7 @@ import cn.chips.MAPLE.utils.Project;
 public class ClassType extends Project implements Type{
     public String name;
     public Position pos;
+    public ClassDecl cls;
     public ClassType(String _n, Position _p){
         name = _n;
         pos = _p;
@@ -24,5 +27,11 @@ public class ClassType extends Project implements Type{
     public boolean getbool(){return false;};
     public String typename() {
         return "class:" + name;
+    }
+    public void setClass(ClassDecl _cls){
+        cls = _cls;
+    }
+    public long length(){
+        return cls.length();
     }
 }

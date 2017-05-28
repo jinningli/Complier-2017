@@ -1,6 +1,7 @@
 package cn.chips.MAPLE.ast.expression;
 
 import cn.chips.MAPLE.compiler.Main;
+import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -12,12 +13,16 @@ import java.util.Objects;
  *    lijinning, 2017.04.02, Shanghai.
  */
 public class BinaryExpr extends Expr {
-    private Expr left = null;
-    private Expr right = null;
-    private String opt = "";
-    private Type lt = null;
-    private Type rt = null;
-    private Position pos;
+    public Expr left = null;
+    public Expr right = null;
+    public String opt = "";
+    public Type lt = null;
+    public Type rt = null;
+    public Position pos;
+
+    public Entity getEnt(){
+        return left.getEnt();
+    }
     public BinaryExpr(Expr _l, Expr _r, String _o, Position _p){
         left = _l;
         right = _r;
@@ -25,6 +30,9 @@ public class BinaryExpr extends Expr {
         pos = _p;
     }
     public Type getretype() {
+        if(lt != null){
+            return lt;
+        }
         setNowScope(grobalVariable.grobal.now);
         if(left == null || right == null){
             throw new NullPtr();

@@ -18,12 +18,24 @@ public class Identifier extends Expr {
     public String name = "";
     public Position pos;
     public Entity ent = null;
+    public Type vartype = null;
 
     public Identifier(TerminalNode ctx){
         name = ctx.getText();
         pos = new Position(ctx.getSymbol());
     }
+
+    public Entity getEnt(){
+        if(ent == null){
+            ent = (Entity) nowScope.what(name);
+        }
+        return ent;
+    }
+
     public Type getretype() {
+        if(vartype != null){
+            return vartype;
+        }
         setNowScope(grobalVariable.grobal.now);
         ent = (Entity) nowScope.what(name); // convert to declare ???constant?
 //        System.out.println(name + " -> " + ent._String());
@@ -31,14 +43,16 @@ public class Identifier extends Expr {
             throw new NullPtr();
         }//maybe something wrong
         if(Objects.equals(name, "null")){
-            return new NullType(pos);
+            vartype = new NullType(pos);
+            return vartype;
         }
         //System.err.println(pos._String());
         Declare d;
 //        System.err.println(pos._String());
         if(grobalVariable.inclass){
             if(Objects.equals(name, "this")){
-                return new ClassType(grobalVariable.nowclass, pos);
+                vartype = new ClassType(grobalVariable.nowclass, pos);
+                return vartype;
             }
 //            String inclassname = grobalVariable.nowclass + "-" + name;
 //            if(grobalVariable.grobal.containsKey(inclassname)){
@@ -48,12 +62,14 @@ public class Identifier extends Expr {
         }
         d = grobalVariable.grobal.what(name);///////////
         if(d instanceof ClassDecl){
-            return new ClassType(d.getname(), pos);
+            vartype = new ClassType(d.getname(), pos);
+            return vartype;
         }
 //        if(d instanceof FuncDecl){
 //            throw new ExpressionError();
 //        }
-        return ((VarDecl)d).type;
+        vartype = ((VarDecl)d).type;
+        return vartype;
     }
     public void print(int depth){
         String indent = "";

@@ -11,5 +11,14 @@
     <orderEntry type="library" name="antlr-4.7-complete1" level="project" />
     <orderEntry type="library" name="antlr-4.7-complete" level="project" />
     <orderEntry type="library" name="antlr-4.7-complete2" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/redist/annotations-java8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

@@ -1,6 +1,7 @@
 package cn.chips.MAPLE.ast.expression;
 
 import cn.chips.MAPLE.compiler.Main;
+import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -15,12 +16,20 @@ public class PostSingleExpr extends Expr {
     public String opt = "";
     public Expr body = null;
     public Position pos;
+    public Type retype = null;
+
+    public Entity getEnt(){
+        return body.getEnt();
+    }
     public PostSingleExpr(Expr _b, String _o, Position _p){
         body = _b;
         opt = _o;
         pos = _p;
     }
     public Type getretype() {
+        if(retype != null){
+            return retype;
+        }
         setNowScope(grobalVariable.grobal.now);
         if((Objects.equals(opt, "")) || (body == null)){
             throw new NullPtr();
@@ -31,7 +40,8 @@ public class PostSingleExpr extends Expr {
         if(!(body.getretype() instanceof IntType || body.getretype() instanceof BoolType)){
             throw new TypeNotMatch();
         }
-        return body.getretype();
+        retype = body.getretype();
+        return retype;
     }
     public void print(int depth){
         String indent = "";

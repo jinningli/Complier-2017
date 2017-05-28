@@ -1,6 +1,8 @@
 package cn.chips.MAPLE.ast.expression;
 
+import cn.chips.MAPLE.ast.declare.VarDecl;
 import cn.chips.MAPLE.compiler.Main;
+import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -14,12 +16,20 @@ public class AssignExpr extends Expr {
     public Expr left = null;
     public Expr right = null;
     public Position pos = null;
+    public Type retype = null;
+
     public AssignExpr(Expr _l, Expr _r, Position _p){
         left = _l;
         right = _r;
         pos = _p;
     }
+    public Entity getEnt(){
+        return left.getEnt();
+    }
     public Type getretype(){
+        if(retype != null){
+            return retype;
+        }
         setNowScope(grobalVariable.grobal.now);
         if(left == null || right == null){
             throw new NullPtr();
@@ -35,7 +45,8 @@ public class AssignExpr extends Expr {
             System.err.println(pos._String());
             throw new TypeNotMatch();
         }
-        return left.getretype();
+        retype = left.getretype();
+        return retype;
     }
     public void print(int depth){
         String indent = "";

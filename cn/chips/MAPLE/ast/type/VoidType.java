@@ -25,4 +25,5 @@ public class VoidType extends Project implements Type {
     public String typename() {
         return "void";
     }
+    public long length(){ return 0; }
 }

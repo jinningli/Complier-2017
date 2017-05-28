@@ -17,7 +17,17 @@ public class FunctionCall extends Expr {
     public Identifier id;
     public Position pos;
     public List<Expr> flist;
+    public Type funcretype = null;
+
+    public Entity getEnt(){
+        return id.getEnt();
+    }
     public FunctionCall(MapleParser.FunctionCallContext ctx){
+        id = new Identifier(ctx.ID());
+        pos = new Position(ctx.getStart());
+        flist = new LinkedList<>();
+    }
+    public FunctionCall(MapleParser.MemberFunctionContext ctx){
         id = new Identifier(ctx.ID());
         pos = new Position(ctx.getStart());
         flist = new LinkedList<>();
@@ -26,6 +36,9 @@ public class FunctionCall extends Expr {
         flist.add(_es);
     }
     public Type getretype() {
+        if(funcretype != null){
+            return funcretype;
+        }
         setNowScope(grobalVariable.grobal.now);
         String name = id.name;
         if(Objects.equals(name, "")){
@@ -37,7 +50,8 @@ public class FunctionCall extends Expr {
             String inclassname = grobalVariable.nowclass + "-" + name;
             if (grobalVariable.grobal.containsKey(inclassname)) {
                 d = grobalVariable.grobal.what(inclassname);
-                return ((FuncDecl) d).retype;
+                funcretype = ((FuncDecl) d).retype;
+                return funcretype;
             }
         }
         d = grobalVariable.grobal.what(name);
@@ -59,8 +73,9 @@ public class FunctionCall extends Expr {
                 throw new TypeNotMatch();
             }
         }
-        /// to be continued;
-        return func.retype;
+        id.setNowScope(grobalVariable.grobal.now);
+        funcretype = func.retype;
+        return funcretype;
     }
     public void print(int depth){
         String indent = "";

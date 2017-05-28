@@ -5,7 +5,7 @@ package cn.chips.MAPLE.ir;
  * lijinning, 2017.05.22, Shanghai.
  */
 public class Var extends EXPR {
-    protected Entity ent = null;
+    public Entity ent = null;
     public int size = 0;
 
     public Var(Entity _ent){

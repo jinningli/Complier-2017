@@ -23,7 +23,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     private ScopeTree maple = grobalVariable.grobal;
     private boolean inclass = false;
     private boolean infunction = false;
-    private String nowclass = "";
+    private ClassDecl nowclass = null;
     private AST root = null;
 
     @Override public Project visitProgram(MapleParser.ProgramContext ctx) {
@@ -46,7 +46,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
         }
 //        System.err.println(vd.pos._String());
         if(inclass&&!infunction){
-            maple.define(nowclass + "-" + vd.getname(), vd);
+            maple.define(nowclass.name + "-" + vd.getname(), vd);
         }
 // else{
 //            maple.define(vd.getname(), vd);
@@ -59,12 +59,12 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     @Override public Project visitClassDecl(MapleParser.ClassDeclContext ctx) {
         ClassDecl cls = new ClassDecl(ctx);
         inclass = true;
-        nowclass = cls.getname();
+        nowclass = cls;
         for(ParserRuleContext child : ctx.blockDecl()){
             cls.add((Declare)visit(child));
         }
         inclass = false;
-        nowclass = "";
+        nowclass = null;
         maple.define(cls.getname(), cls);
         root.getDecls().addClass(cls);
         //maple.StepIn(cls);
@@ -78,6 +78,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     @Override public Project visitFuncDecl(MapleParser.FuncDeclContext ctx) {
         infunction = true;
         FuncDecl func = new FuncDecl(ctx, inclass, nowclass);
+
         for(ParserRuleContext child :  ctx.block().stmt()){
             Statement stmt = (Statement)visit(child);
             if(stmt == null) continue;
@@ -87,7 +88,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
             if(Objects.equals(func.getname(), "this")){
                 throw new ReDefine();
             }
-            maple.define(nowclass + "-" + func.getname(), func);
+            maple.define(nowclass.name + "-" + func.getname(), func);
         }else{
             maple.define(func.getname(), func);
         }
@@ -209,14 +210,16 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     @Override public Project visitExprList(MapleParser.ExprListContext ctx) { return visitChildren(ctx); }
 
     @Override public Project visitMemberFunction(MapleParser.MemberFunctionContext ctx) {
-        MemberFunction fc = new MemberFunction(ctx);
-        fc.listadd((Expr) visit(ctx.expr()));
+        FunctionCall funcall = new FunctionCall(ctx);
+        Expr leftexpr = (Expr) visit(ctx.expr());
+        funcall.listadd(leftexpr);
+
         if(!ctx.exprList().expr().isEmpty()) {
             for (ParserRuleContext child : ctx.exprList().expr()) {
-                fc.listadd((Expr) visit(child));
+                funcall.listadd((Expr) visit(child));
             }
         }
-        return fc;
+        return funcall;
     }
 
     @Override public Project visitArrIndex(MapleParser.ArrIndexContext ctx) {
