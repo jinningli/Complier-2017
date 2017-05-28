@@ -62,7 +62,7 @@ public class FuncDecl extends Declare implements Entity{
             if(!inclass){
                 throw new DeclLost();
             }
-            if(!Objects.equals(name, nowclass.name + "-" + nowclass.name)){
+            if(!Objects.equals(name, nowclass.name)){
                 throw new DeclLost();
             }
             constructFunc = true;
