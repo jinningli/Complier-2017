@@ -4,13 +4,10 @@ import cn.chips.MAPLE.ast.declare.*;
 import cn.chips.MAPLE.ast.expression.*;
 import cn.chips.MAPLE.ast.statement.*;
 import cn.chips.MAPLE.ast.root.AST;
-import cn.chips.MAPLE.ast.type.*;
 import cn.chips.MAPLE.exception.NoDefined;
 import cn.chips.MAPLE.exception.TypeNotMatch;
 import cn.chips.MAPLE.ir.*;
 import cn.chips.MAPLE.utils.Project;
-import cn.chips.MAPLE.utils.scope.ScopeNode;
-import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
