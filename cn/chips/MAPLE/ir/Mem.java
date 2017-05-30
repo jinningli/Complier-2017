@@ -1,5 +1,7 @@
 package cn.chips.MAPLE.ir;
 
+import cn.chips.MAPLE.exception.NullPtr;
+
 /**
  * Maple - 2017
  * lijinning, 2017.05.22, Shanghai.
@@ -19,5 +21,9 @@ public class Mem extends EXPR {
         }
         System.out.println(indent + "Mem:");
         expr.traverse(depth + 1);
+    }
+
+    public EXPR applyAddr(){
+        return expr;
     }
 }

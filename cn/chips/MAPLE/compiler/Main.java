@@ -36,7 +36,7 @@ public class Main
         AstBuilder v = new AstBuilder();
         AST root = (AST) v.visit(tree);
         root.check();
-        root.print(0);
+//        root.print(0);
         IRGenerator r = new IRGenerator(root);
         r.generate();
 

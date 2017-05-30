@@ -1,12 +1,10 @@
 package cn.chips.MAPLE.ast.expression;
 
-import cn.chips.MAPLE.ast.declare.Declare;
 import cn.chips.MAPLE.ast.declare.VarDecl;
 import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
-import cn.chips.MAPLE.compiler.Main;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -79,7 +77,7 @@ public class ArrIndex extends Expr {
             }
             ans += tmp * idxlist.get(i).getint();
         }
-        ans *= elemsize();
+//        ans *= elemsize();
         return ans;
     }
 //    public long length(){

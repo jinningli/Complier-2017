@@ -1,9 +1,11 @@
 package cn.chips.MAPLE.utils;
 
 import cn.chips.MAPLE.ast.declare.ClassDecl;
+import cn.chips.MAPLE.ast.declare.Declare;
 import cn.chips.MAPLE.ast.declare.FuncDecl;
 import cn.chips.MAPLE.ast.declare.VarDecl;
 import cn.chips.MAPLE.ast.expression.ConstantExpr;
+import cn.chips.MAPLE.ast.root.AST;
 import cn.chips.MAPLE.ir.IRTraverse;
 
 import java.util.LinkedHashSet;
@@ -18,7 +20,11 @@ public class Declarations {
     Set<FuncDecl> funs = new LinkedHashSet<>();
     Set<ConstantExpr> constants = new LinkedHashSet<>();
     Set<ClassDecl> classes = new LinkedHashSet<>();
+    AST root;
 
+    public Declarations(AST _root){
+        root = _root;
+    }
     public Set<VarDecl> getVars(){
         return vars;
     }
@@ -68,10 +74,14 @@ public class Declarations {
     public void IRtraverse(){
         IRTraverse k = new IRTraverse();
         System.out.println("\n------------- IR Traverse -------------\n");
+        System.out.println("**********    Grobal Variable    **********");
+        k.setIrstream(root.grobalVarIR);
+        k.traverse();
         for(FuncDecl f: funs){
             System.out.println("********** In the Function: " + f.name + " **********");
             k.setIrstream(f.ir);
             k.traverse();
         }
+        System.out.println("\n------------- IR Traverse End -------------\n");
     }
 }

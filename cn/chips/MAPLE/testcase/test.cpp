@@ -14,6 +14,9 @@ class C
 	    return b + c;
 	}
 }
+
+int b = 23;
+
 int main()
 {
 	A[] a = new A[233];

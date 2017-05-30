@@ -79,7 +79,7 @@ public class IRGenerator {
     }
 
     private void assign(EXPR lhs, EXPR rhs){
-        stmts.add(new Assign(lhs, rhs));
+        stmts.add(new Assign(lhs.applyAddr(), rhs));
     }
 
     private void label(Label label){
@@ -212,7 +212,7 @@ public class IRGenerator {
     public EXPR visit(ArrIndex node){
         EXPR expr = visitExpr(node.body);
         EXPR offset = new Bin("*", new Int(node.elemsize()), new Int(node.offset()));
-                Bin addr = new Bin("+", expr, offset);
+        Bin addr = new Bin("+", expr, offset);
         return new Mem(addr);
     }
 
@@ -221,7 +221,7 @@ public class IRGenerator {
     }
 
     public EXPR visit(Member node){
-        EXPR expr = memAddr(visitExpr(node.body));
+        EXPR expr = visitExpr(node.body);
         EXPR offset = new Int(node.getoffset());
         EXPR addr = new Bin("+", expr, offset);
         return new Mem(addr); // type addr?
@@ -242,12 +242,12 @@ public class IRGenerator {
 
     public EXPR visit(AssignExpr node){
         if(isStatement()){
-            EXPR rhs = visitExpr(node.right);
-            EXPR lhs = visitExpr(node.left);
+            EXPR rhs = memAddr(visitExpr(node.right));
+            EXPR lhs = memAddr(visitExpr(node.left));
             assign(lhs, rhs);
             return null;
         }else{
-            VarDecl tmp = new VarDecl(node.pos);
+            VarDecl tmp = new VarDecl(node.pos);// memAddr ??
             tmp.type = node.right.getretype();
             tmp.setNowScope(node.nowScope);
             Var adds = new Var(tmp);
@@ -474,12 +474,13 @@ public class IRGenerator {
         return new Int(n);
     }
     private EXPR memAddr(EXPR expr){
-        if(expr instanceof Mem){
-            return ((Mem)expr).expr;
-        }
-        if(expr instanceof Var){
-            return new Addr(((Var) expr).ent);
-        }
-        throw new NoDefined();
+//        if(expr instanceof Mem){
+//            return ((Mem)expr).expr;
+//        }
+//        if(expr instanceof Var){
+//            return new Addr(((Var) expr).ent);
+//        }
+//        throw new NoDefined();
+        return new Mem(expr);
     }
 }

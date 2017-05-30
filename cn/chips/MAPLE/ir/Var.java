@@ -1,5 +1,7 @@
 package cn.chips.MAPLE.ir;
 
+import cn.chips.MAPLE.exception.NullPtr;
+
 /**
  * Maple - 2017
  * lijinning, 2017.05.22, Shanghai.
@@ -25,5 +27,7 @@ public class Var extends EXPR {
         System.out.println(indent + "Var with size: " + size);
         ent.traverse(depth + 1);
     }
-
+    public EXPR applyAddr(){
+        return new Addr(ent);
+    }
 }

@@ -16,7 +16,7 @@ public class AST extends Declare {
     public String name;
     public Position pos;
     public List<Declare> DeclList;
-    public Declarations decls = new Declarations();
+    public Declarations decls = new Declarations(this);
     public List<STMT> grobalVarIR;
 
     public AST(){
