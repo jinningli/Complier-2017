@@ -16,6 +16,7 @@ public class StringType extends Project implements Type {
     public final static long charsize = 1;
     public StringType(TerminalNode ctx){
         data = ctx.getText();
+        data = data.substring(1, data.length()-1);
         pos = new Position(ctx.getSymbol());
     }
     public StringType(String _d)
@@ -33,8 +34,11 @@ public class StringType extends Project implements Type {
         data = "";
         pos = _pos;
     }
-    public long length(){
-        return data.length() * charsize;
+    public long size(){
+        return 8;
+    }
+    public long strlen(){
+        return data.length();
     }
     public String _String(){
         return "StringType " + "\tWith Value: " + data + "\t" + pos._String();

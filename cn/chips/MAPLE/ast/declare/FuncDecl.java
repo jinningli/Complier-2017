@@ -1,7 +1,8 @@
 package cn.chips.MAPLE.ast.declare;
 
 
-import cn.chips.MAPLE.compiler.Main;
+import cn.chips.MAPLE.asm.Oprand.ImmediateValue;
+import cn.chips.MAPLE.asm.Oprand.MemoryReference;
 import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.ir.STMT;
 import cn.chips.MAPLE.utils.*;
@@ -24,12 +25,36 @@ public class FuncDecl extends Declare implements Entity{
     public Position pos;
     public Type retype = null;
     public List<Pair<Type, String>> flist = null;
+    public List<VarDecl> para = new LinkedList<>();
     public List<Statement> stmtlist = null;
     public boolean constructFunc = false;
     public boolean classFunc = false;
     public ClassDecl thisptr = null;
     public List<STMT> ir;
+    public boolean located = false;
 
+    public MemoryReference memref;
+    public ImmediateValue address;
+
+    public void setMemref(MemoryReference _memref){
+        memref = _memref;
+        located = true;
+    }
+
+    public MemoryReference getMemref() {
+        if(memref == null){
+            throw new NullPtr();
+        }
+        return memref;
+    }
+
+    public void setAddress(ImmediateValue _immaddr){
+        address = _immaddr;
+    }
+
+    public ImmediateValue getAddress(){
+        return address;
+    }
 
     public void setIR(List<STMT> _stmts){
         ir = _stmts;
@@ -67,6 +92,7 @@ public class FuncDecl extends Declare implements Entity{
                 throw new DeclLost();
             }
             constructFunc = true;
+            nowclass.constructer = this;
         }
 
         else retype = TC.Classify(ctx.typePro());
@@ -118,6 +144,7 @@ public class FuncDecl extends Declare implements Entity{
             vd.setName(flist.get(i).getSecond());
             vd.setType(flist.get(i).getFirst());
             grobalVariable.grobal.define(flist.get(i).getSecond(), vd);
+            para.add(vd);
         }
 
 

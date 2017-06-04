@@ -5,7 +5,7 @@ package cn.chips.MAPLE.ir;
  * lijinning, 2017.05.22, Shanghai.
  */
 public class ExprStmt extends STMT {
-    private EXPR expr = null;
+    public  EXPR expr = null;
     public ExprStmt(EXPR _e){
         expr = _e;
     }

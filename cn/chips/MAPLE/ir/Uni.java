@@ -6,8 +6,8 @@ package cn.chips.MAPLE.ir;
  * op: ! ~ + -
  */
 public class Uni extends EXPR {
-    private String op = "";
-    private EXPR expr = null;
+    public String op = "";
+    public EXPR expr = null;
     public Uni(String _op, EXPR _expr){
         op  = _op;
         expr = _expr;

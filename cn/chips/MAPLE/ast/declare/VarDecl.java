@@ -1,14 +1,15 @@
 package cn.chips.MAPLE.ast.declare;
 
-import cn.chips.MAPLE.ast.statement.Statement;
+import cn.chips.MAPLE.asm.Oprand.ImmediateValue;
+import cn.chips.MAPLE.asm.Oprand.MemoryReference;
+import cn.chips.MAPLE.asm.assembly.AsmLabel;
 import cn.chips.MAPLE.ir.EXPR;
 import cn.chips.MAPLE.ir.Entity;
-import cn.chips.MAPLE.ir.IR;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.expression.*;
 import cn.chips.MAPLE.ast.type.*;
-import cn.chips.MAPLE.compiler.Main;
+
 import java.util.Objects;
 
 /**
@@ -18,12 +19,18 @@ import java.util.Objects;
 
 public class VarDecl extends Declare implements Entity{
     public String name;
+    public static int tmpcnt = 0;
     public Position pos;
     public Type type;
     public Expr expr = null;
     public EXPR ir = null;
     public long offset = 0;
     public boolean isGrobal = false;
+    public boolean located = false;
+
+    public MemoryReference memref;
+    public ImmediateValue address;
+
 
     public VarDecl(Position _p){
         pos = _p;
@@ -45,16 +52,36 @@ public class VarDecl extends Declare implements Entity{
         ir = _ir;
     }
 
+    public void setMemref(MemoryReference _memref){
+        located = true;
+        memref = _memref;
+    }
+
+    public MemoryReference getMemref() {
+        if(memref == null){
+            throw new NullPtr();
+        }
+        return memref;
+    }
+
+    public void setAddress(ImmediateValue _immaddr){
+        address = _immaddr;
+    }
+
+    public ImmediateValue getAddress(){
+        return address;
+    }
+
     public String getname() {return name;}
 
-    public long length(){
-        return type.length();
+    public long size(){
+        return 8;
     }
     public long elemsize(){
         if(type instanceof ArrType)
-            return ((ArrType) type).stdtype.length();
+            return ((ArrType) type).stdtype.size();
         else
-            return type.length();
+            return type.size();
     }
     public long getOffset(){
         return offset;
@@ -114,6 +141,7 @@ public class VarDecl extends Declare implements Entity{
         if(!grobalVariable.inclass && !grobalVariable.infunction){
             isGrobal = true;
         }
+        grobalVariable.root.getDecls().addVars(this);
        // }
 
     }
@@ -141,6 +169,9 @@ public class VarDecl extends Declare implements Entity{
             indent += "\t";
             dep --;
         }
+        if(type == null){
+            System.out.println(indent + "Tmp Variable: " + name);
+        }else
         System.out.println(indent + "Define Variable: "+ name  + "\t"+ type._String() );
     }
 }

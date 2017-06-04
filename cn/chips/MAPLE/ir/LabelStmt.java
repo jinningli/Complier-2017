@@ -6,7 +6,7 @@ package cn.chips.MAPLE.ir;
  * lijinning, 2017.05.22, Shanghai.
  */
 public class LabelStmt extends STMT{
-    private Label label;
+    public Label label;
 
     public LabelStmt(Label _p){
         label = _p;
@@ -18,7 +18,6 @@ public class LabelStmt extends STMT{
             indent += "\t";
             dep --;
         }
-        System.out.println(indent + "LabelSTMT:");
-        label.traverse(depth + 1);
+        System.out.println(indent + label.str);
     }
 }

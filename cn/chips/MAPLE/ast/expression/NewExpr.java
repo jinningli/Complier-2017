@@ -15,9 +15,9 @@ import java.util.List;
  *    lijinning, 2017.04.08, Shanghai.
  */
 public class NewExpr extends Expr {
-    private Type type = null;
+    public Type basetype = null;
     public List<Expr> exprlist = new LinkedList<>();
-    private int dimension = 0;
+    public int dimension = 0;
     public Type retype = null;
     public Position pos;
 
@@ -26,7 +26,7 @@ public class NewExpr extends Expr {
     }
 
     public NewExpr(MapleParser.TypeContext ctx){
-        type = new TypeClassifier().Classify(ctx);
+        basetype = new TypeClassifier().Classify(ctx);
         pos = new Position(ctx.getStart());
     }
     public void add(Expr _e){
@@ -48,7 +48,7 @@ public class NewExpr extends Expr {
                 throw new WrongIndex();
             }
         }
-        if(type == null || dimension == 0){
+        if(basetype == null || dimension == 0){
             throw new NullPtr();
         }
         if(dimension > 1) {
@@ -57,13 +57,13 @@ public class NewExpr extends Expr {
                 intlist.add((IntType)(e.getretype()));
             }
             if(retype == null){
-                retype = new ArrType(dimension, type, new Position(-1, -1), intlist);
+                retype = new ArrType(dimension, basetype, new Position(-1, -1), intlist);
             }
             return retype;
         }
         else {
-            retype = type;
-            return type;
+            retype = basetype;
+            return basetype;
         }
     }
 
@@ -81,7 +81,8 @@ public class NewExpr extends Expr {
             dep --;
         }
         System.out.println(indent + "New: "+"dimension: " + dimension  + pos._String());
-        System.out.println(indent + "Type:" + type._String());
+        System.out.println(indent + "BaseType:" + basetype._String());
+        System.out.println(indent + "Array list:");
         for(Expr e: exprlist){
             e.print(depth + 1);
         }

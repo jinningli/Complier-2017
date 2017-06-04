@@ -36,11 +36,7 @@ public class ArrType extends Project implements Type{
         }
         return "arr:"+stdtype.typename()+":"+dimension;
     }
-    public long length(){
-        long ans = 0;
-        for(int i = 0; i < dimension; i ++){
-            ans *= dmsList.get(i).getint();
-        }
-        return ans;
+    public long size(){
+        return 8;
     }
 }

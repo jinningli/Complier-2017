@@ -10,8 +10,8 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * lijinning, 2017.04.03, Shanghai.
  */
 public class BoolType extends Project implements Type {
-    private boolean data;
-    private Position pos;
+    public boolean data;
+    public Position pos;
     public final static long boolsize = 8;
     public BoolType(TerminalNode ctx){
         String bl = ctx.getText();
@@ -31,12 +31,15 @@ public class BoolType extends Project implements Type {
     }
     public Position getpos(){return pos;};
     public String getname(){return "";};
-    public int getint(){return 0;};
+    public int getint(){
+        if(data) return 1;
+        return 0;
+    }
     public boolean getbool(){return data;}
     public String typename(){
         return "bool";
     }
-    public long length(){
+    public long size(){
         return boolsize;
     }
 }

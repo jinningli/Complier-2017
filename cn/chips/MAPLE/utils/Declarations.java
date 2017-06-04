@@ -7,8 +7,11 @@ import cn.chips.MAPLE.ast.declare.VarDecl;
 import cn.chips.MAPLE.ast.expression.ConstantExpr;
 import cn.chips.MAPLE.ast.root.AST;
 import cn.chips.MAPLE.ir.IRTraverse;
+import cn.chips.MAPLE.ir.Var;
 
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,32 +19,40 @@ import java.util.Set;
  * lijinning, 2017.05.23, Shanghai.
  */
 public class Declarations {
-    Set<VarDecl> vars = new LinkedHashSet<>();
-    Set<FuncDecl> funs = new LinkedHashSet<>();
-    Set<ConstantExpr> constants = new LinkedHashSet<>();
-    Set<ClassDecl> classes = new LinkedHashSet<>();
-    AST root;
+    public List<VarDecl> vars = new LinkedList<>();
+    public List<FuncDecl> funs = new LinkedList<>();
+    public List<ConstantExpr> constants = new LinkedList<>();
+    public List<ClassDecl> classes = new LinkedList<>();
+    public List<VarDecl> gvars = new LinkedList<>();
+    public List<VarDecl> cmvars = new LinkedList<>();
+
+    public AST root;
 
     public Declarations(AST _root){
         root = _root;
     }
-    public Set<VarDecl> getVars(){
+    public List<VarDecl> getVars(){
         return vars;
     }
 
-    public Set<FuncDecl> getFuns(){
+    public List<FuncDecl> getFuns(){
         return funs;
     }
 
-    public Set<ClassDecl> getClasses(){
+    public List<ClassDecl> getClasses(){
         return classes;
     }
 
-    public Set<ConstantExpr> getConst(){
+    public List<ConstantExpr> getConst(){
         return constants;
     }
 
     public void addVars(VarDecl _vd){
+        if(_vd.isGrobal){
+            gvars.add(_vd);
+        }else{
+            cmvars.add(_vd);
+        }
         vars.add(_vd);
     }
 
@@ -73,7 +84,7 @@ public class Declarations {
     }
     public void IRtraverse(){
         IRTraverse k = new IRTraverse();
-        System.out.println("\n------------- IR Traverse -------------\n");
+        System.out.println("\n------------- IRBase Traverse -------------\n");
         System.out.println("**********    Grobal Variable    **********");
         k.setIrstream(root.grobalVarIR);
         k.traverse();
@@ -82,6 +93,6 @@ public class Declarations {
             k.setIrstream(f.ir);
             k.traverse();
         }
-        System.out.println("\n------------- IR Traverse End -------------\n");
+        System.out.println("\n------------- IRBase Traverse End -------------\n");
     }
 }

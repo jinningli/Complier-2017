@@ -10,8 +10,8 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * lijinning, 2017.04.02, Shanghai.
  */
 public class IntType extends Project implements Type {
-    private int data = 0;
-    private Position pos;
+    public int data = 0;
+    public Position pos;
     public final static long intsize = 8;
 
     public IntType(TerminalNode ctx){
@@ -33,7 +33,7 @@ public class IntType extends Project implements Type {
         data = 0;
         pos = _pos;
     }
-    public long length(){
+    public long size(){
         return intsize;
     }
     public String _String(){

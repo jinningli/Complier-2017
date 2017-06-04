@@ -5,7 +5,7 @@ package cn.chips.MAPLE.ir;
  * lijinning, 2017.05.22, Shanghai.
  */
 public class Return extends STMT {
-    private EXPR expr = null;
+    public  EXPR expr = null;
 
     public Return(EXPR _e){
         expr = _e;

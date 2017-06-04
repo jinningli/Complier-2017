@@ -10,13 +10,10 @@ public class Var extends EXPR {
     public Entity ent = null;
     public int size = 0;
 
-    public Var(Entity _ent){
+    public Var(Entity _ent) {
         ent = _ent;
     }
-    public Var(int type, Entity _ent) {
-        size = type;
-        ent = _ent;
-    }
+
     public void traverse(int depth){
         String indent = "";
         int dep = depth;
@@ -24,7 +21,7 @@ public class Var extends EXPR {
             indent += "\t";
             dep --;
         }
-        System.out.println(indent + "Var with size: " + size);
+        System.out.println(indent + "Var：");
         ent.traverse(depth + 1);
     }
     public EXPR applyAddr(){

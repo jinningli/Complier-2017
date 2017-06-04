@@ -40,7 +40,7 @@ public class MapleLexer extends Lexer {
 		"ESC", "LETTER", "DIGIT"
 	};
 
-	private static final String[] _LITERAL_NAMES = {
+	public static final String[] _LITERAL_NAMES = {
 		null, "';'", "'='", "'class'", "'{'", "'}'", "'('", "','", "')'", "'['", 
 		"']'", "'new'", "'bool'", "'int'", "'string'", "'if'", "'else'", "'else if'", 
 		"'while'", "'for'", "'continue'", "'break'", "'return'", "'void'", null, 
@@ -48,7 +48,7 @@ public class MapleLexer extends Lexer {
 		"'>'", "'=='", "'!='", "'<='", "'>='", "'++'", "'--'", "'.'", "'&&'", 
 		"'||'", "'!'", "'&'", "'|'", "'~'", "'^'", "'<<'", "'>>'"
 	};
-	private static final String[] _SYMBOLIC_NAMES = {
+	public static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, "IF", "ELSE", "ELSEIF", "WHILE", "FOR", "CONTINUE", 
 		"BREAK", "RETURN", "VOID", "INT", "BOOL", "NULL", "STRING", "ID", "PLUS", 

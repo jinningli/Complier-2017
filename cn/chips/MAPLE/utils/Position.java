@@ -7,8 +7,8 @@ import org.antlr.v4.runtime.Token;
  *    lijinning, 2017.05.16, Shanghai.
  */
 public class Position {
-    private final int line;
-    private final int column;
+    public final int line;
+    public final int column;
     public Position(int _line, int _column)
     {
         line = _line;

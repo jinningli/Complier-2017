@@ -20,11 +20,11 @@ import java.util.Objects;
  * lijinning, 2017.04.06, Shanghai.
  */
 public class AstBuilder extends MapleBaseVisitor<Project> {
-    private ScopeTree maple = grobalVariable.grobal;
-    private boolean inclass = false;
-    private boolean infunction = false;
-    private ClassDecl nowclass = null;
-    private AST root = null;
+    public ScopeTree maple = grobalVariable.grobal;
+    public boolean inclass = false;
+    public boolean infunction = false;
+    public ClassDecl nowclass = null;
+    public AST root = null;
 
     @Override public Project visitProgram(MapleParser.ProgramContext ctx) {
         AST prog = new AST();
@@ -32,6 +32,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
         for(ParserRuleContext child : ctx.decl()){
             prog.add((Declare) visit(child));
         }
+        grobalVariable.root = root;
         return prog;
     }
 //
@@ -51,7 +52,6 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
 // else{
 //            maple.define(vd.getname(), vd);
 //        }
-        root.getDecls().addVars(vd);
         //System.err.println(ctx.getParent().getText());
         return vd;
     }

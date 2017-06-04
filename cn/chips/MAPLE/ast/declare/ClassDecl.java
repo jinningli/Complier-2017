@@ -16,6 +16,7 @@ public class ClassDecl extends Declare{
     public String name;
     public Position pos;
     public List<Declare> DeclList;
+    public FuncDecl constructer = null;
     public long size = 0;
     public ClassDecl (MapleParser.ClassDeclContext ctx){
         name = ctx.ID().getText();
@@ -39,7 +40,7 @@ public class ClassDecl extends Declare{
     public String _String(){
         return "ClassDecl:: " + name;
     }
-    public long length(){
+    public long size(){
         return size;
     }
     public void check(){
@@ -56,7 +57,6 @@ public class ClassDecl extends Declare{
         for(Declare d : DeclList){
             d.check();
             if(d instanceof VarDecl){
-                ((VarDecl) d).offset = size;
 //                size += ((VarDecl) d).length();
                 size += 8;
             }

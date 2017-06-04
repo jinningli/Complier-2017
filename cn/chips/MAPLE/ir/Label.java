@@ -1,5 +1,7 @@
 package cn.chips.MAPLE.ir;
 
+import cn.chips.MAPLE.asm.assembly.AsmLabel;
+
 /**
  * Maple - 2017
  * lijinning, 2017.05.23, Shanghai.
@@ -11,7 +13,7 @@ public class Label extends EXPR {
 
     public Label(){
         id = labelcnt ++;
-        str = "Label" + id;
+        str = "AsmLabel" + id;
     }
     public Label(String _str){
         str = _str;
@@ -22,6 +24,9 @@ public class Label extends EXPR {
             labelcnt --;
             id = -1;
         }
+    }
+    public AsmLabel getAsmLabel(){
+        return new AsmLabel(str);
     }
     public String getname(){
         return str;
@@ -36,7 +41,6 @@ public class Label extends EXPR {
             indent += "\t";
             dep --;
         }
-        System.out.println(indent + "Label:");
-        System.out.println(indent + "Id: " + str);
+        System.out.println(indent + str);
     }
 }

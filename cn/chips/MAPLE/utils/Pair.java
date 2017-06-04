@@ -5,8 +5,8 @@ package cn.chips.MAPLE.utils;
  * lijinning, 2017.04.03, Shanghai.
  */
 public class Pair<E, F> {
-    private E first;
-    private F second;
+    public E first;
+    public F second;
 
     public Pair(){}
     public Pair(E _e, F _f){

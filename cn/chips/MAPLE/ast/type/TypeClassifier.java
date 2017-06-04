@@ -13,7 +13,7 @@ import java.util.Objects;
  * lijinning, 2017.04.03, Shanghai.
  */
 public class TypeClassifier {
-    private Type output = null;
+    public Type output = null;
     public Type Classify(MapleParser.TypeProContext ctx){
            // System.err.print(ctx.type().getText());
             switch (ctx.type().getText()){

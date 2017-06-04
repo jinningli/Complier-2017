@@ -6,7 +6,7 @@ import java.util.List;
  * Maple - 2017
  * lijinning, 2017.05.28, Shanghai.
  */
-public class IRTraverse extends IR{
+public class IRTraverse extends IRBase {
     public List<STMT> irstream = null;
 
     public IRTraverse(){}

@@ -1,6 +1,7 @@
 package cn.chips.MAPLE.utils.scope;
 
 import cn.chips.MAPLE.ast.declare.Declare;
+import cn.chips.MAPLE.ast.declare.VarDecl;
 import cn.chips.MAPLE.exception.NoDefined;
 import cn.chips.MAPLE.exception.ReDefine;
 
@@ -31,6 +32,16 @@ public class ScopeNode{
             node = node.parent;
         }
         throw new NoDefined();
+    }
+
+    public List<VarDecl> localVariables(){
+        List<VarDecl> vdlist = new LinkedList<>();
+        for(Map.Entry e: namestore.entrySet()){
+            if(e.getValue() instanceof VarDecl){
+                vdlist.add((VarDecl) e.getValue());
+            }
+        }
+        return vdlist;
     }
 
     public boolean containsKey(String _s){

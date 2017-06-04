@@ -12,8 +12,8 @@ public class MapleNameSpace {
 
     public Map<String, Stack<Declare>> namestack = new HashMap<>();
     public Stack<Set<String>> layer = new Stack<>();
-    private int nowlayer = 0;
-    private int maxlayer = 0;
+    public int nowlayer = 0;
+    public int maxlayer = 0;
 
     public MapleNameSpace(){
         grobalLayerInit();

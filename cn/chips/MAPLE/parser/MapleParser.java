@@ -36,7 +36,7 @@ public class MapleParser extends Parser {
 		"exprList", "expr", "type", "ptrBracket", "constant"
 	};
 
-	private static final String[] _LITERAL_NAMES = {
+	public static final String[] _LITERAL_NAMES = {
 		null, "';'", "'='", "'class'", "'{'", "'}'", "'('", "','", "')'", "'['", 
 		"']'", "'new'", "'bool'", "'int'", "'string'", "'if'", "'else'", "'else if'", 
 		"'while'", "'for'", "'continue'", "'break'", "'return'", "'void'", null, 
@@ -44,7 +44,7 @@ public class MapleParser extends Parser {
 		"'>'", "'=='", "'!='", "'<='", "'>='", "'++'", "'--'", "'.'", "'&&'", 
 		"'||'", "'!'", "'&'", "'|'", "'~'", "'^'", "'<<'", "'>>'"
 	};
-	private static final String[] _SYMBOLIC_NAMES = {
+	public static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, "IF", "ELSE", "ELSEIF", "WHILE", "FOR", "CONTINUE", 
 		"BREAK", "RETURN", "VOID", "INT", "BOOL", "NULL", "STRING", "ID", "PLUS", 
@@ -1767,7 +1767,7 @@ public class MapleParser extends Parser {
 		return expr(0);
 	}
 
-	private ExprContext expr(int _p) throws RecognitionException {
+	public ExprContext expr(int _p) throws RecognitionException {
 		ParserRuleContext _parentctx = _ctx;
 		int _parentState = getState();
 		ExprContext _localctx = new ExprContext(_ctx, _parentState);
@@ -2332,7 +2332,7 @@ public class MapleParser extends Parser {
 		}
 		return true;
 	}
-	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
+	public boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
 			return precpred(_ctx, 12);

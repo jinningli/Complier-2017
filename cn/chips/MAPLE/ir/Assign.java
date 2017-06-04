@@ -5,8 +5,8 @@ package cn.chips.MAPLE.ir;
  * lijinning, 2017.05.22, Shanghai.
  */
 public class Assign extends STMT {
-    private EXPR lhs = null;
-    private EXPR rhs = null;
+    public EXPR lhs = null;
+    public EXPR rhs = null;
     public Assign(EXPR _l, EXPR _r){
         lhs = _l;
         rhs = _r;

@@ -1,5 +1,8 @@
 package cn.chips.MAPLE.ast.expression;
 
+import cn.chips.MAPLE.asm.Oprand.ImmediateValue;
+import cn.chips.MAPLE.asm.Oprand.MemoryReference;
+import cn.chips.MAPLE.exception.NullPtr;
 import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.ast.type.*;
@@ -9,8 +12,32 @@ import cn.chips.MAPLE.ast.type.*;
  * lijinning, 2017.04.07, Shanghai.
  */
 public class ConstantExpr extends Expr implements Entity{
-    private Type type;
-    private Position pos;
+    public Type type;
+    public Position pos;
+
+    public MemoryReference memref;
+    public ImmediateValue address;
+    public boolean located = false;
+
+    public void setMemref(MemoryReference _memref){
+        memref = _memref;
+        located = true;
+    }
+
+    public MemoryReference getMemref() {
+        if(memref == null){
+            throw new NullPtr();
+        }
+        return memref;
+    }
+
+    public void setAddress(ImmediateValue _immaddr){
+        address = _immaddr;
+    }
+
+    public ImmediateValue getAddress(){
+        return address;
+    }
 
     public Entity getEnt(){
         return this;

@@ -4,10 +4,14 @@ import cn.chips.MAPLE.ast.declare.*;
 import cn.chips.MAPLE.ast.expression.*;
 import cn.chips.MAPLE.ast.statement.*;
 import cn.chips.MAPLE.ast.root.AST;
+import cn.chips.MAPLE.ast.type.*;
 import cn.chips.MAPLE.exception.NoDefined;
 import cn.chips.MAPLE.exception.TypeNotMatch;
 import cn.chips.MAPLE.ir.*;
+import cn.chips.MAPLE.utils.Position;
 import cn.chips.MAPLE.utils.Project;
+import cn.chips.MAPLE.utils.grobalVariable;
+import cn.chips.MAPLE.utils.scope.ScopeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -19,21 +23,28 @@ import java.util.Objects;
  * lijinning, 2017.05.23, Shanghai.
  */
 public class IRGenerator {
-    private AST root;
-    List<STMT> stmts;
-    LinkedList<Label> breakStack;
-    LinkedList<Label> continueStack;
+    public AST root;
+    public List<STMT> stmts;
+    public LinkedList<Label> breakStack;
+    public LinkedList<Label> continueStack;
+    public FuncDecl mallocFunc;
+
+//    public List<VarDecl> adtofunc;
+//    public List<VarDecl> adtog;
+    boolean inFunc;
 
     public IRGenerator(AST _root){
         root = _root;
+        mallocFunc = (FuncDecl) grobalVariable.grobal.what("mallocFunc");
+//        adtog = new LinkedList<>();
+//        adtofunc = new LinkedList<>();
     }
 
-    public AST generate(){
+    public IR generate(){
         stmts = new LinkedList<>();
         breakStack = new LinkedList<>();
         continueStack = new LinkedList<>();
-        for(VarDecl vd: root.getDecls().getVars()){
-            if(!vd.isGrobal) continue;
+        for(VarDecl vd: root.getDecls().gvars){
             if(vd.expr != null) {
                 EXPR expr = visitExpr(vd.expr);
                 vd.setIR(expr);
@@ -43,9 +54,13 @@ public class IRGenerator {
         root.setGrobalVarIR(stmts);
 
         for(FuncDecl fd: root.getDecls().getFuns()){
+//            adtofunc.clear();
+//            inFunc = true;
             fd.setIR(compileFunctionBody(fd));
+//            inFunc = false;
+//            fd.stmtlist.addAll(0, adtofunc);
         }
-        return root;
+        return new IR(root.getDecls(), grobalVariable.grobal);
     }
 
     public List<STMT> compileFunctionBody(FuncDecl f){
@@ -66,7 +81,7 @@ public class IRGenerator {
         visit(_expr);
     }
 
-    private int exprLevel = 0;
+    public int exprLevel = 0;
     public EXPR visitExpr(Expr expr){
         exprLevel ++;
         EXPR exprir = visit(expr);
@@ -74,56 +89,56 @@ public class IRGenerator {
         return exprir;
     }
 
-    private boolean isStatement(){
+    public boolean isStatement(){
         return exprLevel == 0;
     }
 
-    private void assign(EXPR lhs, EXPR rhs){
+    public void assign(EXPR lhs, EXPR rhs){
         stmts.add(new Assign(lhs.applyAddr(), rhs));
     }
 
-    private void label(Label label){
+    public void label(Label label){
         stmts.add(new LabelStmt(label));
     }
 
-    private void jump(Label target){
+    public void jump(Label target){
         stmts.add(new Jump(target));
     }
 
-    private void cjump(EXPR cond, Label thenlabel, Label elseLabel){
+    public void cjump(EXPR cond, Label thenlabel, Label elseLabel){
         stmts.add(new CJump(cond, thenlabel, elseLabel));
     }
 
-    private void pushBreak(Label label){
+    public void pushBreak(Label label){
         breakStack.add(label);
     }
 
-    private void popBreak(){
+    public void popBreak(){
         if(breakStack.isEmpty()){
             throw new TypeNotMatch();
         }
         breakStack.removeLast();
     }
 
-    private Label currentBreakTarget(){
+    public Label currentBreakTarget(){
         if(breakStack.isEmpty()){
             throw new TypeNotMatch();
         }
         return breakStack.getLast();
     }
 
-    private void pushContinue(Label label){
+    public void pushContinue(Label label){
         continueStack.add(label);
     }
 
-    private void popContinue(){
+    public void popContinue(){
         if(continueStack.isEmpty()){
             throw new TypeNotMatch();
         }
         continueStack.removeLast();
     }
 
-    private Label currentContinueTarget(){
+    public Label currentContinueTarget(){
         if(continueStack.isEmpty()){
             throw new TypeNotMatch();
         }
@@ -211,13 +226,24 @@ public class IRGenerator {
 
     public EXPR visit(ArrIndex node){
         EXPR expr = visitExpr(node.body);
-        EXPR offset = new Bin("*", new Int(node.elemsize()), new Int(node.offset()));
-        Bin addr = new Bin("+", expr, offset);
-        return new Mem(addr);
+        EXPR index = visitExpr(node.index);
+        long size = 8;
+
+        if(index instanceof Int){
+            return new Mem(new Bin("+", expr, new Int(size * ((Int)index).value)));
+        }else{
+            return new Mem(new Bin("+", expr, new Bin("*", index, new Int(size))));
+        }
     }
 
     public EXPR visit(ConstantExpr node){
-        return new Var(node);
+        if(node.type instanceof StringType){
+            return new Str(node);
+        }
+        if(node.type instanceof IntType || node.type instanceof BoolType){
+            return new Int(node.type.getint());
+        }
+        throw new NoDefined();
     }
 
     public EXPR visit(Member node){
@@ -227,12 +253,95 @@ public class IRGenerator {
         return new Mem(addr); // type addr?
     }
 
-    public EXPR visit(NewExpr node){
-        VarDecl tmp = new VarDecl(node.pos);
-        tmp.type = node.getretype();
-        tmp.setNowScope(node.nowScope);
+    public void arraybuild(List<Expr> exprs, EXPR base, int depth, Type basetype, FuncDecl constructor, ScopeNode scope){
+        Var s = newTmp(scope);
+        Var i = newTmp(scope);
 
-        return new Mem(new Var(tmp));
+        Int size = new Int(8);
+        Int zero = new Int(0);
+        Int one = new Int(1);
+
+        Label cond = new Label();
+        Label begin = new Label();
+        Label end = new Label();
+
+        assign(s, visitExpr(exprs.get(depth)));
+        assign(base, new Call(mallocFunc, new LinkedList<EXPR>() {{
+            add(new Bin("+",
+                            new Bin("*", s, size),
+                            size)
+            );
+        }}));
+        assign(new Mem(base), s);
+        assign(base, new Bin("+", base, size));
+        if(exprs.size() > depth + 1){
+            assign(i, zero);
+
+            jump(cond);
+            label(begin);
+            arraybuild(exprs,
+                    new Mem(new Bin("+", base, new Bin("*", i, size))),
+                    depth + 1, basetype, constructor, scope);
+            assign(i, new Bin("+", i, one));
+
+            label(cond);
+            cjump(new Bin("<", i, s), begin, end);
+
+            label(end);
+        }else if (basetype instanceof ClassType){
+            assign(i, zero);
+            jump(cond);
+
+            label(begin);
+            Var tmp = newTmp(scope);
+            assign(tmp, new Bin("+", base, new Bin("*", i, size)));
+            assign(new Mem(tmp), new Call(mallocFunc, new LinkedList<EXPR>() {{
+                add(size);
+            }}
+            ));
+
+            if(constructor != null){
+                stmts.add(new ExprStmt(new Call(constructor, new LinkedList<EXPR>(){{
+                    add(new Mem(tmp));
+                }}
+                )));
+            }
+
+            assign(i, new Bin("+", i, one));
+            label(cond);
+            cjump(new Bin("<", i, s), begin, end);
+            label(end);
+        }
+    }
+
+    public EXPR visit(NewExpr node){
+//        VarDecl tmp = new VarDecl(node.pos);
+//        tmp.type = node.getretype();
+//        tmp.setNowScope(node.nowScope);
+//
+//        return new Mem(new Var(tmp));
+        if(node.dimension == 1){
+            Var tmp = newTmp(node.nowScope);
+
+            Call ml = new Call(mallocFunc);
+            ml.addArgs(new Int(node.basetype.size()));
+            assign(tmp, ml);
+            FuncDecl construct = ((ClassDecl)node.getEnt()).constructer;
+            if(construct!= null){
+                stmts.add(new ExprStmt(new Call(construct, new LinkedList<EXPR>(){{add(tmp);}})));
+            }
+            return isStatement() ? null : tmp;
+        }else{
+            Type basetype = node.basetype;
+            FuncDecl fd = null;
+            if(basetype instanceof ClassType){
+                ClassType clst = (ClassType) basetype;
+                fd = clst.cls.constructer;
+            }
+            Var base = newTmp(node.nowScope);
+            arraybuild(node.exprlist, base, 0, node.basetype, fd, node.nowScope);
+            return isStatement() ? null : base;
+        }
     }
 
     public EXPR visit(Identifier node){
@@ -247,10 +356,10 @@ public class IRGenerator {
             assign(lhs, rhs);
             return null;
         }else{
-            VarDecl tmp = new VarDecl(node.pos);// memAddr ??
-            tmp.type = node.right.getretype();
-            tmp.setNowScope(node.nowScope);
-            Var adds = new Var(tmp);
+//            VarDecl tmp = new VarDecl(node.pos);// memAddr ??
+//            tmp.type = node.right.getretype();
+//            tmp.setNowScope(node.nowScope);
+            Var adds = newTmp(node.nowScope);
             assign(adds, visitExpr(node.right));
             assign(visitExpr(node.left), adds);
             return adds;
@@ -271,15 +380,12 @@ public class IRGenerator {
         for(Expr arg: node.flist){
             args.add(0, visitExpr(arg));
         }
-        EXPR call = new Call(visitExpr(node.id), args);
+        EXPR call = new Call((FuncDecl) node.getEnt(), args);
         if(isStatement()){
             stmts.add(new ExprStmt(call));
             return null;
         }else{
-            VarDecl tmp = new VarDecl(node.pos);
-            tmp.type = node.getretype();
-            tmp.setNowScope(node.nowScope);
-            Var adds = new Var(tmp);
+            Var adds = newTmp(node.nowScope);
 
             assign(adds, call);
             return adds;
@@ -291,14 +397,14 @@ public class IRGenerator {
         for(Expr arg: node.flist){
             args.add(0, visitExpr(arg));
         }
-        EXPR call = new Call(visitExpr(node.id), args);
+        EXPR call = new Call((FuncDecl) node.getEnt(), args);
         if(isStatement()){
             stmts.add(new ExprStmt(call));
         }else{
-            VarDecl tmp = new VarDecl(node.pos);
-            tmp.type = node.getretype();
-            tmp.setNowScope(node.nowScope);
-            Var adds = new Var(tmp);
+//            VarDecl tmp = new VarDecl(node.pos);
+//            tmp.type = node.getretype();
+//            tmp.setNowScope(node.nowScope);
+            Var adds = newTmp(node.nowScope);
 
             assign(adds, call);
             return adds;
@@ -310,10 +416,10 @@ public class IRGenerator {
         if(node.opt == "&&" || node.opt == "||"){
             Label rightLabel = new Label();
             Label endLabel = new Label();
-            VarDecl tmp = new VarDecl(node.pos);
-            tmp.type = node.left.getretype();
-            tmp.setNowScope(node.nowScope);
-            Var adds = new Var(tmp);
+//            VarDecl tmp = new VarDecl(node.pos);
+//            tmp.type = node.left.getretype();
+//            tmp.setNowScope(node.nowScope);
+            Var adds = newTmp(node.nowScope);
 
             assign(adds, visitExpr(node.left));///?????
             cjump(adds, rightLabel, endLabel);
@@ -337,10 +443,10 @@ public class IRGenerator {
         if(isStatement()){
             transformOpAssign(op, body, imm(1));
         }else if(body instanceof Var){
-            VarDecl tmp = new VarDecl(node.pos);
-            tmp.type = node.body.getretype();
-            tmp.setNowScope(node.nowScope);
-            Var adds = new Var(tmp);
+//            VarDecl tmp = new VarDecl(node.pos);
+//            tmp.type = node.body.getretype();
+//            tmp.setNowScope(node.nowScope);
+            Var adds = newTmp(node.nowScope);
 
             assign(adds, body);
             assign(body, new Bin(op, adds, imm(1)));
@@ -368,7 +474,7 @@ public class IRGenerator {
         throw new NoDefined();
     }
 
-    private EXPR transformOpAssign(String op, EXPR lhs, EXPR rhs){
+    public EXPR transformOpAssign(String op, EXPR lhs, EXPR rhs){
         assign(lhs, new Bin(op, lhs, rhs));
         return isStatement() ? null : lhs;
     }
@@ -470,10 +576,10 @@ public class IRGenerator {
         return null;
     }
 
-    private Int imm(long n){
+    public Int imm(long n){
         return new Int(n);
     }
-    private EXPR memAddr(EXPR expr){
+    public EXPR memAddr(EXPR expr){
 //        if(expr instanceof Mem){
 //            return ((Mem)expr).expr;
 //        }
@@ -482,5 +588,18 @@ public class IRGenerator {
 //        }
 //        throw new NoDefined();
         return new Mem(expr);
+    }
+
+    public Var newTmp(ScopeNode scope){
+        VarDecl tempvd = new VarDecl(new Position(-1, -1));
+        tempvd.name = "__tmp" + VarDecl.tmpcnt++;
+        scope.define(tempvd.name, tempvd);
+//        if(inFunc){
+//            adtofunc.add(tempvd);
+//        }else {
+//            adtog.add(tempvd);
+//        }
+//        scope
+        return new Var(tempvd);
     }
 }

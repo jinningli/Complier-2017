@@ -2,14 +2,13 @@ package cn.chips.MAPLE.compiler;
 
 
 import cn.chips.MAPLE.ast.root.AST;
+import cn.chips.MAPLE.ir.IR;
 import cn.chips.MAPLE.parser.*;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 
 public class Main
@@ -36,12 +35,14 @@ public class Main
         AstBuilder v = new AstBuilder();
         AST root = (AST) v.visit(tree);
         root.check();
-//        root.print(0);
+        root.print(0);
         IRGenerator r = new IRGenerator(root);
-        r.generate();
-
+        IR ir = r.generate();
         root.getDecls().IRtraverse();
-//      Walk
-//      ParseTreeWalker walker = new ParseTreeWalker();
+        CodeGenerator c = new CodeGenerator(root.getDecls());
+        c.generate(ir);
+        PrintStream tmpfout = new PrintStream(new FileOutputStream("cn/chips/MAPLE/testcase/test.asm"));
+        tmpfout.print(c.toSource());
+
     }
 }

@@ -5,7 +5,7 @@ package cn.chips.MAPLE.ir;
  * lijinning, 2017.05.22, Shanghai.
  */
 public class Addr extends EXPR {
-    private Entity ent = null;       //the expr pf address
+    public Entity ent = null;       //the expr pf address
 
 
     public Addr(Entity _addr){

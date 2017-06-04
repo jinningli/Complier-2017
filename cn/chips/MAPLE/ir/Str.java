@@ -1,5 +1,7 @@
 package cn.chips.MAPLE.ir;
 
+import cn.chips.MAPLE.asm.Oprand.ImmediateValue;
+import cn.chips.MAPLE.asm.Oprand.MemoryReference;
 import cn.chips.MAPLE.ast.expression.ConstantExpr;
 
 /**
@@ -7,13 +9,13 @@ import cn.chips.MAPLE.ast.expression.ConstantExpr;
  * lijinning, 2017.05.22, Shanghai.
  */
 public class Str extends EXPR {
-    protected ConstantExpr ent = null;
+    public ConstantExpr value;
 
-    public Str(ConstantExpr _cstr){
-        ent = _cstr;
+    public Str(ConstantExpr _value){
+        value = _value;
     }
     public String getValue(){
-        return ent.getString();
+        return value.getString();
     }
     public void traverse(int depth){
         String indent = "";
@@ -22,9 +24,15 @@ public class Str extends EXPR {
             indent += "\t";
             dep --;
         }
-        System.out.println(indent + "Str:");
-        ent.traverse(depth + 1);
+        System.out.println(indent + "Str: " + value.getString());
     }
 
+    public ImmediateValue asmValue(){
+        return value.address;
+    }
+
+    public MemoryReference memref(){
+        return value.getMemref();
+    }
 
 }

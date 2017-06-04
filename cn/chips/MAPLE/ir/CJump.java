@@ -5,9 +5,9 @@ package cn.chips.MAPLE.ir;
  * lijinning, 2017.05.22, Shanghai.
  */
 public class CJump extends STMT {
-    private EXPR cond = null;
-    private Label thenLabel = null;
-    private Label elseLabel = null;
+    public  EXPR cond = null;
+    public Label thenLabel = null;
+    public Label elseLabel = null;
     public CJump(EXPR _cond, Label _then, Label _else){
         cond = _cond;
         thenLabel = _then;
