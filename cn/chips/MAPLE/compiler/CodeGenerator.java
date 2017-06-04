@@ -32,6 +32,9 @@ public class CodeGenerator {
 
     public AsmLabel epilogue = null;
 
+
+    public Register RAX, RCX, RDX, RBX,  RSP,  RBP,  RSI,  RDI;
+
     public CodeGenerator(){
         decls = null;
         labeltable = new LabelTable();
@@ -44,6 +47,17 @@ public class CodeGenerator {
         labeltable = new LabelTable();
         text = new AssemblyCode(labeltable);
         data = new AssemblyCode(labeltable);
+    }
+
+    public void registInit(){
+        RAX = new Register("rax");
+        RCX = new Register("rcx");
+        RDX = new Register("rdx");
+        RBX = new Register("rbx");
+        RSP = new Register("rsp");
+        RBP = new Register("rbp");
+        RSI = new Register("rsi");
+        RDI = new Register("rdi");
     }
 
     static final String dotL = ".L";
@@ -86,7 +100,6 @@ public class CodeGenerator {
         }
     }
 
-
     public void compileText(){
         for(FuncDecl f: decls.funs) {
             text._label(labeltable.newFuncLabel(f.name));
@@ -110,6 +123,8 @@ public class CodeGenerator {
         frame.lvarSize =  locateLocalVariables(f.nowScope);
 
         compileStmts(f);
+
+
 //        temp = labeltable.newGeneralLabel();
 //        for(STMT s: f.ir){
 //            visit(s);
