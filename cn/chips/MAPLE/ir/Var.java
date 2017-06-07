@@ -21,7 +21,7 @@ public class Var extends EXPR {
             indent += "\t";
             dep --;
         }
-        System.out.println(indent + "Var：");
+        System.out.println(indent + "Var: ");
         ent.traverse(depth + 1);
     }
 }
