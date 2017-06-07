@@ -44,6 +44,29 @@ public class ScopeNode{
         return vdlist;
     }
 
+    public List<VarDecl> localVariables(ScopeNode now){
+        List<VarDecl> vdlist = new LinkedList<>();
+        for(Map.Entry e: now.namestore.entrySet()){
+            if(e.getValue() instanceof VarDecl){
+                vdlist.add((VarDecl) e.getValue());
+            }
+        }
+        return vdlist;
+    }
+
+    public List<VarDecl> allLocalVariables(){
+        return allLocalVariables(this);
+    }
+
+    public List<VarDecl> allLocalVariables(ScopeNode now){
+        List<VarDecl> varlist = new LinkedList<>();
+        for(ScopeNode s: now.child){
+            varlist.addAll(allLocalVariables(s));
+        }
+        varlist.addAll(localVariables(now));
+        return varlist;
+    }
+
     public boolean containsKey(String _s){
         return namestore.containsKey(_s);
     }

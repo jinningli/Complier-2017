@@ -35,14 +35,15 @@ public class Main
         AstBuilder v = new AstBuilder();
         AST root = (AST) v.visit(tree);
         root.check();
-        root.print(0);
+//        root.print(0);
         IRGenerator r = new IRGenerator(root);
         IR ir = r.generate();
-        root.getDecls().IRtraverse();
+//        root.getDecls().IRtraverse();
         CodeGenerator c = new CodeGenerator(root.getDecls());
         c.generate(ir);
-        PrintStream tmpfout = new PrintStream(new FileOutputStream("cn/chips/MAPLE/testcase/test.asm"));
-        tmpfout.print(c.toSource());
+//        PrintStream tmpfout = new PrintStream(new FileOutputStream("cn/chips/MAPLE/testcase/test.asm"));
+//        tmpfout.print(c.toSource());
+        System.out.print(c.toSource());
 
     }
 }

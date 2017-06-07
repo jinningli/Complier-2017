@@ -20,7 +20,6 @@ public class MemoryReference extends Oprand {
         base = _base;
         para = 1;
         fixed = false;
-        str = base.type;
     }
 
     public MemoryReference(Register _base, Register _mul, long _scale){
@@ -29,7 +28,6 @@ public class MemoryReference extends Oprand {
         scale = _scale;
         para = 12;
         fixed = false;
-        str =  base.type + "+" + _mul.type + "*" + _scale;
     }
 
     public MemoryReference(Register _base, Register _mul, long _scale, long _offset){
@@ -39,7 +37,6 @@ public class MemoryReference extends Oprand {
         offset = _offset;
         para = 123;
         fixed = false;
-        str =base.type + "+" + _mul.type + "*" + _scale + "+" + _offset;
     }
 
     public MemoryReference(Register _base, long _offset){
@@ -47,26 +44,41 @@ public class MemoryReference extends Oprand {
         offset = _offset;
         para = 13;
         fixed = false;
-        str = base.type + "+" + _offset ;
     }
 
     public MemoryReference(long _offset){
         offset = _offset;
         para = 3;
         fixed = false;
-        str = "" + _offset;
     }
 
     public MemoryReference(AsmLabel _Asm_label){
         asmLabel = _Asm_label;
         para = 4;
         fixed = false;
-        str = _Asm_label.str;
     }
 
     public String toSource(){
         if(asmLabel != null && asmLabel.isString){
             return str;
+        }
+        switch (para){
+            case 1:
+                str = base.type;
+                break;
+            case 12:
+                str =  base.type + "+" + mul.type + "*" + scale;
+                break;
+            case 123:
+                str =base.type + "+" + mul.type + "*" + scale + "+" + offset;
+                break;
+            case 13:
+                str = base.type + "+" + offset;
+                break;
+            case 3:
+                str = "" + offset;
+                break;
+            default: break;
         }
         return "qword [" + str + "]";
     }

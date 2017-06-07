@@ -57,17 +57,17 @@ public class AssemblyCode {
     }
 
     public void addInstruction(String name, Oprand opd){
-        System.out.println("Instruction: " + name + "\t" + opd.toSource());
+//        System.out.println("Instruction: " + name + "\t" + opd.toSource());
         assemblies.add(new Instruction(name, opd));
     }
 
     public void addInstruction(String name, Oprand opd1, Oprand opd2){
-        System.out.println("Instruction: " + name + "\t" + opd1.toSource() + "\t" + opd2.toSource());
+//        System.out.println("Instruction: " + name + "\t" + opd1.toSource() + "\t" + opd2.toSource());
         assemblies.add(new Instruction(name, opd1, opd2));
     }
 
     public void addInstruction(String name){
-        System.out.println("Instruction: " + name);
+//        System.out.println("Instruction: " + name);
         assemblies.add(new Instruction(name));
     }
 

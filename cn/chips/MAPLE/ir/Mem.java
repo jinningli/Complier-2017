@@ -23,7 +23,4 @@ public class Mem extends EXPR {
         expr.traverse(depth + 1);
     }
 
-    public EXPR applyAddr(){
-        return expr;
-    }
 }

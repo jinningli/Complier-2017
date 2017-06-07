@@ -7,6 +7,7 @@ import cn.chips.MAPLE.asm.Oprand.MemoryReference;
 import cn.chips.MAPLE.asm.Oprand.Oprand;
 import cn.chips.MAPLE.asm.Oprand.Register;
 import cn.chips.MAPLE.asm.assembly.AsmLabel;
+import cn.chips.MAPLE.asm.assembly.Assembly;
 import cn.chips.MAPLE.ast.declare.ClassDecl;
 import cn.chips.MAPLE.ast.declare.FuncDecl;
 import cn.chips.MAPLE.ast.declare.VarDecl;
@@ -15,8 +16,8 @@ import cn.chips.MAPLE.exception.NoDefined;
 import cn.chips.MAPLE.ir.*;
 import cn.chips.MAPLE.utils.Declarations;
 import cn.chips.MAPLE.utils.scope.ScopeNode;
-import com.sun.corba.se.impl.orbutil.StackImpl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -32,14 +33,17 @@ public class CodeGenerator {
 
     public AsmLabel epilogue = null;
 
+    public AssemblyCode nowAsm;
 
-    public Register RAX, RCX, RDX, RBX,  RSP,  RBP,  RSI,  RDI;
+    public Register[] register = new Register[16];
+    public boolean[] usedRegister = new boolean[16];
 
     public CodeGenerator(){
         decls = null;
         labeltable = new LabelTable();
         text = new AssemblyCode(labeltable);
         data = new AssemblyCode(labeltable);
+        registInit();
     }
 
     public CodeGenerator(Declarations _decls){
@@ -47,17 +51,18 @@ public class CodeGenerator {
         labeltable = new LabelTable();
         text = new AssemblyCode(labeltable);
         data = new AssemblyCode(labeltable);
+        registInit();
     }
 
     public void registInit(){
-        RAX = new Register("rax");
-        RCX = new Register("rcx");
-        RDX = new Register("rdx");
-        RBX = new Register("rbx");
-        RSP = new Register("rsp");
-        RBP = new Register("rbp");
-        RSI = new Register("rsi");
-        RDI = new Register("rdi");
+        register[0] = new Register("rax");
+        register[1] = new Register("rcx");
+        register[2] = new Register("rdx");
+        register[3] = new Register("rbx");
+        register[4] = new Register("rsp");
+        register[5] = new Register("rbp");
+        register[6] = new Register("rsi");
+        register[7] = new Register("rdi");
     }
 
     static final String dotL = ".L";
@@ -106,31 +111,95 @@ public class CodeGenerator {
             compileFunction(f);
         }
     }
+
     class StackFrameInfo {
-        List<Register> saveRegs;
+        List<Register> saveRegs = new LinkedList<>();
         long lvarSize;
         long tempSize;
 
         long saveRegsSize() { return saveRegs.size() * 8; }
         long lvarOffset() { return saveRegsSize(); }
-        long tempOffset() { return saveRegsSize() + lvarSize * 8; }
-        long frameSize() { return saveRegsSize() + lvarSize* 8 + tempSize* 8; }
+        long tempOffset() { return saveRegsSize() + lvarSize; }
+        long frameSize() { return saveRegsSize() + lvarSize + tempSize; }
     }
 
+    int callee[] = {0, 0, 1, 0, 1,
+                    1, 1, 0, 0, 0,
+                    0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0};
+
     public void compileFunction(FuncDecl f){
+        nowAsm = new AssemblyCode(labeltable);
+        AssemblyCode textback = text;
+        text = nowAsm;
+
         StackFrameInfo frame = new StackFrameInfo();
         locateParameter(f.para);
         frame.lvarSize =  locateLocalVariables(f.nowScope);
 
         compileStmts(f);
 
+        collectreg(frame);
 
+        frame.tempSize = text.vs.max;
+        fixLocalVarDeclOffset(f.nowScope, frame.lvarOffset());
+        fixTempVariableOffset(text, frame.tempOffset());
+
+        nowAsm = text;
+        text = textback;
+
+        generateFunctionBody(frame);
 //        temp = labeltable.newGeneralLabel();
 //        for(STMT s: f.ir){
 //            visit(s);
 //        }
 //        text._label(temp);
     }
+
+    public void collectreg(StackFrameInfo sf){
+        for(int i = 0; i <= 15; i ++){
+            if(usedRegister[i] && callee[i] > 0){
+                sf.saveRegs.add(register[i]);
+            }
+            usedRegister[i] = false;
+        }
+    }
+
+    public void generateFunctionBody(StackFrameInfo frame){
+//        addprologue();
+        text._push(RBP());
+        text._mov(RBP(), RSP());
+        for(Register reg: frame.saveRegs){
+            text.virtualPush(reg);
+        }
+        extendStack(text, frame.frameSize());
+
+        text._label(labeltable.newGeneralLabel("start"));
+
+        text.assemblies.addAll(nowAsm.assemblies);
+
+//        text._label(labeltable.newGeneralLabel("end"));
+        //        addepilogue();
+        for(int i = frame.saveRegs.size() - 1; i >= 0; i --){
+            text.virtualPop(frame.saveRegs.get(i));
+        }
+        text._mov(RSP(), RBP());
+        text._pop(RBP());
+        text._ret();
+
+    }
+
+
+    public void fixTempVariableOffset(AssemblyCode asm, long len){
+        asm.vs.offset -= len;
+    }
+
+    public void fixLocalVarDeclOffset(ScopeNode s, long len){
+        for(VarDecl vd: s.allLocalVariables()){
+            vd.getMemref().offset -= len;
+        }
+    }
+
 
     public void compileStmts(FuncDecl f){
         epilogue = labeltable.newGeneralLabel("epilogue");
@@ -152,7 +221,7 @@ public class CodeGenerator {
         long len = parentlen;
         for(VarDecl vd: scope.localVariables()){
             len += 8;
-            vd.setMemref(new MemoryReference(new Register("rbp"), -len));
+            vd.setMemref(new MemoryReference(RBP(), -len));
         }
         long maxlen = len;
         for(ScopeNode s: scope.child){
@@ -165,7 +234,7 @@ public class CodeGenerator {
     public void locateParameter(List<VarDecl> parameters){
         long offset = 8;
         for(VarDecl vd: parameters){
-            vd.setMemref(new MemoryReference(new Register("rbp"), offset));
+            vd.setMemref(new MemoryReference(RBP(), offset));
             offset += 8;
         }
     }
@@ -238,7 +307,7 @@ public class CodeGenerator {
     }
 
     public void visit(Addr node) {
-        loadAddress(node.ent, new Register("rax"));
+        loadAddress(node.ent, RAX());
     }
 
     public void loadAddress(Entity var, Register reg){
@@ -249,31 +318,93 @@ public class CodeGenerator {
         }
     }
 
+    public void loadConstant(EXPR node, Register reg){
+        if(node instanceof Int){
+            Int intnode = (Int)node;
+            if(intnode.AsmValue() != null){
+                text._mov(reg, intnode.AsmValue());
+            }else if(intnode.memref() != null){
+                text._lea(reg, intnode.memref());
+            }
+        }else if(node instanceof Str){
+            Str strnode = (Str) node;
+            if(strnode.AsmValue() != null){
+                text._mov(reg, strnode.AsmValue());
+            }else if(strnode.memref() != null){
+                text._lea(reg, strnode.memref());
+            }
+        }
+        else
+            throw new NoDefined();
+    }
+
     public void visit(Assign node) {
         if (node.lhs instanceof Addr && ((Addr) node.lhs).ent.getMemref() != null) {
             visit(node.rhs);
-            store(new Register("rax"), ((Addr) node.lhs).ent.getMemref());
+            store(RAX(), ((Addr) node.lhs).ent.getMemref());
         }else if(node.rhs instanceof Int || node.rhs instanceof Str){
             visit(node.lhs);
-            text._mov(new Register("rcx"), new Register("rax"));
-            store(new Register("rax"), new MemoryReference(new Register("rcx")));
+            text._mov(RCX(), RAX());
+            store(RAX(), new MemoryReference(RCX()));
         }else {
             visit(node.rhs);
-            text.virtualPush(new Register("rax"));
+            text.virtualPush(RAX());
             visit(node.lhs);
-            text._mov(new Register("rcx"), new Register("rax"));
-            text.virtualPop(new Register("rax"));
-            text._mov(new MemoryReference(new Register("rcx")), new Register("rax"));
+            text._mov(RCX(), RAX());
+            text.virtualPop(RAX());
+            text._mov(new MemoryReference(RCX()), RAX());
         }
     }
 
     public void visit(Bin node) {
         String op = node.op;
-        visit(node.rhs);
-        text.virtualPush(new Register("rax"));
-        visit(node.lhs);
-        text.virtualPop(new Register("rcx"));
-        compileBinaryOp(op, new Register("rax"), new Register("rcx"));
+
+        if(node.rhs instanceof Int || node.rhs instanceof Str){
+            if(!needReg(op)){
+                visit(node.lhs);
+                if(node.rhs instanceof Int)
+                    compileBinaryOp(op, RAX(), ((Int) node.rhs).AsmValue());
+                else
+                    compileBinaryOp(op, RAX(), ((Str)node.rhs).asmValue());
+            }else{
+                visit(node.lhs);
+                loadConstant(node.rhs, RAX());
+                compileBinaryOp(op, RAX(), RCX());
+            }
+        }else if(node.rhs instanceof Var){
+            visit(node.lhs);
+            loadVariable((Var)node.rhs, RCX());
+            compileBinaryOp(op, RAX(), RCX());
+        }else if(node.rhs instanceof Addr){
+            visit(node.lhs);
+            loadAddress(((Addr) node.rhs).ent, RCX());
+        }else if(node.lhs instanceof Int
+                || node.lhs instanceof Str
+                || node.lhs instanceof Var
+                || node.lhs instanceof Addr){
+            visit(node.rhs);
+            text._mov(RCX(), RAX());
+            visit(node.lhs);
+            compileBinaryOp(op, RAX(), RCX());
+        }else {
+            visit(node.rhs);
+            text.virtualPush(RAX());
+            visit(node.lhs);
+            text.virtualPop(RCX());
+            compileBinaryOp(op, RAX(), RCX());
+        }
+    }
+
+    public boolean needReg(String op){
+        switch (op){
+            case "/":
+            case "%":
+            case "<<":
+            case ">>":
+                return true;
+            default:
+                return false;
+        }
     }
 
     public void compileBinaryOp(String op, Register lhs, Oprand rhs){
@@ -303,24 +434,25 @@ public class CodeGenerator {
                 text._xor(lhs, rhs);
                 break;
             case "<<":
-                text._sal(lhs, new Register("rcx"));
+                text._sal(lhs, RCX());
                 break;
             case ">>":
-                text._sar(lhs, new Register("rcx"));
+                text._sar(lhs, RCX());
                 break;
             default:
-                text._cmp(new Register("rax"), rhs);
+                text._cmp(RAX(), rhs);
                 switch (op){
-                    case "==":  text._sete(new Register("rax"));break;
-                    case "!=":  text._setne(new Register("rax"));break;
-                    case ">":   text._setg(new Register("rax"));break;
-                    case ">=":   text._setge(new Register("rax"));break;
-                    case "<":   text._setl(new Register("rax"));break;
-                    case "<=":   text._setle(new Register("rax"));break;
+                    case "==":  text._sete(RAX());break;
+                    case "!=":  text._setne(RAX());break;
+                    case ">":   text._setg(RAX());break;
+                    case ">=":   text._setge(RAX());break;
+                    case "<":   text._setl(RAX());break;
+                    case "<=":   text._setle(RAX());break;
                     default:
                         throw new NoDefined();
                 }
-                text._mov(lhs, new Register("rax"));
+                if(lhs.type != "rax")//
+                    text._mov(lhs, RAX());
         }
     }
 
@@ -328,7 +460,7 @@ public class CodeGenerator {
         int argsize = node.args.size();
         for(int i = argsize - 1; i >= 0; i --){
             visit(node.args.get(i));
-            text._push(new Register("rax", 0));
+            text._push(RAX());
         }
         text._call(node.ent.getMemref().asmLabel.str);
         rewindStack(text, argsize * 8);
@@ -336,7 +468,7 @@ public class CodeGenerator {
 
     public void visit(CJump node) {
         visit(node.cond);
-        text._test(new Register("rax"), new Register("rax"));
+        text._test(RAX(), RAX());
         text._jnz(node.thenLabel.str);
         text._jmp(node.elseLabel.str);
     }
@@ -346,7 +478,7 @@ public class CodeGenerator {
     }
 
     public void visit(Int node) {
-        text._mov(new Register("rax"), new ImmediateValue(node.value));
+        text._mov(RAX(), new ImmediateValue(node.value));
     }
 
     public void visit(Jump node) {
@@ -359,7 +491,7 @@ public class CodeGenerator {
 
     public void visit(Mem node) {
         visit(node.expr);
-        text._mov(new Register("rax"), new MemoryReference(new Register("rax")));
+        text._mov(RAX(), new MemoryReference(RAX()));
     }
 
     public void visit(Return node) {
@@ -373,9 +505,9 @@ public class CodeGenerator {
 
     public void visit(Str node) {
         if(node.asmValue() != null){
-            text._mov(new Register("rax"), node.asmValue());
+            text._mov(RAX(), node.asmValue());
         }else if(node.memref() != null){
-            text._lea(new Register("rax"), node.memref());
+            text._lea(RAX(), node.memref());
         }
         throw new NoDefined();
     }
@@ -385,13 +517,13 @@ public class CodeGenerator {
         visit(node.expr);
         switch (node.op){
             case "-":
-                text._neg(new Register("rax"));
+                text._neg(RAX());
                 break;
             case "~":
-                text._not(new Register("rax"));
+                text._not(RAX());
                 break;
             case "!":
-                text._test(new Register("rax"), new Register("rax"));
+                text._test(RAX(), RAX());
                 break;
             default:
                 throw new NoDefined();
@@ -399,7 +531,7 @@ public class CodeGenerator {
     }
 
     public void visit(Var node) {
-        loadVariable(node, new Register("rax"));
+        loadVariable(node, RAX());
     }
 
     public void loadVariable(Var var, Register dest){
@@ -413,15 +545,55 @@ public class CodeGenerator {
 
     public void extendStack(AssemblyCode file, long len){
         if(len > 0){
-            file._sub(new ImmediateValue(len), new Register("rsp"));
+            file._sub(RSP(), new ImmediateValue(len));
         }
     }
 
     public void rewindStack(AssemblyCode file, long len){
         if(len > 0){
-            file._add(new Register("rsp"), new ImmediateValue(len));
+            file._add(RSP(), new ImmediateValue(len));
         }
     }
+
+    Register RAX(){
+        usedRegister[0] = true;
+        return register[0];
+    }
+
+    Register RCX(){
+        usedRegister[1] = true;
+        return register[1];
+    }
+    Register RDX(){
+        usedRegister[2] = true;
+        return register[2];
+    }
+
+    Register RBX(){
+        usedRegister[3] = true;
+        return register[3];
+    }
+
+    Register RSP(){
+        usedRegister[4] = true;
+        return register[4];
+    }
+
+    Register RBP(){
+        usedRegister[5] = true;
+        return register[5];
+    }
+
+    Register RSI(){
+        usedRegister[6] = true;
+        return register[6];
+    }
+
+    Register RDI(){
+        usedRegister[7] = true;
+        return register[7];
+    }
+
     String pre = "default rel\n" +
             "\n" +
             "global __string__connect__\n" +

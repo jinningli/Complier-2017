@@ -1,9 +1,10 @@
 int main() {
-
-    int a = 2;
-    int b = 3;
-    int c = a + b;
-
-//    return c;
-return 0;
+    int n = 20;
+    int sum = 0;
+    int i = 1;
+    while (i <= n) {
+        sum = sum + i;
+        i = i+1;
+    }
+    return sum;
 }

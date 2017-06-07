@@ -94,7 +94,7 @@ public class IRGenerator {
     }
 
     public void assign(EXPR lhs, EXPR rhs){
-        stmts.add(new Assign(lhs.applyAddr(), rhs));
+        stmts.add(new Assign(memAddr(lhs), rhs));
     }
 
     public void label(Label label){
@@ -351,13 +351,13 @@ public class IRGenerator {
 
     public EXPR visit(AssignExpr node){
         if(isStatement()){
-            EXPR rhs = memAddr(visitExpr(node.right));
-            EXPR lhs = memAddr(visitExpr(node.left));
+            EXPR rhs = visitExpr(node.right);
+            EXPR lhs = visitExpr(node.left);
             assign(lhs, rhs);
             return null;
         }else{
 //            VarDecl tmp = new VarDecl(node.pos);// memAddr ??
-//            tmp.type = node.right.getretype();
+//            tmp.type = node.dright.getretype();
 //            tmp.setNowScope(node.nowScope);
             Var adds = newTmp(node.nowScope);
             assign(adds, visitExpr(node.right));
@@ -580,14 +580,14 @@ public class IRGenerator {
         return new Int(n);
     }
     public EXPR memAddr(EXPR expr){
-//        if(expr instanceof Mem){
-//            return ((Mem)expr).expr;
-//        }
-//        if(expr instanceof Var){
-//            return new Addr(((Var) expr).ent);
-//        }
-//        throw new NoDefined();
-        return new Mem(expr);
+        if(expr instanceof Mem){
+            return ((Mem)expr).expr;
+        }
+        if(expr instanceof Var){
+            return new Addr(((Var) expr).ent);
+        }
+        throw new NoDefined();
+//        return new Mem(expr);
     }
 
     public Var newTmp(ScopeNode scope){
