@@ -218,9 +218,9 @@ public class IRGenerator {
     public EXPR visit(VarDecl node){
         if(node.expr != null){
             node.setIR(visitExpr(node.expr));
+            EXPR lhs = new Var(node);
+            assign(lhs, node.ir);
         }
-        EXPR lhs = new Var(node);
-        assign(lhs, node.ir);
         return null;
     }
 

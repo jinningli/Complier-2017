@@ -84,6 +84,11 @@ public class CodeGenerator {
     }
 
     public String toSource(){
+        for(VarDecl vd: decls.getVars()){
+            if (vd.memref != null){
+                System.err.println("Mem locate to: " + vd.getname() + " at " + vd.getMemref().toSource());
+            }
+        }
         return pre + data.toSource() + "\n\n" +text.toSource();
     }
 
@@ -222,6 +227,7 @@ public class CodeGenerator {
         for(VarDecl vd: scope.localVariables()){
             len += 8;
             vd.setMemref(new MemoryReference(RBP(), -len));
+//            System.err.println("Mem locate to: " + vd.getname() + " at " + vd.getMemref().toSource());
         }
         long maxlen = len;
         for(ScopeNode s: scope.child){

@@ -16,9 +16,9 @@ public class Main
 //    public static boolean returned = false;
     public static void main(String[] args) throws Exception
     {
-        InputStream Filein = new FileInputStream("cn/chips/MAPLE/testcase/test.cpp");
-        compile(Filein, System.out);
-//        compile(System.in, System.out);
+//        InputStream Filein = new FileInputStream("cn/chips/MAPLE/testcase/test.cpp");
+//        compile(Filein, System.out);
+        compile(System.in, System.out);
     }
     public static void compile(InputStream in, OutputStream out) throws Exception
     {
@@ -35,15 +35,20 @@ public class Main
         AstBuilder v = new AstBuilder();
         AST root = (AST) v.visit(tree);
         root.check();
+
 //        root.print(0);
+
         IRGenerator r = new IRGenerator(root);
         IR ir = r.generate();
+
 //        root.getDecls().IRtraverse();
+
         CodeGenerator c = new CodeGenerator(root.getDecls());
         c.generate(ir);
+
 //        PrintStream tmpfout = new PrintStream(new FileOutputStream("cn/chips/MAPLE/testcase/test.asm"));
 //        tmpfout.print(c.toSource());
-        System.out.print(c.toSource());
+        System.out.println(c.toSource());
 
     }
 }
