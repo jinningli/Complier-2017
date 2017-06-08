@@ -13,12 +13,12 @@ import java.io.*;
 
 public class Main
 {
-    static boolean test = false;
+    static boolean localtest = false;
 
 //    public static boolean returned = false;
     public static void main(String[] args) throws Exception
     {
-        if(test) {
+        if(localtest) {
             InputStream Filein = new FileInputStream("cn/chips/MAPLE/testcase/test.cpp");
             compile(Filein, System.out);
         }else
@@ -37,16 +37,16 @@ public class Main
         AstBuilder v = new AstBuilder();
         AST root = (AST) v.visit(tree);
         root.check();
-        if(test)
+        if(localtest)
             root.print(0);
         IRGenerator r = new IRGenerator(root);
         IR ir = r.generate();
-        if(test)
+        if(localtest)
         root.getDecls().IRtraverse();
 
         CodeGenerator c = new CodeGenerator(root.getDecls());
         c.generate(ir);
-        if(test) {
+        if(localtest) {
             PrintStream tmpfout = new PrintStream(new FileOutputStream("cn/chips/MAPLE/testcase/test.asm"));
             tmpfout.print(c.toSource());
         }else

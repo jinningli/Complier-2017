@@ -47,6 +47,9 @@ public class FunctionCall extends Expr {
             if (grobalVariable.grobal.containsKey(inclassname)) {
                 d = grobalVariable.grobal.what(inclassname);
                 id.ent = (Entity) d;
+                for(Expr e: flist){
+                    e.getretype();//////
+                }
                 funcretype = ((FuncDecl) d).retype;
                 return funcretype;
             }

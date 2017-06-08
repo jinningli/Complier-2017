@@ -6,6 +6,7 @@ import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import java.util.Objects;
 
@@ -44,6 +45,9 @@ public class AssignExpr extends Expr {
         if((!Objects.equals(lt.typename(), rt.typename()))&&(!(rt instanceof NullType))){
             System.err.println(pos._String());
             throw new TypeNotMatch();
+        }
+        if(right instanceof NewExpr && rt instanceof ArrType){
+            ((ArrType)left.getretype()).dmsList = ((ArrType) rt).dmsList;//////
         }
         retype = left.getretype();
         return retype;

@@ -409,6 +409,7 @@ public class IRGenerator {
         for(Expr arg: node.flist){
             args.add(0, visitExpr(arg));
         }
+        EXPR call = null;
         if(Objects.equals(node.id.name, "size")){
             Expr body = node.flist.get(0);
             Type t = body.getretype();
@@ -418,7 +419,20 @@ public class IRGenerator {
             ArrType at = (ArrType) t;
             return new Int(at.inlinesize());
         }
-        EXPR call = new Call((FuncDecl) node.getEnt(), args);
+        if(Objects.equals(node.id.name, "length")){
+            FuncDecl tmp = new FuncDecl("length", new IntType(0));
+            tmp.pos = node.pos;
+            tmp.setMemref(new MemoryReference(new AsmLabel("__string__length__")));
+            call = new Call(tmp, args);
+        }else if((Objects.equals(node.id.name, "substring"))){
+            FuncDecl tmp = new FuncDecl("length", new IntType(0));
+            tmp.pos = node.pos;
+            tmp.setMemref(new MemoryReference(new AsmLabel("__string__substring__")));
+            call = new Call(tmp, args);
+        }else{
+            call = new Call((FuncDecl) node.getEnt(), args);
+        }
+
         if(isStatement()){
             stmts.add(new ExprStmt(call));
         }else{
@@ -527,6 +541,9 @@ public class IRGenerator {
     }
 
     public EXPR visit(ForStatement node){
+        if(node.stmt == null){
+            return null;
+        }
         Label beg = new Label();
         Label body = new Label();
         Label cont = new Label();
@@ -580,6 +597,9 @@ public class IRGenerator {
     }
 
     public EXPR visit(WhileStatement node){
+        if(node.stmt == null){
+            return null;
+        }
         Label beg = new Label();
         Label body = new Label();
         Label end = new Label();

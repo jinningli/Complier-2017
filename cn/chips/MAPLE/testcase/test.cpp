@@ -1,37 +1,76 @@
-class Fibonacci{
-	int x;
-	int result;
-	
-	void reset(){
-		x = 0;
-		result = 0;
-	}
-	
-	void set_problem(int x_in){
-		reset();
-		x = x_in;
-	}
-	
-	int calc(int cur_num){
-		if (cur_num == 0)
-			return 1;
-		else
-			return cur_num * calc(cur_num-1);
-	}
-	
-	int get_result(){
-		result = calc(x);
-		return result;
-	}
+int n;
+int[] a;
+
+void exchange(int x,int y)
+{
+    int t=a[x];
+    a[x]=a[y];
+    a[y]=t;
 }
 
-int main(){
-	Fibonacci teacher;
-	teacher = new Fibonacci;
-	int x;
-	for (x = 0; x < 5; x++){
-		teacher.set_problem(x);
-		println(toString(teacher.get_result()));
-	}
-	return 0;
+int makeHeap() {
+    int i;
+    int t;
+    int j;
+    i = (n - 1) / 2;
+    t = 0;
+    j = 0;
+    while (i >= 0) {
+        j = i * 2;
+        if (i*2+1<n && a[i*2+1]<a[i*2]) j = i*2+1;
+        if (a[i] > a[j]) {
+            exchange(i,j);
+        }
+        i = i - 1;
+    }
+    return 0;
+}
+
+int adjustHeap(int n) {
+    int i;
+    int j;
+    int t;
+    i = 0;
+    j = 0;
+    t = 0;
+    while (i * 2 < n) {
+        j = i*2;
+        if (i*2+1<n && a[i*2+1] < a[i*2]) j = i*2+1;
+        if (a[i] > a[j]) {
+            int t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+            i = j;
+        }
+        else break;
+    }
+    return 0;
+}
+
+int heapSort() {
+    int t;
+    int k;
+    t = 0;
+    for (k = 0; k < n; k = k + 1) {
+        t = a[0];
+        a[0] = a[n-k-1];
+        a[n-k-1] = t;
+        adjustHeap(n-k-1);
+    }
+    return 0;
+}
+
+int main() {
+    int i;
+	n = getString().parseInt();
+	a = new int[n];
+
+    for (i = 0; i < a.size(); i = i + 1)
+		a[i] = i;
+    makeHeap();
+    heapSort();
+    for (i = 0; i < a.size(); i = i + 1)
+        print(toString(a[i]) + " ");
+	print("\n");
+    return 0;
 }
