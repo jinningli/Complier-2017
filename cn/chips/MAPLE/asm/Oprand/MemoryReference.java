@@ -60,7 +60,7 @@ public class MemoryReference extends Oprand {
 
     public String toSource(){
         if(asmLabel != null && asmLabel.isString){
-            return str;
+            return "[" + asmLabel.str + "]";
         }
         switch (para){
             case 1:

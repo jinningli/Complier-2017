@@ -39,6 +39,9 @@ public class MemberFunction extends Expr {
     public Type getretype() {
         setNowScope(grobalVariable.grobal.now);
         id.setNowScope(grobalVariable.grobal.now);
+        if(funcretype != null){
+            return funcretype;
+        }
         Expr left = flist.get(0);
         if(Objects.equals(id.name, "") || left == null){
             throw new NullPtr();

@@ -19,6 +19,7 @@ import cn.chips.MAPLE.utils.scope.ScopeNode;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Maple - 2017
@@ -105,6 +106,8 @@ public class CodeGenerator {
         data._db("%d,0");
         data._label(labeltable.newStrLabel());
         data._db("%s,0");
+        data._label(labeltable.diyLabel("__nullptr"));
+        data._db("0,0");
 
         locateGrobalVariable();
         compileText();
@@ -124,10 +127,12 @@ public class CodeGenerator {
     public void locateGrobalVariable(){
         List<VarDecl> gvars = decls.gvars;
         List<ConstantExpr> cons = decls.constants;
+
         for(VarDecl vd : gvars){
             AsmLabel l = labeltable.newGrobalLabel();
             data._label(l);
             data._db("" + 8);
+            vd.setMemref(new MemoryReference(l));
         }
         for(ConstantExpr c: cons){
             if(c.type instanceof StringType){
@@ -143,7 +148,16 @@ public class CodeGenerator {
 
     public void compileText(){
         for(FuncDecl f: decls.funs) {
-            text._label(labeltable.newFuncLabel(f.name));
+            if(Objects.equals(f.name, "main")){
+                AsmLabel funcLabel = labeltable.diyLabel("main");
+                text._label(funcLabel);
+                f.setMemref(new MemoryReference(funcLabel));
+                compileFunction(f);
+                return;
+            }
+            AsmLabel funcLabel = labeltable.newFuncLabel(f.name);
+            text._label(funcLabel);
+            f.setMemref(new MemoryReference(funcLabel));
             compileFunction(f);
         }
     }
@@ -476,6 +490,7 @@ public class CodeGenerator {
             case ">>":
                 text._sar(lhs, RCX());
                 break;
+
             default:
                 text._cmp(RAX(), rhs);
                 switch (op){
@@ -486,7 +501,7 @@ public class CodeGenerator {
                     case "<":   text._setl(RAX());break;
                     case "<=":   text._setle(RAX());break;
                     default:
-                        throw new NoDefined();
+                         throw new NoDefined();
                 }
                 if(lhs.type != "rax")//
                     text._mov(lhs, RAX());

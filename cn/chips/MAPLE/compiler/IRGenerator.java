@@ -1,5 +1,7 @@
 package cn.chips.MAPLE.compiler;
 
+import cn.chips.MAPLE.asm.Oprand.MemoryReference;
+import cn.chips.MAPLE.asm.assembly.AsmLabel;
 import cn.chips.MAPLE.ast.declare.*;
 import cn.chips.MAPLE.ast.expression.*;
 import cn.chips.MAPLE.ast.statement.*;
@@ -243,6 +245,12 @@ public class IRGenerator {
         if(node.type instanceof IntType || node.type instanceof BoolType){
             return new Int(node.type.getint());
         }
+        if(node.type instanceof NullType){
+            Str tmp = new Str(node);//////??????????
+            tmp.value.setMemref(new MemoryReference(new AsmLabel("__nullptr")));
+            return tmp;
+
+        }
         throw new NoDefined();
     }
 
@@ -413,7 +421,7 @@ public class IRGenerator {
     }
 
     public EXPR visit(LogicExpr node){///////////?????
-        if(node.opt == "&&" || node.opt == "||"){
+        if(Objects.equals(node.opt, "&&") || Objects.equals(node.opt, "||")){
             Label rightLabel = new Label();
             Label endLabel = new Label();
 //            VarDecl tmp = new VarDecl(node.pos);
