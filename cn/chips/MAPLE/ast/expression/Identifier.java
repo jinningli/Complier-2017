@@ -32,7 +32,10 @@ public class Identifier extends Expr {
 
     public Entity getEnt(){
         if(ent == null){
-            ent = (Entity) nowScope.what(name);
+            if(Objects.equals(name, "this")){
+                ent = (Entity) nowScope.what("This");
+            }else
+                ent = (Entity) nowScope.what(name);
         }
         return ent;
     }
@@ -42,7 +45,10 @@ public class Identifier extends Expr {
             return vartype;
         }
         setNowScope(grobalVariable.grobal.now);
-        ent = (Entity) nowScope.what(name); // convert to declare ???constant?
+        if(Objects.equals(name, "this")){
+            ent = (Entity) nowScope.what("This");
+        }else
+            ent = (Entity) nowScope.what(name);
 //        System.out.println(name + " -> " + ent._String());
         if(Objects.equals(name, "")){
             throw new NullPtr();

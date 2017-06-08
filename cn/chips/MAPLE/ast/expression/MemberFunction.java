@@ -73,10 +73,20 @@ public class MemberFunction extends Expr {
             if(Objects.equals(id.name, "length")){
                 return new IntType(0);
             }else if(Objects.equals(id.name, "substring")){
+                for(int i = 1; i < flist.size(); i ++){
+                    if(!(flist.get(i).getretype() instanceof IntType)){
+                        throw new TypeNotMatch();
+                    }
+                }
                 return new StringType("");
             }else if(Objects.equals(id.name, "parseInt")){
                 return new IntType(0);
             }else if(Objects.equals(id.name, "ord")){
+                for(int i = 1; i < flist.size(); i ++){
+                    if(!(flist.get(i).getretype() instanceof IntType)){
+                        throw new TypeNotMatch();
+                    }
+                }
                 return new IntType(0);
             }else throw new NoDefined();
         }

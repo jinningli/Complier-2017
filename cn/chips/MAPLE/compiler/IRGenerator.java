@@ -246,9 +246,7 @@ public class IRGenerator {
             return new Int(node.type.getint());
         }
         if(node.type instanceof NullType){
-            Str tmp = new Str(node);//////??????????
-            tmp.value.setMemref(new MemoryReference(new AsmLabel("__nullptr")));
-            return tmp;
+            return new Int(0);
 
         }
         throw new NoDefined();
@@ -334,9 +332,15 @@ public class IRGenerator {
             Call ml = new Call(mallocFunc);
             ml.addArgs(new Int(node.basetype.size()));
             assign(tmp, ml);
-            FuncDecl construct = ((ClassDecl)node.getEnt()).constructer;
-            if(construct!= null){
-                stmts.add(new ExprStmt(new Call(construct, new LinkedList<EXPR>(){{add(tmp);}})));
+
+            Type basetype = node.basetype;
+            FuncDecl fd = null;
+            if(basetype instanceof  ClassType){
+                ClassType clst = (ClassType) basetype;
+                fd = clst.getcls().constructer;
+            }
+            if(fd!= null){
+                stmts.add(new ExprStmt(new Call(fd, new LinkedList<EXPR>(){{add(tmp);}})));
             }
             return isStatement() ? null : tmp;
         }else{
@@ -344,7 +348,7 @@ public class IRGenerator {
             FuncDecl fd = null;
             if(basetype instanceof ClassType){
                 ClassType clst = (ClassType) basetype;
-                fd = clst.cls.constructer;
+                fd = clst.getcls().constructer;
             }
             Var base = newTmp(node.nowScope);
             arraybuild(node.exprlist, base, 0, node.basetype, fd, node.nowScope);
@@ -404,6 +408,15 @@ public class IRGenerator {
         List<EXPR> args = new ArrayList<>();
         for(Expr arg: node.flist){
             args.add(0, visitExpr(arg));
+        }
+        if(Objects.equals(node.id.name, "size")){
+            Expr body = node.flist.get(0);
+            Type t = body.getretype();
+            if(!(t instanceof ArrType)){
+                throw new TypeNotMatch();
+            }
+            ArrType at = (ArrType) t;
+            return new Int(at.inlinesize());
         }
         EXPR call = new Call((FuncDecl) node.getEnt(), args);
         if(isStatement()){

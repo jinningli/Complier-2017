@@ -2,9 +2,9 @@ package cn.chips.MAPLE.ast.type;
 
 
 import cn.chips.MAPLE.ast.declare.ClassDecl;
-import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.Position;
 import cn.chips.MAPLE.utils.Project;
+import cn.chips.MAPLE.utils.grobalVariable;
 
 /**
  *    Maple - 2017
@@ -31,6 +31,12 @@ public class ClassType extends Project implements Type{
     }
     public void setClass(ClassDecl _cls){
         cls = _cls;
+    }
+    public ClassDecl getcls(){
+        if(cls != null){
+            return cls;
+        }
+        return (ClassDecl) grobalVariable.grobal.what(name);
     }
     public long size(){
         return ptrsize;

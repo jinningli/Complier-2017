@@ -127,7 +127,7 @@ public class CodeGenerator {
     public void locateGrobalVariable(){
         List<VarDecl> gvars = decls.gvars;
         List<ConstantExpr> cons = decls.constants;
-
+        List<FuncDecl> funs = decls.funs;
         for(VarDecl vd : gvars){
             AsmLabel l = labeltable.newGrobalLabel();
             data._label(l);
@@ -144,20 +144,20 @@ public class CodeGenerator {
                 c.setMemref(new MemoryReference(l));
             }
         }
+        for(FuncDecl f: funs){
+            if(Objects.equals(f.name, "main")){
+                AsmLabel funcLabel = labeltable.diyLabel("main");
+                f.setMemref(new MemoryReference(funcLabel));
+            }else {
+                AsmLabel funcLabel = labeltable.newFuncLabel(f.name);
+                f.setMemref(new MemoryReference(funcLabel));
+            }
+        }
     }
 
     public void compileText(){
         for(FuncDecl f: decls.funs) {
-            if(Objects.equals(f.name, "main")){
-                AsmLabel funcLabel = labeltable.diyLabel("main");
-                text._label(funcLabel);
-                f.setMemref(new MemoryReference(funcLabel));
-                compileFunction(f);
-                return;
-            }
-            AsmLabel funcLabel = labeltable.newFuncLabel(f.name);
-            text._label(funcLabel);
-            f.setMemref(new MemoryReference(funcLabel));
+            text._label(f.getMemref().asmLabel);
             compileFunction(f);
         }
     }

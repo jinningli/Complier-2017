@@ -39,4 +39,7 @@ public class ArrType extends Project implements Type{
     public long size(){
         return 8;
     }
+    public int inlinesize(){
+        return dmsList.get(dimension - 2).getint();
+    }
 }

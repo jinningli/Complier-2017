@@ -18,6 +18,9 @@ public class Return extends STMT {
             dep --;
         }
         System.out.println(indent + "Return:");
-        expr.traverse(depth + 1);
+        if(expr == null){
+            System.out.println(indent + "void");
+        }else
+            expr.traverse(depth + 1);
     }
 }

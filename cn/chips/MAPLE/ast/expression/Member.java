@@ -40,7 +40,9 @@ public class Member extends Expr {
         }
         if(body instanceof Identifier){
             if(Objects.equals(((Identifier) body).name, "this")){
-                retype = ((VarDecl)grobalVariable.grobal.what(grobalVariable.nowclass + "-" + name)).type;
+                vardeclent = (VarDecl)grobalVariable.grobal.what(grobalVariable.nowclass + "-" + name);
+                retype = ((VarDecl)vardeclent).type;
+                body.getretype();
                 return retype;
             }
         }

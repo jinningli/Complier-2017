@@ -46,6 +46,7 @@ public class FunctionCall extends Expr {
             String inclassname = grobalVariable.nowclass + "-" + name;
             if (grobalVariable.grobal.containsKey(inclassname)) {
                 d = grobalVariable.grobal.what(inclassname);
+                id.ent = (Entity) d;
                 funcretype = ((FuncDecl) d).retype;
                 return funcretype;
             }
