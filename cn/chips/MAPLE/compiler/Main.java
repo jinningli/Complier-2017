@@ -13,11 +13,15 @@ import java.io.*;
 
 public class Main
 {
+    static boolean test = false;
+
 //    public static boolean returned = false;
     public static void main(String[] args) throws Exception
     {
-//        InputStream Filein = new FileInputStream("cn/chips/MAPLE/testcase/test.cpp");
-//        compile(Filein, System.out);
+        if(test) {
+            InputStream Filein = new FileInputStream("cn/chips/MAPLE/testcase/test.cpp");
+            compile(Filein, System.out);
+        }else
         compile(System.in, System.out);
     }
     public static void compile(InputStream in, OutputStream out) throws Exception
@@ -29,25 +33,23 @@ public class Main
         MapleParser parser = new MapleParser(tokens);
         parser.setErrorHandler(new BailErrorStrategy());
         ParseTree tree = parser.program();
-//        System.out.pccfrintln("\n***String Tree:");
-//        System.out.println(tree.toStringTree(parser) + "\n***");
 
         AstBuilder v = new AstBuilder();
         AST root = (AST) v.visit(tree);
         root.check();
-
-//        root.print(0);
-
+        if(test)
+            root.print(0);
         IRGenerator r = new IRGenerator(root);
         IR ir = r.generate();
-
-//        root.getDecls().IRtraverse();
+        if(test)
+        root.getDecls().IRtraverse();
 
         CodeGenerator c = new CodeGenerator(root.getDecls());
         c.generate(ir);
-
-//        PrintStream tmpfout = new PrintStream(new FileOutputStream("cn/chips/MAPLE/testcase/test.asm"));
-//        tmpfout.print(c.toSource());
+        if(test) {
+            PrintStream tmpfout = new PrintStream(new FileOutputStream("cn/chips/MAPLE/testcase/test.asm"));
+            tmpfout.print(c.toSource());
+        }else
         System.out.println(c.toSource());
 
     }

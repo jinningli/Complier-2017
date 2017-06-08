@@ -58,6 +58,12 @@ public class LabelTable {
         return asmLabel;
     }
 
+    public AsmLabel diyLabel(String name){
+        AsmLabel asmLabel = new AsmLabel(name);
+        set.add(asmLabel);
+        return asmLabel;
+    }
+
 //    public AsmLabel newFuncLabel(){
 //        AsmLabel asmLabel = new AsmLabel(funcbase, null);
 //        set.add(asmLabel);

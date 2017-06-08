@@ -7,14 +7,14 @@ import cn.chips.MAPLE.asm.Oprand.MemoryReference;
 import cn.chips.MAPLE.asm.Oprand.Oprand;
 import cn.chips.MAPLE.asm.Oprand.Register;
 import cn.chips.MAPLE.asm.assembly.AsmLabel;
-import cn.chips.MAPLE.asm.assembly.Assembly;
-import cn.chips.MAPLE.ast.declare.ClassDecl;
 import cn.chips.MAPLE.ast.declare.FuncDecl;
 import cn.chips.MAPLE.ast.declare.VarDecl;
+import cn.chips.MAPLE.ast.expression.ConstantExpr;
 import cn.chips.MAPLE.ast.type.StringType;
 import cn.chips.MAPLE.exception.NoDefined;
 import cn.chips.MAPLE.ir.*;
 import cn.chips.MAPLE.utils.Declarations;
+import cn.chips.MAPLE.utils.grobalVariable;
 import cn.chips.MAPLE.utils.scope.ScopeNode;
 
 import java.util.LinkedList;
@@ -44,6 +44,7 @@ public class CodeGenerator {
         text = new AssemblyCode(labeltable);
         data = new AssemblyCode(labeltable);
         registInit();
+        inlineFuncInit();
     }
 
     public CodeGenerator(Declarations _decls){
@@ -52,6 +53,34 @@ public class CodeGenerator {
         text = new AssemblyCode(labeltable);
         data = new AssemblyCode(labeltable);
         registInit();
+        inlineFuncInit();
+    }
+
+    public void inlineFuncInit(){
+        FuncDecl func;
+        func = (FuncDecl) grobalVariable.grobal.what("print");
+        func.setMemref(new MemoryReference(labeltable.diyLabel("print")));
+
+        func = (FuncDecl) grobalVariable.grobal.what("println");
+        func.setMemref(new MemoryReference(labeltable.diyLabel("println")));
+
+        func = (FuncDecl) grobalVariable.grobal.what("getString");
+        func.setMemref(new MemoryReference(labeltable.diyLabel("getString")));
+
+        func = (FuncDecl) grobalVariable.grobal.what("getInt");
+        func.setMemref(new MemoryReference(labeltable.diyLabel("getInt")));
+
+        func = (FuncDecl) grobalVariable.grobal.what("toString");
+        func.setMemref(new MemoryReference(labeltable.diyLabel("toString")));
+
+        func = (FuncDecl) grobalVariable.grobal.what("parseInt");
+        func.setMemref(new MemoryReference(labeltable.diyLabel("ParseInt")));
+
+        func = (FuncDecl) grobalVariable.grobal.what("ord");
+        func.setMemref(new MemoryReference(labeltable.diyLabel("ord")));
+
+        func = (FuncDecl) grobalVariable.grobal.what("mallocFunc");
+        func.setMemref(new MemoryReference(labeltable.diyLabel("malloc")));
     }
 
     public void registInit(){
@@ -94,18 +123,20 @@ public class CodeGenerator {
 
     public void locateGrobalVariable(){
         List<VarDecl> gvars = decls.gvars;
+        List<ConstantExpr> cons = decls.constants;
         for(VarDecl vd : gvars){
-            if(vd.type instanceof StringType){
-                String str = vd.expr.getretype().getname();
+            AsmLabel l = labeltable.newGrobalLabel();
+            data._label(l);
+            data._db("" + 8);
+        }
+        for(ConstantExpr c: cons){
+            if(c.type instanceof StringType){
+                String str = c.type.getname();
                 data._db("" + str.length());
                 AsmLabel l = labeltable.newStrLabel();
                 data._label(l);
                 data._db("\'" + str +"\',0");
-                vd.setMemref(new MemoryReference(l));
-            }else{
-                AsmLabel l = labeltable.newGrobalLabel();
-                data._label(l);
-                data._db("" + 8);
+                c.setMemref(new MemoryReference(l));
             }
         }
     }
@@ -512,8 +543,10 @@ public class CodeGenerator {
     public void visit(Str node) {
         if(node.asmValue() != null){
             text._mov(RAX(), node.asmValue());
+            return;
         }else if(node.memref() != null){
             text._lea(RAX(), node.memref());
+            return;
         }
         throw new NoDefined();
     }

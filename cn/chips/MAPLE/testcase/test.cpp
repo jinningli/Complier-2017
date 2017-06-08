@@ -1,3 +1,5 @@
-int main() {
-    void a;
+int main()
+{
+  println("Hello, world!");
+  return 0;
 }
