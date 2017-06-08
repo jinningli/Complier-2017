@@ -411,15 +411,11 @@ public class IRGenerator {
         }
         EXPR call = null;
         if(Objects.equals(node.id.name, "size")){
-            Expr body = node.flist.get(0);
-            Type t = body.getretype();
-            if(!(t instanceof ArrType)){
-                throw new TypeNotMatch();
-            }
-            ArrType at = (ArrType) t;
-            return new Int(at.inlinesize());
-        }
-        if(Objects.equals(node.id.name, "length")){
+            FuncDecl tmp = new FuncDecl("size", new IntType(0));
+            tmp.pos = node.pos;
+            tmp.setMemref(new MemoryReference(new AsmLabel("__array__size_")));
+            call = new Call(tmp, args);
+        }else if(Objects.equals(node.id.name, "length")){
             FuncDecl tmp = new FuncDecl("length", new IntType(0));
             tmp.pos = node.pos;
             tmp.setMemref(new MemoryReference(new AsmLabel("__string__length__")));

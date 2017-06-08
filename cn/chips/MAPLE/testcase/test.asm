@@ -31,165 +31,155 @@ __Str_1:
 	db	%s,0
 __nullptr:
 	db	0,0
-__Grobal_0:
-	db	8
-__Grobal_1:
-	db	8
-	db	1
+	db	2
 __Str_2:
-	db	' ',0
+	db	'( ',0
 	db	2
 __Str_3:
-	db	'\n',0
+	db	', ',0
+	db	2
+__Str_4:
+	db	' )',0
+	db	10
+__Str_5:
+	db	'vector x: ',0
+	db	8
+__Str_6:
+	db	'excited!',0
+	db	10
+__Str_7:
+	db	'vector y: ',0
+	db	7
+__Str_8:
+	db	'x + y: ',0
+	db	7
+__Str_9:
+	db	'x * y: ',0
+	db	14
+__Str_10:
+	db	'(1 << 3) * y: ',0
 
 
 	section .text
-__Function_exchange:
-	push rbp
-	mov rbp rsp
-	mov qword [rbp+-8] rbp
-	sub rsp 40
-__L_start_1:
-	mov rax qword [rbp+-24]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov qword [rbp+-16] rax
-	mov rax qword [rbp+-32]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-24]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rcx rax
-	mov rax qword [rbp+-8]
-	mov qword [rcx] rax
-	mov rax qword [rbp+-16]
-	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-32]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rcx rax
-	mov rax qword [rbp+-8]
-	mov qword [rcx] rax
-__L_epilogue_0:
-	mov rbp qword [rbp+-8]
-	mov rsp rbp
-	pop rbp
-	ret
-__Function_makeHeap:
+__Function_vector-init:
 	push rbp
 	mov rbp rsp
 	mov qword [rbp+-8] rsp
 	mov qword [rbp+-16] rbp
-	sub rsp 56
-__L_start_3:
-	mov rax [__Grobal_0]
-	sub rax 1
-	mov rax 2
-	div rax rcx
-	mov qword [rbp+-32] rax
-	mov rax 0
-	mov qword [rbp+-24] rax
-	mov rax 0
-	mov qword [rbp+-40] rax
-AsmLabel0:
-	mov rax qword [rbp+-32]
+	sub rsp 96
+__L_start_1:
+	mov rax qword [rbp+-48]
 	cmp rax 0
-	setge rax
+	sete rax
 	test rax rax
-	jnz	AsmLabel1
-	jmp	AsmLabel2
-AsmLabel1:
-	mov rax qword [rbp+-32]
-	imul rax 2
-	mov qword [rbp+-40] rax
-	mov rax qword [rbp+-32]
-	imul rax 2
-	add rax 1
-	mov rcx [__Grobal_0]
-	cmp rax rcx
-	setl rax
-	mov qword [rbp+-48] rax
-	mov rax qword [rbp+-48]
-	test rax rax
-	jnz	AsmLabel6
-	jmp	AsmLabel7
-AsmLabel6:
-	mov rax qword [rbp+-32]
-	imul rax 2
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-32]
-	imul rax 2
-	add rax 1
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov rcx qword [rbp+-8]
-	cmp rax rcx
-	setl rax
-	mov qword [rbp+-48] rax
-AsmLabel7:
-	mov rax qword [rbp+-48]
-	test rax rax
-	jnz	AsmLabel3
-	jmp	AsmLabel4
-AsmLabel3:
-	mov rax qword [rbp+-32]
-	imul rax 2
-	add rax 1
-	mov qword [rbp+-40] rax
-AsmLabel5:
-	mov rax qword [rbp+-40]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-32]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov rcx qword [rbp+-8]
-	cmp rax rcx
-	setg rax
-	test rax rax
-	jnz	AsmLabel8
-	jmp	AsmLabel9
-AsmLabel8:
-	mov rax qword [rbp+-32]
-	push rax
-	mov rax qword [rbp+-40]
-	push rax
-	call	__Function_exchange
-	add rsp 16
-AsmLabel10:
-	mov rax qword [rbp+-32]
-	sub rax 1
-	mov qword [rbp+-32] rax
-	jmp	AsmLabel0
+	jnz	AsmLabel0
+	jmp	AsmLabel1
+AsmLabel0:
+	jmp	__L_epilogue_0
 AsmLabel2:
+	mov rax qword [rbp+-48]
+	push rax
+	call	__array__size_
+	add rsp 8
+	mov qword [rbp+-32] rax
+	mov rax qword [rbp+-32]
+	mov qword [rbp+-64] rax
+	mov rax qword [rbp+-64]
+	imul rax 8
+	add rax 8
+	push rax
+	call	malloc
+	add rsp 8
+	mov qword [rbp+-40] rax
+	mov rax qword [rbp+-64]
+	mov qword [rbp+-8] rax
+	mov rax qword [rbp+-40]
+	mov rcx rax
+	mov rax qword [rbp+-8]
+	mov qword [rcx] rax
+	mov rax qword [rbp+-40]
+	add rax 8
+	mov qword [rbp+-40] rax
+	mov rax qword [rbp+-40]
+	mov qword [rbp+-8] rax
+	mov rax qword [rbp+-72]
+	add rax 0
+	mov rcx rax
+	mov rax qword [rbp+-8]
+	mov qword [rcx] rax
 	mov rax 0
+	mov qword [rbp+-80] rax
+AsmLabel6:
+	mov rax qword [rbp+-48]
+	push rax
+	call	__array__size_
+	add rsp 8
+	mov qword [rbp+-24] rax
+	mov rax qword [rbp+-80]
+	mov rcx qword [rbp+-24]
+	cmp rax rcx
+	setl rax
+	test rax rax
+	jnz	AsmLabel7
+	jmp	AsmLabel9
+AsmLabel7:
+	mov rax qword [rbp+-80]
+	imul rax 8
+	mov rcx rax
+	mov rax qword [rbp+-48]
+	add rax rcx
+	mov rax qword [rax]
+	mov qword [rbp+-8] rax
+	mov rax qword [rbp+-80]
+	imul rax 8
+	mov qword [rbp+-16] rax
+	mov rax qword [rbp+-72]
+	add rax 0
+	mov rax qword [rax]
+	mov rcx qword [rbp+-16]
+	add rax rcx
+	mov rcx rax
+	mov rax qword [rbp+-8]
+	mov qword [rcx] rax
+AsmLabel8:
+	mov rax qword [rbp+-80]
+	add rax 1
+	mov qword [rbp+-80] rax
+	jmp	AsmLabel6
+AsmLabel9:
+__L_epilogue_0:
+	mov rbp qword [rbp+-16]
+	mov rsp qword [rbp+-8]
+	mov rsp rbp
+	pop rbp
+	ret
+__Function_vector-getDim:
+	push rbp
+	mov rbp rsp
+	mov qword [rbp+-8] rsp
+	mov qword [rbp+-16] rbp
+	sub rsp 32
+__L_start_3:
+	mov rax qword [rbp+-32]
+	add rax 0
+	mov rax qword [rax]
+	cmp rax 0
+	sete rax
+	test rax rax
+	jnz	AsmLabel10
+	jmp	AsmLabel11
+AsmLabel10:
+	mov rax 0
+	jmp	__L_epilogue_2
+AsmLabel12:
+	mov rax qword [rbp+-32]
+	add rax 0
+	mov rax qword [rax]
+	push rax
+	call	__array__size_
+	add rsp 8
+	mov qword [rbp+-24] rax
+	mov rax qword [rbp+-24]
 	jmp	__L_epilogue_2
 __L_epilogue_2:
 	mov rbp qword [rbp+-16]
@@ -197,7 +187,7 @@ __L_epilogue_2:
 	mov rsp rbp
 	pop rbp
 	ret
-__Function_adjustHeap:
+__Function_vector-dot:
 	push rbp
 	mov rbp rsp
 	mov qword [rbp+-8] rsp
@@ -205,161 +195,48 @@ __Function_adjustHeap:
 	sub rsp 72
 __L_start_5:
 	mov rax 0
-	mov qword [rbp+-32] rax
-	mov rax 0
-	mov qword [rbp+-40] rax
+	mov qword [rbp+-48] rax
 	mov rax 0
 	mov qword [rbp+-24] rax
-AsmLabel11:
-	mov rax qword [rbp+-32]
-	imul rax 2
-	mov rcx qword [rbp+-48]
+AsmLabel13:
+	call	__Function_vector-getDim
+	mov qword [rbp+-32] rax
+	mov rax qword [rbp+-48]
+	mov rcx qword [rbp+-32]
 	cmp rax rcx
 	setl rax
-	test rax rax
-	jnz	AsmLabel12
-	jmp	AsmLabel13
-AsmLabel12:
-	mov rax qword [rbp+-32]
-	imul rax 2
-	mov qword [rbp+-40] rax
-	mov rax qword [rbp+-32]
-	imul rax 2
-	add rax 1
-	mov rcx qword [rbp+-48]
-	cmp rax rcx
-	setl rax
-	mov qword [rbp+-56] rax
-	mov rax qword [rbp+-56]
-	test rax rax
-	jnz	AsmLabel17
-	jmp	AsmLabel18
-AsmLabel17:
-	mov rax qword [rbp+-32]
-	imul rax 2
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-32]
-	imul rax 2
-	add rax 1
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov rcx qword [rbp+-8]
-	cmp rax rcx
-	setl rax
-	mov qword [rbp+-56] rax
-AsmLabel18:
-	mov rax qword [rbp+-56]
 	test rax rax
 	jnz	AsmLabel14
 	jmp	AsmLabel15
 AsmLabel14:
-	mov rax qword [rbp+-32]
-	imul rax 2
-	add rax 1
-	mov qword [rbp+-40] rax
-AsmLabel16:
-	mov rax qword [rbp+-40]
+	mov rax qword [rbp+-48]
 	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
+	mov qword [rbp+-8] rax
+	mov rax qword [rbp+-56]
+	add rax 0
+	mov rax qword [rax]
+	mov rcx qword [rbp+-8]
 	add rax rcx
 	mov rax qword [rax]
 	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-32]
+	mov rax qword [rbp+-48]
 	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
+	mov qword [rbp+-16] rax
+	mov rax qword [rbp+-40]
+	add rax 0
+	mov rax qword [rax]
+	mov rcx qword [rbp+-16]
 	add rax rcx
 	mov rax qword [rax]
 	mov rcx qword [rbp+-8]
-	cmp rax rcx
-	setg rax
-	test rax rax
-	jnz	AsmLabel19
-	jmp	AsmLabel20
-AsmLabel19:
-	mov rax qword [rbp+-32]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov qword [rbp+-64] rax
-	mov rax qword [rbp+-40]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-32]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rcx rax
-	mov rax qword [rbp+-8]
-	mov qword [rcx] rax
-	mov rax qword [rbp+-64]
-	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-40]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rcx rax
-	mov rax qword [rbp+-8]
-	mov qword [rcx] rax
-	mov rax qword [rbp+-40]
-	mov qword [rbp+-32] rax
-	jmp	AsmLabel21
-AsmLabel20:
-	mov rax qword [rbp+-32]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov qword [rbp+-64] rax
-	mov rax qword [rbp+-40]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-32]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rcx rax
-	mov rax qword [rbp+-8]
-	mov qword [rcx] rax
-	mov rax qword [rbp+-64]
-	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-40]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rcx rax
-	mov rax qword [rbp+-8]
-	mov qword [rcx] rax
-	mov rax qword [rbp+-40]
-	mov qword [rbp+-32] rax
-AsmLabel21:
-	jmp	AsmLabel11
-AsmLabel13:
-	mov rax 0
+	imul rax rcx
+	mov qword [rbp+-24] rax
+	mov rax qword [rbp+-48]
+	add rax 1
+	mov qword [rbp+-48] rax
+	jmp	AsmLabel13
+AsmLabel15:
+	mov rax qword [rbp+-24]
 	jmp	__L_epilogue_4
 __L_epilogue_4:
 	mov rbp qword [rbp+-16]
@@ -367,74 +244,328 @@ __L_epilogue_4:
 	mov rsp rbp
 	pop rbp
 	ret
-__Function_heapSort:
+__Function_vector-scalarInPlaceMultiply:
+	push rbp
+	mov rbp rsp
+	mov qword [rbp+-8] rsp
+	mov qword [rbp+-16] rbp
+	sub rsp 64
+__L_start_7:
+	mov rax qword [rbp+-32]
+	add rax 0
+	mov rax qword [rax]
+	cmp rax 0
+	sete rax
+	test rax rax
+	jnz	AsmLabel16
+	jmp	AsmLabel17
+AsmLabel16:
+	mov rax 0
+	jmp	__L_epilogue_6
+AsmLabel18:
+	mov rax 0
+	mov qword [rbp+-40] rax
+AsmLabel19:
+	call	__Function_vector-getDim
+	mov qword [rbp+-48] rax
+	mov rax qword [rbp+-40]
+	mov rcx qword [rbp+-48]
+	cmp rax rcx
+	setl rax
+	test rax rax
+	jnz	AsmLabel20
+	jmp	AsmLabel22
+AsmLabel20:
+	mov rax qword [rbp+-40]
+	imul rax 8
+	mov qword [rbp+-8] rax
+	mov rax qword [rbp+-32]
+	add rax 0
+	mov rax qword [rax]
+	mov rcx qword [rbp+-8]
+	add rax rcx
+	mov rax qword [rax]
+	mov rcx rax
+	mov rax qword [rbp+-24]
+	imul rax rcx
+	mov qword [rbp+-8] rax
+	mov rax qword [rbp+-40]
+	imul rax 8
+	mov qword [rbp+-16] rax
+	mov rax qword [rbp+-32]
+	add rax 0
+	mov rax qword [rax]
+	mov rcx qword [rbp+-16]
+	add rax rcx
+	mov rcx rax
+	mov rax qword [rbp+-8]
+	mov qword [rcx] rax
+AsmLabel21:
+	mov rax qword [rbp+-40]
+	add rax 1
+	mov qword [rbp+-40] rax
+	jmp	AsmLabel19
+AsmLabel22:
+	mov rax qword [rbp+-32]
+	jmp	__L_epilogue_6
+__L_epilogue_6:
+	mov rbp qword [rbp+-16]
+	mov rsp qword [rbp+-8]
+	mov rsp rbp
+	pop rbp
+	ret
+__Function_vector-add:
+	push rbp
+	mov rbp rsp
+	mov qword [rbp+-8] rsp
+	mov qword [rbp+-16] rbp
+	sub rsp 112
+__L_start_9:
+	call	__Function_vector-getDim
+	mov qword [rbp+-96] rax
+	mov rax qword [rbp+-80]
+	push rax
+	call	__Function_vector-getDim
+	add rsp 8
+	mov qword [rbp+-32] rax
+	mov rax qword [rbp+-96]
+	mov rcx qword [rbp+-32]
+	cmp rax rcx
+	setne rax
+	mov qword [rbp+-88] rax
+	mov rax qword [rbp+-88]
+	test rax rax
+	jnz	AsmLabel26
+	jmp	AsmLabel27
+AsmLabel26:
+	call	__Function_vector-getDim
+	mov qword [rbp+-40] rax
+	mov rax qword [rbp+-40]
+	cmp rax 0
+	sete rax
+	mov qword [rbp+-88] rax
+AsmLabel27:
+	mov rax qword [rbp+-88]
+	test rax rax
+	jnz	AsmLabel23
+	jmp	AsmLabel24
+AsmLabel23:
+	mov rax 0
+	jmp	__L_epilogue_8
+AsmLabel25:
+	mov rax 8
+	push rax
+	call	malloc
+	add rsp 8
+	mov qword [rbp+-64] rax
+	mov rax qword [rbp+-64]
+	mov qword [rbp+-24] rax
+	mov rax 0
+	mov qword [rbp+-56] rax
+AsmLabel28:
+	call	__Function_vector-getDim
+	mov qword [rbp+-72] rax
+	mov rax qword [rbp+-56]
+	mov rcx qword [rbp+-72]
+	cmp rax rcx
+	setl rax
+	test rax rax
+	jnz	AsmLabel29
+	jmp	AsmLabel31
+AsmLabel29:
+	mov rax qword [rbp+-56]
+	imul rax 8
+	mov qword [rbp+-8] rax
+	mov rax qword [rbp+-80]
+	add rax 0
+	mov rax qword [rax]
+	mov rcx qword [rbp+-8]
+	add rax rcx
+	mov rax qword [rax]
+	mov qword [rbp+-8] rax
+	mov rax qword [rbp+-56]
+	imul rax 8
+	mov qword [rbp+-16] rax
+	mov rax qword [rbp+-48]
+	add rax 0
+	mov rax qword [rax]
+	mov rcx qword [rbp+-16]
+	add rax rcx
+	mov rax qword [rax]
+	mov rcx qword [rbp+-8]
+	add rax rcx
+	mov qword [rbp+-8] rax
+	mov rax qword [rbp+-56]
+	imul rax 8
+	mov qword [rbp+-16] rax
+	mov rax qword [rbp+-24]
+	add rax 0
+	mov rax qword [rax]
+	mov rcx qword [rbp+-16]
+	add rax rcx
+	mov rcx rax
+	mov rax qword [rbp+-8]
+	mov qword [rcx] rax
+AsmLabel30:
+	mov rax qword [rbp+-56]
+	add rax 1
+	mov qword [rbp+-56] rax
+	jmp	AsmLabel28
+AsmLabel31:
+	mov rax qword [rbp+-24]
+	jmp	__L_epilogue_8
+__L_epilogue_8:
+	mov rbp qword [rbp+-16]
+	mov rsp qword [rbp+-8]
+	mov rsp rbp
+	pop rbp
+	ret
+__Function_vector-set:
+	push rbp
+	mov rbp rsp
+	mov qword [rbp+-8] rsp
+	mov qword [rbp+-16] rbp
+	sub rsp 64
+__L_start_11:
+	call	__Function_vector-getDim
+	mov qword [rbp+-24] rax
+	mov rax qword [rbp+-24]
+	mov rcx qword [rbp+-40]
+	cmp rax rcx
+	setl rax
+	test rax rax
+	jnz	AsmLabel32
+	jmp	AsmLabel33
+AsmLabel32:
+	mov rax 0
+	jmp	__L_epilogue_10
+AsmLabel34:
+	mov rax qword [rbp+-48]
+	mov qword [rbp+-8] rax
+	mov rax qword [rbp+-40]
+	imul rax 8
+	mov qword [rbp+-16] rax
+	mov rax qword [rbp+-32]
+	add rax 0
+	mov rax qword [rax]
+	mov rcx qword [rbp+-16]
+	add rax rcx
+	mov rcx rax
+	mov rax qword [rbp+-8]
+	mov qword [rcx] rax
+	mov rax 1
+	jmp	__L_epilogue_10
+__L_epilogue_10:
+	mov rbp qword [rbp+-16]
+	mov rsp qword [rbp+-8]
+	mov rsp rbp
+	pop rbp
+	ret
+__Function_vector-toString:
+	push rbp
+	mov rbp rsp
+	mov qword [rbp+-8] rsp
+	mov qword [rbp+-16] rbp
+	sub rsp 64
+__L_start_13:
+	lea rax [__Str_2]
+	mov qword [rbp+-24] rax
+	call	__Function_vector-getDim
+	mov qword [rbp+-48] rax
+	mov rax qword [rbp+-48]
+	cmp rax 0
+	setg rax
+	test rax rax
+	jnz	AsmLabel35
+	jmp	AsmLabel36
+AsmLabel35:
+	call	__Function_vector-toString
+	mov qword [rbp+-64] rax
+	mov rax qword [rbp+-24]
+	mov rcx qword [rbp+-64]
+	add rax rcx
+	mov qword [rbp+-24] rax
+AsmLabel37:
+	mov rax 1
+	mov qword [rbp+-40] rax
+AsmLabel38:
+	call	__Function_vector-getDim
+	mov qword [rbp+-56] rax
+	mov rax qword [rbp+-40]
+	mov rcx qword [rbp+-56]
+	cmp rax rcx
+	setl rax
+	test rax rax
+	jnz	AsmLabel39
+	jmp	AsmLabel41
+AsmLabel39:
+	call	__Function_vector-toString
+	mov qword [rbp+-64] rax
+	mov rax qword [rbp+-24]
+	add rax
+	mov rcx qword [rbp+-64]
+	add rax rcx
+	mov qword [rbp+-24] rax
+AsmLabel40:
+	mov rax qword [rbp+-40]
+	add rax 1
+	mov qword [rbp+-40] rax
+	jmp	AsmLabel38
+AsmLabel41:
+	mov rax qword [rbp+-24]
+	add rax
+	mov qword [rbp+-24] rax
+	mov rax qword [rbp+-24]
+	jmp	__L_epilogue_12
+__L_epilogue_12:
+	mov rbp qword [rbp+-16]
+	mov rsp qword [rbp+-8]
+	mov rsp rbp
+	pop rbp
+	ret
+__Function_vector-copy:
 	push rbp
 	mov rbp rsp
 	mov qword [rbp+-8] rsp
 	mov qword [rbp+-16] rbp
 	sub rsp 40
-__L_start_7:
-	mov rax 0
-	mov qword [rbp+-24] rax
-	mov rax 0
-	mov qword [rbp+-32] rax
-AsmLabel22:
+__L_start_15:
 	mov rax qword [rbp+-32]
-	mov rcx [__Grobal_0]
-	cmp rax rcx
-	setl rax
+	cmp rax 0
+	sete rax
 	test rax rax
-	jnz	AsmLabel23
-	jmp	AsmLabel25
-AsmLabel23:
-	mov rax [__Grobal_1]
-	add rax 0
-	mov rax qword [rax]
-	mov qword [rbp+-24] rax
-	mov rax [__Grobal_0]
-	mov rcx qword [rbp+-32]
-	sub rax rcx
-	sub rax 1
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
-	mov qword [rbp+-8] rax
-	mov rax [__Grobal_1]
-	add rax 0
-	mov rcx rax
-	mov rax qword [rbp+-8]
-	mov qword [rcx] rax
-	mov rax qword [rbp+-24]
-	mov qword [rbp+-8] rax
-	mov rax [__Grobal_0]
-	mov rcx qword [rbp+-32]
-	sub rax rcx
-	sub rax 1
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rcx rax
-	mov rax qword [rbp+-8]
-	mov qword [rcx] rax
-	mov rax [__Grobal_0]
-	mov rcx qword [rbp+-32]
-	sub rax rcx
-	sub rax 1
-	push rax
-	call	__Function_adjustHeap
-	add rsp 8
-AsmLabel24:
-	mov rax qword [rbp+-32]
-	add rax 1
-	mov qword [rbp+-32] rax
-	jmp	AsmLabel22
-AsmLabel25:
+	jnz	AsmLabel42
+	jmp	AsmLabel43
+AsmLabel42:
 	mov rax 0
-	jmp	__L_epilogue_6
-__L_epilogue_6:
+	jmp	__L_epilogue_14
+AsmLabel44:
+	mov rax qword [rbp+-32]
+	push rax
+	call	__Function_vector-getDim
+	add rsp 8
+	mov qword [rbp+-40] rax
+	mov rax qword [rbp+-40]
+	cmp rax 0
+	sete rax
+	test rax rax
+	jnz	AsmLabel45
+	jmp	AsmLabel46
+AsmLabel45:
+	mov rax qword [rbp+-24]
+	add rax 0
+	mov rcx rax
+	mov qword [rcx] rax
+	jmp	AsmLabel47
+AsmLabel46:
+	mov rax qword [rbp+-24]
+	add rax 0
+	mov rcx rax
+	mov qword [rcx] rax
+AsmLabel47:
+	mov rax 1
+	jmp	__L_epilogue_14
+__L_epilogue_14:
 	mov rbp qword [rbp+-16]
 	mov rsp qword [rbp+-8]
 	mov rsp rbp
@@ -445,103 +576,190 @@ main:
 	mov rbp rsp
 	mov qword [rbp+-8] rsp
 	mov qword [rbp+-16] rbp
-	sub rsp 80
-__L_start_9:
-	call	getString
+	sub rsp 168
+__L_start_17:
+	mov rax 8
+	push rax
+	call	malloc
+	add rsp 8
+	mov qword [rbp+-80] rax
+	mov rax qword [rbp+-80]
+	mov qword [rbp+-96] rax
+	mov rax 10
 	mov qword [rbp+-56] rax
 	mov rax qword [rbp+-56]
-	push rax
-	call	ParseInt
-	add rsp 8
-	mov qword [rbp+-32] rax
-	mov rax qword [rbp+-32]
-	mov [__Grobal_0] rax
-	mov rax [__Grobal_0]
-	mov qword [rbp+-48] rax
-	mov rax qword [rbp+-48]
 	imul rax 8
 	add rax 8
 	push rax
 	call	malloc
 	add rsp 8
-	mov qword [rbp+-24] rax
-	mov rax qword [rbp+-48]
+	mov qword [rbp+-40] rax
+	mov rax qword [rbp+-56]
 	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-24]
+	mov rax qword [rbp+-40]
 	mov rcx rax
 	mov rax qword [rbp+-8]
 	mov qword [rcx] rax
-	mov rax qword [rbp+-24]
+	mov rax qword [rbp+-40]
 	add rax 8
+	mov qword [rbp+-40] rax
+	mov rax qword [rbp+-40]
 	mov qword [rbp+-24] rax
-	mov rax qword [rbp+-24]
-	mov [__Grobal_1] rax
 	mov rax 0
-	mov qword [rbp+-64] rax
-AsmLabel29:
-	mov rax qword [rbp+-64]
-	cmp rax 0
+	mov qword [rbp+-32] rax
+AsmLabel51:
+	mov rax qword [rbp+-32]
+	cmp rax 10
 	setl rax
 	test rax rax
-	jnz	AsmLabel30
-	jmp	AsmLabel32
-AsmLabel30:
-	mov rax qword [rbp+-64]
+	jnz	AsmLabel52
+	jmp	AsmLabel54
+AsmLabel52:
+	mov rax 9
+	mov rcx qword [rbp+-32]
+	sub rax rcx
 	mov qword [rbp+-8] rax
-	mov rax qword [rbp+-64]
+	mov rax qword [rbp+-32]
 	imul rax 8
 	mov rcx rax
-	mov rax [__Grobal_1]
+	mov rax qword [rbp+-24]
 	add rax rcx
 	mov rcx rax
 	mov rax qword [rbp+-8]
 	mov qword [rcx] rax
-AsmLabel31:
-	mov rax qword [rbp+-64]
+AsmLabel53:
+	mov rax qword [rbp+-32]
 	add rax 1
-	mov qword [rbp+-64] rax
-	jmp	AsmLabel29
-AsmLabel32:
-	call	__Function_makeHeap
-	call	__Function_heapSort
-	mov rax 0
-	mov qword [rbp+-64] rax
-AsmLabel33:
-	mov rax qword [rbp+-64]
-	cmp rax 0
-	setl rax
+	mov qword [rbp+-32] rax
+	jmp	AsmLabel51
+AsmLabel54:
+	mov rax qword [rbp+-96]
+	push rax
+	mov rax qword [rbp+-24]
+	push rax
+	call	__Function_vector-init
+	add rsp 16
+	lea rax [__Str_5]
+	push rax
+	call	print
+	add rsp 8
+	mov rax qword [rbp+-96]
+	push rax
+	call	__Function_vector-toString
+	add rsp 8
+	mov qword [rbp+-136] rax
+	mov rax qword [rbp+-136]
+	push rax
+	call	println
+	add rsp 8
+	mov rax 8
+	push rax
+	call	malloc
+	add rsp 8
+	mov qword [rbp+-104] rax
+	mov rax qword [rbp+-104]
+	mov qword [rbp+-112] rax
+	mov rax qword [rbp+-112]
+	push rax
+	mov rax qword [rbp+-96]
+	push rax
+	call	__Function_vector-copy
+	add rsp 16
+	mov rax qword [rbp+-112]
+	push rax
+	mov rax 3
+	push rax
+	mov rax 817
+	push rax
+	call	__Function_vector-set
+	add rsp 24
+	mov qword [rbp+-120] rax
+	mov rax qword [rbp+-120]
 	test rax rax
-	jnz	AsmLabel34
-	jmp	AsmLabel36
-AsmLabel34:
-	mov rax qword [rbp+-64]
-	imul rax 8
-	mov rcx rax
-	mov rax [__Grobal_1]
-	add rax rcx
-	mov rax qword [rax]
+	jnz	AsmLabel55
+	jmp	AsmLabel56
+AsmLabel55:
+	lea rax [__Str_6]
+	push rax
+	call	println
+	add rsp 8
+AsmLabel57:
+	lea rax [__Str_7]
+	push rax
+	call	print
+	add rsp 8
+	mov rax qword [rbp+-112]
+	push rax
+	call	__Function_vector-toString
+	add rsp 8
+	mov qword [rbp+-152] rax
+	mov rax qword [rbp+-152]
+	push rax
+	call	println
+	add rsp 8
+	lea rax [__Str_8]
+	push rax
+	call	print
+	add rsp 8
+	mov rax qword [rbp+-96]
+	push rax
+	mov rax qword [rbp+-112]
+	push rax
+	call	__Function_vector-add
+	add rsp 16
+	mov qword [rbp+-160] rax
+	mov rax qword [rbp+-160]
+	push rax
+	call	__Function_vector-toString
+	add rsp 8
+	mov qword [rbp+-144] rax
+	mov rax qword [rbp+-144]
+	push rax
+	call	println
+	add rsp 8
+	lea rax [__Str_9]
+	push rax
+	call	print
+	add rsp 8
+	mov rax qword [rbp+-96]
+	push rax
+	mov rax qword [rbp+-112]
+	push rax
+	call	__Function_vector-dot
+	add rsp 16
+	mov qword [rbp+-72] rax
+	mov rax qword [rbp+-72]
 	push rax
 	call	toString
 	add rsp 8
-	mov qword [rbp+-72] rax
-	mov rax qword [rbp+-72]
-	add rax
+	mov qword [rbp+-88] rax
+	mov rax qword [rbp+-88]
+	push rax
+	call	println
+	add rsp 8
+	lea rax [__Str_10]
 	push rax
 	call	print
 	add rsp 8
-AsmLabel35:
-	mov rax qword [rbp+-64]
-	add rax 1
+	mov rax qword [rbp+-96]
+	push rax
+	mov rax 1
+	mov rax 3
+	sal rax rcx
+	push rax
+	call	__Function_vector-scalarInPlaceMultiply
+	add rsp 16
+	mov qword [rbp+-48] rax
+	mov rax qword [rbp+-48]
+	push rax
+	call	__Function_vector-toString
+	add rsp 8
 	mov qword [rbp+-64] rax
-	jmp	AsmLabel33
-AsmLabel36:
-	lea rax [__Str_3]
+	mov rax qword [rbp+-64]
 	push rax
-	call	print
+	call	println
 	add rsp 8
-	mov rax 0
-	jmp	__L_epilogue_8
-__L_epilogue_8:
+__L_epilogue_16:
 	mov rbp qword [rbp+-16]
 	mov rsp qword [rbp+-8]
 	mov rsp rbp
