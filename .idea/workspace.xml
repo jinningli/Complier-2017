@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e3283450-0471-4350-b335-1bcad0db854d" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/ir/Root.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cn/chips/MAPLE/asm/Oprand/MemoryReference.java" afterPath="$PROJECT_DIR$/cn/chips/MAPLE/asm/Oprand/MemoryReference.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cn/chips/MAPLE/ast/expression/MemberFunction.java" afterPath="$PROJECT_DIR$/cn/chips/MAPLE/ast/expression/MemberFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cn/chips/MAPLE/compiler/CodeGenerator.java" afterPath="$PROJECT_DIR$/cn/chips/MAPLE/compiler/CodeGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cn/chips/MAPLE/compiler/IRGenerator.java" afterPath="$PROJECT_DIR$/cn/chips/MAPLE/compiler/IRGenerator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cn/chips/MAPLE/compiler/Main.java" afterPath="$PROJECT_DIR$/cn/chips/MAPLE/compiler/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.cpp" afterPath="$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -92,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IRGenerator.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IRGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/compiler/IRGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="407" column="0" lean-forward="false" selection-start-line="407" selection-start-column="0" selection-end-line="407" selection-end-column="0" />
+            <state relative-caret-position="254">
+              <caret line="414" column="37" lean-forward="false" selection-start-line="414" selection-start-column="37" selection-end-line="414" selection-end-column="37" />
               <folding>
                 <element signature="e#2321#2322#0" expanded="true" />
                 <element signature="e#2346#2347#0" expanded="true" />
@@ -115,21 +110,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Mem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/ir/Mem.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/compiler/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="16" column="8" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+            <state relative-caret-position="120">
+              <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NoDefined.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/exception/NoDefined.java">
+      <file leaf-file-name="Mem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/ir/Mem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="210">
+              <caret line="16" column="8" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -285,12 +280,12 @@
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/ir/Var.java" />
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/ir/IRTraverse.java" />
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/asm/LabelTable.java" />
-        <option value="$PROJECT_DIR$/cn/chips/MAPLE/compiler/Main.java" />
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/ast/expression/MemberFunction.java" />
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/asm/Oprand/MemoryReference.java" />
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.cpp" />
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/compiler/CodeGenerator.java" />
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/compiler/IRGenerator.java" />
+        <option value="$PROJECT_DIR$/cn/chips/MAPLE/compiler/Main.java" />
       </list>
     </option>
   </component>
@@ -569,12 +564,12 @@
       <workItem from="1496653970281" duration="987000" />
       <workItem from="1496816235726" duration="207000" />
       <workItem from="1496856292406" duration="5521000" />
-      <workItem from="1496894768540" duration="6228000" />
+      <workItem from="1496894768540" duration="6256000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="274271000" />
+    <option name="totallyTimeSpent" value="274299000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -869,14 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/compiler/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="15" column="30" lean-forward="false" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/ast/declare/FuncDecl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
@@ -984,14 +971,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/ir/Mem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="8" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/compiler/CodeGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
@@ -1069,12 +1048,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/compiler/IRGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="407" column="0" lean-forward="false" selection-start-line="407" selection-start-column="0" selection-end-line="407" selection-end-column="0" />
+        <state relative-caret-position="254">
+          <caret line="414" column="37" lean-forward="false" selection-start-line="414" selection-start-column="37" selection-end-line="414" selection-end-column="37" />
           <folding>
             <element signature="e#2321#2322#0" expanded="true" />
             <element signature="e#2346#2347#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/ir/Mem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="8" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/compiler/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
