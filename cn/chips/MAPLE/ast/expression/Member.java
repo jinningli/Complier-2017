@@ -21,7 +21,7 @@ public class Member extends Expr {
 
     public Entity getEnt(){
         if(vardeclent == null){
-            vardeclent = (Entity)nowScope.what(name);
+            vardeclent = (Entity)nowScope.what(name);/////
         }
         return vardeclent;
     }

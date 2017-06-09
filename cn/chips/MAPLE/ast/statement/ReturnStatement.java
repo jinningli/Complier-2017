@@ -38,7 +38,7 @@ public class ReturnStatement extends Statement{
             if(grobalVariable.nowfunc.retype instanceof VoidType){
                 retype = new VoidType(pos);
                 return;
-            }else if(grobalVariable.nowfunc.retype == null && Objects.equals(grobalVariable.nowfunc.getname(), grobalVariable.nowclass)){
+            }else if(grobalVariable.nowfunc.retype == null && Objects.equals(grobalVariable.nowfunc.getname(), grobalVariable.nowclass + "-" + grobalVariable.nowclass)){
                 retype = null;
                 return;
             }

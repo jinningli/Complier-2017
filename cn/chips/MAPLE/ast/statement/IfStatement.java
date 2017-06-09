@@ -68,7 +68,11 @@ public class IfStatement extends Statement{
         System.out.println(indent + " Cond: ");
         expr.print(depth + 1);
         System.out.println(indent + " Then: ");
-        thenbody.print(depth + 1);
+        if(thenbody == null){
+            System.out.println(indent + "\tNULL");
+        }else {
+            thenbody.print(depth + 1);
+        }
         System.out.println(indent + " Else: ");
         if(elsebody == null){
             System.out.println(indent + "\tNULL");

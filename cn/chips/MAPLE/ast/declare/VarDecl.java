@@ -25,6 +25,7 @@ public class VarDecl extends Declare implements Entity{
     public Expr expr = null;
     public EXPR ir = null;
     public long offset = 0;
+    public boolean isClassMember = false;
     public boolean isGrobal = false;
     public boolean located = false;
 
@@ -94,7 +95,9 @@ public class VarDecl extends Declare implements Entity{
     }
     public void check(){
         setNowScope(grobalVariable.grobal.now);
-
+        if(grobalVariable.inclass && !grobalVariable.infunction){
+            isClassMember = true;
+        }
         if(expr != null) {
             Type exprRetype = expr.getretype();
             if (!(exprRetype instanceof NullType)) {

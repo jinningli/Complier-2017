@@ -126,6 +126,9 @@ public class FuncDecl extends Declare implements Entity{
         grobalVariable.grobal.newLayer();
         setNowScope(grobalVariable.grobal.now);
 //        Main.returned = false;
+        if(grobalVariable.inclass && Objects.equals(name, thisptr.name + "-" + "this")){
+            throw new TypeNotMatch();
+        }
         if(retype instanceof ClassType){
             grobalVariable.grobal.what(retype.getname());
         }

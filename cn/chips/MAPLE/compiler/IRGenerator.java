@@ -357,6 +357,13 @@ public class IRGenerator {
     }
 
     public EXPR visit(Identifier node){
+        VarDecl vd = (VarDecl) node.getEnt();
+        if(vd.isClassMember){
+            EXPR expr = new Var(((VarDecl)node.nowScope.what("This")));///
+            EXPR offset = new Int(vd.offset);
+            EXPR addr = new Bin("+", expr, offset);
+            return new Mem(addr); // type addr?
+        }
         return new Var(node.getEnt());
     }
 
@@ -567,11 +574,20 @@ public class IRGenerator {
         Label endLabel = new Label();
         EXPR cond = visitExpr(node.expr);
         if(node.elsebody == null){
-            cjump(cond, thenLabel, elseLabel);
+            if(node.thenbody == null){
+                return null;
+            }
+            cjump(cond, thenLabel, endLabel);
             label(thenLabel);
             visitStmt(node.thenbody);
             label(endLabel);
         }else{
+            if(node.thenbody == null){
+                cjump(cond, endLabel, elseLabel);
+                label(elseLabel);
+                visitStmt(node.elsebody);
+                label(endLabel);
+            }
             cjump(cond, thenLabel, elseLabel);
             label(thenLabel);
             visitStmt(node.thenbody);

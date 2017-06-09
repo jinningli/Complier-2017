@@ -13,6 +13,7 @@ import cn.chips.MAPLE.parser.*;
 import cn.chips.MAPLE.utils.scope.ScopeTree;
 import org.antlr.v4.runtime.ParserRuleContext;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -24,6 +25,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     public boolean inclass = false;
     public boolean infunction = false;
     public ClassDecl nowclass = null;
+    public FuncDecl nowfunc = null;
     public AST root = null;
 
     @Override public Project visitProgram(MapleParser.ProgramContext ctx) {
@@ -78,6 +80,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     @Override public Project visitFuncDecl(MapleParser.FuncDeclContext ctx) {
         infunction = true;
         FuncDecl func = new FuncDecl(ctx, inclass, nowclass);
+        nowfunc = func;
 
         for(ParserRuleContext child :  ctx.block().stmt()){
             Statement stmt = (Statement)visit(child);
@@ -91,6 +94,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
         }
         maple.define(func.getname(), func);
         infunction = false;
+        nowfunc = null;
         root.getDecls().addFuns(func);
         return func;
     }
@@ -298,15 +302,21 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
 
     @Override public Project visitIdentifier(MapleParser.IdentifierContext ctx) {
         String id = ctx.getText();
-        if(inclass && infunction){
-            if(maple.containsKey(nowclass.name + "-" + id)){
-                Member k = new Member(
-                        new Identifier("This", new Position(ctx.getStart())),
-                        id,
-                        new Position(ctx.getStart()));
-                return k;
-            }
-        }
+//        if(inclass && infunction){
+//            if(maple.containsKey(nowclass.name + "-" + id)){
+//                List<Pair<Type, String>> ls = nowfunc.flist;
+//                for(Pair<Type, String> p: ls){
+//                    if(Objects.equals(p.getSecond(), id)){
+//                        return new Identifier(ctx.ID());
+//                    }
+//                }
+//                Member k = new Member(
+//                        new Identifier("This", new Position(ctx.getStart())),
+//                        id,
+//                        new Position(ctx.getStart()));
+//                return k;
+//            }
+//        }
         return new Identifier(ctx.ID());
     }
 
