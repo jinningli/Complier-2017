@@ -34,7 +34,7 @@ public class Instruction extends Assembly {
             res += " " + oprand1.toSource();
         }
         if(oprand2 != null){
-            res += " " + oprand2.toSource();
+            res += ", " + oprand2.toSource();
         }
         return res;
     }

@@ -103,9 +103,9 @@ public class CodeGenerator {
         data.addDirective("\tsection .data");
 
         data._label(labeltable.newStrLabel());
-        data._db("%d,0");
+        data._db("\'%d\',0");
         data._label(labeltable.newStrLabel());
-        data._db("%s,0");
+        data._db("\'%s\',0");
         data._label(labeltable.diyLabel("__nullptr"));
         data._db("0,0");
 
