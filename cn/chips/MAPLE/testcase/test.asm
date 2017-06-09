@@ -1,6 +1,6 @@
 	global _main
 	extern _printf, _scanf, _puts, _gets, _s_printf, _s_scanf, _getchar, _strlen, _strcmp, _strcpy, _strncpy, _malloc
-	extern memcpy
+	extern _memcpy
 
 	section .data
 __global_null:
@@ -112,7 +112,7 @@ __lib_str_operator_ADD:
         mov     rsi, r15
         mov     rdi, rbp
         add     rdx, 1
-        call    memcpy
+        call    _memcpy
 L_001:  add     rbp, rbx
         test    r12d, r12d
         jle     L_002
@@ -120,7 +120,7 @@ L_001:  add     rbp, rbx
         lea     rdi, [r14+rbx+4H]
         mov     rsi, r13
         add     rdx, 1
-        call    memcpy
+        call    _memcpy
 L_002:  mov     byte [rbp+r12], 0
         mov     rax, rbp
         add     rsp, 8
@@ -160,7 +160,7 @@ __lib_str_substring:
         mov     rdi, rcx
         add     rdx, 1
         add     rsi, r12
-        call    memcpy
+        call    _memcpy
         mov     rcx, rax
 L_003:  movsxd  r13, r13d
         mov     rax, rcx

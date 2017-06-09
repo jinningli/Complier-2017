@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3283450-0471-4350-b335-1bcad0db854d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/asm/assembly/Instruction.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/asm/assembly/Instruction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/compiler/CodeGenerator.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/compiler/CodeGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cn/chips/MAPLE/asm/assembly/Instruction.java" afterPath="$PROJECT_DIR$/cn/chips/MAPLE/asm/assembly/Instruction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cn/chips/MAPLE/compiler/CodeGenerator.java" afterPath="$PROJECT_DIR$/cn/chips/MAPLE/compiler/CodeGenerator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.asm" afterPath="$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.asm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.cpp" afterPath="$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/testcase/test.asm" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/testcase/test.asm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/testcase/test.cpp" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/testcase/test.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -175,8 +167,8 @@
               <file leaf-file-name="test.asm" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.asm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="181">
-                      <caret line="33" column="7" lean-forward="true" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+                    <state relative-caret-position="114">
+                      <caret line="162" column="9" lean-forward="false" selection-start-line="162" selection-start-column="9" selection-end-line="162" selection-end-column="9" />
                       <folding />
                     </state>
                   </provider>
@@ -197,7 +189,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Logic</find>
       <find>check</find>
       <find>visit(Membe</find>
       <find>FuncD</find>
@@ -227,6 +218,7 @@
       <find>Member</find>
       <find>identi</find>
       <find>getchar</find>
+      <find>memcpy</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -308,8 +300,8 @@
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.cpp" />
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/compiler/CodeGenerator.java" />
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/asm/assembly/Instruction.java" />
-        <option value="$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.asm" />
         <option value="$PROJECT_DIR$/cn/chips/MAPLE/compiler/Main.java" />
+        <option value="$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.asm" />
       </list>
     </option>
   </component>
@@ -569,12 +561,12 @@
       <workItem from="1496903823745" duration="513000" />
       <workItem from="1496923686413" duration="10905000" />
       <workItem from="1496999108973" duration="3992000" />
-      <workItem from="1497016511025" duration="4075000" />
+      <workItem from="1497016511025" duration="4406000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="294242000" />
+    <option name="totallyTimeSpent" value="294573000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -589,7 +581,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2987952" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2987952" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1042,14 +1034,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.asm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6297">
-          <caret line="447" column="7" lean-forward="true" selection-start-line="447" selection-start-column="7" selection-end-line="447" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/asm/assembly/Instruction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
@@ -1062,6 +1046,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="15" column="36" lean-forward="false" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cn/chips/MAPLE/testcase/test.asm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="162" column="9" lean-forward="false" selection-start-line="162" selection-start-column="9" selection-end-line="162" selection-end-column="9" />
           <folding />
         </state>
       </provider>
