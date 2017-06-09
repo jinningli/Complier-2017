@@ -20,4 +20,8 @@ public class LabelStmt extends STMT{
         }
         System.out.println(indent + label.str);
     }
+
+    public String translate(){
+        return label.str + ":";
+    }
 }

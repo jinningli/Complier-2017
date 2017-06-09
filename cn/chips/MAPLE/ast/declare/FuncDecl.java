@@ -190,4 +190,8 @@ public class FuncDecl extends Declare implements Entity{
         }
         System.out.println(indent + "Function: " + name + " defined in: " + pos._String());
     }
+
+    public String translate(){
+        return name;
+    }
 }

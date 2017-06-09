@@ -28,4 +28,11 @@ public class Bin extends EXPR {
         System.out.println(indent + "op:");
         System.out.println(indent + op);
     }
+
+    public String translate(){
+        String res = lhs.translate();
+        res += " " + op + " ";
+        res += rhs.translate();
+        return res;
+    }
 }

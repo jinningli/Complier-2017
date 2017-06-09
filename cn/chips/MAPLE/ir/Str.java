@@ -35,4 +35,7 @@ public class Str extends EXPR {
         return value.getMemref();
     }
 
+    public String translate(){
+        return value.translate();
+    }
 }

@@ -23,4 +23,7 @@ public class Return extends STMT {
         }else
             expr.traverse(depth + 1);
     }
+    public String translate(){
+        return "return " + expr.translate();
+    }
 }

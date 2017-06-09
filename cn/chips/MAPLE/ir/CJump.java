@@ -28,4 +28,15 @@ public class CJump extends STMT {
         System.out.println(indent + "elseLabel:");
         elseLabel.traverse(depth + 1);
     }
+    public String translate(){
+        String res = null;
+        res += "if(" + cond.translate() + ")";
+        if(thenLabel != null){
+            if(elseLabel != null){
+                res += " goto " + thenLabel.str + "; else goto" + elseLabel.str + ";";
+            }
+            res += " goto " + thenLabel.str + ";";
+        }
+        return res;
+    }
 }

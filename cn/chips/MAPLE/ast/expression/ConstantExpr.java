@@ -101,4 +101,17 @@ public class ConstantExpr extends Expr implements Entity{
         }
         System.out.println(indent + "Constant Variable: "+ type._String());
     }
+
+    public String translate(){
+        if(type instanceof IntType){
+            return String.valueOf(type.getint());
+        }else if(type instanceof BoolType){
+            return String.valueOf(type.getbool());
+        }else if(type instanceof VoidType){
+            return "void";
+        }else if(type instanceof StringType){
+            return "\"" + type.getname() + "\"";
+        }
+        throw new NullPtr();
+    }
 }

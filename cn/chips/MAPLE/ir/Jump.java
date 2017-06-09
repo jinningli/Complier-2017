@@ -21,4 +21,8 @@ public class Jump extends STMT {
         System.out.println(indent + "toLabel:");
         label.traverse(depth + 1);
     }
+
+    public String translate(){
+        return "goto " + label.str;
+    }
 }

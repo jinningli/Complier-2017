@@ -38,4 +38,18 @@ public class Call extends EXPR {
            e.traverse(depth + 1);
         }
     }
+
+    public String translate(){
+        String res = null;
+        res += ent.name;
+        res += "(";
+        for(int i = 0; i < args.size(); i ++){
+            res += args.get(i).translate();
+            if(i != args.size() - 1){
+                res += ", ";
+            }
+        }
+        res += ")";
+        return res;
+    }
 }

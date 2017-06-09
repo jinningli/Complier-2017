@@ -24,4 +24,11 @@ public class Assign extends STMT {
         System.out.println(indent + "rhs:");
         rhs.traverse(depth + 1);
     }
+
+    public String translate(){
+        String res = lhs.translate();
+        res += " = ";
+        res += rhs.translate();
+        return res;
+    }
 }

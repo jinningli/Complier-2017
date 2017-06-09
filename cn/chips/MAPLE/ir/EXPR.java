@@ -11,6 +11,7 @@ import cn.chips.MAPLE.exception.NullPtr;
  */
 public abstract class EXPR extends IRBase {
     public abstract void traverse(int depth);
+    public abstract String translate();
     public MemoryReference memref(){throw new NoDefined();}
     public Oprand AsmValue(){throw new NoDefined();}
 }

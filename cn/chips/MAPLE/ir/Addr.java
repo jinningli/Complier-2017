@@ -24,4 +24,8 @@ public class Addr extends EXPR {
         System.out.println(indent + "Addr:");
         ent.traverse(depth + 1);
     }
+
+    public String translate(){
+        return ent.translate();
+    }
 }

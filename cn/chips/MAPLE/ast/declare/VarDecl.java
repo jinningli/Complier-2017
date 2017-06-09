@@ -177,4 +177,8 @@ public class VarDecl extends Declare implements Entity{
         }else
         System.out.println(indent + "Define Variable: "+ name  + "\t"+ type._String() );
     }
+
+    public String translate(){
+        return name;
+    }
 }

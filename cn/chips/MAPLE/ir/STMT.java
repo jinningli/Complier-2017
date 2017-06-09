@@ -6,4 +6,5 @@ package cn.chips.MAPLE.ir;
  */
 public abstract class STMT extends IRBase {
     public abstract void traverse(int depth);
+    public abstract String translate();
 }

@@ -30,4 +30,7 @@ public class Int extends EXPR {
     public MemoryReference memref(){
         throw new NoDefined();
     }
+    public String translate(){
+        return String.valueOf(value);
+    }
 }

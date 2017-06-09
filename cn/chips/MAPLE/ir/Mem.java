@@ -23,4 +23,7 @@ public class Mem extends EXPR {
         expr.traverse(depth + 1);
     }
 
+    public String translate(){
+        return expr.translate();
+    }
 }

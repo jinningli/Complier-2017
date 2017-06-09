@@ -24,4 +24,8 @@ public class Var extends EXPR {
         System.out.println(indent + "Var: ");
         ent.traverse(depth + 1);
     }
+
+    public String translate(){
+        return ent.translate();
+    }
 }

@@ -6,6 +6,7 @@ import cn.chips.MAPLE.ast.declare.FuncDecl;
 import cn.chips.MAPLE.ast.declare.VarDecl;
 import cn.chips.MAPLE.ast.expression.ConstantExpr;
 import cn.chips.MAPLE.ast.root.AST;
+import cn.chips.MAPLE.ir.IRTranslate;
 import cn.chips.MAPLE.ir.IRTraverse;
 import cn.chips.MAPLE.ir.Var;
 
@@ -94,5 +95,21 @@ public class Declarations {
             k.traverse();
         }
         System.out.println("\n------------- IRBase Traverse End -------------\n");
+    }
+
+    public String IRTranslate(){
+        String res = null;
+        IRTranslate t = new IRTranslate();
+        res += ("\n------------- IRBase Translate -------------\n");
+        res += ("**********    Grobal Variable    **********");
+        t.setIrstream(root.grobalVarIR);
+        res += t.translate();
+        for(FuncDecl f: funs){
+            res += ("********** In the Function: " + f.name + " **********");
+            t.setIrstream(f.ir);
+            res += t.translate();
+        }
+        res += ("\n------------- IRBase Traverse End -------------\n");
+        return res;
     }
 }

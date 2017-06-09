@@ -18,4 +18,6 @@ public interface Entity {
     void setAddress(ImmediateValue _immaddr);
 
     ImmediateValue getAddress();
+
+    public String translate();
 }

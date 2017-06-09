@@ -43,4 +43,8 @@ public class Label extends EXPR {
         }
         System.out.println(indent + str);
     }
+
+    public String translate(){
+        return str;
+    }
 }

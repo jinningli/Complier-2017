@@ -13,7 +13,7 @@ import java.io.*;
 
 public class Main
 {
-    static boolean localtest = false;
+    static boolean localtest = true;
 
 //    public static boolean returned = false;
     public static void main(String[] args) throws Exception
@@ -43,14 +43,14 @@ public class Main
         IR ir = r.generate();
         if(localtest)
         root.getDecls().IRtraverse();
-
-        CodeGenerator c = new CodeGenerator(root.getDecls());
-        c.generate(ir);
-        if(localtest) {
-            PrintStream tmpfout = new PrintStream(new FileOutputStream("cn/chips/MAPLE/testcase/test.asm"));
-            tmpfout.print(c.toSource());
-        }else
-        System.out.println(c.toSource());
+        root.getDecls().IRTranslate();
+//        CodeGenerator c = new CodeGenerator(root.getDecls());
+//        c.generate(ir);
+//        if(localtest) {
+//            PrintStream tmpfout = new PrintStream(new FileOutputStream("cn/chips/MAPLE/testcase/test.asm"));
+//            tmpfout.print(c.toSource());
+//        }else
+//        System.out.println(c.toSource());
 
     }
 }

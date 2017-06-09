@@ -25,4 +25,7 @@ public class Uni extends EXPR {
         System.out.println(indent + "Body:");
         expr.traverse(depth + 1);
     }
+    public String translate(){
+        return op + expr.translate();
+    }
 }

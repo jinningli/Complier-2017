@@ -20,4 +20,7 @@ public class ExprStmt extends STMT {
         System.out.println(indent + "EXPR:");
         expr.traverse(depth + 1);
     }
+    public String translate(){
+        return expr.translate() + ";\n";
+    }
 }
