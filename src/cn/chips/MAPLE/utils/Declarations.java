@@ -188,7 +188,7 @@ public class Declarations {
             VarDecl para = ((VarDecl)f.nowScope.what(f.flist.get(i).getSecond()));
             para.name += "_" + cnt++;
             para.renamed = true;
-            eqal += para.declTranslate() + " = " + f.flist.get(i).getSecond() + ";\n";
+            res += para.declTranslate() + " = " + f.flist.get(i).getSecond() + ";\n";
         }
 
         for(int i = 0; i < lvd.size(); i ++){

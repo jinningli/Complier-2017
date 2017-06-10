@@ -92,4 +92,6 @@ public class Main
 //nasm -felf64 cn/chips/MAPLE/testcase/test.asm && gcc cn/chips/MAPLE/testcase/test.o && ./cn/chips/MAPLE/testcase/test.out
 //bash c2nasm.bash output.c -O0&&nasm -felf64 output.asm && gcc output.o && ./output.out
     }
+
 }
+
