@@ -169,12 +169,22 @@ public class Declarations {
     public String defineLocalVariable(FuncDecl f){
         List<VarDecl> lvd = getLocalVarDecl(f.nowScope);
         String res = "";
+
         for(int i = 0; i < f.flist.size(); i ++){
-            res += lvd.get(i).declTranslate() + " = " + f.flist.get(i).getSecond() + ";\n";
+            VarDecl para = ((VarDecl)f.nowScope.what(f.flist.get(i).getSecond()));
+            para.name += "_" + cnt++;
+            para.renamed = true;
+            res += para.declTranslate() + " = " + f.flist.get(i).getSecond() + ";\n";
         }
-        for(int i = f.flist.size(); i < lvd.size(); i ++){
+
+        for(int i = 0; i < lvd.size(); i ++){
+            VarDecl vd = lvd.get(i);
+            if(vd.renamed) continue;
+            vd.name += "_" + cnt++;
+            vd.renamed = true;
             res += lvd.get(i).declTranslate() + ";\n";
         }
+
         return res;
     }
 
@@ -183,7 +193,7 @@ public class Declarations {
     public List<VarDecl> getLocalVarDecl(ScopeNode scope){
         List<VarDecl> lvd = new LinkedList<>();
         for(VarDecl vd: scope.localVariables()){
-            vd.name += "_" + cnt ++;
+//            vd.name += "_" + cnt ++;
             lvd.add(vd);
         }
         for(ScopeNode s: scope.child){

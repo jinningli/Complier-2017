@@ -1,24 +1,24 @@
 ; Disassembly of file: output.o
-; Sun Jun 11 01:06:14 2017
+; Sun Jun 11 02:43:29 2017
 ; Mode: 64 bits
 ; Syntax: YASM/NASM
 ; Instruction set: Pentium Pro, x64
 
 default rel
 
-global _substring: function
+global _substring
 global _ord
 global _parseInt
 global _strlength: function
 global _getInt
 global _getString
 global _size
-global _toMoStr: function
+global _toMoStr
 global _str_add
 global ___lib_printlnInt
 global ___lib_printInt
 global ___lib_malloc
-global _println: function
+global _println
 global _print
 global _toString
 global _main
@@ -210,7 +210,7 @@ _getInt:; Function begin
         push    rbp                                     ; 01C0 _ 55
         mov     rbp, rsp                                ; 01C1 _ 48: 89. E5
         sub     rsp, 16                                 ; 01C4 _ 48: 83. EC, 10
-        lea     rdi, [rel _substring+4B7H]              ; 01C8 _ 48: 8D. 3D, 000004B7(rel)
+        lea     rdi, [rel _substring+483H]              ; 01C8 _ 48: 8D. 3D, 00000483(rel)
         lea     rsi, [rbp-4H]                           ; 01CF _ 48: 8D. 75, FC
         mov     dword [rbp-4H], 0                       ; 01D3 _ C7. 45, FC, 00000000
         mov     al, 0                                   ; 01DA _ B0, 00
@@ -430,7 +430,7 @@ ___lib_printlnInt:; Function begin
         push    rbp                                     ; 0420 _ 55
         mov     rbp, rsp                                ; 0421 _ 48: 89. E5
         sub     rsp, 16                                 ; 0424 _ 48: 83. EC, 10
-        lea     rax, [rel _substring+25AH]              ; 0428 _ 48: 8D. 05, 0000025A(rel)
+        lea     rax, [rel _substring+226H]              ; 0428 _ 48: 8D. 05, 00000226(rel)
         mov     qword [rbp-8H], rdi                     ; 042F _ 48: 89. 7D, F8
         mov     rsi, qword [rbp-8H]                     ; 0433 _ 48: 8B. 75, F8
         mov     rdi, rax                                ; 0437 _ 48: 89. C7
@@ -452,7 +452,7 @@ ___lib_printInt:; Function begin
         push    rbp                                     ; 0450 _ 55
         mov     rbp, rsp                                ; 0451 _ 48: 89. E5
         sub     rsp, 16                                 ; 0454 _ 48: 83. EC, 10
-        lea     rax, [rel _substring+22FH]              ; 0458 _ 48: 8D. 05, 0000022F(rel)
+        lea     rax, [rel _substring+1FBH]              ; 0458 _ 48: 8D. 05, 000001FB(rel)
         mov     qword [rbp-8H], rdi                     ; 045F _ 48: 89. 7D, F8
         mov     rsi, qword [rbp-8H]                     ; 0463 _ 48: 8B. 75, F8
         mov     rdi, rax                                ; 0467 _ 48: 89. C7
@@ -511,7 +511,7 @@ _print: ; Function begin
         push    rbp                                     ; 04C0 _ 55
         mov     rbp, rsp                                ; 04C1 _ 48: 89. E5
         sub     rsp, 16                                 ; 04C4 _ 48: 83. EC, 10
-        lea     rax, [rel _substring+1C3H]              ; 04C8 _ 48: 8D. 05, 000001C3(rel)
+        lea     rax, [rel _substring+18FH]              ; 04C8 _ 48: 8D. 05, 0000018F(rel)
         mov     qword [rbp-8H], rdi                     ; 04CF _ 48: 89. 7D, F8
         mov     rsi, qword [rbp-8H]                     ; 04D3 _ 48: 8B. 75, F8
         mov     rdi, rax                                ; 04D7 _ 48: 89. C7
@@ -640,30 +640,16 @@ ALIGN   16
 _main:  ; Function begin
         push    rbp                                     ; 0640 _ 55
         mov     rbp, rsp                                ; 0641 _ 48: 89. E5
-        sub     rsp, 16                                 ; 0644 _ 48: 83. EC, 10
-        lea     rdi, [rel _substring+46H]               ; 0648 _ 48: 8D. 3D, 00000046(rel)
-        mov     dword [rbp-4H], 0                       ; 064F _ C7. 45, FC, 00000000
-        call    _toMoStr                                ; 0656 _ E8, 00000000(rel)
-        mov     ecx, 1                                  ; 065B _ B9, 00000001
-        mov     esi, ecx                                ; 0660 _ 89. CE
-        mov     ecx, 2                                  ; 0662 _ B9, 00000002
-        mov     edx, ecx                                ; 0667 _ 89. CA
-        mov     rdi, rax                                ; 0669 _ 48: 89. C7
-        call    _substring                              ; 066C _ E8, 00000000(rel)
-        mov     qword [rbp-10H], rax                    ; 0671 _ 48: 89. 45, F0
-        mov     rdi, qword [rbp-10H]                    ; 0675 _ 48: 8B. 7D, F0
-        call    _println                                ; 0679 _ E8, 00000000(rel)
-        xor     eax, eax                                ; 067E _ 31. C0
-        add     rsp, 16                                 ; 0680 _ 48: 83. C4, 10
-        pop     rbp                                     ; 0684 _ 5D
-        ret                                             ; 0685 _ C3
+        mov     eax, 233                                ; 0644 _ B8, 000000E9
+        mov     dword [rbp-4H], 0                       ; 0649 _ C7. 45, FC, 00000000
+        pop     rbp                                     ; 0650 _ 5D
+        ret                                             ; 0651 _ C3
 ; _main End of function
 
 
 SECTION ._TEXT.__cstring align=1 noexecute              ; section number 2, data
 
-        db 25H, 64H, 00H, 25H, 6CH, 64H, 0AH, 00H       ; 0686 _ %d.%ld..
-        db 25H, 6CH, 64H, 00H, 25H, 73H, 00H, 31H       ; 068E _ %ld.%s.1
-        db 32H, 33H, 34H, 35H, 36H, 00H                 ; 0696 _ 23456.
+        db 25H, 64H, 00H, 25H, 6CH, 64H, 0AH, 00H       ; 0652 _ %d.%ld..
+        db 25H, 6CH, 64H, 00H, 25H, 73H, 00H            ; 065A _ %ld.%s.
 
 

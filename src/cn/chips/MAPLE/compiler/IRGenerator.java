@@ -407,7 +407,7 @@ public class IRGenerator {
     public EXPR visit(FunctionCall node){
         List<EXPR> args = new ArrayList<>();
         for(Expr arg: node.flist){
-            args.add(0, visitExpr(arg));
+            args.add( visitExpr(arg));
         }
         EXPR call = new Call((FuncDecl) node.getEnt(), args);
         if(isStatement()){

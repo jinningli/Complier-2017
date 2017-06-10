@@ -168,12 +168,8 @@ long toString(long x) {
 int main(){
 //Grobal Variable Initialize
 //Define Local Variable
-long __tmp0_0;
 //Function Body
-__tmp0_0 = substring((toMoStr("123456")), (1), (2));
-println((__tmp0_0));
-;
-return (0);
+return (233);
 }
 
 //------------- IRBase Traverse End -------------

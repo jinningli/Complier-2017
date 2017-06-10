@@ -27,6 +27,7 @@ public class VarDecl extends Declare implements Entity{
     public boolean isClassMember = false;
     public boolean isGrobal = false;
     public boolean located = false;
+    public boolean renamed = false;
 
     public MemoryReference memref;
     public ImmediateValue address;
