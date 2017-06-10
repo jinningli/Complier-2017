@@ -108,16 +108,29 @@ long toString(long x) {
 int main(){
 //Grobal Variable Initialize
 //Define Local Variable
-long a_0;
-long __tmp0_1;
-long __tmp2_2;
-long __tmp1_3;
+long __tmp4_0;
+long a_1;
+long __tmp3_2;
+long __tmp0_3;
+long __tmp2_4;
+long __tmp1_5;
 //Function Body
-__tmp1_3 = (1);
-__tmp0_1 = __lib_malloc((((__tmp1_3) * (8)) + (4)));
-*((long*)(__tmp0_1)) = (__tmp1_3);
-__tmp0_1 = ((__tmp0_1) + (4));
-a_0 = (*(long *)((__tmp0_1) + (8)));
+__tmp1_5 = (1);
+__tmp0_3 = __lib_malloc((((__tmp1_5) * (8)) + (4)));
+*((long*)(__tmp0_3)) = (__tmp1_5);
+__tmp0_3 = ((__tmp0_3) + (4));
+__tmp2_4 = (0);
+goto AsmLabel0;
+AsmLabel1:;
+__tmp3_2 = (1);
+*((long*)((__tmp0_3) + ((__tmp2_4) * (8)))) = __lib_malloc((((__tmp3_2) * (8)) + (4)));
+*((long*)(*(long *)((__tmp0_3) + ((__tmp2_4) * (8))))) = (__tmp3_2);
+*((long*)((__tmp0_3) + ((__tmp2_4) * (8)))) = ((*(long *)((__tmp0_3) + ((__tmp2_4) * (8)))) + (4));
+__tmp2_4 = ((__tmp2_4) + (1));
+AsmLabel0:;
+if(((__tmp2_4) < (__tmp1_5))) goto AsmLabel1; else goto AsmLabel2;;
+AsmLabel2:;
+a_1 = (__tmp0_3);
 return (0);
 }
 

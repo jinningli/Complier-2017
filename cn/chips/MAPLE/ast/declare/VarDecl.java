@@ -112,6 +112,12 @@ public class VarDecl extends Declare implements Entity{
                 throw new TypeNotMatch();
             }
             if (expr instanceof NewExpr && exprRetype instanceof ArrType) {
+                if(!(type instanceof ArrType)){
+                    throw new TypeNotMatch();
+                }
+                if(((ArrType) type).dimension != ((ArrType) exprRetype).dimension){
+                    throw new TypeNotMatch();
+                }
                 type = exprRetype;
             }
         }
@@ -132,6 +138,11 @@ public class VarDecl extends Declare implements Entity{
                 Declare d = grobalVariable.grobal.what(stdtype.getname());
                 ((ClassType)stdtype).setClass((ClassDecl)d);
             }
+//            if(expr.getretype() instanceof ArrType){
+//                if(((ArrType) expr.getretype()).dimension != ((ArrType) type).dimension){
+//                    throw new TypeNotMatch();
+//                }
+//            }
 //            if(!(d instanceof ClassDecl)){
 //                throw new NoDefined();
 //            }
