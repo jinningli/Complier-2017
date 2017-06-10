@@ -6,17 +6,16 @@
 #include <string.h>
 
 //Function & Class Declare
-struct point;
+struct vector;
 
-void point__point(point This);
-void point__set(point This, long a_x, long a_y, long a_z);
-long point__sqrLen(point This);
-long point__sqrDis(point This, point other);
-long point__dot(point This, point other);
-point point__cross(point This, point other);
-point point__add(point This, point other);
-point point__sub(point This, point other);
-void point__printPoint(point This);
+void vector__init(vector This, arr:long:2 vec);
+long vector__getDim(vector This);
+long vector__dot(vector This, vector rhs);
+vector vector__scalarInPlaceMultiply(vector This, long c);
+vector vector__add(vector This, vector rhs);
+bool vector__set(vector This, long idx, long value);
+string vector__toString(vector This);
+bool vector__copy(vector This, vector rhs);
 long getInt();
 void print(long null);
 void println(long null);
@@ -81,176 +80,278 @@ long toString(long x) {
 }
 
 //Class Body
-struct point{
-long x;
-long y;
-long z;
+struct vector{
+long data;
 };
-void point__point(point This){
+void vector__init(vector This, arr:long:2 vec){
 //Define Local Variable
-point This_0 = This;
+long __tmp4_0 = This;
+long __tmp3_1 = vec;
+long __tmp0_2;
+long vec_3;
+long __tmp2_4;
+long __tmp1_5;
+vector This_6;
+long i_7;
 //Function Body
-*((long*)((This_0) + (0))) = (0);
-*((long*)((This_0) + (0))) = (0);
-*((long*)((This_0) + (0))) = (0);
+if(((vec_3) == (0))) goto AsmLabel0; else goto AsmLabel2;;
+AsmLabel0:;
+return;
+AsmLabel2:;
+__tmp3_1 = size((vec_3));
+__tmp1_5 = (__tmp3_1);
+__tmp0_2 = __lib_malloc((((__tmp1_5) * (8)) + (4)));
+*((long*)(__tmp0_2)) = (__tmp1_5);
+__tmp0_2 = ((__tmp0_2) + (4));
+*((long*)((This_6) + (0))) = (__tmp0_2);
+i_7 = (0);
+AsmLabel6:;
+__tmp4_0 = size((vec_3));
+if(((i_7) < (__tmp4_0))) goto AsmLabel7; else goto AsmLabel9;;
+AsmLabel7:;
+*((long*)((*(long *)((This_6) + (0))) + ((i_7) * (8)))) = (*(long *)((vec_3) + ((i_7) * (8))));
+AsmLabel8:;
+i_7 = ((i_7) + (1));
+goto AsmLabel6;
+AsmLabel9:;
 }
-void point__set(point This, long a_x, long a_y, long a_z){
+long vector__getDim(vector This){
 //Define Local Variable
-point This_1 = This;
-long a_y_2 = a_x;
-long a_x_3 = a_y;
-long a_z_4 = a_z;
+long __tmp5_8 = This;
+vector This_9;
 //Function Body
-*((long*)((This_1) + (0))) = (a_x_3);
-*((long*)((This_1) + (0))) = (a_y_2);
-*((long*)((This_1) + (0))) = (a_z_4);
+if(((*(long *)((This_9) + (0))) == (0))) goto AsmLabel10; else goto AsmLabel12;;
+AsmLabel10:;
+return (0);
+AsmLabel12:;
+__tmp5_8 = size((*(long *)((This_9) + (0))));
+return (__tmp5_8);
 }
-long point__sqrLen(point This){
+long vector__dot(vector This, vector rhs){
 //Define Local Variable
-point This_5 = This;
+long result_10 = This;
+long __tmp6_11 = rhs;
+vector This_12;
+long i_13;
+vector rhs_14;
 //Function Body
-return ((((*(long *)((This_5) + (0))) * (*(long *)((This_5) + (0)))) + ((*(long *)((This_5) + (0))) * (*(long *)((This_5) + (0))))) + ((*(long *)((This_5) + (0))) * (*(long *)((This_5) + (0)))));
+i_13 = (0);
+result_10 = (0);
+AsmLabel13:;
+__tmp6_11 = vector__getDim();
+if(((i_13) < (__tmp6_11))) goto AsmLabel14; else goto AsmLabel15;;
+AsmLabel14:;
+result_10 = ((*(long *)((*(long *)((This_12) + (0))) + ((i_13) * (8)))) * (*(long *)((*(long *)((rhs_14) + (0))) + ((i_13) * (8)))));
+i_13 = ((i_13) + (1));
+goto AsmLabel13;
+AsmLabel15:;
+return (result_10);
 }
-long point__sqrDis(point This, point other){
+vector vector__scalarInPlaceMultiply(vector This, long c){
 //Define Local Variable
-point other_6 = This;
-point This_7 = other;
+long c_15 = This;
+vector This_16 = c;
+long i_17;
+long __tmp7_18;
 //Function Body
-return (((((*(long *)((This_7) + (0))) - (*(long *)((other_6) + (0)))) * ((*(long *)((This_7) + (0))) - (*(long *)((other_6) + (0))))) + (((*(long *)((This_7) + (0))) - (*(long *)((other_6) + (0)))) * ((*(long *)((This_7) + (0))) - (*(long *)((other_6) + (0)))))) + (((*(long *)((This_7) + (0))) - (*(long *)((other_6) + (0)))) * ((*(long *)((This_7) + (0))) - (*(long *)((other_6) + (0))))));
+if(((*(long *)((This_16) + (0))) == (0))) goto AsmLabel16; else goto AsmLabel18;;
+AsmLabel16:;
+return (0);
+AsmLabel18:;
+i_17 = (0);
+AsmLabel19:;
+__tmp7_18 = vector__getDim();
+if(((i_17) < (__tmp7_18))) goto AsmLabel20; else goto AsmLabel22;;
+AsmLabel20:;
+*((long*)((*(long *)((This_16) + (0))) + ((i_17) * (8)))) = ((c_15) * (*(long *)((*(long *)((This_16) + (0))) + ((i_17) * (8)))));
+AsmLabel21:;
+i_17 = ((i_17) + (1));
+goto AsmLabel19;
+AsmLabel22:;
+return (This_16);
 }
-long point__dot(point This, point other){
+vector vector__add(vector This, vector rhs){
 //Define Local Variable
-point other_8 = This;
-point This_9 = other;
+vector temp_19 = This;
+long __tmp10_20 = rhs;
+long __tmp11_21;
+vector This_22;
+long i_23;
+long __tmp12_24;
+long __tmp13_25;
+vector rhs_26;
+long __tmp8_27;
+long __tmp9_28;
 //Function Body
-return ((((*(long *)((This_9) + (0))) * (*(long *)((other_8) + (0)))) + ((*(long *)((This_9) + (0))) * (*(long *)((other_8) + (0))))) + ((*(long *)((This_9) + (0))) * (*(long *)((other_8) + (0)))));
+__tmp9_28 = vector__getDim();
+__tmp10_20 = vector__getDim((rhs_26));
+__tmp8_27 = ((__tmp9_28) != (__tmp10_20));
+if((__tmp8_27)) goto AsmLabel26; else goto AsmLabel27;;
+AsmLabel26:;
+__tmp11_21 = vector__getDim();
+__tmp8_27 = ((__tmp11_21) == (0));
+AsmLabel27:;
+if((__tmp8_27)) goto AsmLabel23; else goto AsmLabel25;;
+AsmLabel23:;
+return (0);
+AsmLabel25:;
+__tmp12_24 = __lib_malloc((8));
+temp_19 = (__tmp12_24);
+i_23 = (0);
+AsmLabel28:;
+__tmp13_25 = vector__getDim();
+if(((i_23) < (__tmp13_25))) goto AsmLabel29; else goto AsmLabel31;;
+AsmLabel29:;
+*((long*)((*(long *)((temp_19) + (0))) + ((i_23) * (8)))) = ((*(long *)((*(long *)((This_22) + (0))) + ((i_23) * (8)))) + (*(long *)((*(long *)((rhs_26) + (0))) + ((i_23) * (8)))));
+AsmLabel30:;
+i_23 = ((i_23) + (1));
+goto AsmLabel28;
+AsmLabel31:;
+return (temp_19);
 }
-point point__cross(point This, point other){
+bool vector__set(vector This, long idx, long value){
 //Define Local Variable
-point other_10 = This;
-point This_11 = other;
-point retval_12;
+long __tmp14_29 = This;
+vector This_30 = idx;
+long idx_31 = value;
+long value_32;
 //Function Body
-point__set((((*(long *)((This_11) + (0))) * (*(long *)((other_10) + (0)))) - ((*(long *)((This_11) + (0))) * (*(long *)((other_10) + (0))))), (((*(long *)((This_11) + (0))) * (*(long *)((other_10) + (0)))) - ((*(long *)((This_11) + (0))) * (*(long *)((other_10) + (0))))), (((*(long *)((This_11) + (0))) * (*(long *)((other_10) + (0)))) - ((*(long *)((This_11) + (0))) * (*(long *)((other_10) + (0))))), (retval_12));
-;
-return (retval_12);
+__tmp14_29 = vector__getDim();
+if(((__tmp14_29) < (idx_31))) goto AsmLabel32; else goto AsmLabel34;;
+AsmLabel32:;
+return (0);
+AsmLabel34:;
+*((long*)((*(long *)((This_30) + (0))) + ((idx_31) * (8)))) = (value_32);
+return (1);
 }
-point point__add(point This, point other){
+string vector__toString(vector This){
 //Define Local Variable
-point other_13 = This;
-point This_14 = other;
+string temp_33 = This;
+vector This_34;
+long i_35;
+long __tmp15_36;
+long __tmp17_37;
+long __tmp16_38;
+long __tmp18_39;
 //Function Body
-*((long*)((This_14) + (0))) = ((*(long *)((This_14) + (0))) + (*(long *)((other_13) + (0))));
-*((long*)((This_14) + (0))) = ((*(long *)((This_14) + (0))) + (*(long *)((other_13) + (0))));
-*((long*)((This_14) + (0))) = ((*(long *)((This_14) + (0))) + (*(long *)((other_13) + (0))));
+temp_33 = ("( ");
+__tmp15_36 = vector__getDim();
+if(((__tmp15_36) > (0))) goto AsmLabel35; else goto AsmLabel37;;
+AsmLabel35:;
+__tmp16_38 = vector__toString();
+temp_33 = ((temp_33) + (__tmp16_38));
+AsmLabel37:;
+i_35 = (1);
+AsmLabel38:;
+__tmp17_37 = vector__getDim();
+if(((i_35) < (__tmp17_37))) goto AsmLabel39; else goto AsmLabel41;;
+AsmLabel39:;
+__tmp18_39 = vector__toString();
+temp_33 = (((temp_33) + (", ")) + (__tmp18_39));
+AsmLabel40:;
+i_35 = ((i_35) + (1));
+goto AsmLabel38;
+AsmLabel41:;
+temp_33 = ((temp_33) + (" )"));
+return (temp_33);
 }
-point point__sub(point This, point other){
+bool vector__copy(vector This, vector rhs){
 //Define Local Variable
-point other_15 = This;
-point This_16 = other;
+vector This_40 = This;
+vector rhs_41 = rhs;
+long __tmp19_42;
 //Function Body
-*((long*)((This_16) + (0))) = ((*(long *)((This_16) + (0))) - (*(long *)((other_15) + (0))));
-*((long*)((This_16) + (0))) = ((*(long *)((This_16) + (0))) - (*(long *)((other_15) + (0))));
-*((long*)((This_16) + (0))) = ((*(long *)((This_16) + (0))) - (*(long *)((other_15) + (0))));
-}
-void point__printPoint(point This){
-//Define Local Variable
-long __tmp0_17 = This;
-long __tmp2_18;
-long __tmp1_19;
-point This_20;
-//Function Body
-__tmp0_17 = toString((*(long *)((This_20) + (0))));
-__tmp1_19 = toString((*(long *)((This_20) + (0))));
-__tmp2_18 = toString((*(long *)((This_20) + (0))));
-println(((((((("(") + (__tmp2_18)) + (", ")) + (__tmp1_19)) + (", ")) + (__tmp0_17)) + (")")));
-;
+if(((rhs_41) == (0))) goto AsmLabel42; else goto AsmLabel44;;
+AsmLabel42:;
+return (0);
+AsmLabel44:;
+__tmp19_42 = vector__getDim((rhs_41));
+if(((__tmp19_42) == (0))) goto AsmLabel45; else goto AsmLabel46;;
+AsmLabel45:;
+*((long*)((This_40) + (0))) = (0);
+goto AsmLabel47;
+AsmLabel46:;
+*((long*)((This_40) + (0))) = (0);
+AsmLabel47:;
+return (1);
 }
 int main(){
 //Grobal Variable Initialize
 //Define Local Variable
-point a_21;
-point b_22;
-point c_23;
-point d_24;
-long __tmp8_25;
-long __tmp7_26;
-long __tmp9_27;
-long __tmp4_28;
-long __tmp3_29;
-long __tmp6_30;
-long __tmp5_31;
-long __tmp10_32;
-long __tmp11_33;
-long __tmp12_34;
-long __tmp13_35;
+long a_43;
+long i_44;
+long __tmp21_45;
+long __tmp32_46;
+long __tmp22_47;
+long __tmp33_48;
+long __tmp30_49;
+long __tmp20_50;
+long __tmp31_51;
+vector x_52;
+long __tmp25_53;
+vector y_54;
+long __tmp26_55;
+long __tmp23_56;
+long __tmp24_57;
+long __tmp29_58;
+long __tmp27_59;
+long __tmp28_60;
 //Function Body
-point__printPoint((a_21));
+__tmp20_50 = __lib_malloc((8));
+x_52 = (__tmp20_50);
+__tmp22_47 = (10);
+__tmp21_45 = __lib_malloc((((__tmp22_47) * (8)) + (4)));
+*((long*)(__tmp21_45)) = (__tmp22_47);
+__tmp21_45 = ((__tmp21_45) + (4));
+a_43 = (__tmp21_45);
+i_44 = (0);
+AsmLabel51:;
+if(((i_44) < (10))) goto AsmLabel52; else goto AsmLabel54;;
+AsmLabel52:;
+*((long*)((a_43) + ((i_44) * (8)))) = ((9) - (i_44));
+AsmLabel53:;
+i_44 = ((i_44) + (1));
+goto AsmLabel51;
+AsmLabel54:;
+vector__init((a_43), (x_52));
 ;
-point__set((480), -(463), (849), (a_21));
+print(("vector x: "));
 ;
-point__set(-(150), (585), -(208), (b_22));
+__tmp24_57 = vector__toString((x_52));
+println((__tmp24_57));
 ;
-point__set(-(742), -(670), (360), (c_23));
+__tmp25_53 = __lib_malloc((8));
+y_54 = (__tmp25_53);
+vector__copy((x_52), (y_54));
 ;
-point__set(-(960), -(591), -(29), (d_24));
+__tmp26_55 = vector__set((817), (3), (y_54));
+if((__tmp26_55)) goto AsmLabel55; else goto AsmLabel57;;
+AsmLabel55:;
+println(("excited!"));
 ;
-point__add((b_22), (a_21));
+AsmLabel57:;
+print(("vector y: "));
 ;
-point__add((c_23), (b_22));
+__tmp27_59 = vector__toString((y_54));
+println((__tmp27_59));
 ;
-point__add((c_23), (d_24));
+print(("x + y: "));
 ;
-point__sub((a_21), (c_23));
+__tmp28_60 = vector__add((y_54), (x_52));
+__tmp29_58 = vector__toString((__tmp28_60));
+println((__tmp29_58));
 ;
-point__sub((d_24), (b_22));
+print(("x * y: "));
 ;
-point__sub((c_23), (d_24));
+__tmp30_49 = vector__dot((y_54), (x_52));
+__tmp31_51 = toString((__tmp30_49));
+println((__tmp31_51));
 ;
-point__add((b_22), (c_23));
+print(("(1 << 3) * y: "));
 ;
-point__add((b_22), (a_21));
-;
-point__add((b_22), (b_22));
-;
-point__add((c_23), (c_23));
-;
-point__sub((d_24), (a_21));
-;
-point__add((b_22), (a_21));
-;
-point__sub((c_23), (b_22));
-;
-__tmp3_29 = point__sqrLen((a_21));
-__tmp4_28 = toString((__tmp3_29));
-println((__tmp4_28));
-;
-__tmp5_31 = point__sqrLen((b_22));
-__tmp6_30 = toString((__tmp5_31));
-println((__tmp6_30));
-;
-__tmp7_26 = point__sqrDis((c_23), (b_22));
-__tmp8_25 = toString((__tmp7_26));
-println((__tmp8_25));
-;
-__tmp9_27 = point__sqrDis((a_21), (d_24));
-__tmp10_32 = toString((__tmp9_27));
-println((__tmp10_32));
-;
-__tmp11_33 = point__dot((a_21), (c_23));
-__tmp12_34 = toString((__tmp11_33));
-println((__tmp12_34));
-;
-__tmp13_35 = point__cross((d_24), (b_22));
-point__printPoint((__tmp13_35));
-;
-point__printPoint((a_21));
-;
-point__printPoint((b_22));
-;
-point__printPoint((c_23));
-;
-point__printPoint((d_24));
+__tmp32_46 = vector__scalarInPlaceMultiply(((1) << (3)), (x_52));
+__tmp33_48 = vector__toString((__tmp32_46));
+println((__tmp33_48));
 ;
 }
 
