@@ -1,5 +1,5 @@
-; Disassembly of file: ./output.o
-; Sat Jun 10 16:21:57 2017
+; Disassembly of file: output.o
+; Sat Jun 10 17:08:36 2017
 ; Mode: 64 bits
 ; Syntax: YASM/NASM
 ; Instruction set: Pentium Pro, x64
@@ -24,7 +24,7 @@ ___lib_printlnInt:; Function begin
         push    rbp                                     ; 0000 _ 55
         mov     rbp, rsp                                ; 0001 _ 48: 89. E5
         sub     rsp, 16                                 ; 0004 _ 48: 83. EC, 10
-        lea     rax, [rel ___lib_printlnInt+22AH]       ; 0008 _ 48: 8D. 05, 0000022A(rel)
+        lea     rax, [rel ___lib_printlnInt+1F3H]       ; 0008 _ 48: 8D. 05, 000001F3(rel)
         mov     qword [rbp-8H], rdi                     ; 000F _ 48: 89. 7D, F8
         mov     rsi, qword [rbp-8H]                     ; 0013 _ 48: 8B. 75, F8
         mov     rdi, rax                                ; 0017 _ 48: 89. C7
@@ -46,7 +46,7 @@ ___lib_printInt:; Function begin
         push    rbp                                     ; 0030 _ 55
         mov     rbp, rsp                                ; 0031 _ 48: 89. E5
         sub     rsp, 16                                 ; 0034 _ 48: 83. EC, 10
-        lea     rax, [rel ___lib_printlnInt+1FFH]       ; 0038 _ 48: 8D. 05, 000001FF(rel)
+        lea     rax, [rel ___lib_printlnInt+1C8H]       ; 0038 _ 48: 8D. 05, 000001C8(rel)
         mov     qword [rbp-8H], rdi                     ; 003F _ 48: 89. 7D, F8
         mov     rsi, qword [rbp-8H]                     ; 0043 _ 48: 8B. 75, F8
         mov     rdi, rax                                ; 0047 _ 48: 89. C7
@@ -212,30 +212,16 @@ ALIGN   16
 _main:  ; Function begin
         push    rbp                                     ; 01F0 _ 55
         mov     rbp, rsp                                ; 01F1 _ 48: 89. E5
-        mov     dword [rbp-4H], 0                       ; 01F4 _ C7. 45, FC, 00000000
-        mov     qword [rbp-10H], 5                      ; 01FB _ 48: C7. 45, F0, 00000005
-        mov     rax, qword [rbp-10H]                    ; 0203 _ 48: 8B. 45, F0
-        mov     qword [rbp-28H], rax                    ; 0207 _ 48: 89. 45, D8
-        mov     rax, qword [rbp-28H]                    ; 020B _ 48: 8B. 45, D8
-        add     rax, 1                                  ; 020F _ 48: 83. C0, 01
-        mov     qword [rbp-10H], rax                    ; 0213 _ 48: 89. 45, F0
-        mov     rax, qword [rbp-28H]                    ; 0217 _ 48: 8B. 45, D8
-        mov     qword [rbp-20H], rax                    ; 021B _ 48: 89. 45, E0
-        mov     rax, qword [rbp-20H]                    ; 021F _ 48: 8B. 45, E0
-        mov     qword [rbp-18H], rax                    ; 0223 _ 48: 89. 45, E8
-        mov     rax, qword [rbp-18H]                    ; 0227 _ 48: 8B. 45, E8
-        add     rax, qword [rbp-20H]                    ; 022B _ 48: 03. 45, E0
-        add     rax, qword [rbp-10H]                    ; 022F _ 48: 03. 45, F0
-        mov     ecx, eax                                ; 0233 _ 89. C1
-        mov     eax, ecx                                ; 0235 _ 89. C8
-        pop     rbp                                     ; 0237 _ 5D
-        ret                                             ; 0238 _ C3
+        mov     eax, 233                                ; 01F4 _ B8, 000000E9
+        mov     dword [rbp-4H], 0                       ; 01F9 _ C7. 45, FC, 00000000
+        pop     rbp                                     ; 0200 _ 5D
+        ret                                             ; 0201 _ C3
 ; _main End of function
 
 
 SECTION ._TEXT.__cstring align=1 noexecute              ; section number 2, data
 
-        db 25H, 6CH, 64H, 0AH, 00H, 25H, 6CH, 64H       ; 0239 _ %ld..%ld
-        db 00H                                          ; 0241 _ .
+        db 25H, 6CH, 64H, 0AH, 00H, 25H, 6CH, 64H       ; 0202 _ %ld..%ld
+        db 00H                                          ; 020A _ .
 
 
