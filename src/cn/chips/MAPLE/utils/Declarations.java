@@ -286,6 +286,8 @@ public class Declarations {
                 "    unsigned char* bak = tmp;\n" +
                 "    tmp += sizeof(int);\n" +
                 "    tmp[size] = (unsigned char)getchar();\n" +
+                "    if(tmp[size] == '\\n')\n" +
+                "        tmp[size] = (unsigned char)getchar();\n" +
                 "    while(tmp[size] !=  '\\n'){\n" +
                 "        tmp[++size] = (unsigned char)getchar();\n" +
                 "    }\n" +

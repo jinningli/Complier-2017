@@ -1,138 +1,65 @@
-bool check(int a, int N) {
-    return ((a < N) && (a >= 0));
+//考察点：section 9 函数，包括函数定义，内建函数
+//算法：斜堆
+//样例输入：
+//5 5
+//ABCDE
+//1 2 3 4 5
+//样例输出：
+//5 E
+//10
+int N;
+int M;
+string ch;
+
+int[] l;
+int[] r;
+int[] w;
+
+int merge(int x,int y)
+{
+	if (0 == x) return y;
+	if (0 == y) return x;
+	if (w[x] < w[y]) {
+		int e = x;
+		x = y;
+		y = e;
+	}
+	r[x] = merge(r[x],y);
+	int e = l[x];
+	l[x] = r[x];
+	r[x] = e;	
+	return x;
 }
 
-int main() {
-    int N;
-    int head;
-	int startx;
-	int starty;
-    int targetx;
-	int targety;
-	int tail;
-	int ok;
-	int now;
-    int x;
-	int y;
-    int[] xlist;
-	int[] ylist;
-    int[][] step;
-    int i;
-	int j;
-
-    N = getInt();
-    head =0;
-    tail = 0;
-    startx = 0;
-    starty = 0;
-    targetx = N-1;
-    targety = N-1;
-    x = 0;
-    y = 0;
-    now = 0;
-    ok = 0;
-    xlist = new int[N * N];
-    for (i = 0; i < N * N; i ++ )
-        xlist[i] = 0;
-    ylist = new int[N * N];
-    for (i = 0; i < N * N; i ++ )
-        ylist[i] = 0;
-    step = new int[N][];
-    for (i = 0; i < N;  i ++ ) {
-		step[i] = new int[N];
-        for (j = 0; j < N; j ++ )
-        step[i][j] = -1;
-    }
-    xlist[0] = startx;
-    ylist[0] = starty;
-    step[startx][starty] = 0;
-    while (head <= tail)
-    {
-        now = step[xlist[head]][ylist[head]];
-        x = xlist[head] - 1;
-        y = ylist[head] - 2;
-        if (check(x, N) && check(y, N) && step[x][y] == -1)
-        {
-            tail = tail + 1;
-            xlist[tail] = x;
-            ylist[tail] = y;
-            step[x][y] = now + 1;
-            if (x == targetx && y == targety) ok = 1;
-        }
-        x = xlist[head] - 1;
-        y = ylist[head] + 2;
-        if (check(x, N) && check(y, N) && step[x][y] == -1)
-        {
-            tail = tail + 1;
-            xlist[tail] = x;
-            ylist[tail] = y;
-            step[x][y] = now + 1;
-            if (x == targetx && y == targety) ok = 1;
-        }
-        x = xlist[head] + 1;
-        y = ylist[head] - 2;
-        if (check(x, N) && check(y, N) && step[x][y] == -1)
-        {
-            tail = tail + 1;
-            xlist[tail] = x;
-            ylist[tail] = y;
-            step[x][y] = now + 1;
-            if (x == targetx && y == targety) ok = 1;
-        }
-        x = xlist[head] + 1;
-        y = ylist[head] + 2;
-        if (check(x, N) && check(y, N) && step[x][y] == -1)
-        {
-            tail = tail + 1;
-            xlist[tail] = x;
-            ylist[tail] = y;
-            step[x][y] = now + 1;
-            if (x == targetx && y == targety) ok = 1;
-        }
-        x = xlist[head] - 2;
-        y = ylist[head] - 1;
-        if (check(x, N) && check(y, N) && step[x][y] == -1)
-        {
-            tail = tail + 1;
-            xlist[tail] = x;
-            ylist[tail] = y;
-            step[x][y] = now + 1;
-            if (x == targetx && y == targety) ok = 1;
-        }
-        x = xlist[head] - 2;
-        y = ylist[head] + 1;
-        if (check(x, N) && check(y, N) && step[x][y] == -1)
-        {
-            tail = tail + 1;
-            xlist[tail] = x;
-            ylist[tail] = y;
-            step[x][y] = now + 1;
-            if (x == targetx && y == targety) ok = 1;
-        }
-        x = xlist[head] + 2;
-        y = ylist[head] - 1;
-        if (check(x, N) && check(y, N) && step[x][y] == -1)
-        {
-            tail = tail + 1;
-            xlist[tail] = x;
-            ylist[tail] = y;
-            step[x][y] = now + 1;
-            if (x == targetx && y == targety) ok = 1;
-        }
-        x = xlist[head] + 2;
-        y = ylist[head] + 1;
-        if (check(x, N) && check(y, N) && step[x][y] == -1)
-        {
-            tail = tail + 1;
-            xlist[tail] = x;
-            ylist[tail] = y;
-            step[x][y] = now + 1;
-            if (x == targetx && y == targety) ok = 1;
-        }
-        if (ok == 1) break;
-        head = head + 1;
-    }
-    if (ok == 1) println(toString(step[targetx][targety]));
-    else print("no solution!\n");
-    return 0;
+int main()
+{
+	N = getInt();
+	M = getInt();
+	ch = getString();
+	l = new int[N+M+5];
+	r = new int[N+M+5];
+	w = new int[N+M+5];
+	int i;
+	for (i=1;i <= N;i++) {
+		w[i] = getInt();
+		l[i] = 0;
+   		r[i] = 0;
+	}
+	for (i=1;i <= M;i++) {
+		w[i + N] = ch.ord(i-1);
+		l[i + N] = 0;
+		r[i + N] = 0;
+	}
+	int rt0 = 1;
+	int rt1 = N + 1;
+	for (i = 2;i <= N;i++) 
+		rt0 = merge(rt0,i);
+	for (i = N+2;i<= N+M;i++)
+		rt1 = merge(rt1,i);
+	print(toString(w[rt0]));
+	print(" ");
+	print(ch.substring(rt1-N-1,rt1-N-1));
+	print("\n");
+	println(toString(merge(rt0,rt1)));
+	return 0;
 }
