@@ -43,15 +43,13 @@ stmt:       expr? ';'                                        # ExprStatement
 
 //Structure of If, For and While
 ifStmt:     IF exprBkt
-            stmt
-            (
+            stmt(
                 (
                     ELSEIF exprBkt
                      stmt
-                )*
-             ELSE
-             stmt
-            )?
+                )*)?
+             (ELSE
+             stmt)?
             ;
 forStmt:    FOR '(' first = expr? ';' second = expr? ';' thirld = expr? ')'
             stmt

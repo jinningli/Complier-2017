@@ -1,11 +1,13 @@
-// Generated from /Users/lijinning/Desktop/Compiler - 2017/MAPLE/Compiler/FrontEnd/Maple.g4 by ANTLR 4.7
+// Generated from /Users/lijinning/Desktop/Maple - 2017/src/cn/chips/MAPLE/parser/Maple.g4 by ANTLR 4.7
 package cn.chips.MAPLE.parser;
-
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class MapleLexer extends Lexer {
@@ -40,7 +42,7 @@ public class MapleLexer extends Lexer {
 		"ESC", "LETTER", "DIGIT"
 	};
 
-	public static final String[] _LITERAL_NAMES = {
+	private static final String[] _LITERAL_NAMES = {
 		null, "';'", "'='", "'class'", "'{'", "'}'", "'('", "','", "')'", "'['", 
 		"']'", "'new'", "'bool'", "'int'", "'string'", "'if'", "'else'", "'else if'", 
 		"'while'", "'for'", "'continue'", "'break'", "'return'", "'void'", null, 
@@ -48,7 +50,7 @@ public class MapleLexer extends Lexer {
 		"'>'", "'=='", "'!='", "'<='", "'>='", "'++'", "'--'", "'.'", "'&&'", 
 		"'||'", "'!'", "'&'", "'|'", "'~'", "'^'", "'<<'", "'>>'"
 	};
-	public static final String[] _SYMBOLIC_NAMES = {
+	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, "IF", "ELSE", "ELSEIF", "WHILE", "FOR", "CONTINUE", 
 		"BREAK", "RETURN", "VOID", "INT", "BOOL", "NULL", "STRING", "ID", "PLUS", 

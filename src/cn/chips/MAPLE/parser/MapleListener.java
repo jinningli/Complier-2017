@@ -1,4 +1,4 @@
-// Generated from /Users/lijinning/Desktop/Compiler - 2017/MAPLE/Compiler/FrontEnd/Maple.g4 by ANTLR 4.7
+// Generated from /Users/lijinning/Desktop/Maple - 2017/src/cn/chips/MAPLE/parser/Maple.g4 by ANTLR 4.7
 package cn.chips.MAPLE.parser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
