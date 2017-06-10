@@ -2,10 +2,13 @@ package cn.chips.MAPLE.compiler;
 
 
 import cn.chips.MAPLE.asm.AsmModifier;
+import cn.chips.MAPLE.ast.declare.FuncDecl;
+import cn.chips.MAPLE.ast.declare.VarDecl;
 import cn.chips.MAPLE.ast.root.AST;
 import cn.chips.MAPLE.ir.IR;
 import cn.chips.MAPLE.parser.*;
 
+import cn.chips.MAPLE.utils.scope.ScopeNode;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.omg.SendingContext.RunTime;
@@ -59,6 +62,9 @@ public class Main
         PrintStream cfout = new PrintStream(new FileOutputStream("output.c"));
         String res = root.getDecls().IRTranslate();
         cfout.println(res);
+
+        if(root.getDecls().vars.size() > 255)
+            return;
 
 //        System.err.println(res);
 //        Runtime.getRuntime().exec("bash conv/build.sh");
