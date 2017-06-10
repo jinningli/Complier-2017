@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class AsmModifier {
     String asmFileName;
-    String res = "";
+    StringBuilder res = new StringBuilder();
     public AsmModifier(String filename){
         asmFileName = filename;
     }
@@ -25,13 +25,14 @@ public class AsmModifier {
         String line;
         while((line = fin.readLine()) != null){
             if(line.contains(".data")){
-                res += line + "\n";
-                res += "\n";
-                res += buildDataField();
-                res +="\n";
+                res.append(line);
+                res.append("\n");
+                res.append(buildDataField());
+                res.append("\n");
                 continue;
             }
-            res += line + "\n";
+            res.append(line);
+            res.append("\n");
         }
     }
 
@@ -44,15 +45,17 @@ public class AsmModifier {
     }
 
     public String buildDataField(){
-        String res = "";
+        StringBuilder res = new StringBuilder();
         ScopeNode scope = grobalVariable.grobal.root;
         List<VarDecl> grobal =  scope.localVariables();
         for(VarDecl vd : grobal){
             if(vd.isGrobal){
-                res += vd.name + ":\n";
-                res += "\tdq 0,0\n";
+                res.append(vd.name);
+                res.append(":\n");
+                res.append("\tdq 0,0");
+                res.append("\n");
             }
         }
-        return res;
+        return res.toString();
     }
 }

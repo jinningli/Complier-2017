@@ -9,7 +9,7 @@ int main() {
      count = new int[1];
      count[0] = 0;
      v0 = getcount(count);
-     print(toString(v0) + " ");
-     println("");
+     print(toString(v0) + " 2");
+     println("33");
      return 0;
 }
