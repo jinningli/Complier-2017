@@ -101,6 +101,11 @@ public class ArrIndex extends Expr {
         if(index == null || body == null)
             throw new NullPtr();
         Type br =  body.getretype();
+        if(br instanceof ArrType){
+            if(((ArrType) br).dmsList.size() < ((ArrType) br).dimension - 1 && index.getretype().getint() == 1){
+                throw new TypeNotMatch();
+            }
+        }
         Type ir = index.getretype();
         if(!(ir instanceof IntType)){
             throw new WrongType();

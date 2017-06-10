@@ -44,6 +44,9 @@ public class AssignExpr extends Expr {
             throw new TypeNotMatch();
         }
         if(right instanceof NewExpr && rt instanceof ArrType){
+//            if(((ArrType)left.getretype()).dimension != ((ArrType)right.getretype()).dimension){
+//                throw new TypeNotMatch();
+//            }
             ((ArrType)left.getretype()).dmsList = ((ArrType) rt).dmsList;//////
         }
         retype = left.getretype();

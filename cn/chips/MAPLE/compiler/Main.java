@@ -66,6 +66,7 @@ public class Main
         if(root.getDecls().vars.size() > 255)
             return;
 
+
 //        System.err.println(res);
 //        Runtime.getRuntime().exec("bash conv/build.sh");
         Process proc = Runtime.getRuntime().exec("bash c2nasm.bash output.c -O0"
