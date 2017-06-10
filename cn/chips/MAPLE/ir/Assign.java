@@ -26,7 +26,13 @@ public class Assign extends STMT {
     }
 
     public String translate(){
-        String res = lhs.translate();
+        String res;
+        if(lhs instanceof Addr){
+            res = lhs.translate();
+        }else {
+            res = "*((long*)" + lhs.translate() + ")";
+        }
+
         res += " = ";
         res += rhs.translate();
         return res;

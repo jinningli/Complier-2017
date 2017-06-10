@@ -43,7 +43,7 @@ public class FunctionCall extends Expr {
        //System.err.println(pos._String());
         Declare d;
         if(grobalVariable.inclass) {
-            String inclassname = grobalVariable.nowclass + "-" + name;
+            String inclassname = grobalVariable.nowclass + "__" + name;
             if (grobalVariable.grobal.containsKey(inclassname)) {
                 d = grobalVariable.grobal.what(inclassname);
                 id.ent = (Entity) d;

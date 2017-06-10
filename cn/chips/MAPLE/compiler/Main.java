@@ -1,12 +1,14 @@
 package cn.chips.MAPLE.compiler;
 
 
+import cn.chips.MAPLE.asm.AsmModifier;
 import cn.chips.MAPLE.ast.root.AST;
 import cn.chips.MAPLE.ir.IR;
 import cn.chips.MAPLE.parser.*;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.omg.SendingContext.RunTime;
 
 import java.io.*;
 
@@ -37,20 +39,36 @@ public class Main
         AstBuilder v = new AstBuilder();
         AST root = (AST) v.visit(tree);
         root.check();
-        if(localtest)
-            root.print(0);
+
+//        if(localtest)
+//            root.print(0);
+
         IRGenerator r = new IRGenerator(root);
         IR ir = r.generate();
-        if(localtest)
-        root.getDecls().IRtraverse();
-        root.getDecls().IRTranslate();
+
+//        if(localtest) {
+//        root.getDecls().IRtraverse();
+
+        PrintStream cfout = new PrintStream(new FileOutputStream("output.c"));
+        cfout.println(root.getDecls().IRTranslate());
+        Runtime.getRuntime().exec("cd conv && bash build.sh  2> err.txt 1> std.txt && cd ..");
+        Runtime.getRuntime().exec("bash c2nasm.bash output.c -O0" +
+                " 2> err.txt 1> std.txt"
+        );
+
+        AsmModifier am = new AsmModifier("./output.asm");
+        am.process();
+        am.print();
+
+//        }
 //        CodeGenerator c = new CodeGenerator(root.getDecls());
 //        c.generate(ir);
 //        if(localtest) {
-//            PrintStream tmpfout = new PrintStream(new FileOutputStream("cn/chips/MAPLE/testcase/test.asm"));
+//            PrintStream tmpfout = new PrintStream(new FileOutputStream("cn/chips/MAPLE/testcase/out.asm"));
 //            tmpfout.print(c.toSource());
 //        }else
 //        System.out.println(c.toSource());
-
+//nasm -felf64 cn/chips/MAPLE/testcase/test.asm && gcc cn/chips/MAPLE/testcase/test.o && ./cn/chips/MAPLE/testcase/test.out
+//bash c2nasm.bash cn/chips/MAPLE/testcase/test.c -O0&&nasm -felf64 cn/chips/MAPLE/testcase/test.asm && gcc cn/chips/MAPLE/testcase/test.o && ./cn/chips/MAPLE/testcase/test.out
     }
 }

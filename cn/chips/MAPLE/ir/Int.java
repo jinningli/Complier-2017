@@ -31,6 +31,6 @@ public class Int extends EXPR {
         throw new NoDefined();
     }
     public String translate(){
-        return String.valueOf(value);
+        return "(" + String.valueOf(value) + ")";
     }
 }

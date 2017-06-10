@@ -4,6 +4,7 @@ import  cn.chips.MAPLE.compiler.*;
 import  cn.chips.MAPLE.parser.*;
 import  cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.utils.scope.ScopeNode;
+import org.antlr.v4.codegen.model.decl.Decl;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -76,6 +77,23 @@ public class ClassDecl extends Declare{
         for(Declare d: DeclList){
             d.print(depth + 1);
         }
+    }
 
+    public String declTranslate(){
+        String res = "";
+        res += "struct " + name + "{\n";
+        for(Declare d: DeclList){
+            if(d instanceof VarDecl){
+                res += ((VarDecl) d).declTranslate() + ";\n";
+            }
+        }
+        res += "};\n";
+        return res;
+    }
+
+    public String onlyDeclare(){
+        String res = "";
+        res += "struct " + name + ";\n";
+        return res;
     }
 }

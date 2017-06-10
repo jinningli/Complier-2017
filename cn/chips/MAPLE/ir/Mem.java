@@ -24,6 +24,6 @@ public class Mem extends EXPR {
     }
 
     public String translate(){
-        return expr.translate();
+        return "(*(long *)" +  expr.translate() + ")";
     }
 }

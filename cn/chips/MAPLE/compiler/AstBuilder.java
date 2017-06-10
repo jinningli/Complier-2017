@@ -49,7 +49,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
         }
 //        System.err.println(vd.pos._String());
         if(inclass&&!infunction){
-            maple.define(nowclass.name + "-" + vd.getname(), vd);
+            maple.define(nowclass.name + "__" + vd.getname(), vd);
         }
 // else{
 //            maple.define(vd.getname(), vd);
@@ -303,7 +303,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     @Override public Project visitIdentifier(MapleParser.IdentifierContext ctx) {
         String id = ctx.getText();
 //        if(inclass && infunction){
-//            if(maple.containsKey(nowclass.name + "-" + id)){
+//            if(maple.containsKey(nowclass.name + "__" + id)){
 //                List<Pair<Type, String>> ls = nowfunc.flist;
 //                for(Pair<Type, String> p: ls){
 //                    if(Objects.equals(p.getSecond(), id)){

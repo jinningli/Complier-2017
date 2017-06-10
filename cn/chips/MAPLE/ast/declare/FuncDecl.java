@@ -79,7 +79,7 @@ public class FuncDecl extends Declare implements Entity{
         if(inclass){
             classFunc = true;
             thisptr = nowclass;
-            name = nowclass.name + "-" + ctx.ID().getText();
+            name = nowclass.name + "__" + ctx.ID().getText();
             Type thistype = new ClassType(nowclass.name, pos);
             flist.add(new Pair<>(thistype, "This"));
         }
@@ -88,7 +88,7 @@ public class FuncDecl extends Declare implements Entity{
             if(!inclass){
                 throw new DeclLost();
             }
-            if(!Objects.equals(name, nowclass.name + "-" + nowclass.name)){
+            if(!Objects.equals(name, nowclass.name + "__" + nowclass.name)){
                 throw new DeclLost();
             }
             constructFunc = true;
@@ -126,7 +126,7 @@ public class FuncDecl extends Declare implements Entity{
         grobalVariable.grobal.newLayer();
         setNowScope(grobalVariable.grobal.now);
 //        Main.returned = false;
-        if(grobalVariable.inclass && Objects.equals(name, thisptr.name + "-" + "this")){
+        if(grobalVariable.inclass && Objects.equals(name, thisptr.name + "__" + "this")){
             throw new TypeNotMatch();
         }
         if(retype instanceof ClassType){
@@ -193,5 +193,22 @@ public class FuncDecl extends Declare implements Entity{
 
     public String translate(){
         return name;
+    }
+
+    public String declTranslate(){
+        String res = "";
+        if(!Objects.equals(name, "main"))
+             res += retype.typename();
+        else
+            res += "int";
+        res += " " + name + "(";
+        for(int i = 0; i < flist.size(); i ++){
+            res += flist.get(i).first.typename() + " " + flist.get(i).getSecond();
+            if(i != flist.size() - 1) {
+                res += ", ";
+            }
+        }
+        res += ")";
+        return res;
     }
 }

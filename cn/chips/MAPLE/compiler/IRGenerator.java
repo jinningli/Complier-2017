@@ -37,7 +37,7 @@ public class IRGenerator {
 
     public IRGenerator(AST _root){
         root = _root;
-        mallocFunc = (FuncDecl) grobalVariable.grobal.what("mallocFunc");
+        mallocFunc = (FuncDecl) grobalVariable.grobal.what("__lib_malloc");
 //        adtog = new LinkedList<>();
 //        adtofunc = new LinkedList<>();
     }
@@ -275,11 +275,11 @@ public class IRGenerator {
         assign(base, new Call(mallocFunc, new LinkedList<EXPR>() {{
             add(new Bin("+",
                             new Bin("*", s, size),
-                            size)
+                            new Int(4))
             );
         }}));
         assign(new Mem(base), s);
-        assign(base, new Bin("+", base, size));
+        assign(base, new Bin("+", base, new Int(4)));
         if(exprs.size() > depth + 1){
             assign(i, zero);
 
@@ -475,7 +475,7 @@ public class IRGenerator {
         if(Objects.equals(op, "++")){
             op = "+";
         }else if(Objects.equals(op, "--")){
-            op = "-";
+            op = "__";
         }
 
         if(isStatement()){
@@ -500,11 +500,11 @@ public class IRGenerator {
         if(Objects.equals(op, "++"))
             return transformOpAssign("+", body, im);
         else if (Objects.equals(op, "--"))
-            return transformOpAssign("-", body, im);
+            return transformOpAssign("__", body, im);
         else if(Objects.equals(op, "+")){
             return body;
         }
-        else if (Objects.equals(op, "-")
+        else if (Objects.equals(op, "__")
                 || Objects.equals(op, "~")
                 || Objects.equals(op, "!")){
             return new Uni(op, body);

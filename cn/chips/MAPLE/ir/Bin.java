@@ -30,9 +30,11 @@ public class Bin extends EXPR {
     }
 
     public String translate(){
-        String res = lhs.translate();
+        String res = "(";
+        res +=lhs.translate();
         res += " " + op + " ";
         res += rhs.translate();
+        res += ")";
         return res;
     }
 }

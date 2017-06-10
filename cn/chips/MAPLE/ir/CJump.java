@@ -29,11 +29,12 @@ public class CJump extends STMT {
         elseLabel.traverse(depth + 1);
     }
     public String translate(){
-        String res = null;
+        String res = "";
         res += "if(" + cond.translate() + ")";
         if(thenLabel != null){
             if(elseLabel != null){
-                res += " goto " + thenLabel.str + "; else goto" + elseLabel.str + ";";
+                res += " goto " + thenLabel.str + "; else goto " + elseLabel.str + ";";
+                return res;
             }
             res += " goto " + thenLabel.str + ";";
         }

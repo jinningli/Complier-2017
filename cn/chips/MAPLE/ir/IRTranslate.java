@@ -19,9 +19,9 @@ public class IRTranslate extends IRBase{
     }
 
     public String translate(){
-        StringBuilder res = null;
+        StringBuilder res = new StringBuilder();
         for(STMT s: irstream){
-            res.append(s.translate());
+            res.append(s.translate() + ";\n");
         }
         return res.toString();
     }

@@ -39,7 +39,7 @@ public class PreSingleExpr extends Expr {
         }
 //        if(Objects.equals(opt, "++") ||
 //                Objects.equals(opt, "--") ||
-//                Objects.equals(opt, "-") ||
+//                Objects.equals(opt, "__") ||
 //                Objects.equals(opt, "+") ||
 //                Objects.equals(opt, "!")){
 //            return body.getretype();
@@ -50,7 +50,7 @@ public class PreSingleExpr extends Expr {
         }
 //        else if(Objects.equals(opt, "~")){
 //            return body.getretype();
-//        }else if(Objects.equals(opt, "-") || Objects.equals(opt, "+")){
+//        }else if(Objects.equals(opt, "__") || Objects.equals(opt, "+")){
 //            return body.getretype();
 //        }else if(Objects.equals(opt, "--") || Objects.equals(opt, "++")){
 //            return body.getretype();

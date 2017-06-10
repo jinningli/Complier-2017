@@ -40,7 +40,7 @@ public class Member extends Expr {
         }
         if(body instanceof Identifier){
             if(Objects.equals(((Identifier) body).name, "this")){
-                vardeclent = (VarDecl)grobalVariable.grobal.what(grobalVariable.nowclass + "-" + name);
+                vardeclent = (VarDecl)grobalVariable.grobal.what(grobalVariable.nowclass + "__" + name);
                 retype = ((VarDecl)vardeclent).type;
                 body.getretype();
                 return retype;
@@ -51,7 +51,7 @@ public class Member extends Expr {
             if(Objects.equals(t.getname(), "")){
                 throw new NullPtr();
             }
-            String n = t.getname() + "-" + name;
+            String n = t.getname() + "__" + name;
             Declare dn = grobalVariable.grobal.what(n);
             if (!(dn instanceof VarDecl)) {
                 throw new NameNotMatch();

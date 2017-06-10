@@ -65,7 +65,7 @@ public class Identifier extends Expr {
                 vartype = new ClassType(grobalVariable.nowclass, pos);
                 return vartype;
             }
-//            String inclassname = grobalVariable.nowclass + "-" + name;
+//            String inclassname = grobalVariable.nowclass + "__" + name;
 //            if(grobalVariable.grobal.containsKey(inclassname)){
 //                d = grobalVariable.grobal.what(inclassname);
 //                return ((VarDecl)d).type;

@@ -40,7 +40,7 @@ public class Call extends EXPR {
     }
 
     public String translate(){
-        String res = null;
+        String res = "";
         res += ent.name;
         res += "(";
         for(int i = 0; i < args.size(); i ++){

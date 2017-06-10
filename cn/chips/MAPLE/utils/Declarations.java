@@ -9,11 +9,9 @@ import cn.chips.MAPLE.ast.root.AST;
 import cn.chips.MAPLE.ir.IRTranslate;
 import cn.chips.MAPLE.ir.IRTraverse;
 import cn.chips.MAPLE.ir.Var;
+import cn.chips.MAPLE.utils.scope.ScopeNode;
 
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Maple - 2017
@@ -83,6 +81,7 @@ public class Declarations {
             System.out.println("Const:: " + c._String() + " " );
         }
     }
+
     public void IRtraverse(){
         IRTraverse k = new IRTraverse();
         System.out.println("\n------------- IRBase Traverse -------------\n");
@@ -98,18 +97,170 @@ public class Declarations {
     }
 
     public String IRTranslate(){
-        String res = null;
+        String res = "";
         IRTranslate t = new IRTranslate();
-        res += ("\n------------- IRBase Translate -------------\n");
-        res += ("**********    Grobal Variable    **********");
-        t.setIrstream(root.grobalVarIR);
-        res += t.translate();
+
+        res += ("\n//------------- IRBase Translate -------------\n\n");
+        //head
+        res += head();
+
+        //fundDecl:
+        res += "//Function & Class Declare\n";
+        for(ClassDecl cls : classes){
+            res += cls.onlyDeclare();
+        }
+        res += "\n";
         for(FuncDecl f: funs){
-            res += ("********** In the Function: " + f.name + " **********");
+            if(!Objects.equals(f.name, "main"))
+                res += f.declTranslate() + ";\n";
+        }
+        res += insideFuncDecl();
+
+        //grobalVariable
+
+//        res += ("\n**********    Grobal Variable    **********\n");
+        String grobalInitialize = "";
+        res += "//Grobal Variable\n";
+        for(VarDecl vd: vars){
+            if(vd.isGrobal){
+                res += vd.declTranslate();
+                if(vd.ir != null){
+                    grobalInitialize += vd.name + " = " + vd.ir.translate() + ";\n";
+                }
+                res += ";\n";
+            }
+        }
+        res += "\n";
+
+        //Inside Function
+        res += "//Inside Function\n";
+        res += insideFunc();
+
+
+        //Class
+        res += "//Class Body\n";
+        for(ClassDecl cls : classes){
+            res += cls.declTranslate();
+        }
+
+        //Function
+
+        for(FuncDecl f: funs){
+//            res += ("\n********** In the Function: " + f.name + " **********\n");
+            res += f.declTranslate() + "{\n";
+            if(Objects.equals(f.name, "main")){
+                res += "//Grobal Variable Initialize\n";
+                res += grobalInitialize;
+            }
+            res += "//Define Local Variable\n";
+            res += defineLocalVariable(f);
+            res += "//Function Body\n";
             t.setIrstream(f.ir);
             res += t.translate();
+            res += "}\n";
         }
-        res += ("\n------------- IRBase Traverse End -------------\n");
+
+
+
+
+        res += ("\n//------------- IRBase Traverse End -------------\n");
         return res;
+
+    }
+
+    public String defineLocalVariable(FuncDecl f){
+        List<VarDecl> lvd = getLocalVarDecl(f.nowScope);
+        String res = "";
+        for(int i = 0; i < f.flist.size(); i ++){
+            res += lvd.get(i).declTranslate() + " = " + f.flist.get(i).getSecond() + ";\n";
+        }
+        for(int i = f.flist.size(); i < lvd.size(); i ++){
+            res += lvd.get(i).declTranslate() + ";\n";
+        }
+        return res;
+    }
+
+    int cnt = 0;
+
+    public List<VarDecl> getLocalVarDecl(ScopeNode scope){
+        List<VarDecl> lvd = new LinkedList<>();
+        for(VarDecl vd: scope.localVariables()){
+            vd.name += "_" + cnt ++;
+            lvd.add(vd);
+        }
+        for(ScopeNode s: scope.child){
+            lvd.addAll(getLocalVarDecl(s));
+        }
+        return lvd;
+    }
+
+    public String head(){
+        return "#include <stdio.h>\n" +
+                "#include <stdlib.h>\n" +
+                "#include <string.h>\n\n";
+    }
+
+    public String insideFuncDecl(){
+        return "long getInt();\n" +
+                "void print(long null);\n" +
+                "void println(long null);\n" +
+                "void __lib_printInt(long null);\n" +
+                "long __lib_malloc(long null);\n" +
+                "long toString(long null);\n" +
+                "int main();\n" +
+                "long getString();\n" +
+                "void __lib_printlnInt(long null);\n\n";
+    }
+
+    public String insideFunc(){
+        return "void __lib_printlnInt(long x) {\n" +
+                "    printf(\"%ld\\n\", x);\n" +
+                "}\n" +
+                "\n" +
+                "void __lib_printInt(long x) {\n" +
+                "    printf(\"%ld\", x);\n" +
+                "}\n" +
+                "\n" +
+                "long __lib_malloc(long x) {\n" +
+                "    return (long) malloc(x);\n" +
+                "}\n" +
+                "\n" +
+                "void println(long x) {\n" +
+                "    puts((char *)x);\n" +
+                "}\n" +
+                "\n" +
+                "long toString(long x) {\n" +
+                "    unsigned char *ret = (unsigned char*)malloc(12 + sizeof(int));\n" +
+                "    ret += sizeof(int);\n" +
+                "    unsigned char *p = ret;\n" +
+                "\n" +
+                "    if (x < 0) {\n" +
+                "        *p++ = '-';\n" +
+                "        x = -x;\n" +
+                "    }\n" +
+                "\n" +
+                "    if (x == 0)\n" +
+                "        *p++ = '0';\n" +
+                "\n" +
+                "    unsigned char *begin = p;\n" +
+                "    while (x) {\n" +
+                "        int next = x / 10;\n" +
+                "        *p++ = '0' + x - next * 10;\n" +
+                "        x = next;\n" +
+                "    }\n" +
+                "    *p = 0;\n" +
+                "    *(((int *)ret) - 1) = p - ret;\n" +
+                "\n" +
+                "    p--;\n" +
+                "    while (begin <= p) {\n" +
+                "        char t = *begin;\n" +
+                "        *begin = *p;\n" +
+                "        *p = t;\n" +
+                "        begin++;\n" +
+                "        p--;\n" +
+                "    }\n" +
+                "\n" +
+                "    return (long)ret;\n" +
+                "}\n\n";
     }
 }

@@ -73,11 +73,11 @@ public class ScopeTree extends Project{
         builtinFunc.pos = new Position(-1, -1);
         root.define("ord", builtinFunc);
 
-        builtinFunc = new FuncDecl("mallocFunc",
+        builtinFunc = new FuncDecl("__lib_malloc",
                 new VoidType());
         builtinFunc.addlist(new IntType(0), "size");
         builtinFunc.pos = new Position(-1, -1);
-        root.define("mallocFunc", builtinFunc);
+        root.define("__lib_malloc", builtinFunc);
 
 //        define("bool", new VarDecl(new Position(-1, -1)));
 //        define("int", new VarDecl(new Position(-1, -1)));

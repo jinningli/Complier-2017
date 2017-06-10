@@ -51,7 +51,7 @@ public class MemberFunction extends Expr {
             if(Objects.equals(t.getname(), "")){
                 throw new NullPtr();
             }
-            id.name = t.getname() + "-" + id.name;
+            id.name = t.getname() + "__" + id.name;
             Declare nd = grobalVariable.grobal.what(id.name);
             if(!(nd instanceof FuncDecl)){
                 throw new NameNotMatch();

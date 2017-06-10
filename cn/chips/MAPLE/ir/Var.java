@@ -26,6 +26,6 @@ public class Var extends EXPR {
     }
 
     public String translate(){
-        return ent.translate();
+        return "(" +  ent.translate() + ")";
     }
 }

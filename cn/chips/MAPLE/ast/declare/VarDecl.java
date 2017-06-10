@@ -181,4 +181,16 @@ public class VarDecl extends Declare implements Entity{
     public String translate(){
         return name;
     }
+
+    public String declTranslate(){
+        String res = "";
+        if(type instanceof ArrType){
+            res += "long";
+        }else if(type == null){
+            res += "long";
+        }else
+            res += type.typename();
+        res += " " + name;
+        return res;
+    }
 }

@@ -44,6 +44,6 @@ public class IntType extends Project implements Type {
     public int getint(){return data;};
     public boolean getbool(){return false;};
     public String typename() {
-        return "int";
+        return "long";
     }
 }
