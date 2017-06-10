@@ -1,9 +1,8 @@
-int x;
-int y;
 int main() {
-    x = 10;
-    y = 20;
-    int c = x+y;
-    println(toString(c));
-    return c;
+    int a = 5;
+    int b;
+    int c;
+    c = a++;
+    b = c;
+    return b+c+a;
 }

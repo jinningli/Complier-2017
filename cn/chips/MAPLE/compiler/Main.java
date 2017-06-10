@@ -50,13 +50,15 @@ public class Main
 //        root.getDecls().IRtraverse();
 
         PrintStream cfout = new PrintStream(new FileOutputStream("output.c"));
-        cfout.println(root.getDecls().IRTranslate());
+        String res = root.getDecls().IRTranslate();
+        cfout.println(res);
+//        System.err.println(res);
 //        Runtime.getRuntime().exec("bash conv/build.sh");
-        Runtime.getRuntime().exec("bash c2nasm.bash ./output.c -O0"
+        Runtime.getRuntime().exec("bash c2nasm.bash output.c -O0"
 //                " 2> err.txt 1> std.txt"
         );
 
-        AsmModifier am = new AsmModifier("./output.asm");
+        AsmModifier am = new AsmModifier("output.asm");
         am.process();
         am.print();
 

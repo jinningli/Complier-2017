@@ -39,6 +39,10 @@ public class AsmModifier {
         System.out.println(res);
     }
 
+    public void errprint(){
+        System.out.println(res);
+    }
+
     public String buildDataField(){
         String res = "";
         ScopeNode scope = grobalVariable.grobal.root;

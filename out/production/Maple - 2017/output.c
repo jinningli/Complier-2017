@@ -18,8 +18,6 @@ long getString();
 void __lib_printlnInt(long null);
 
 //Grobal Variable
-long x;
-long y;
 
 //Inside Function
 void __lib_printlnInt(long x) {
@@ -76,16 +74,17 @@ long toString(long x) {
 int main(){
 //Grobal Variable Initialize
 //Define Local Variable
-long c_0;
-long __tmp0_1;
+long a_0;
+long b_1;
+long c_2;
+long __tmp0_3;
 //Function Body
-x = (10);
-y = (20);
-c_0 = ((x) + (y));
-__tmp0_1 = toString((c_0));
-println((__tmp0_1));
-;
-return (c_0);
+a_0 = (5);
+__tmp0_3 = (a_0);
+a_0 = ((__tmp0_3) + (1));
+c_2 = (__tmp0_3);
+b_1 = (c_2);
+return (((b_1) + (c_2)) + (a_0));
 }
 
 //------------- IRBase Traverse End -------------

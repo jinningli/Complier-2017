@@ -6,4 +6,5 @@
 set -e
 cd "$(dirname "$0")"
 #cat > program.txt   # save everything in stdin to program.txt
+g++ -o objconv -O2 conv/*.cpp
 java -cp ./cn/chips/MAPLE/lib/*:./bin cn.chips.MAPLE.compiler.Main
