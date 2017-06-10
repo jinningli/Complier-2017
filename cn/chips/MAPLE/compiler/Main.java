@@ -20,11 +20,18 @@ public class Main
 //    public static boolean returned = false;
     public static void main(String[] args) throws Exception
     {
-        if(localtest) {
-            InputStream Filein = new FileInputStream("cn/chips/MAPLE/testcase/test.cpp");
-            compile(Filein, System.out);
-        }else
-        compile(System.in, System.out);
+        if (args.length != 0 && args[0].equals("--add-global"))
+        {
+            AsmModifier am = new AsmModifier("output.asm");
+            am.process();
+            am.print();
+        }else {
+            if (localtest) {
+                InputStream Filein = new FileInputStream("cn/chips/MAPLE/testcase/test.cpp");
+                compile(Filein, System.out);
+            } else
+                compile(System.in, System.out);
+        }
     }
     public static void compile(InputStream in, OutputStream out) throws Exception
     {
@@ -59,13 +66,17 @@ public class Main
 //                " 2> err.txt 1> std.txt"
         );
         int exitv = proc.waitFor();
+        proc.destroyForcibly();
         System.err.println(exitv);
 
 //        Runtime.getRuntime().exec("pwd");
 
         AsmModifier am = new AsmModifier("output.asm");
+        System.err.println("2");
         am.process();
+        System.err.println("3");
         am.print();
+        System.err.println("4");
 
 //        }
 //        CodeGenerator c = new CodeGenerator(root.getDecls());
