@@ -5,7 +5,7 @@
 
 set -e
 cd "$(dirname "$0")"
-java -cp ./cn/chips/MAPLE/lib/*:./bin cn.chips.MAPLE.compiler.Main
+java -cp ./src/cn/chips/MAPLE/lib/*:./bin cn.chips.MAPLE.compiler.Main
 #bash c2nasm.bash output.c -O0  2> err.txt 1> std.txt
 #cat std.txt
 #java -cp ./cn/chips/MAPLE/lib/*:./bin cn.chips.MAPLE.compiler.Main --add-global

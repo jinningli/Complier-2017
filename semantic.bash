@@ -6,4 +6,4 @@
 set -e
 cd "$(dirname "$0")"
 #cat > program.txt   # save everything in stdin to program.txt
-java -cp ./cn/chips/MAPLE/lib/*:./bin cn.chips.MAPLE.compiler.Main
+java -cp ./src/cn/chips/MAPLE/lib/*:./bin cn.chips.MAPLE.compiler.Main

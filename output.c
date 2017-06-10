@@ -7,6 +7,10 @@
 
 //Function & Class Declare
 
+long ord(long pos, long str);
+long parseInt(long x);
+long strlength(long idx);
+long size(long x);
 long toMoStr(char *str);
 long str_add(long a, long b);
 long getInt();
@@ -22,6 +26,49 @@ void __lib_printlnInt(long null);
 //Grobal Variable
 
 //Inside Function
+long ord(long pos, long str){
+    char* ret = (char*)str + pos;
+    return (long)*ret;
+}
+long parseInt(long x){
+    int s = (int) strlength(x);
+    char* ret = (char*)x;
+    int res = 0;
+    for(int i = 0; i < s; i ++){
+        if(ret[i]>='0' && ret[i] <= '9'){
+            res = res * 10 + ret[i] - '0';
+        }else{
+            break;
+        }
+    };
+    return res;
+}
+long strlength(long idx){
+    int res = *((int *)(idx - sizeof(int)));
+    return (long)res;
+}
+long getInt(){
+    int tmp = 0;
+    scanf("%d", &tmp);
+    return (long)tmp;
+}
+long getString(){
+    int size = 0;
+    unsigned char* tmp = (unsigned char*)malloc(2000 + sizeof(int));
+    unsigned char* bak = tmp;
+    tmp += sizeof(int);
+    tmp[size] = (unsigned char)getchar();
+    while(tmp[size] !=  '\n'){
+        tmp[++size] = (unsigned char)getchar();
+    }
+    tmp[size] = '\0';
+    *((int*) bak) = size;
+    return (long)(bak + sizeof(int));
+}
+long size(long x){
+    long s = *((long*)(x - sizeof(long)));
+    return s;
+}
 long toMoStr(char *str) {
     int len = strlen(str);
     unsigned char* ret = (unsigned char *) malloc(len + sizeof(int) + 1);
@@ -111,27 +158,22 @@ int main(){
 long __tmp4_0;
 long a_1;
 long __tmp3_2;
-long __tmp0_3;
-long __tmp2_4;
-long __tmp1_5;
+long __tmp5_3;
+long __tmp0_4;
+long __tmp2_5;
+long __tmp1_6;
 //Function Body
-__tmp1_5 = (1);
-__tmp0_3 = __lib_malloc((((__tmp1_5) * (8)) + (4)));
-*((long*)(__tmp0_3)) = (__tmp1_5);
-__tmp0_3 = ((__tmp0_3) + (4));
-__tmp2_4 = (0);
-goto AsmLabel0;
-AsmLabel1:;
-__tmp3_2 = (1);
-*((long*)((__tmp0_3) + ((__tmp2_4) * (8)))) = __lib_malloc((((__tmp3_2) * (8)) + (4)));
-*((long*)(*(long *)((__tmp0_3) + ((__tmp2_4) * (8))))) = (__tmp3_2);
-*((long*)((__tmp0_3) + ((__tmp2_4) * (8)))) = ((*(long *)((__tmp0_3) + ((__tmp2_4) * (8)))) + (4));
-__tmp2_4 = ((__tmp2_4) + (1));
-AsmLabel0:;
-if(((__tmp2_4) < (__tmp1_5))) goto AsmLabel1; else goto AsmLabel2;;
-AsmLabel2:;
-a_1 = (__tmp0_3);
-return (0);
+__tmp1_6 = (20);
+__tmp0_4 = __lib_malloc((((__tmp1_6) * (8)) + (8)));
+*((long*)(__tmp0_4)) = (__tmp1_6);
+__tmp0_4 = ((__tmp0_4) + (8));
+a_1 = (__tmp0_4);
+__tmp3_2 = ord((1), (toMoStr("12345assss")));
+__tmp4_0 = toString((__tmp3_2));
+println((__tmp4_0));
+;
+__tmp5_3 = size((a_1));
+return (__tmp5_3);
 }
 
 //------------- IRBase Traverse End -------------
