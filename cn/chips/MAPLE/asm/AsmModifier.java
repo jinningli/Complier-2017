@@ -8,7 +8,7 @@ import java.io.*;
  */
 public class AsmModifier {
     String asmFileName;
-    String res;
+    String res = "";
     public AsmModifier(String filename){
         asmFileName = filename;
     }

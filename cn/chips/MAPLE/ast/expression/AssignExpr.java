@@ -1,12 +1,9 @@
 package cn.chips.MAPLE.ast.expression;
 
-import cn.chips.MAPLE.ast.declare.VarDecl;
-import cn.chips.MAPLE.compiler.Main;
 import cn.chips.MAPLE.ir.Entity;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.type.*;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import java.util.Objects;
 

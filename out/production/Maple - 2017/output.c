@@ -7,7 +7,6 @@
 
 //Function & Class Declare
 
-long add(long a, long b);
 long getInt();
 void print(long null);
 void println(long null);
@@ -19,7 +18,6 @@ long getString();
 void __lib_printlnInt(long null);
 
 //Grobal Variable
-long n;
 
 //Inside Function
 void __lib_printlnInt(long x) {
@@ -73,59 +71,11 @@ long toString(long x) {
 }
 
 //Class Body
-long add(long a, long b){
-//Define Local Variable
-long a_0 = a;
-long b_1 = b;
-//Function Body
-return ((a_0) + (b_1));
-}
 int main(){
 //Grobal Variable Initialize
-n = ((1) + (3));
 //Define Local Variable
-long a_2;
-long s_3;
-long __tmp5_4;
-long __tmp0_5;
-long __tmp2_6;
-long __tmp1_7;
-long i_8;
-long n_9;
-long __tmp4_10;
-long __tmp3_11;
 //Function Body
-n_9 = (100);
-s_3 = (0);
-__tmp1_7 = (n_9);
-__tmp0_5 = __lib_malloc((((__tmp1_7) * (8)) + (4)));
-*((long*)(__tmp0_5)) = (__tmp1_7);
-__tmp0_5 = ((__tmp0_5) + (4));
-a_2 = (__tmp0_5);
-i_8 = (0);
-AsmLabel3:;
-if(((i_8) < (n_9))) goto AsmLabel4; else goto AsmLabel6;;
-AsmLabel4:;
-*((long*)((a_2) + ((i_8) * (8)))) = (i_8);
-AsmLabel5:;
-i_8 = ((i_8) + (1));
-goto AsmLabel3;
-AsmLabel6:;
-i_8 = (0);
-AsmLabel7:;
-if(((i_8) < (n_9))) goto AsmLabel8; else goto AsmLabel10;;
-AsmLabel8:;
-__tmp3_11 = toString((*(long *)((a_2) + ((i_8) * (8)))));
-println((__tmp3_11));
-;
-__tmp4_10 = add((i_8), (s_3));
-s_3 = (__tmp4_10);
-AsmLabel9:;
-i_8 = ((i_8) + (1));
-goto AsmLabel7;
-AsmLabel10:;
-__tmp5_4 = toString((s_3));
-println((__tmp5_4));
+println(("Hello, world!"));
 ;
 return (0);
 }
