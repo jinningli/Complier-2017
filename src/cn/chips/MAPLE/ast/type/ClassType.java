@@ -27,7 +27,7 @@ public class ClassType extends Project implements Type{
     public int getint(){return 0;};
     public boolean getbool(){return false;};
     public String typename() {
-        return name;
+        return "long";
     }
     public void setClass(ClassDecl _cls){
         cls = _cls;
@@ -39,7 +39,7 @@ public class ClassType extends Project implements Type{
         return (ClassDecl) grobalVariable.grobal.what(name);
     }
     public long size(){
-        return ptrsize;
+        return getcls().size;
     }
     public long clssize(){
         return cls.size;

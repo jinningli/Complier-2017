@@ -47,13 +47,13 @@ public class Main
         root.check();
 
 //        if(localtest)
-//            root.print(0);
+            root.print(0);
 
         IRGenerator r = new IRGenerator(root);
         IR ir = r.generate();
 
 //        if(localtest) {
-//        root.getDecls().IRtraverse();
+        root.getDecls().IRtraverse();
 
         PrintStream cfout = new PrintStream(new FileOutputStream("output.c"));
         String res = root.getDecls().IRTranslate();

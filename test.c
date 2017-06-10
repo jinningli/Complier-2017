@@ -1,19 +1,16 @@
-int qpow(int a,int p,int mod) {
-    int t = 1;
-    int y = a;
-    while(p>0){
-        if((p&1) == 1)t=t*y % mod;
-        y=y*y % mod;
-        p=p / 2;
-    }
-    return t;
+class C2 {
+    int x;
+    int y;
+    bool b;
+    int z;
 }
 
-
-
-
-
 int main() {
-    println(toString(qpow(2,10,10000)));
-    return 0;
+    C2 obj = new C2;
+    obj.x = 10;
+    obj.y = 20;
+    obj.b = obj.x > obj.y;
+    if (obj.b) obj.z = 40;
+    else obj.z = 80;
+    return obj.x + obj.y + obj.z;
 }

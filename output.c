@@ -6,6 +6,7 @@
 #include <string.h>
 
 //Function & Class Declare
+struct C2;
 
 long substring(long str, long l, long r);
 long ord(long pos, long str);
@@ -165,11 +166,31 @@ long toString(long x) {
 }
 
 //Class Body
+struct C2{
+long x;
+long y;
+bool b;
+long z;
+};
 int main(){
 //Grobal Variable Initialize
 //Define Local Variable
+long __tmp0_0;
+long obj_1;
 //Function Body
-return (233);
+__tmp0_0 = __lib_malloc((32));
+obj_1 = (__tmp0_0);
+*((long*)((obj_1) + (0))) = (10);
+*((long*)((obj_1) + (8))) = (20);
+*((long*)((obj_1) + (16))) = ((*(long *)((obj_1) + (0))) > (*(long *)((obj_1) + (8))));
+if((*(long *)((obj_1) + (16)))) goto AsmLabel0; else goto AsmLabel1;;
+AsmLabel0:;
+*((long*)((obj_1) + (24))) = (40);
+goto AsmLabel2;
+AsmLabel1:;
+*((long*)((obj_1) + (24))) = (80);
+AsmLabel2:;
+return (((*(long *)((obj_1) + (0))) + (*(long *)((obj_1) + (8)))) + (*(long *)((obj_1) + (24))));
 }
 
 //------------- IRBase Traverse End -------------

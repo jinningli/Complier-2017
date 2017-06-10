@@ -53,9 +53,12 @@ public class ClassDecl extends Declare{
                 grobalVariable.grobal.define(d.getname(), d);
             }
         }
+        int ofs = 0;
         for(Declare d : DeclList){
             d.check();
             if(d instanceof VarDecl){
+                ((VarDecl) d).offset = ofs;
+                ofs += 8;
 //                size += ((VarDecl) d).length();
                 size += 8;
             }

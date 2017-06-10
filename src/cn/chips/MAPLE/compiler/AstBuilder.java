@@ -164,7 +164,7 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
         outer.setExpr((Expr)visit(ctx.exprBkt(k).expr()));
         outer.setThenBody((Statement)visit(ctx.stmt(k)));
         if(ctx.stmt(k + 1)!=null){
-            outer.setElseBody((Statement) visit(ctx.stmt(k)));
+            outer.setElseBody((Statement) visit(ctx.stmt(k + 1)));
         }
         k --;
         IfStatement inner = new IfStatement(new Position(ctx.getStart()));
