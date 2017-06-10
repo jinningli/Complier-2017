@@ -57,7 +57,8 @@ public class Main
         Process proc = Runtime.getRuntime().exec("bash c2nasm.bash output.c -O0"
 //                " 2> err.txt 1> std.txt"
         );
-        proc.waitFor();
+        int exitv = proc.waitFor();
+        System.err.println(exitv);
 //        Runtime.getRuntime().exec("pwd");
 
         AsmModifier am = new AsmModifier("output.asm");

@@ -75,7 +75,9 @@ int main(){
 //Grobal Variable Initialize
 //Define Local Variable
 //Function Body
-return (233);
+println(("Hello, world!"));
+;
+return (0);
 }
 
 //------------- IRBase Traverse End -------------
