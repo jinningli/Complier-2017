@@ -295,6 +295,11 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     }
 
     @Override public Project visitPreSelfOp(MapleParser.PreSelfOpContext ctx) {
+        Expr expr = (Expr)visit(ctx.expr());
+        if(expr instanceof LogicExpr){
+            return new LogicExpr(new PreSingleExpr((Expr)(((LogicExpr) expr).left), ctx.operation.getText(), new Position(ctx.getStart())),
+                    ((LogicExpr) expr).right, ((LogicExpr) expr).opt, new Position(ctx.getStart()));
+        }
         return new PreSingleExpr((Expr)visit(ctx.expr()),
                 ctx.operation.getText(), new Position(ctx.getStart()));
     }

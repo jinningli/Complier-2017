@@ -168,29 +168,12 @@ long toString(long x) {
 int main(){
 //Grobal Variable Initialize
 //Define Local Variable
-long __tmp4_0;
-long a_1;
-long __tmp3_2;
-long __tmp6_3;
-long __tmp5_4;
-long __tmp0_5;
-long __tmp2_6;
-long __tmp1_7;
+long __tmp0_0;
 //Function Body
-__tmp1_7 = (20);
-__tmp0_5 = __lib_malloc((((__tmp1_7) * (8)) + (8)));
-*((long*)(__tmp0_5)) = (__tmp1_7);
-__tmp0_5 = ((__tmp0_5) + (8));
-a_1 = (__tmp0_5);
-__tmp3_2 = ord((toMoStr("12345assss")), (1));
-__tmp4_0 = toString((__tmp3_2));
-println((__tmp4_0));
+__tmp0_0 = substring((toMoStr("123456")), (1), (2));
+println((__tmp0_0));
 ;
-__tmp5_4 = substring((toMoStr("12345assss")), (1), (2));
-println((__tmp5_4));
-;
-__tmp6_3 = size((a_1));
-return (__tmp6_3);
+return (0);
 }
 
 //------------- IRBase Traverse End -------------

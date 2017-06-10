@@ -68,5 +68,9 @@ public class ForStatement extends Statement{
         for(Expr e: expr){
             e.print(depth + 1);
         }
+        System.out.println(indent + "Body:");
+        if(stmt != null){
+            stmt.print(depth + 1);
+        }
     }
 }
