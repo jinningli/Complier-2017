@@ -200,7 +200,7 @@ public class VarDecl extends Declare implements Entity{
         }else if(type == null){
             res += "long";
         }else
-            res += type.typename();
+            res += "long";
         res += " " + name;
         return res;
     }

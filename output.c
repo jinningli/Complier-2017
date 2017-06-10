@@ -6,7 +6,8 @@
 #include <string.h>
 
 //Function & Class Declare
-struct C2;
+struct A;
+struct B;
 
 long substring(long str, long l, long r);
 long ord(long pos, long str);
@@ -166,31 +167,30 @@ long toString(long x) {
 }
 
 //Class Body
-struct C2{
+struct A{
 long x;
-long y;
-bool b;
-long z;
+};
+struct B{
+long x;
 };
 int main(){
 //Grobal Variable Initialize
 //Define Local Variable
-long __tmp0_0;
-long obj_1;
+long a_0;
+long b_1;
+long __tmp0_2;
+long __tmp1_3;
 //Function Body
-__tmp0_0 = __lib_malloc((32));
-obj_1 = (__tmp0_0);
-*((long*)((obj_1) + (0))) = (10);
-*((long*)((obj_1) + (8))) = (20);
-*((long*)((obj_1) + (16))) = ((*(long *)((obj_1) + (0))) > (*(long *)((obj_1) + (8))));
-if((*(long *)((obj_1) + (16)))) goto AsmLabel0; else goto AsmLabel1;;
+__tmp0_2 = __lib_malloc((8));
+a_0 = (__tmp0_2);
+*((long*)((a_0) + (0))) = (20);
+__tmp1_3 = __lib_malloc((8));
+b_1 = (__tmp1_3);
+*((long*)((b_1) + (0))) = (16);
+if(((a_0) == (b_1))) goto AsmLabel0; else goto AsmLabel2;;
 AsmLabel0:;
-*((long*)((obj_1) + (24))) = (40);
-goto AsmLabel2;
-AsmLabel1:;
-*((long*)((obj_1) + (24))) = (80);
 AsmLabel2:;
-return (((*(long *)((obj_1) + (0))) + (*(long *)((obj_1) + (8)))) + (*(long *)((obj_1) + (24))));
+return (0);
 }
 
 //------------- IRBase Traverse End -------------

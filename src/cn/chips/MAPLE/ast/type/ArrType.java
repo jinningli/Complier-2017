@@ -33,7 +33,7 @@ public class ArrType extends Project implements Type{
         if(stdtype == null){
             throw new NullPtr();
         }
-        return "long";
+        return "Arr:" + stdtype.getname();
     }
     public long size(){
         return 8;

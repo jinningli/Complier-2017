@@ -201,12 +201,12 @@ public class FuncDecl extends Declare implements Entity{
             if(retype == null){
             res += "void";
             }else
-             res += retype.typename();
+             res += "long";
         else
             res += "int";
         res += " " + name + "(";
         for(int i = 0; i < flist.size(); i ++){
-            res += flist.get(i).first.typename() + " " + flist.get(i).getSecond();
+            res += "long" + " " + flist.get(i).getSecond();
             if(i != flist.size() - 1) {
                 res += ", ";
             }
