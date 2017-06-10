@@ -52,7 +52,7 @@ public class Main
         PrintStream cfout = new PrintStream(new FileOutputStream("output.c"));
         cfout.println(root.getDecls().IRTranslate());
 //        Runtime.getRuntime().exec("cd conv && bash build.sh  2> err.txt 1> std.txt && cd ..");
-        Runtime.getRuntime().exec("bash c2nasm.bash output.c -O0" +
+        Runtime.getRuntime().exec("bash c2nasm.bash ./output.c -O0" +
                 " 2> err.txt 1> std.txt"
         );
 
@@ -69,6 +69,6 @@ public class Main
 //        }else
 //        System.out.println(c.toSource());
 //nasm -felf64 cn/chips/MAPLE/testcase/test.asm && gcc cn/chips/MAPLE/testcase/test.o && ./cn/chips/MAPLE/testcase/test.out
-//bash c2nasm.bash cn/chips/MAPLE/testcase/test.c -O0&&nasm -felf64 cn/chips/MAPLE/testcase/test.asm && gcc cn/chips/MAPLE/testcase/test.o && ./cn/chips/MAPLE/testcase/test.out
+//bash c2nasm.bash output.c -O0&&nasm -felf64 output.asm && gcc output.o && ./output.out
     }
 }

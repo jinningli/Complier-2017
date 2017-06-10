@@ -1,6 +1,12 @@
 package cn.chips.MAPLE.asm;
 
+import cn.chips.MAPLE.ast.declare.Declare;
+import cn.chips.MAPLE.ast.declare.VarDecl;
+import cn.chips.MAPLE.utils.grobalVariable;
+import cn.chips.MAPLE.utils.scope.ScopeNode;
+
 import java.io.*;
+import java.util.List;
 
 /**
  * Maple - 2017
@@ -18,7 +24,11 @@ public class AsmModifier {
         BufferedReader fin = new BufferedReader(new FileReader(f));
         String line;
         while((line = fin.readLine()) != null){
-            if(line.contains("[rel n]")){
+            if(line.contains(".data")){
+                res += line + "\n";
+                res += "\n";
+                res += buildDataField();
+                res +="\n";
                 continue;
             }
             res += line + "\n";
@@ -27,5 +37,18 @@ public class AsmModifier {
 
     public void print(){
         System.out.println(res);
+    }
+
+    public String buildDataField(){
+        String res = "";
+        ScopeNode scope = grobalVariable.grobal.root;
+        List<VarDecl> grobal =  scope.localVariables();
+        for(VarDecl vd : grobal){
+            if(vd.isGrobal){
+                res += vd.name + ":\n";
+                res += "\tdq 0,0\n";
+            }
+        }
+        return res;
     }
 }

@@ -18,9 +18,8 @@ long getString();
 void __lib_printlnInt(long null);
 
 //Grobal Variable
-long maxn;
-long link;
-long place;
+long x;
+long y;
 
 //Inside Function
 void __lib_printlnInt(long x) {
@@ -76,34 +75,17 @@ long toString(long x) {
 //Class Body
 int main(){
 //Grobal Variable Initialize
-maxn = (50005);
-link = (__tmp0);
-place = (__tmp3);
 //Define Local Variable
-long xx_0;
-long yy_1;
-long __tmp6_2;
-long u_3;
-long v_4;
-long __tmp8_5;
-long __tmp7_6;
-long __tmp9_7;
+long c_0;
+long __tmp0_1;
 //Function Body
-u_3 = (0);
-v_4 = (0);
-__tmp6_2 = getInt();
-u_3 = (__tmp6_2);
-__tmp7_6 = getInt();
-v_4 = (__tmp7_6);
-xx_0 = (0);
-yy_1 = (0);
-__tmp8_5 = (*(long *)((place) + ((u_3) * (8))));
-*((long*)((place) + ((u_3) * (8)))) = ((__tmp8_5) + (1));
-*((long*)((*(long *)((link) + ((u_3) * (8)))) + ((__tmp8_5) * (8)))) = (v_4);
-
-__tmp9_7 = (*(long *)((place) + ((v_4) * (8))));
-*((long*)((place) + ((v_4) * (8)))) = ((__tmp9_7) + (1));
-*((long*)((*(long *)((link) + ((v_4) * (8)))) + ((__tmp9_7) * (8)))) = (u_3);
+x = (10);
+y = (20);
+c_0 = ((x) + (y));
+__tmp0_1 = toString((c_0));
+println((__tmp0_1));
+;
+return (c_0);
 }
 
 //------------- IRBase Traverse End -------------
