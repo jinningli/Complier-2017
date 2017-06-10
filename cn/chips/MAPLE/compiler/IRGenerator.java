@@ -475,7 +475,7 @@ public class IRGenerator {
         if(Objects.equals(op, "++")){
             op = "+";
         }else if(Objects.equals(op, "--")){
-            op = "__";
+            op = "-";
         }
 
         if(isStatement()){
@@ -500,11 +500,11 @@ public class IRGenerator {
         if(Objects.equals(op, "++"))
             return transformOpAssign("+", body, im);
         else if (Objects.equals(op, "--"))
-            return transformOpAssign("__", body, im);
+            return transformOpAssign("-", body, im);
         else if(Objects.equals(op, "+")){
             return body;
         }
-        else if (Objects.equals(op, "__")
+        else if (Objects.equals(op, "-")
                 || Objects.equals(op, "~")
                 || Objects.equals(op, "!")){
             return new Uni(op, body);

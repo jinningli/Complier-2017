@@ -198,6 +198,9 @@ public class FuncDecl extends Declare implements Entity{
     public String declTranslate(){
         String res = "";
         if(!Objects.equals(name, "main"))
+            if(retype == null){
+            res += "void";
+            }else
              res += retype.typename();
         else
             res += "int";

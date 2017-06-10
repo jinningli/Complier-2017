@@ -463,7 +463,7 @@ public class CodeGenerator {
             case "+":
                 text._add(lhs, rhs);
                 break;
-            case "__":
+            case "-":
                 text._sub(lhs, rhs);
                 break;
             case "*":
@@ -570,7 +570,7 @@ public class CodeGenerator {
     public void visit(Uni node) {
         visit(node.expr);
         switch (node.op){
-            case "__":
+            case "-":
                 text._neg(RAX());
                 break;
             case "~":
