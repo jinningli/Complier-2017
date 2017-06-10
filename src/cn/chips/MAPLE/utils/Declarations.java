@@ -153,6 +153,7 @@ public class Declarations {
                 res += "//Grobal Variable Initialize\n";
                 for(Declare d: grobalVariable.grobal.root.localVariables()){
                     if(d instanceof VarDecl){
+                        if(((VarDecl) d).name == null) continue;
                         if(((VarDecl) d).name.contains("__tmp")){
                             res += ((VarDecl) d).declTranslate() + ";\n";
                         }
@@ -207,6 +208,7 @@ public class Declarations {
     public List<VarDecl> getLocalVarDecl(ScopeNode scope){
         List<VarDecl> lvd = new LinkedList<>();
         for(VarDecl vd: scope.localVariables()){
+            if(vd.name == null) continue;
 //            vd.name += "_" + cnt ++;
             lvd.add(vd);
         }
