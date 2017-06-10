@@ -36,6 +36,6 @@ public class Str extends EXPR {
     }
 
     public String translate(){
-        return "(" + value.translate() + ")";
+        return "(toMoStr(" + value.translate() + "))";
     }
 }

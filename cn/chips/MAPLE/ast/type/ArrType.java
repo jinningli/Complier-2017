@@ -34,7 +34,7 @@ public class ArrType extends Project implements Type{
         if(stdtype == null){
             throw new NullPtr();
         }
-        return "arr:"+stdtype.typename()+":"+dimension;
+        return "long";
     }
     public long size(){
         return 8;

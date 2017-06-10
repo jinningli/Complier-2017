@@ -201,7 +201,9 @@ public class Declarations {
     }
 
     public String insideFuncDecl(){
-        return "long getInt();\n" +
+        return "long toMoStr(char *str);\n" +
+                "long str_add(long a, long b);\n" +
+                "long getInt();\n" +
                 "void print(long null);\n" +
                 "void println(long null);\n" +
                 "void __lib_printInt(long null);\n" +
@@ -213,7 +215,38 @@ public class Declarations {
     }
 
     public String insideFunc(){
-        return "void __lib_printlnInt(long x) {\n" +
+        return "long toMoStr(char *str) {\n" +
+                "    int len = strlen(str);\n" +
+                "    unsigned char* ret = (unsigned char *) malloc(len + sizeof(int) + 1);\n" +
+                "\n" +
+                "    *((int *)ret) = len;\n" +
+                "    ret += sizeof(int);\n" +
+                "\n" +
+                "    strcpy((char *)ret, str);\n" +
+                "    return (long)ret;\n" +
+                "}\n" +
+                "long str_add(long a, long b) {\n" +
+                "    int l1 = *((int *)(a - sizeof(int)));\n" +
+                "    int l2 = *((int *)(b - sizeof(int)));\n" +
+                "\n" +
+                "    int l = l1 + l2;\n" +
+                "\n" +
+                "    unsigned char* ret = (unsigned char*) malloc(l + sizeof(int) + 1);\n" +
+                "    *((int *)ret) = l;\n" +
+                "    ret += sizeof(int);\n" +
+                "\n" +
+                "\n" +
+                "    for (int i =0; i < l1; i++)\n" +
+                "        ((char*)ret)[i] = ((char *)a)[i];\n" +
+                "\n" +
+                "    for (int i = 0; i < l2; i++)\n" +
+                "        ((char*)ret)[i+l1] = ((char *)b)[i];\n" +
+                "\n" +
+                "    ((char*)ret)[l] = 0;\n" +
+                "\n" +
+                "    return (long)ret;\n" +
+                "}\n" +
+                "void __lib_printlnInt(long x) {\n" +
                 "    printf(\"%ld\\n\", x);\n" +
                 "}\n" +
                 "\n" +
@@ -227,8 +260,10 @@ public class Declarations {
                 "\n" +
                 "void println(long x) {\n" +
                 "    puts((char *)x);\n" +
+                "}" +
+                "void print(long x){\n" +
+                "    printf(\"%s\", (char*)x);\n" +
                 "}\n" +
-                "\n" +
                 "long toString(long x) {\n" +
                 "    unsigned char *ret = (unsigned char*)malloc(12 + sizeof(int));\n" +
                 "    ret += sizeof(int);\n" +

@@ -52,6 +52,7 @@ public class Main
         PrintStream cfout = new PrintStream(new FileOutputStream("output.c"));
         String res = root.getDecls().IRTranslate();
         cfout.println(res);
+
 //        System.err.println(res);
 //        Runtime.getRuntime().exec("bash conv/build.sh");
         Process proc = Runtime.getRuntime().exec("bash c2nasm.bash output.c -O0"
@@ -59,6 +60,7 @@ public class Main
         );
         int exitv = proc.waitFor();
         System.err.println(exitv);
+
 //        Runtime.getRuntime().exec("pwd");
 
         AsmModifier am = new AsmModifier("output.asm");

@@ -390,6 +390,16 @@ public class IRGenerator {
         EXPR lhs = visitExpr(node.left);
         String op = node.opt;
 
+
+        if (Objects.equals(op, "+") && (node.left.getretype() instanceof StringType ||node.right.getretype() instanceof StringType)) {
+            List<EXPR> lst = new LinkedList<>();
+            lst.add(lhs);
+            lst.add(rhs);
+            FuncDecl tmp = new FuncDecl("str_add", new IntType(0));
+            tmp.pos = node.pos;
+            return new Call(tmp, lst);
+        }
+
         return new Bin(op, lhs, rhs);
     }
 
