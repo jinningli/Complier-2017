@@ -30,6 +30,9 @@ public class CJump extends STMT {
     }
     public String translate(){
         String res = "";
+        if(cond == null){
+            res += "if (true) ";
+        }else
         res += "if(" + cond.translate() + ")";
         if(thenLabel != null){
             if(elseLabel != null){

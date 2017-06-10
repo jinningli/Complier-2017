@@ -170,7 +170,78 @@ long toString(long x) {
 int main(){
 //Grobal Variable Initialize
 //Define Local Variable
+long a_0;
+long b_1;
+long c_2;
+long d_3;
+long __tmp0_4;
+long e_5;
+long f_6;
+long __tmp2_7;
+long g_8;
+long __tmp1_9;
+long __tmp3_10;
+long __tmp5_11;
+long __tmp4_12;
 //Function Body
+a_0 = (10000);
+b_1 = (0);
+c_2 = (2800);
+d_3 = (0);
+e_5 = (0);
+__tmp1_9 = (2801);
+__tmp0_4 = __lib_malloc((((__tmp1_9) * (8)) + (8)));
+*((long*)(__tmp0_4)) = (__tmp1_9);
+__tmp0_4 = ((__tmp0_4) + (8));
+f_6 = (__tmp0_4);
+g_8 = (0);
+AsmLabel3:;
+if((((b_1) - (c_2)) != (0))) goto AsmLabel4; else goto AsmLabel6;;
+AsmLabel4:;
+__tmp3_10 = (b_1);
+b_1 = ((__tmp3_10) + (1));
+*((long*)((f_6) + ((__tmp3_10) * (8)))) = ((a_0) / (5));
+AsmLabel5:;
+goto AsmLabel3;
+AsmLabel6:;
+AsmLabel7:;
+if((1)) goto AsmLabel8; else goto AsmLabel10;;
+AsmLabel8:;
+d_3 = (0);
+g_8 = ((c_2) * (2));
+if(((g_8) == (0))) goto AsmLabel11; else goto AsmLabel13;;
+AsmLabel11:;
+goto AsmLabel10;
+AsmLabel13:;
+b_1 = (c_2);
+AsmLabel14:;
+if((1)) goto AsmLabel15; else goto AsmLabel17;;
+AsmLabel15:;
+d_3 = ((d_3) + ((*(long *)((f_6) + ((b_1) * (8)))) * (a_0)));
+g_8 = ((g_8) - (1));
+*((long*)((f_6) + ((b_1) * (8)))) = ((d_3) % (g_8));
+__tmp4_12 = (g_8);
+g_8 = ((__tmp4_12) - (1));
+d_3 = ((d_3) / (__tmp4_12));
+b_1 = ((b_1) - (1));
+if(((b_1) == (0))) goto AsmLabel18; else goto AsmLabel20;;
+AsmLabel18:;
+goto AsmLabel17;
+AsmLabel20:;
+AsmLabel16:;
+d_3 = ((d_3) * (b_1));
+goto AsmLabel14;
+AsmLabel17:;
+c_2 = ((c_2) - (14));
+__tmp5_11 = toString(((e_5) + ((d_3) / (a_0))));
+print((__tmp5_11));
+;
+AsmLabel9:;
+e_5 = ((d_3) % (a_0));
+goto AsmLabel7;
+AsmLabel10:;
+print((toMoStr("\n")));
+;
 return (0);
 }
 

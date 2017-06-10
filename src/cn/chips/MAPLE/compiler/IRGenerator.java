@@ -566,7 +566,10 @@ public class IRGenerator {
 
         visitStmt(node.expr.get(0));
         label(beg);
-        cjump(visitExpr(node.expr.get(1)), body, end);
+        if(node.expr.get(1).getretype() instanceof NullType){
+            cjump(new Int(1), body, end);
+        }else
+            cjump(visitExpr(node.expr.get(1)), body, end);
         label(body);
         pushBreak(end);
         pushContinue(cont);
