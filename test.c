@@ -1,39 +1,115 @@
-//考察点：section 10 字符串，包括字符串定义，运算符语义，字符串的内建方法
-//算法：递归模拟
-//样例输入：
-//DCBAE
-//4ssfsdf
-//样例输出：
-//ABCD
+//
+// Naive vector class for Mx*.
+// Without any guarantee for robustness.
+//
+class vector{
+	int[] data;
+	void init(int[] vec){
+		// init the vector from an array
+		if (vec == null) return;
+		data = new int[vec.size()];
+		int i;
+		for (i = 0; i < vec.size(); ++i)
+		{
+			data[i] = vec[i];
+		}
+	}
 
-string A;
-string B;
-string C;
-int N;
+	int getDim(){
+		if (data == null) return 0;
+		return data.size();
+	}
 
-string calc(string A)
-{
-	int len = A.length();
-	if (1 == len) return A;
-	int mid = len/2;
-	string L = calc(A.substring(0,mid-1));
-	string R = calc(A.substring(mid,len-1));
-	if (L < R) ;
-	else if (L == R) ;
-	else if (L > R) ;
-	println("Never Ever!");
+	int dot(vector rhs){
+		int i = 0;
+		int result = 0;
+		while(i < getDim()){
+			//result = data[i] * rhs[i];
+			result = data[i] * rhs.data[i];
+			++i;
+		}
+		return result;
+	}
+
+	vector scalarInPlaceMultiply(int c){
+		if (data == null) return null;
+		int i;
+		for (i = 0; i < getDim(); ++i) {
+			this.data[i] = c * this.data[i];
+		}
+		return this;
+	}
+
+	vector add(vector rhs){
+		if (getDim() != rhs.getDim() || getDim() == 0)
+			return null;
+		vector temp = new vector;
+		int i;
+		temp.data = new int[getDim()];
+		for (i = 0; i < getDim(); ++i){
+			temp.data[i] = data[i] + rhs.data[i];
+		}
+		return temp;
+	}
+
+	bool set(int idx, int value){
+		if (getDim() < idx) return false;
+		data[idx] = value;
+		return true;
+	}
+
+	string tostring(){
+		string temp = "( ";
+		if (getDim() > 0) {
+			temp = temp + toString(data[0]);
+		}
+		int i;
+		for (i = 1; i < getDim(); ++i) {
+			temp = temp + ", " + toString(data[i]);
+		}
+		temp = temp + " )";
+		return temp;
+	}
+
+	bool copy(vector rhs){
+		if (rhs == null) return false;
+		if (rhs.getDim() == 0) {
+			data = null;
+		} else {
+			data = new int[rhs.getDim()];
+			int i;
+			for (i = 0; i < getDim(); ++i) {
+				data[i] = rhs.data[i];
+			}
+		}
+		return true;
+	}
 }
 
-int main()
-{
-	A = getString();
-	B = getString();
-	N = B.parseInt();
-	if (A.length() < N) {
-		println("length error!");
-		return 0;
+int main(){
+	vector x = new vector;
+	int[] a = new int[10];
+	int i;
+	for (i = 0; i < 10; ++i){
+		a[i] = 9 - i;
 	}
-	C = calc(A.substring(0,N-1));
-	println(C);
+	x.init(a);
+	print("vector x: ");
+	println(x.tostring());
+
+	vector y = new vector;
+	y.copy(x);
+	if (y.set(3, 817)){
+		println("excited!");
+	}
+	print("vector y: ");
+	println(y.tostring());
+	print("x + y: ");
+	println((x.add(y)).tostring());
+	print("x * y: ");
+	println(toString(x.dot(y)));
+	print("(1 << 3) * y: ");
+	println(y.scalarInPlaceMultiply(1 << 3).tostring());
 	return 0;
 }
+

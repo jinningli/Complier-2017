@@ -1,4 +1,4 @@
-extern puts
+extern puts, putchar
 global main
 	section .text
 

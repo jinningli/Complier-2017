@@ -50,6 +50,9 @@ public class FunctionCall extends Expr {
                 for(Expr e: flist){
                     e.getretype();//////
                 }
+                Expr tmp = new Identifier("this", pos);
+                tmp.nowScope = nowScope;
+                flist.add(tmp);
                 funcretype = ((FuncDecl) d).retype;
                 return funcretype;
             }

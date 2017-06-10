@@ -6,10 +6,16 @@
 #include <string.h>
 
 //Function & Class Declare
+struct vector;
 
-void origin(long N);
-long check(long a);
-void addList(long x, long y);
+void vector__init(long This, long vec);
+long vector__getDim(long This);
+long vector__dot(long This, long rhs);
+long vector__scalarInPlaceMultiply(long This, long c);
+long vector__add(long This, long rhs);
+long vector__set(long This, long idx, long value);
+long vector__tostring(long This);
+long vector__copy(long This, long rhs);
 long substring(long str, long l, long r);
 long ord(long pos, long str);
 long parseInt(long x);
@@ -28,24 +34,6 @@ long getString();
 void __lib_printlnInt(long null);
 
 //Grobal Variable
-long N;
-long head;
-long startx;
-long starty;
-long targetx;
-long targety;
-long x;
-long y;
-long xlist;
-long ylist;
-long tail;
-long ok;
-long now;
-long dx;
-long dy;
-long step;
-long i;
-long j;
 
 //Inside Function
 long substring(long str, long l, long r){
@@ -188,215 +176,310 @@ long toString(long x) {
 }
 
 //Class Body
-void origin(long N){
+struct vector{
+long data;
+};
+void vector__init(long This, long vec){
 //Define Local Variable
-long N_0 = N;
-long __tmp14_1;
-long __tmp12_2;
-long __tmp13_3;
-long __tmp15_4;
-long __tmp16_5;
-long __tmp17_6;
+long This_0 = This;
+long vec_1 = vec;
+long __tmp4_2;
+long __tmp3_3;
+long __tmp0_4;
+long __tmp2_5;
+long __tmp1_6;
+long i_7;
 //Function Body
-head = (0);
-tail = (0);
-__tmp13_3 = (N_0);
-__tmp12_2 = __lib_malloc((((__tmp13_3) * (8)) + (8)));
-*((long*)(__tmp12_2)) = (__tmp13_3);
-__tmp12_2 = ((__tmp12_2) + (8));
-step = (__tmp12_2);
-i = (0);
+if(((vec_1) == (0))) goto AsmLabel0; else goto AsmLabel2;;
+AsmLabel0:;
+return;
+AsmLabel2:;
+__tmp3_3 = size((vec_1));
+__tmp1_6 = (__tmp3_3);
+__tmp0_4 = __lib_malloc((((__tmp1_6) * (8)) + (8)));
+*((long*)(__tmp0_4)) = (__tmp1_6);
+__tmp0_4 = ((__tmp0_4) + (8));
+*((long*)((This_0) + (0))) = (__tmp0_4);
+i_7 = (0);
+AsmLabel6:;
+__tmp4_2 = size((vec_1));
+if(((i_7) < (__tmp4_2))) goto AsmLabel7; else goto AsmLabel9;;
+AsmLabel7:;
+*((long*)((*(long *)((This_0) + (0))) + ((i_7) * (8)))) = (*(long *)((vec_1) + ((i_7) * (8))));
+AsmLabel8:;
+i_7 = ((i_7) + (1));
+goto AsmLabel6;
+AsmLabel9:;
+}
+long vector__getDim(long This){
+//Define Local Variable
+long This_8 = This;
+long __tmp5_9;
+//Function Body
+if(((*(long *)((This_8) + (0))) == (0))) goto AsmLabel10; else goto AsmLabel12;;
+AsmLabel10:;
+return (0);
+AsmLabel12:;
+__tmp5_9 = size((*(long *)((This_8) + (0))));
+return (__tmp5_9);
+}
+long vector__dot(long This, long rhs){
+//Define Local Variable
+long This_10 = This;
+long rhs_11 = rhs;
+long result_12;
+long __tmp6_13;
+long i_14;
+//Function Body
+i_14 = (0);
+result_12 = (0);
+AsmLabel13:;
+__tmp6_13 = vector__getDim((This_10));
+if(((i_14) < (__tmp6_13))) goto AsmLabel14; else goto AsmLabel15;;
+AsmLabel14:;
+result_12 = ((*(long *)((*(long *)((This_10) + (0))) + ((i_14) * (8)))) * (*(long *)((*(long *)((rhs_11) + (0))) + ((i_14) * (8)))));
+i_14 = ((i_14) + (1));
+goto AsmLabel13;
 AsmLabel15:;
-if(((i) < (N_0))) goto AsmLabel16; else goto AsmLabel18;;
+return (result_12);
+}
+long vector__scalarInPlaceMultiply(long This, long c){
+//Define Local Variable
+long This_15 = This;
+long c_16 = c;
+long i_17;
+long __tmp7_18;
+//Function Body
+if(((*(long *)((This_15) + (0))) == (0))) goto AsmLabel16; else goto AsmLabel18;;
 AsmLabel16:;
-__tmp16_5 = (N_0);
-__tmp15_4 = __lib_malloc((((__tmp16_5) * (8)) + (8)));
-*((long*)(__tmp15_4)) = (__tmp16_5);
-__tmp15_4 = ((__tmp15_4) + (8));
-*((long*)((step) + ((i) * (8)))) = (__tmp15_4);
-j = (0);
-AsmLabel22:;
-if(((j) < (N_0))) goto AsmLabel23; else goto AsmLabel25;;
-AsmLabel23:;
-*((long*)((*(long *)((step) + ((i) * (8)))) + ((j) * (8)))) = (0);
-AsmLabel24:;
-j = ((j) + (1));
-goto AsmLabel22;
-AsmLabel25:;
-AsmLabel17:;
-i = ((i) + (1));
-goto AsmLabel15;
+return (0);
 AsmLabel18:;
+i_17 = (0);
+AsmLabel19:;
+__tmp7_18 = vector__getDim((This_15));
+if(((i_17) < (__tmp7_18))) goto AsmLabel20; else goto AsmLabel22;;
+AsmLabel20:;
+*((long*)((*(long *)((This_15) + (0))) + ((i_17) * (8)))) = ((c_16) * (*(long *)((*(long *)((This_15) + (0))) + ((i_17) * (8)))));
+AsmLabel21:;
+i_17 = ((i_17) + (1));
+goto AsmLabel19;
+AsmLabel22:;
+return (This_15);
 }
-long check(long a){
+long vector__add(long This, long rhs){
 //Define Local Variable
-long a_7 = a;
-long __tmp18_8;
+long This_19 = This;
+long rhs_20 = rhs;
+long temp_21;
+long i_22;
+long __tmp8_23;
+long __tmp9_24;
+long __tmp10_25;
+long __tmp11_26;
+long __tmp14_27;
+long __tmp15_28;
+long __tmp12_29;
+long __tmp13_30;
+long __tmp16_31;
+long __tmp17_32;
 //Function Body
-__tmp18_8 = ((a_7) < (N));
-if((__tmp18_8)) goto AsmLabel26; else goto AsmLabel27;;
+__tmp9_24 = vector__getDim((This_19));
+__tmp10_25 = vector__getDim((rhs_20));
+__tmp8_23 = ((__tmp9_24) != (__tmp10_25));
+if((__tmp8_23)) goto AsmLabel26; else goto AsmLabel27;;
 AsmLabel26:;
-__tmp18_8 = ((a_7) >= (0));
+__tmp11_26 = vector__getDim((This_19));
+__tmp8_23 = ((__tmp11_26) == (0));
 AsmLabel27:;
-return (__tmp18_8);
-}
-void addList(long x, long y){
-//Define Local Variable
-long x_9 = x;
-long y_10 = y;
-long __tmp21_11;
-long __tmp22_12;
-long __tmp20_13;
-long __tmp19_14;
-long __tmp23_15;
-//Function Body
-__tmp21_11 = check((x_9));
-__tmp20_13 = (__tmp21_11);
-if((__tmp20_13)) goto AsmLabel33; else goto AsmLabel34;;
-AsmLabel33:;
-__tmp22_12 = check((y_10));
-__tmp20_13 = (__tmp22_12);
-AsmLabel34:;
-__tmp19_14 = (__tmp20_13);
-if((__tmp19_14)) goto AsmLabel31; else goto AsmLabel32;;
+if((__tmp8_23)) goto AsmLabel23; else goto AsmLabel25;;
+AsmLabel23:;
+return (0);
+AsmLabel25:;
+__tmp12_29 = __lib_malloc((8));
+temp_21 = (__tmp12_29);
+__tmp16_31 = vector__getDim((This_19));
+__tmp14_27 = (__tmp16_31);
+__tmp13_30 = __lib_malloc((((__tmp14_27) * (8)) + (8)));
+*((long*)(__tmp13_30)) = (__tmp14_27);
+__tmp13_30 = ((__tmp13_30) + (8));
+*((long*)((temp_21) + (0))) = (__tmp13_30);
+i_22 = (0);
 AsmLabel31:;
-__tmp19_14 = ((*(long *)((*(long *)((step) + ((x_9) * (8)))) + ((y_10) * (8)))) == -(1));
+__tmp17_32 = vector__getDim((This_19));
+if(((i_22) < (__tmp17_32))) goto AsmLabel32; else goto AsmLabel34;;
 AsmLabel32:;
-if((__tmp19_14)) goto AsmLabel28; else goto AsmLabel30;;
-AsmLabel28:;
-tail = ((tail) + (1));
-*((long*)((xlist) + ((tail) * (8)))) = (x_9);
-*((long*)((ylist) + ((tail) * (8)))) = (y_10);
-*((long*)((*(long *)((step) + ((x_9) * (8)))) + ((y_10) * (8)))) = ((now) + (1));
-__tmp23_15 = ((x_9) == (targetx));
-if((__tmp23_15)) goto AsmLabel38; else goto AsmLabel39;;
-AsmLabel38:;
-__tmp23_15 = ((y_10) == (targety));
-AsmLabel39:;
-if((__tmp23_15)) goto AsmLabel35; else goto AsmLabel37;;
+*((long*)((*(long *)((temp_21) + (0))) + ((i_22) * (8)))) = ((*(long *)((*(long *)((This_19) + (0))) + ((i_22) * (8)))) + (*(long *)((*(long *)((rhs_20) + (0))) + ((i_22) * (8)))));
+AsmLabel33:;
+i_22 = ((i_22) + (1));
+goto AsmLabel31;
+AsmLabel34:;
+return (temp_21);
+}
+long vector__set(long This, long idx, long value){
+//Define Local Variable
+long This_33 = This;
+long idx_34 = idx;
+long value_35 = value;
+long __tmp18_36;
+//Function Body
+__tmp18_36 = vector__getDim((This_33));
+if(((__tmp18_36) < (idx_34))) goto AsmLabel35; else goto AsmLabel37;;
 AsmLabel35:;
-ok = (1);
+return (0);
 AsmLabel37:;
-AsmLabel30:;
+*((long*)((*(long *)((This_33) + (0))) + ((idx_34) * (8)))) = (value_35);
+return (1);
+}
+long vector__tostring(long This){
+//Define Local Variable
+long This_37 = This;
+long temp_38;
+long __tmp21_39;
+long i_40;
+long __tmp19_41;
+long __tmp20_42;
+long __tmp22_43;
+//Function Body
+temp_38 = (toMoStr("( "));
+__tmp19_41 = vector__getDim((This_37));
+if(((__tmp19_41) > (0))) goto AsmLabel38; else goto AsmLabel40;;
+AsmLabel38:;
+__tmp20_42 = toString((*(long *)((*(long *)((This_37) + (0))) + (0))));
+temp_38 = str_add((temp_38), (__tmp20_42));
+AsmLabel40:;
+i_40 = (1);
+AsmLabel41:;
+__tmp21_39 = vector__getDim((This_37));
+if(((i_40) < (__tmp21_39))) goto AsmLabel42; else goto AsmLabel44;;
+AsmLabel42:;
+__tmp22_43 = toString((*(long *)((*(long *)((This_37) + (0))) + ((i_40) * (8)))));
+temp_38 = str_add(str_add((temp_38), (toMoStr(", "))), (__tmp22_43));
+AsmLabel43:;
+i_40 = ((i_40) + (1));
+goto AsmLabel41;
+AsmLabel44:;
+temp_38 = str_add((temp_38), (toMoStr(" )")));
+return (temp_38);
+}
+long vector__copy(long This, long rhs){
+//Define Local Variable
+long This_44 = This;
+long rhs_45 = rhs;
+long __tmp23_46;
+long __tmp25_47;
+long i_48;
+long __tmp26_49;
+long __tmp24_50;
+long __tmp27_51;
+long __tmp28_52;
+//Function Body
+if(((rhs_45) == (0))) goto AsmLabel45; else goto AsmLabel47;;
+AsmLabel45:;
+return (0);
+AsmLabel47:;
+__tmp23_46 = vector__getDim((rhs_45));
+if(((__tmp23_46) == (0))) goto AsmLabel48; else goto AsmLabel49;;
+AsmLabel48:;
+*((long*)((This_44) + (0))) = (0);
+goto AsmLabel50;
+AsmLabel49:;
+__tmp27_51 = vector__getDim((rhs_45));
+__tmp25_47 = (__tmp27_51);
+__tmp24_50 = __lib_malloc((((__tmp25_47) * (8)) + (8)));
+*((long*)(__tmp24_50)) = (__tmp25_47);
+__tmp24_50 = ((__tmp24_50) + (8));
+*((long*)((This_44) + (0))) = (__tmp24_50);
+i_48 = (0);
+AsmLabel54:;
+__tmp28_52 = vector__getDim((This_44));
+if(((i_48) < (__tmp28_52))) goto AsmLabel55; else goto AsmLabel57;;
+AsmLabel55:;
+*((long*)((*(long *)((This_44) + (0))) + ((i_48) * (8)))) = (*(long *)((*(long *)((rhs_45) + (0))) + ((i_48) * (8))));
+AsmLabel56:;
+i_48 = ((i_48) + (1));
+goto AsmLabel54;
+AsmLabel57:;
+AsmLabel50:;
+return (1);
 }
 int main(){
 //Grobal Variable Initialize
-long __tmp4;
-long __tmp3;
-long __tmp6;
-long __tmp5;
-long __tmp0;
-long __tmp2;
-long __tmp1;
-long __tmp8;
-long __tmp7;
-long __tmp9;
-long __tmp10;
-long __tmp11;
-__tmp1 = (12000);
-__tmp0 = __lib_malloc((((__tmp1) * (8)) + (8)));
-*((long*)(__tmp0)) = (__tmp1);
-__tmp0 = ((__tmp0) + (8));
-(__tmp0);
-;
-__tmp4 = (12000);
-__tmp3 = __lib_malloc((((__tmp4) * (8)) + (8)));
-*((long*)(__tmp3)) = (__tmp4);
-__tmp3 = ((__tmp3) + (8));
-(__tmp3);
-;
-__tmp7 = (8);
-__tmp6 = __lib_malloc((((__tmp7) * (8)) + (8)));
-*((long*)(__tmp6)) = (__tmp7);
-__tmp6 = ((__tmp6) + (8));
-(__tmp6);
-;
-__tmp10 = (9);
-__tmp9 = __lib_malloc((((__tmp10) * (8)) + (8)));
-*((long*)(__tmp9)) = (__tmp10);
-__tmp9 = ((__tmp9) + (8));
-(__tmp9);
-;
-xlist = (__tmp0);
-ylist = (__tmp3);
-dx = (__tmp6);
-dy = (__tmp9);
 //Define Local Variable
-long __tmp25_16;
-long __tmp24_17;
+long a_53;
+long i_54;
+long __tmp40_55;
+long __tmp32_56;
+long __tmp33_57;
+long __tmp30_58;
+long __tmp41_59;
+long __tmp31_60;
+long __tmp42_61;
+long x_62;
+long __tmp36_63;
+long y_64;
+long __tmp37_65;
+long __tmp34_66;
+long __tmp35_67;
+long __tmp29_68;
+long __tmp38_69;
+long __tmp39_70;
 //Function Body
-origin((106));
+__tmp29_68 = __lib_malloc((8));
+x_62 = (__tmp29_68);
+__tmp31_60 = (10);
+__tmp30_58 = __lib_malloc((((__tmp31_60) * (8)) + (8)));
+*((long*)(__tmp30_58)) = (__tmp31_60);
+__tmp30_58 = ((__tmp30_58) + (8));
+a_53 = (__tmp30_58);
+i_54 = (0);
+AsmLabel61:;
+if(((i_54) < (10))) goto AsmLabel62; else goto AsmLabel64;;
+AsmLabel62:;
+*((long*)((a_53) + ((i_54) * (8)))) = ((9) - (i_54));
+AsmLabel63:;
+i_54 = ((i_54) + (1));
+goto AsmLabel61;
+AsmLabel64:;
+vector__init((x_62), (a_53));
 ;
-__tmp24_17 = getInt();
-N = (__tmp24_17);
-targety = ((N) - (1));
-targetx = (targety);
-i = (0);
-AsmLabel40:;
-if(((i) < (N))) goto AsmLabel41; else goto AsmLabel43;;
-AsmLabel41:;
-j = (0);
-AsmLabel44:;
-if(((j) < (N))) goto AsmLabel45; else goto AsmLabel47;;
-AsmLabel45:;
-*((long*)((*(long *)((step) + ((i) * (8)))) + ((j) * (8)))) = -(1);
-AsmLabel46:;
-j = ((j) + (1));
-goto AsmLabel44;
-AsmLabel47:;
-AsmLabel42:;
-i = ((i) + (1));
-goto AsmLabel40;
-AsmLabel43:;
-*((long*)((dx) + (0))) = -(2);
-*((long*)((dy) + (0))) = -(1);
-*((long*)((dx) + (8))) = -(2);
-*((long*)((dy) + (8))) = (1);
-*((long*)((dx) + (16))) = (2);
-*((long*)((dy) + (16))) = -(1);
-*((long*)((dx) + (24))) = (2);
-*((long*)((dy) + (24))) = (1);
-*((long*)((dx) + (32))) = -(1);
-*((long*)((dy) + (32))) = -(2);
-*((long*)((dx) + (40))) = -(1);
-*((long*)((dy) + (40))) = (2);
-*((long*)((dx) + (48))) = (1);
-*((long*)((dy) + (48))) = -(2);
-*((long*)((dx) + (56))) = (1);
-*((long*)((dy) + (56))) = (2);
-AsmLabel48:;
-if(((head) <= (tail))) goto AsmLabel49; else goto AsmLabel50;;
-AsmLabel49:;
-x = (*(long *)((xlist) + ((head) * (8))));
-y = (*(long *)((ylist) + ((head) * (8))));
-now = (*(long *)((*(long *)((step) + ((x) * (8)))) + ((y) * (8))));
-j = (0);
-AsmLabel51:;
-if(((j) < (8))) goto AsmLabel52; else goto AsmLabel54;;
-AsmLabel52:;
-addList(((x) + (*(long *)((dx) + ((j) * (8))))), ((y) + (*(long *)((dy) + ((j) * (8))))));
+print((toMoStr("vector x: ")));
 ;
-AsmLabel53:;
-j = ((j) + (1));
-goto AsmLabel51;
-AsmLabel54:;
-if(((ok) == (1))) goto AsmLabel55; else goto AsmLabel57;;
-AsmLabel55:;
-goto AsmLabel50;
-AsmLabel57:;
-head = ((head) + (1));
-goto AsmLabel48;
-AsmLabel50:;
-if(((ok) == (1))) goto AsmLabel58; else goto AsmLabel59;;
-AsmLabel58:;
-__tmp25_16 = toString((*(long *)((*(long *)((step) + ((targetx) * (8)))) + ((targety) * (8)))));
-println((__tmp25_16));
+__tmp33_57 = vector__tostring((x_62));
+println((__tmp33_57));
 ;
-goto AsmLabel60;
-AsmLabel59:;
-print((toMoStr("no solution!\n")));
+__tmp34_66 = __lib_malloc((8));
+y_64 = (__tmp34_66);
+vector__copy((y_64), (x_62));
 ;
-AsmLabel60:;
+__tmp35_67 = vector__set((y_64), (3), (817));
+if((__tmp35_67)) goto AsmLabel65; else goto AsmLabel67;;
+AsmLabel65:;
+println((toMoStr("excited!")));
+;
+AsmLabel67:;
+print((toMoStr("vector y: ")));
+;
+__tmp36_63 = vector__tostring((y_64));
+println((__tmp36_63));
+;
+print((toMoStr("x + y: ")));
+;
+__tmp37_65 = vector__add((x_62), (y_64));
+__tmp38_69 = vector__tostring((__tmp37_65));
+println((__tmp38_69));
+;
+print((toMoStr("x * y: ")));
+;
+__tmp39_70 = vector__dot((x_62), (y_64));
+__tmp40_55 = toString((__tmp39_70));
+println((__tmp40_55));
+;
+print((toMoStr("(1 << 3) * y: ")));
+;
+__tmp41_59 = vector__scalarInPlaceMultiply((y_64), ((1) << (3)));
+__tmp42_61 = vector__tostring((__tmp41_59));
+println((__tmp42_61));
+;
 return (0);
 }
 

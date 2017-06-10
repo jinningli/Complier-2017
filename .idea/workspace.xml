@@ -10,63 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3283450-0471-4350-b335-1bcad0db854d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleLexer.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleLexer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ArrIndexContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ArrIndexContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$AssignContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$AssignContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BinaryBitMovContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BinaryBitMovContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BinaryBitOperationContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BinaryBitOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BinaryExpressionContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BinaryExpressionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BitNotOperationContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BitNotOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BlockContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BlockContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BlockDeclContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BlockDeclContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BlockStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$BlockStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ClassDeclContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ClassDeclContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ConstantContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ConstantContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ConstantValueContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ConstantValueContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ControlStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ControlStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$DeclContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$DeclContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ExprBktContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ExprBktContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ExprContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ExprContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ExprListContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ExprListContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ExprStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ExprStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ExprWithBracketContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ExprWithBracketContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ForStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ForStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ForStmtContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ForStmtContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$FuncDeclContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$FuncDeclContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$FuncListContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$FuncListContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$FunctionCallContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$FunctionCallContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$IdentifierContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$IdentifierContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$IfStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$IfStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$IfStmtContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$IfStmtContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$LogicExpressionContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$LogicExpressionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$MemberContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$MemberContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$MemberFunctionContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$MemberFunctionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$NewOperationContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$NewOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$NotOperationContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$NotOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$PostSelfOpContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$PostSelfOpContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$PreSelfOpContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$PreSelfOpContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ProgramContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ProgramContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$PtrBracketContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$PtrBracketContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ReturnStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$ReturnStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$SignExpressionContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$SignExpressionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$StmtContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$StmtContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$TypeContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$TypeContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$TypeProContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$TypeProContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$VarDeclContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$VarDeclContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$VarDeclareContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$VarDeclareContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$WhileStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$WhileStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$WhileStmtContext.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser$WhileStmtContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/MapleParser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/Maple.g4" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/parser/Maple.g4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib.asm" afterPath="$PROJECT_DIR$/lib.asm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.asm" afterPath="$PROJECT_DIR$/output.asm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/Maple.g4" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/Maple.g4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleBaseListener.java" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleBaseListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleBaseVisitor.java" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleBaseVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleLexer.java" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleLexer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleListener.java" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleParser.java" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleVisitor.java" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/MapleVisitor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.c" afterPath="$PROJECT_DIR$/output.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.o" afterPath="$PROJECT_DIR$/output.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/FunctionCall.java" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/FunctionCall.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.c" afterPath="$PROJECT_DIR$/test.c" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -97,8 +46,8 @@
       <file leaf-file-name="IRGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/IRGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="446" column="9" lean-forward="false" selection-start-line="446" selection-start-column="9" selection-end-line="446" selection-end-column="9" />
+            <state relative-caret-position="204">
+              <caret line="424" column="0" lean-forward="false" selection-start-line="424" selection-start-column="0" selection-end-line="424" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -107,8 +56,28 @@
       <file leaf-file-name="test.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="33" lean-forward="false" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+            <state relative-caret-position="30">
+              <caret line="2" column="28" lean-forward="false" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FunctionCall.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/FunctionCall.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="53" column="40" lean-forward="false" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Identifier.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/Identifier.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -124,21 +93,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CodeGenerator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/CodeGenerator.java">
+      <file leaf-file-name="output.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/output.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4973">
-              <caret line="34" column="18" lean-forward="false" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
+            <state relative-caret-position="1185">
+              <caret line="79" column="29" lean-forward="true" selection-start-line="79" selection-start-column="29" selection-end-line="79" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="output.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/output.c">
+      <file leaf-file-name="FuncDecl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/declare/FuncDecl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="29" column="17" lean-forward="false" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+            <state relative-caret-position="194">
+              <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClassDecl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/declare/ClassDecl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -156,21 +135,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScopeNode.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/utils/scope/ScopeNode.java">
+      <file leaf-file-name="lib.asm" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib.asm">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="40" column="47" lean-forward="false" selection-start-line="40" selection-start-column="47" selection-end-line="40" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Declarations.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/utils/Declarations.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="155" column="64" lean-forward="false" selection-start-line="155" selection-start-column="64" selection-end-line="155" selection-end-column="64" />
+            <state relative-caret-position="0">
+              <caret line="0" column="20" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -266,7 +235,6 @@
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/BinaryExpr.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/ConstantExpr.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/Expr.java" />
-        <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/FunctionCall.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/Identifier.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/LogicExpr.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/Member.java" />
@@ -301,7 +269,6 @@
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/type/ClassType.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/declare/VarDecl.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/root/AST.java" />
-        <option value="$PROJECT_DIR$/lib.asm" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ir/CJump.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/statement/ForStatement.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/IRGenerator.java" />
@@ -309,9 +276,11 @@
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/declare/FuncDecl.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/utils/scope/ScopeNode.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/utils/Declarations.java" />
+        <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/Maple.g4" />
+        <option value="$PROJECT_DIR$/lib.asm" />
         <option value="$PROJECT_DIR$/output.c" />
         <option value="$PROJECT_DIR$/test.c" />
-        <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/parser/Maple.g4" />
+        <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/FunctionCall.java" />
         <option value="$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java" />
       </list>
     </option>
@@ -711,7 +680,7 @@
       <workItem from="1497016511025" duration="21717000" />
       <workItem from="1497065897306" duration="4502000" />
       <workItem from="1497072210840" duration="22122000" />
-      <workItem from="1497102884406" duration="24817000" />
+      <workItem from="1497102884406" duration="26460000" />
     </task>
     <servers />
   </component>
@@ -727,7 +696,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="363325000" />
+    <option name="totallyTimeSpent" value="364968000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -799,16 +768,16 @@
           <option name="timeStamp" value="371" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/IRGenerator.java</url>
-          <line>424</line>
+          <url>file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/Identifier.java</url>
+          <line>33</line>
           <properties />
-          <option name="timeStamp" value="372" />
+          <option name="timeStamp" value="375" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="373" />
+      <option name="time" value="376" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -821,14 +790,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/statement/Statement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/type/NullType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -915,16 +876,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/FunctionCall.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/out/production/Compiler - 20171/lib/antlr-4.7-complete.jar!/org/antlr/v4/runtime/BailErrorStrategy.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
@@ -961,14 +912,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/declare/ClassDecl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="15" />
           <folding />
         </state>
       </provider>
@@ -1128,14 +1071,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib.asm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/AstBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
@@ -1152,16 +1087,6 @@
           <caret line="20" column="48" lean-forward="false" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/declare/FuncDecl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="175" column="41" lean-forward="true" selection-start-line="175" selection-start-column="41" selection-end-line="175" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1214,22 +1139,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/IRGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="446" column="9" lean-forward="false" selection-start-line="446" selection-start-column="9" selection-end-line="446" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="29" column="17" lean-forward="false" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/parser/Maple.tokens">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1246,10 +1155,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib.asm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="20" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/declare/ClassDecl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/declare/FuncDecl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="33" lean-forward="false" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+        <state relative-caret-position="30">
+          <caret line="2" column="28" lean-forward="false" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/IRGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="424" column="0" lean-forward="false" selection-start-line="424" selection-start-column="0" selection-end-line="424" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/Identifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/expression/FunctionCall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="53" column="40" lean-forward="false" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1185">
+          <caret line="79" column="29" lean-forward="true" selection-start-line="79" selection-start-column="29" selection-end-line="79" selection-end-column="29" />
           <folding />
         </state>
       </provider>
