@@ -490,7 +490,9 @@ public class IRGenerator {
 
         if(isStatement()){
             transformOpAssign(op, body, imm(1));
-        }else if(body instanceof Var || body instanceof Mem){////
+        }else
+            if(body instanceof Var || body instanceof Mem)
+            {////
 //            VarDecl tmp = new VarDecl(node.pos);
 //            tmp.type = node.body.getretype();
 //            tmp.setNowScope(node.nowScope);

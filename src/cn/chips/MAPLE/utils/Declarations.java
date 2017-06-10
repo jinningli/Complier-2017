@@ -1,13 +1,16 @@
 package cn.chips.MAPLE.utils;
 
 import cn.chips.MAPLE.ast.declare.ClassDecl;
+import cn.chips.MAPLE.ast.declare.Declare;
 import cn.chips.MAPLE.ast.declare.FuncDecl;
 import cn.chips.MAPLE.ast.declare.VarDecl;
 import cn.chips.MAPLE.ast.expression.ConstantExpr;
 import cn.chips.MAPLE.ast.root.AST;
 import cn.chips.MAPLE.ir.IRTranslate;
 import cn.chips.MAPLE.ir.IRTraverse;
+import cn.chips.MAPLE.ir.STMT;
 import cn.chips.MAPLE.utils.scope.ScopeNode;
+import org.antlr.v4.codegen.model.decl.Decl;
 
 import java.util.*;
 
@@ -148,6 +151,16 @@ public class Declarations {
             res += f.declTranslate() + "{\n";
             if(Objects.equals(f.name, "main")){
                 res += "//Grobal Variable Initialize\n";
+                for(Declare d: grobalVariable.grobal.root.localVariables()){
+                    if(d instanceof VarDecl){
+                        if(((VarDecl) d).name.contains("__tmp")){
+                            res += ((VarDecl) d).declTranslate() + ";\n";
+                        }
+                    }
+                }
+                for(STMT s: root.grobalVarIR){
+                    res += s.translate() + ";\n";
+                }
                 res += grobalInitialize;
             }
             res += "//Define Local Variable\n";
@@ -169,12 +182,13 @@ public class Declarations {
     public String defineLocalVariable(FuncDecl f){
         List<VarDecl> lvd = getLocalVarDecl(f.nowScope);
         String res = "";
+        String eqal = "";
 
         for(int i = 0; i < f.flist.size(); i ++){
             VarDecl para = ((VarDecl)f.nowScope.what(f.flist.get(i).getSecond()));
             para.name += "_" + cnt++;
             para.renamed = true;
-            res += para.declTranslate() + " = " + f.flist.get(i).getSecond() + ";\n";
+            eqal += para.declTranslate() + " = " + f.flist.get(i).getSecond() + ";\n";
         }
 
         for(int i = 0; i < lvd.size(); i ++){

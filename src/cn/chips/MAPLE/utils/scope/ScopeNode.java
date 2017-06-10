@@ -37,6 +37,7 @@ public class ScopeNode{
     public List<VarDecl> localVariables(){
         List<VarDecl> vdlist = new LinkedList<>();
         for(Map.Entry e: namestore.entrySet()){
+            if(e.getKey() == "this")continue;
             if(e.getValue() instanceof VarDecl){
                 vdlist.add((VarDecl) e.getValue());
             }

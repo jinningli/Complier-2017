@@ -46,15 +46,15 @@ public class Main
         AST root = (AST) v.visit(tree);
         root.check();
 
-//        if(localtest)
-//            root.print(0);
+        if(localtest)
+            root.print(0);
 
         IRGenerator r = new IRGenerator(root);
         IR ir = r.generate();
 
-//        if(localtest) {
-//        root.getDecls().IRtraverse();
-
+        if(localtest) {
+            root.getDecls().IRtraverse();
+        }
         PrintStream cfout = new PrintStream(new FileOutputStream("output.c"));
         String res = root.getDecls().IRTranslate();
         cfout.println(res);

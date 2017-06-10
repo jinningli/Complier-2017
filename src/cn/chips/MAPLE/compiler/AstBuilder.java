@@ -290,6 +290,15 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     }//stdtype: dimension = 1
 // in arrIndex should check if new operation
     @Override public Project visitPostSelfOp(MapleParser.PostSelfOpContext ctx) {
+        Expr expr = (Expr)visit(ctx.expr());
+        if(expr instanceof LogicExpr){
+            return new LogicExpr(new PostSingleExpr((Expr)(((LogicExpr) expr).left), ctx.operation.getText(), new Position(ctx.getStart())),
+                    ((LogicExpr) expr).right, ((LogicExpr) expr).opt, new Position(ctx.getStart()));
+        }
+        if(expr instanceof BinaryExpr){
+            return new BinaryExpr(new PostSingleExpr((Expr)(((BinaryExpr) expr).left), ctx.operation.getText(), new Position(ctx.getStart())),
+                    ((BinaryExpr) expr).right, ((BinaryExpr) expr).opt, new Position(ctx.getStart()));
+        }
         return new PostSingleExpr((Expr)visit(ctx.expr()),
                 ctx.operation.getText(), new Position(ctx.getStart()));
     }
@@ -325,8 +334,11 @@ public class AstBuilder extends MapleBaseVisitor<Project> {
     }
 
     @Override public Project visitBinaryExpression(MapleParser.BinaryExpressionContext ctx) {
-        BinaryExpr be =  new BinaryExpr((Expr) visit(ctx.expr(0)),
-                (Expr) visit(ctx.expr(1)),
+        Expr expr0 = (Expr) visit(ctx.expr(0));
+        Expr expr1 = (Expr) visit(ctx.expr(1));
+
+        BinaryExpr be =  new BinaryExpr(expr0,
+                expr1,
                 ctx.operation.getText(),
                 new Position(ctx.getStart()));
         return be;

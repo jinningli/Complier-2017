@@ -6,8 +6,6 @@
 #include <string.h>
 
 //Function & Class Declare
-struct A;
-struct B;
 
 long substring(long str, long l, long r);
 long ord(long pos, long str);
@@ -167,30 +165,11 @@ long toString(long x) {
 }
 
 //Class Body
-struct A{
-long x;
-};
-struct B{
-long x;
-};
 int main(){
 //Grobal Variable Initialize
 //Define Local Variable
-long a_0;
-long b_1;
-long __tmp0_2;
-long __tmp1_3;
 //Function Body
-__tmp0_2 = __lib_malloc((8));
-a_0 = (__tmp0_2);
-*((long*)((a_0) + (0))) = (20);
-__tmp1_3 = __lib_malloc((8));
-b_1 = (__tmp1_3);
-*((long*)((b_1) + (0))) = (16);
-if(((a_0) == (b_1))) goto AsmLabel0; else goto AsmLabel2;;
-AsmLabel0:;
-AsmLabel2:;
-return (0);
+return (233);
 }
 
 //------------- IRBase Traverse End -------------
