@@ -7,6 +7,7 @@
 
 //Function & Class Declare
 
+long substring(long str, long l, long r);
 long ord(long pos, long str);
 long parseInt(long x);
 long strlength(long idx);
@@ -26,7 +27,19 @@ void __lib_printlnInt(long null);
 //Grobal Variable
 
 //Inside Function
-long ord(long pos, long str){
+long substring(long str, long l, long r){
+    int ns = r - l + 1;
+    unsigned char *ret = (unsigned char*)malloc(ns + sizeof(int) + 1);
+    *((int*)ret) = ns;
+    ret += sizeof(int);
+    int idx = 0;
+    for(int i = l; i <= r; i ++){
+        ((char*)ret)[idx++] = ((char*)str)[i];
+    }
+    ((char*)ret)[idx] = '\0';
+    return (long)ret;
+}
+long ord(long str, long pos){
     char* ret = (char*)str + pos;
     return (long)*ret;
 }
@@ -158,22 +171,26 @@ int main(){
 long __tmp4_0;
 long a_1;
 long __tmp3_2;
-long __tmp5_3;
-long __tmp0_4;
-long __tmp2_5;
-long __tmp1_6;
+long __tmp6_3;
+long __tmp5_4;
+long __tmp0_5;
+long __tmp2_6;
+long __tmp1_7;
 //Function Body
-__tmp1_6 = (20);
-__tmp0_4 = __lib_malloc((((__tmp1_6) * (8)) + (8)));
-*((long*)(__tmp0_4)) = (__tmp1_6);
-__tmp0_4 = ((__tmp0_4) + (8));
-a_1 = (__tmp0_4);
-__tmp3_2 = ord((1), (toMoStr("12345assss")));
+__tmp1_7 = (20);
+__tmp0_5 = __lib_malloc((((__tmp1_7) * (8)) + (8)));
+*((long*)(__tmp0_5)) = (__tmp1_7);
+__tmp0_5 = ((__tmp0_5) + (8));
+a_1 = (__tmp0_5);
+__tmp3_2 = ord((toMoStr("12345assss")), (1));
 __tmp4_0 = toString((__tmp3_2));
 println((__tmp4_0));
 ;
-__tmp5_3 = size((a_1));
-return (__tmp5_3);
+__tmp5_4 = substring((toMoStr("12345assss")), (1), (2));
+println((__tmp5_4));
+;
+__tmp6_3 = size((a_1));
+return (__tmp6_3);
 }
 
 //------------- IRBase Traverse End -------------

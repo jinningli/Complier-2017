@@ -424,7 +424,7 @@ public class IRGenerator {
     public EXPR visit(MemberFunction node){
         List<EXPR> args = new ArrayList<>();
         for(Expr arg: node.flist){
-            args.add(0, visitExpr(arg));
+            args.add(visitExpr(arg));
         }
         EXPR call = null;
         if(Objects.equals(node.id.name, "size")){
@@ -440,7 +440,7 @@ public class IRGenerator {
         }else if((Objects.equals(node.id.name, "substring"))){
             FuncDecl tmp = new FuncDecl("substring", new IntType(0));
             tmp.pos = node.pos;
-            tmp.setMemref(new MemoryReference(new AsmLabel("__string__substring__")));
+            tmp.setMemref(new MemoryReference(new AsmLabel("substring")));
             call = new Call(tmp, args);
         }else {
             call = new Call((FuncDecl) node.getEnt(), args);

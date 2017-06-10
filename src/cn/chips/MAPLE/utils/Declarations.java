@@ -199,7 +199,8 @@ public class Declarations {
     }
 
     public String insideFuncDecl(){
-        return "long ord(long pos, long str);\n" +
+        return "long substring(long str, long l, long r);\n" +
+                "long ord(long pos, long str);\n" +
                 "long parseInt(long x);\n" +
                 "long strlength(long idx);\n" +
                 "long size(long x);\n" +
@@ -217,7 +218,19 @@ public class Declarations {
     }
 
     public String insideFunc(){
-        return "long ord(long pos, long str){\n" +
+        return "long substring(long str, long l, long r){\n" +
+                "    int ns = r - l + 1;\n" +
+                "    unsigned char *ret = (unsigned char*)malloc(ns + sizeof(int) + 1);\n" +
+                "    *((int*)ret) = ns;\n" +
+                "    ret += sizeof(int);\n" +
+                "    int idx = 0;\n" +
+                "    for(int i = l; i <= r; i ++){\n" +
+                "        ((char*)ret)[idx++] = ((char*)str)[i];\n" +
+                "    }\n" +
+                "    ((char*)ret)[idx] = '\\0';\n" +
+                "    return (long)ret;\n" +
+                "}\n" +
+                "long ord(long str, long pos){\n" +
                 "    char* ret = (char*)str + pos;\n" +
                 "    return (long)*ret;\n" +
                 "}\n" +
