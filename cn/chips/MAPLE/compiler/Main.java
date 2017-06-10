@@ -51,7 +51,7 @@ public class Main
 
         PrintStream cfout = new PrintStream(new FileOutputStream("output.c"));
         cfout.println(root.getDecls().IRTranslate());
-        Runtime.getRuntime().exec("bash conv/build.sh");
+//        Runtime.getRuntime().exec("bash conv/build.sh");
         Runtime.getRuntime().exec("bash c2nasm.bash ./output.c -O0"
 //                " 2> err.txt 1> std.txt"
         );
