@@ -10,13 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3283450-0471-4350-b335-1bcad0db854d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/compiler/Main.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/compiler/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.asm" afterPath="$PROJECT_DIR$/output.asm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.c" afterPath="$PROJECT_DIR$/output.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.o" afterPath="$PROJECT_DIR$/output.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.c" afterPath="$PROJECT_DIR$/test.c" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -106,8 +100,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="52" column="26" lean-forward="true" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+            <state relative-caret-position="1215">
+              <caret line="81" column="78" lean-forward="true" selection-start-line="81" selection-start-column="78" selection-end-line="81" selection-end-column="78" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -681,7 +675,7 @@
       <workItem from="1497065897306" duration="4502000" />
       <workItem from="1497072210840" duration="22122000" />
       <workItem from="1497102884406" duration="37953000" />
-      <workItem from="1497158317988" duration="1766000" />
+      <workItem from="1497158317988" duration="1862000" />
     </task>
     <servers />
   </component>
@@ -697,7 +691,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="378227000" />
+    <option name="totallyTimeSpent" value="378323000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1190,8 +1184,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="52" column="26" lean-forward="true" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+        <state relative-caret-position="1215">
+          <caret line="81" column="78" lean-forward="true" selection-start-line="81" selection-start-column="78" selection-end-line="81" selection-end-column="78" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

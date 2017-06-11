@@ -79,7 +79,7 @@ public class Main
 
 //        System.err.println(res);
 //        Runtime.getRuntime().exec("bash conv/build.sh");
-        Process proc = Runtime.getRuntime().exec("bash c2nasm.bash output.c -O3"
+        Process proc = Runtime.getRuntime().exec("bash c2nasm.bash output.c -O"
                 +" 2> err.txt 1> std.txt"
         );
 
