@@ -237,9 +237,12 @@ public class Declarations {
                 "long getInt();\n" +
                 "void print(long null);\n" +
                 "void println(long null);\n" +
+                "void __lib_printInt(long null);\n" +
+                "long __lib_malloc(long null);\n" +
                 "long toString(long null);\n" +
                 "int main();\n" +
-                "long getString();\n\n";
+                "long getString();\n" +
+                "void __lib_printlnInt(long null);\n\n";
     }
 
     public String insideFunc(){
@@ -349,6 +352,18 @@ public class Declarations {
                 "\n" +
                 "    return (long)ret;\n" +
                 "}\n" +
+                "void __lib_printlnInt(long x) {\n" +
+                "    printf(\"%ld\\n\", x);\n" +
+                "}\n" +
+                "\n" +
+                "void __lib_printInt(long x) {\n" +
+                "    printf(\"%ld\", x);\n" +
+                "}\n" +
+                "\n" +
+                "long __lib_malloc(long x) {\n" +
+                "    return (long) malloc(x);\n" +
+                "}\n" +
+                "\n" +
                 "void println(long x) {\n" +
                 "    puts((char *)x);\n" +
                 "}" +

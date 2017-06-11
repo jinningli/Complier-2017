@@ -17,7 +17,7 @@ import java.io.*;
 
 public class Main
 {
-    static boolean localtest = false;
+    static boolean localtest = true;
     static boolean o3 = false;
 //    public static boolean returned = false;
     public static void main(String[] args) throws Exception

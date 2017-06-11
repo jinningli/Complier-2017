@@ -31,6 +31,8 @@ global adjustHeap
 global heapSort
 global main
 
+extern fputs
+extern stderr
 extern puts
 extern printf
 extern strcpy
@@ -888,58 +890,63 @@ L_042:
 main:
         push    rbp
         mov     rbp, rsp
-        sub     rsp, 80
+        push    rbx
+        sub     rsp, 88
+        mov     rbx, qword [rel stderr]
         mov     edi, L_051
         call    toMoStr
+        mov     rsi, rbx
         mov     rdi, rax
-        call    println
+        call    fputs
         mov     eax, 0
         call    getString
-        mov     qword [rbp-40H], rax
-        mov     rax, qword [rbp-40H]
+        mov     qword [rbp-50H], rax
+        mov     rax, qword [rbp-50H]
         mov     rdi, rax
         call    parseInt
-        mov     qword [rbp-38H], rax
-        mov     rax, qword [rbp-38H]
+        mov     qword [rbp-48H], rax
+        mov     rax, qword [rbp-48H]
         mov     qword [rel n_], rax
         mov     rax, qword [rel n_]
         mov     rdi, rax
         call    toString
-        mov     qword [rbp-30H], rax
-        mov     rax, qword [rbp-30H]
+        mov     qword [rbp-40H], rax
+        mov     rdx, qword [rel stderr]
+        mov     rax, qword [rbp-40H]
+        mov     rsi, rdx
         mov     rdi, rax
-        call    println
+        call    fputs
         mov     rax, qword [rel n_]
-        mov     qword [rbp-28H], rax
-        mov     rax, qword [rbp-28H]
+        mov     qword [rbp-38H], rax
+        mov     rax, qword [rbp-38H]
         add     rax, 1
         shl     rax, 3
         mov     rdi, rax
         call    __lib_malloc
-        mov     qword [rbp-20H], rax
-        mov     rax, qword [rbp-20H]
-        mov     rdx, qword [rbp-28H]
+        mov     qword [rbp-30H], rax
+        mov     rax, qword [rbp-30H]
+        mov     rdx, qword [rbp-38H]
         mov     qword [rax], rdx
-        add     qword [rbp-20H], 8
-        mov     rax, qword [rbp-20H]
+        add     qword [rbp-30H], 8
+        mov     rax, qword [rbp-30H]
         mov     qword [rel a_], rax
-        mov     qword [rbp-48H], 0
+        mov     qword [rbp-58H], 0
 L_043:  mov     rax, qword [rel a_]
         mov     rdi, rax
         call    size
-        mov     qword [rbp-18H], rax
-        mov     rax, qword [rbp-48H]
-        cmp     rax, qword [rbp-18H]
+        mov     qword [rbp-28H], rax
+        mov     rax, qword [rbp-58H]
+        cmp     rax, qword [rbp-28H]
         jge     L_044
         nop
-        mov     rax, qword [rbp-48H]
+        mov     rax, qword [rbp-58H]
         lea     rdx, [rax*8]
         mov     rax, qword [rel a_]
         add     rax, rdx
         mov     rdx, rax
-        mov     rax, qword [rbp-48H]
+        mov     rax, qword [rbp-58H]
         mov     qword [rdx], rax
-        add     qword [rbp-48H], 1
+        add     qword [rbp-58H], 1
         jmp     L_043
 
 
@@ -947,43 +954,47 @@ L_044:
         nop
         mov     eax, 0
         call    makeHeap
+        mov     rbx, qword [rel stderr]
         mov     edi, L_052
         call    toMoStr
+        mov     rsi, rbx
         mov     rdi, rax
-        call    println
+        call    fputs
         mov     eax, 0
         call    heapSort
+        mov     rbx, qword [rel stderr]
         mov     edi, L_053
         call    toMoStr
+        mov     rsi, rbx
         mov     rdi, rax
-        call    println
-        mov     qword [rbp-48H], 0
+        call    fputs
+        mov     qword [rbp-58H], 0
 L_045:  mov     rax, qword [rel a_]
         mov     rdi, rax
         call    size
-        mov     qword [rbp-10H], rax
-        mov     rax, qword [rbp-48H]
-        cmp     rax, qword [rbp-10H]
+        mov     qword [rbp-20H], rax
+        mov     rax, qword [rbp-58H]
+        cmp     rax, qword [rbp-20H]
         jge     L_046
         nop
-        mov     rax, qword [rbp-48H]
+        mov     rax, qword [rbp-58H]
         lea     rdx, [rax*8]
         mov     rax, qword [rel a_]
         add     rax, rdx
         mov     rax, qword [rax]
         mov     rdi, rax
         call    toString
-        mov     qword [rbp-8H], rax
+        mov     qword [rbp-18H], rax
         mov     edi, L_054
         call    toMoStr
         mov     rdx, rax
-        mov     rax, qword [rbp-8H]
+        mov     rax, qword [rbp-18H]
         mov     rsi, rdx
         mov     rdi, rax
         call    str_add
         mov     rdi, rax
         call    print
-        add     qword [rbp-48H], 1
+        add     qword [rbp-58H], 1
         jmp     L_045
 
 L_046:
@@ -993,7 +1004,9 @@ L_046:
         mov     rdi, rax
         call    print
         mov     eax, 0
-        leave
+        add     rsp, 88
+        pop     rbx
+        pop     rbp
         ret
 
 
