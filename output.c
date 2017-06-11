@@ -8,6 +8,8 @@
 //Function & Class Declare
 
 long calc(long A);
+long str_le(long str1, long str2);
+long str_eql(long str1, long str2);
 long substring(long str, long l, long r);
 long ord(long pos, long str);
 long parseInt(long x);
@@ -32,6 +34,24 @@ long C_;
 long N_;
 
 //Inside Function
+long str_le(long str1, long str2){
+    if(strcmp((char*)str1, (char*)str2) < 0){
+        return 1;
+    }
+    return 0;
+}
+long str_eql(long str1, long str2){
+    int l1 = (int) strlength(str1);
+    int l2 = (int) strlength(str2);
+    if(l1 != l2) return 0;
+
+    for(int i = 0; i < l1; i ++){
+        if(((char*)str1)[i] != ((char*)str2)[i]){
+            return 0;
+        }
+    }
+    return 1;
+}
 long substring(long str, long l, long r){
     int ns = r - l + 1;
     unsigned char *ret = (unsigned char*)malloc(ns + sizeof(int) + 1);
@@ -202,12 +222,12 @@ L_9_ = (__tmp2_6_);
 __tmp3_2_ = substring((A_0_), (mid_8_), ((len_4_) - (1)));
 __tmp4_1_ = calc((__tmp3_2_));
 R_3_ = (__tmp4_1_);
-if(((L_9_) < (R_3_))) goto AsmLabel4; else goto AsmLabel5;;
+if(str_le((L_9_), (R_3_))) goto AsmLabel4; else goto AsmLabel5;;
 AsmLabel4:;
 return str_add((L_9_), (R_3_));
 goto AsmLabel6;
 AsmLabel5:;
-if(((L_9_) == (R_3_))) goto AsmLabel8; else goto AsmLabel9;;
+if(str_eql((L_9_), (R_3_))) goto AsmLabel8; else goto AsmLabel9;;
 AsmLabel8:;
 __tmp5_12_ = ord((L_9_), (0));
 l_13_ = (__tmp5_12_);
@@ -220,7 +240,7 @@ AsmLabel14:;
 return str_add((R_3_), (L_9_));
 goto AsmLabel10;
 AsmLabel9:;
-if(((L_9_) > (R_3_))) goto AsmLabel16; else goto AsmLabel18;;
+if(str_le((R_3_), (L_9_))) goto AsmLabel16; else goto AsmLabel18;;
 AsmLabel16:;
 return str_add((R_3_), (L_9_));
 AsmLabel18:;

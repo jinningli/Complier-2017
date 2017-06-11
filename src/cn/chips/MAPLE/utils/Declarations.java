@@ -225,7 +225,9 @@ public class Declarations {
     }
 
     public String insideFuncDecl(){
-        return "long substring(long str, long l, long r);\n" +
+        return "long str_le(long str1, long str2);\n" +
+                "long str_eql(long str1, long str2);\n" +
+                "long substring(long str, long l, long r);\n" +
                 "long ord(long pos, long str);\n" +
                 "long parseInt(long x);\n" +
                 "long strlength(long idx);\n" +
@@ -244,7 +246,25 @@ public class Declarations {
     }
 
     public String insideFunc(){
-        return "long substring(long str, long l, long r){\n" +
+        return "long str_le(long str1, long str2){\n" +
+                "    if(strcmp((char*)str1, (char*)str2) < 0){\n" +
+                "        return 1;\n" +
+                "    }\n" +
+                "    return 0;\n" +
+                "}\n" +
+                "long str_eql(long str1, long str2){\n" +
+                "    int l1 = (int) strlength(str1);\n" +
+                "    int l2 = (int) strlength(str2);\n" +
+                "    if(l1 != l2) return 0;\n" +
+                "\n" +
+                "    for(int i = 0; i < l1; i ++){\n" +
+                "        if(((char*)str1)[i] != ((char*)str2)[i]){\n" +
+                "            return 0;\n" +
+                "        }\n" +
+                "    }\n" +
+                "    return 1;\n" +
+                "}\n" +
+                "long substring(long str, long l, long r){\n" +
                 "    int ns = r - l + 1;\n" +
                 "    unsigned char *ret = (unsigned char*)malloc(ns + sizeof(int) + 1);\n" +
                 "    *((int*)ret) = ns;\n" +

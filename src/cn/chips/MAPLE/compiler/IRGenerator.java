@@ -389,17 +389,16 @@ public class IRGenerator {
         EXPR rhs = visitExpr(node.right);
         EXPR lhs = visitExpr(node.left);
         String op = node.opt;
-
-
-        if (Objects.equals(op, "+") && (node.left.getretype() instanceof StringType ||node.right.getretype() instanceof StringType)) {
-            List<EXPR> lst = new LinkedList<>();
-            lst.add(lhs);
-            lst.add(rhs);
-            FuncDecl tmp = new FuncDecl("str_add", new IntType(0));
-            tmp.pos = node.pos;
-            return new Call(tmp, lst);
+        if((node.left.getretype() instanceof StringType ||node.right.getretype() instanceof StringType)) {
+            if (Objects.equals(op, "+")) {
+                List<EXPR> lst = new LinkedList<>();
+                lst.add(lhs);
+                lst.add(rhs);
+                FuncDecl tmp = new FuncDecl("str_add", new IntType(0));
+                tmp.pos = node.pos;
+                return new Call(tmp, lst);
+            }
         }
-
         return new Bin(op, lhs, rhs);
     }
 
@@ -475,6 +474,37 @@ public class IRGenerator {
             assign(adds, visitExpr(node.right));
             label(endLabel);
             return isStatement() ? null : adds;
+        }
+        if((node.left.getretype() instanceof StringType ||node.right.getretype() instanceof StringType)) {
+            EXPR rhs = visitExpr(node.right);
+            EXPR lhs = visitExpr(node.left);
+            String op = node.opt;
+            if (Objects.equals(op, "==")) {
+                List<EXPR> lst = new LinkedList<>();
+                lst.add(lhs);
+                lst.add(rhs);
+                FuncDecl tmp = new FuncDecl("str_eql", new IntType(0));
+                tmp.pos = node.pos;
+                return new Call(tmp, lst);
+            }
+            if(Objects.equals(op, "<")){
+                List<EXPR> lst = new LinkedList<>();
+                lst.add(lhs);
+                lst.add(rhs);
+                FuncDecl tmp = new FuncDecl("str_le", new IntType(0));
+                tmp.pos = node.pos;
+                return new Call(tmp, lst);
+            }
+
+            if(Objects.equals(op, ">")){
+                List<EXPR> lst = new LinkedList<>();
+                lst.add(rhs);
+                lst.add(lhs);
+                FuncDecl tmp = new FuncDecl("str_le", new IntType(0));
+                tmp.pos = node.pos;
+                return new Call(tmp, lst);
+            }
+
         }
         return new Bin(node.opt, visitExpr(node.left), visitExpr(node.right));/////
     }
