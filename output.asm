@@ -1,5 +1,5 @@
 ; Disassembly of file: output.o
-; Sun Jun 11 19:41:43 2017
+; Sun Jun 11 21:32:04 2017
 ; Mode: 64 bits
 ; Syntax: YASM/NASM
 ; Instruction set: SSE4.1, x64
@@ -230,7 +230,7 @@ _getInt:; Function begin
         mov     rbp, rsp                                ; 0141 _ 48: 89. E5
         sub     rsp, 16                                 ; 0144 _ 48: 83. EC, 10
         mov     dword [rbp-4H], 0                       ; 0148 _ C7. 45, FC, 00000000
-        lea     rdi, [rel _str_le+17EAH]                ; 014F _ 48: 8D. 3D, 000017EA(rel)
+        lea     rdi, [rel _str_le+17DAH]                ; 014F _ 48: 8D. 3D, 000017DA(rel)
         lea     rsi, [rbp-4H]                           ; 0156 _ 48: 8D. 75, FC
         xor     eax, eax                                ; 015A _ 31. C0
         call    _scanf                                  ; 015C _ E8, 00000000(rel)
@@ -255,7 +255,7 @@ _getString:; Function begin
         call    _malloc                                 ; 017C _ E8, 00000000(rel)
         mov     r14, rax                                ; 0181 _ 49: 89. C6
         lea     rbx, [r14+4H]                           ; 0184 _ 49: 8D. 5E, 04
-        lea     rdi, [rel _str_le+17B4H]                ; 0188 _ 48: 8D. 3D, 000017B4(rel)
+        lea     rdi, [rel _str_le+17A4H]                ; 0188 _ 48: 8D. 3D, 000017A4(rel)
         xor     eax, eax                                ; 018F _ 31. C0
         mov     rsi, rbx                                ; 0191 _ 48: 89. DE
         call    _scanf                                  ; 0194 _ E8, 00000000(rel)
@@ -534,7 +534,7 @@ ___lib_printlnInt:; Function begin
         push    rbp                                     ; 0470 _ 55
         mov     rbp, rsp                                ; 0471 _ 48: 89. E5
         mov     rcx, rdi                                ; 0474 _ 48: 89. F9
-        lea     rdi, [rel _str_le+14C8H]                ; 0477 _ 48: 8D. 3D, 000014C8(rel)
+        lea     rdi, [rel _str_le+14B8H]                ; 0477 _ 48: 8D. 3D, 000014B8(rel)
         xor     eax, eax                                ; 047E _ 31. C0
         mov     rsi, rcx                                ; 0480 _ 48: 89. CE
         pop     rbp                                     ; 0483 _ 5D
@@ -551,7 +551,7 @@ ___lib_printInt:; Function begin
         push    rbp                                     ; 0490 _ 55
         mov     rbp, rsp                                ; 0491 _ 48: 89. E5
         mov     rcx, rdi                                ; 0494 _ 48: 89. F9
-        lea     rdi, [rel _str_le+14ADH]                ; 0497 _ 48: 8D. 3D, 000014AD(rel)
+        lea     rdi, [rel _str_le+149DH]                ; 0497 _ 48: 8D. 3D, 0000149D(rel)
         xor     eax, eax                                ; 049E _ 31. C0
         mov     rsi, rcx                                ; 04A0 _ 48: 89. CE
         pop     rbp                                     ; 04A3 _ 5D
@@ -594,7 +594,7 @@ _print: ; Function begin
         push    rbp                                     ; 04D0 _ 55
         mov     rbp, rsp                                ; 04D1 _ 48: 89. E5
         mov     rcx, rdi                                ; 04D4 _ 48: 89. F9
-        lea     rdi, [rel _str_le+1465H]                ; 04D7 _ 48: 8D. 3D, 00001465(rel)
+        lea     rdi, [rel _str_le+1455H]                ; 04D7 _ 48: 8D. 3D, 00001455(rel)
         xor     eax, eax                                ; 04DE _ 31. C0
         mov     rsi, rcx                                ; 04E0 _ 48: 89. CE
         pop     rbp                                     ; 04E3 _ 5D
@@ -1328,7 +1328,7 @@ ALIGN   16
         lea     rax, [rdi+34B72514H]                    ; 0CF6 _ 48: 8D. 87, 34B72514
         add     rdi, 1622273709                         ; 0CFD _ 48: 81. C7, 60B1EEAD
 ; Note: Alignment fault. Memory operand must be aligned
-        movdqa  xmm0, oword [rel _str_le+0C14H]         ; 0D04 _ 66: 0F 6F. 05, 00000C14(rel)
+        movdqa  xmm0, oword [rel _str_le+0C04H]         ; 0D04 _ 66: 0F 6F. 05, 00000C04(rel)
         mov     ebx, 1732584193                         ; 0D0C _ BB, 67452301
         jmp     ?_081                                   ; 0D11 _ E9, 0000033C
 
@@ -1349,9 +1349,9 @@ ALIGN   16
 
 ?_073:
 ; Note: Alignment fault. Memory operand must be aligned
-        movdqa  xmm1, oword [rel _str_le+0BCCH]         ; 0D5C _ 66: 0F 6F. 0D, 00000BCC(rel)
+        movdqa  xmm1, oword [rel _str_le+0BBCH]         ; 0D5C _ 66: 0F 6F. 0D, 00000BBC(rel)
 ; Note: Alignment fault. Memory operand must be aligned
-        movdqa  xmm0, oword [rel _str_le+0BB4H]         ; 0D64 _ 66: 0F 6F. 05, 00000BB4(rel)
+        movdqa  xmm0, oword [rel _str_le+0BA4H]         ; 0D64 _ 66: 0F 6F. 05, 00000BA4(rel)
         xor     r14d, r14d                              ; 0D6C _ 45: 31. F6
         mov     ebx, 1732584193                         ; 0D6F _ BB, 67452301
         pxor    xmm2, xmm2                              ; 0D74 _ 66: 0F EF. D2
@@ -1629,7 +1629,7 @@ ALIGN   16
         mov     r15, rax                                ; 1126 _ 49: 89. C7
         cmp     qword [r15-8H], 0                       ; 1129 _ 49: 83. 7F, F8, 00
         jle     ?_088                                   ; 112E _ 7E, 36
-        lea     r14, [rel _str_le+80CH]                 ; 1130 _ 4C: 8D. 35, 0000080C(rel)
+        lea     r14, [rel _str_le+7FCH]                 ; 1130 _ 4C: 8D. 35, 000007FC(rel)
         mov     r12, r15                                ; 1137 _ 4D: 89. FC
         xor     ebx, ebx                                ; 113A _ 31. DB
 ; Filling space: 4H
@@ -2101,7 +2101,7 @@ ALIGN   8
 ?_126:  cmp     qword [rbp-30H], 0                      ; 1644 _ 48: 83. 7D, D0, 00
         jle     ?_133                                   ; 1649 _ 0F 8E, 000000D2
         mov     rbx, qword 100000000H                   ; 164F _ 48: BB, 0000000100000000
-        lea     r12, [rel _str_le+2E3H]                 ; 1659 _ 4C: 8D. 25, 000002E3(rel)
+        lea     r12, [rel _str_le+2D3H]                 ; 1659 _ 4C: 8D. 25, 000002D3(rel)
         xor     r15d, r15d                              ; 1660 _ 45: 31. FF
 ; Filling space: 0DH
 ; Filler type: Multi-byte NOP
@@ -2161,7 +2161,7 @@ ALIGN   8
         jle     ?_130                                   ; 16F6 _ 7E, E8
         sar     rax, 32                                 ; 16F8 _ 48: C1. F8, 20
 ?_131:  mov     byte [rcx+rax], 0                       ; 16FC _ C6. 04 01, 00
-        lea     r12, [rel _str_le+23CH]                 ; 1700 _ 4C: 8D. 25, 0000023C(rel)
+        lea     r12, [rel _str_le+22CH]                 ; 1700 _ 4C: 8D. 25, 0000022C(rel)
 ?_132:  xor     eax, eax                                ; 1707 _ 31. C0
         mov     rdi, r12                                ; 1709 _ 4C: 89. E7
         mov     rsi, rcx                                ; 170C _ 48: 89. CE
@@ -2204,27 +2204,23 @@ _main:  ; Function begin
         mov     rbx, rax                                ; 1768 _ 48: 89. C3
         mov     dword [rbx], 95                         ; 176B _ C7. 03, 0000005F
         add     rbx, 4                                  ; 1771 _ 48: 83. C3, 04
-        lea     rsi, [rel _str_le+1FFH]                 ; 1775 _ 48: 8D. 35, 000001FF(rel)
+        lea     rsi, [rel _str_le+1EFH]                 ; 1775 _ 48: 8D. 35, 000001EF(rel)
         mov     edx, 96                                 ; 177C _ BA, 00000060
         mov     rdi, rbx                                ; 1781 _ 48: 89. DF
         call    _memcpy                                 ; 1784 _ E8, 00000000(rel)
         mov     rax, qword [rel _asciiTable_]           ; 1789 _ 48: 8B. 05, 00000000(GOT r)
         mov     qword [rax], rbx                        ; 1790 _ 48: 89. 18
-        mov     r14, qword [rel _MAXCHUNK_]             ; 1793 _ 4C: 8B. 35, 00000000(GOT r)
-        mov     qword [r14], 100                        ; 179A _ 49: C7. 06, 00000064
-        mov     edi, 808                                ; 17A1 _ BF, 00000328
-        call    _malloc                                 ; 17A6 _ E8, 00000000(rel)
-        mov     r12, rax                                ; 17AB _ 49: 89. C4
-        mov     qword [r12], 100                        ; 17AE _ 49: C7. 04 24, 00000064
-        mov     r15, r12                                ; 17B6 _ 4D: 89. E7
-        add     r15, 8                                  ; 17B9 _ 49: 83. C7, 08
-        mov     ebx, 8                                  ; 17BD _ BB, 00000008
-; Filling space: 0EH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH
-;       db 84H, 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
+        mov     rax, qword [rel _MAXCHUNK_]             ; 1793 _ 48: 8B. 05, 00000000(GOT r)
+        mov     qword [rax], 100                        ; 179A _ 48: C7. 00, 00000064
+        mov     r14, qword [rel _MAXLENGTH_]            ; 17A1 _ 4C: 8B. 35, 00000000(GOT r)
+        mov     qword [r14], 6320                       ; 17A8 _ 49: C7. 06, 000018B0
+        mov     edi, 808                                ; 17AF _ BF, 00000328
+        call    _malloc                                 ; 17B4 _ E8, 00000000(rel)
+        mov     r12, rax                                ; 17B9 _ 49: 89. C4
+        mov     qword [r12], 100                        ; 17BC _ 49: C7. 04 24, 00000064
+        mov     r15, r12                                ; 17C4 _ 4D: 89. E7
+        add     r15, 8                                  ; 17C7 _ 49: 83. C7, 08
+        mov     ebx, 8                                  ; 17CB _ BB, 00000008
 ?_135:  mov     edi, 648                                ; 17D0 _ BF, 00000288
         call    _malloc                                 ; 17D5 _ E8, 00000000(rel)
         mov     qword [r12+rbx], rax                    ; 17DA _ 49: 89. 04 1C
@@ -2233,126 +2229,121 @@ ALIGN   16
         add     rbx, 8                                  ; 17EA _ 48: 83. C3, 08
         cmp     rbx, 808                                ; 17EE _ 48: 81. FB, 00000328
         jnz     ?_135                                   ; 17F5 _ 75, D9
-        mov     r12, qword [rel _MAXLENGTH_]            ; 17F7 _ 4C: 8B. 25, 00000000(GOT r)
-        mov     r13, qword [r12]                        ; 17FE _ 4D: 8B. 2C 24
-        lea     rdi, [r13*8+8H]                         ; 1802 _ 4A: 8D. 3C ED, 00000008
-        call    _malloc                                 ; 180A _ E8, 00000000(rel)
-        mov     rbx, rax                                ; 180F _ 48: 89. C3
-        mov     qword [rbx], r13                        ; 1812 _ 4C: 89. 2B
-        add     rbx, 8                                  ; 1815 _ 48: 83. C3, 08
-        mov     edi, 48                                 ; 1819 _ BF, 00000030
-        call    _malloc                                 ; 181E _ E8, 00000000(rel)
-        mov     qword [rax], 5                          ; 1823 _ 48: C7. 00, 00000005
-        add     rax, 8                                  ; 182A _ 48: 83. C0, 08
-        mov     rcx, qword [r14]                        ; 182E _ 49: 8B. 0E
-        shl     rcx, 6                                  ; 1831 _ 48: C1. E1, 06
-        add     rcx, -80                                ; 1835 _ 48: 83. C1, B0
-        mov     qword [r12], rcx                        ; 1839 _ 49: 89. 0C 24
-        mov     rcx, qword [rel _chunks_]               ; 183D _ 48: 8B. 0D, 00000000(GOT r)
-        mov     qword [rcx], r15                        ; 1844 _ 4C: 89. 39
-        mov     rcx, qword [rel _inputBuffer_]          ; 1847 _ 48: 8B. 0D, 00000000(GOT r)
-        mov     qword [rcx], rbx                        ; 184E _ 48: 89. 19
-        mov     rcx, qword [rel _outputBuffer_]         ; 1851 _ 48: 8B. 0D, 00000000(GOT r)
-        mov     qword [rcx], rax                        ; 1858 _ 48: 89. 01
-        lea     r14, [rel _str_le+0DEH]                 ; 185B _ 4C: 8D. 35, 000000DE(rel)
-        lea     r12, [rbp-2CH]                          ; 1862 _ 4C: 8D. 65, D4
-        lea     r15, [rel _str_le+0D6H]                 ; 1866 _ 4C: 8D. 3D, 000000D6(rel)
-        jmp     ?_137                                   ; 186D _ EB, 33
+        mov     rax, qword [rel _chunks_]               ; 17F7 _ 48: 8B. 05, 00000000(GOT r)
+        mov     qword [rax], r15                        ; 17FE _ 4C: 89. 38
+        mov     rbx, qword [r14]                        ; 1801 _ 49: 8B. 1E
+        lea     rdi, [rbx*8+8H]                         ; 1804 _ 48: 8D. 3C DD, 00000008
+        call    _malloc                                 ; 180C _ E8, 00000000(rel)
+        mov     qword [rax], rbx                        ; 1811 _ 48: 89. 18
+        add     rax, 8                                  ; 1814 _ 48: 83. C0, 08
+        mov     rcx, qword [rel _inputBuffer_]          ; 1818 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     qword [rcx], rax                        ; 181F _ 48: 89. 01
+        mov     edi, 48                                 ; 1822 _ BF, 00000030
+        call    _malloc                                 ; 1827 _ E8, 00000000(rel)
+        mov     qword [rax], 5                          ; 182C _ 48: C7. 00, 00000005
+        add     rax, 8                                  ; 1833 _ 48: 83. C0, 08
+        mov     rcx, qword [rel _outputBuffer_]         ; 1837 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     qword [rcx], rax                        ; 183E _ 48: 89. 01
+        lea     r14, [rel _str_le+0E8H]                 ; 1841 _ 4C: 8D. 35, 000000E8(rel)
+        lea     r12, [rbp-2CH]                          ; 1848 _ 4C: 8D. 65, D4
+        lea     r15, [rel _str_le+0E0H]                 ; 184C _ 4C: 8D. 3D, 000000E0(rel)
+        jmp     ?_137                                   ; 1853 _ EB, 3D
 
-; Filling space: 1H
-; Filler type: NOP
-;       db 90H
+; Filling space: 0BH
+; Filler type: Multi-byte NOP
+;       db 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H
+;       db 00H, 00H, 00H
 
-ALIGN   8
-?_136:  mov     edi, 2004                               ; 1870 _ BF, 000007D4
-        call    _malloc                                 ; 1875 _ E8, 00000000(rel)
-        mov     r13, rax                                ; 187A _ 49: 89. C5
-        lea     rbx, [r13+4H]                           ; 187D _ 49: 8D. 5D, 04
-        xor     eax, eax                                ; 1881 _ 31. C0
-        mov     rdi, r15                                ; 1883 _ 4C: 89. FF
-        mov     rsi, rbx                                ; 1886 _ 48: 89. DE
-        call    _scanf                                  ; 1889 _ E8, 00000000(rel)
-        mov     rdi, rbx                                ; 188E _ 48: 89. DF
-        call    _strlen                                 ; 1891 _ E8, 00000000(rel)
-        mov     dword [r13], eax                        ; 1896 _ 41: 89. 45, 00
-        mov     rdi, rbx                                ; 189A _ 48: 89. DF
-        call    _crackSHA1                              ; 189D _ E8, 00000000(rel)
-?_137:  mov     dword [rbp-2CH], 0                      ; 18A2 _ C7. 45, D4, 00000000
-        xor     eax, eax                                ; 18A9 _ 31. C0
-        mov     rdi, r14                                ; 18AB _ 4C: 89. F7
-        mov     rsi, r12                                ; 18AE _ 4C: 89. E6
-        call    _scanf                                  ; 18B1 _ E8, 00000000(rel)
-        movsxd  rax, dword [rbp-2CH]                    ; 18B6 _ 48: 63. 45, D4
-        cmp     rax, 1                                  ; 18BA _ 48: 83. F8, 01
-        jz      ?_138                                   ; 18BE _ 74, 10
-        cmp     rax, 2                                  ; 18C0 _ 48: 83. F8, 02
-        jz      ?_136                                   ; 18C4 _ 74, AA
-        test    rax, rax                                ; 18C6 _ 48: 85. C0
-        jnz     ?_137                                   ; 18C9 _ 75, D7
-        jmp     ?_139                                   ; 18CB _ EB, 37
+ALIGN   16
+?_136:  mov     edi, 2004                               ; 1860 _ BF, 000007D4
+        call    _malloc                                 ; 1865 _ E8, 00000000(rel)
+        mov     r13, rax                                ; 186A _ 49: 89. C5
+        lea     rbx, [r13+4H]                           ; 186D _ 49: 8D. 5D, 04
+        xor     eax, eax                                ; 1871 _ 31. C0
+        mov     rdi, r15                                ; 1873 _ 4C: 89. FF
+        mov     rsi, rbx                                ; 1876 _ 48: 89. DE
+        call    _scanf                                  ; 1879 _ E8, 00000000(rel)
+        mov     rdi, rbx                                ; 187E _ 48: 89. DF
+        call    _strlen                                 ; 1881 _ E8, 00000000(rel)
+        mov     dword [r13], eax                        ; 1886 _ 41: 89. 45, 00
+        mov     rdi, rbx                                ; 188A _ 48: 89. DF
+        call    _crackSHA1                              ; 188D _ E8, 00000000(rel)
+?_137:  mov     dword [rbp-2CH], 0                      ; 1892 _ C7. 45, D4, 00000000
+        xor     eax, eax                                ; 1899 _ 31. C0
+        mov     rdi, r14                                ; 189B _ 4C: 89. F7
+        mov     rsi, r12                                ; 189E _ 4C: 89. E6
+        call    _scanf                                  ; 18A1 _ E8, 00000000(rel)
+        movsxd  rax, dword [rbp-2CH]                    ; 18A6 _ 48: 63. 45, D4
+        cmp     rax, 1                                  ; 18AA _ 48: 83. F8, 01
+        jz      ?_138                                   ; 18AE _ 74, 10
+        cmp     rax, 2                                  ; 18B0 _ 48: 83. F8, 02
+        jz      ?_136                                   ; 18B4 _ 74, AA
+        test    rax, rax                                ; 18B6 _ 48: 85. C0
+        jnz     ?_137                                   ; 18B9 _ 75, D7
+        jmp     ?_139                                   ; 18BB _ EB, 37
 
 ; Filling space: 3H
 ; Filler type: Multi-byte NOP
 ;       db 0FH, 1FH, 00H
 
 ALIGN   8
-?_138:  mov     edi, 2004                               ; 18D0 _ BF, 000007D4
-        call    _malloc                                 ; 18D5 _ E8, 00000000(rel)
-        mov     r13, rax                                ; 18DA _ 49: 89. C5
-        lea     rbx, [r13+4H]                           ; 18DD _ 49: 8D. 5D, 04
-        xor     eax, eax                                ; 18E1 _ 31. C0
-        mov     rdi, r15                                ; 18E3 _ 4C: 89. FF
-        mov     rsi, rbx                                ; 18E6 _ 48: 89. DE
-        call    _scanf                                  ; 18E9 _ E8, 00000000(rel)
-        mov     rdi, rbx                                ; 18EE _ 48: 89. DF
-        call    _strlen                                 ; 18F1 _ E8, 00000000(rel)
-        mov     dword [r13], eax                        ; 18F6 _ 41: 89. 45, 00
-        mov     rdi, rbx                                ; 18FA _ 48: 89. DF
-        call    _computeSHA1                            ; 18FD _ E8, 00000000(rel)
-        jmp     ?_137                                   ; 1902 _ EB, 9E
+?_138:  mov     edi, 2004                               ; 18C0 _ BF, 000007D4
+        call    _malloc                                 ; 18C5 _ E8, 00000000(rel)
+        mov     r13, rax                                ; 18CA _ 49: 89. C5
+        lea     rbx, [r13+4H]                           ; 18CD _ 49: 8D. 5D, 04
+        xor     eax, eax                                ; 18D1 _ 31. C0
+        mov     rdi, r15                                ; 18D3 _ 4C: 89. FF
+        mov     rsi, rbx                                ; 18D6 _ 48: 89. DE
+        call    _scanf                                  ; 18D9 _ E8, 00000000(rel)
+        mov     rdi, rbx                                ; 18DE _ 48: 89. DF
+        call    _strlen                                 ; 18E1 _ E8, 00000000(rel)
+        mov     dword [r13], eax                        ; 18E6 _ 41: 89. 45, 00
+        mov     rdi, rbx                                ; 18EA _ 48: 89. DF
+        call    _computeSHA1                            ; 18ED _ E8, 00000000(rel)
+        jmp     ?_137                                   ; 18F2 _ EB, 9E
 ; _main End of function
 
 ?_139:  ; Local function
-        xor     eax, eax                                ; 1904 _ 31. C0
-        add     rsp, 8                                  ; 1906 _ 48: 83. C4, 08
-        pop     rbx                                     ; 190A _ 5B
-        pop     r12                                     ; 190B _ 41: 5C
-        pop     r13                                     ; 190D _ 41: 5D
-        pop     r14                                     ; 190F _ 41: 5E
-        pop     r15                                     ; 1911 _ 41: 5F
-        pop     rbp                                     ; 1913 _ 5D
-        ret                                             ; 1914 _ C3
+        xor     eax, eax                                ; 18F4 _ 31. C0
+        add     rsp, 8                                  ; 18F6 _ 48: 83. C4, 08
+        pop     rbx                                     ; 18FA _ 5B
+        pop     r12                                     ; 18FB _ 41: 5C
+        pop     r13                                     ; 18FD _ 41: 5D
+        pop     r14                                     ; 18FF _ 41: 5E
+        pop     r15                                     ; 1901 _ 41: 5F
+        pop     rbp                                     ; 1903 _ 5D
+        ret                                             ; 1904 _ C3
 
 
 SECTION ._TEXT.__literal16 align=16 noexecute           ; section number 2, data
 
-        db 76H, 54H, 32H, 10H, 00H, 00H, 00H, 00H       ; 1920 _ vT2.....
-        db 0FEH, 0DCH, 0BAH, 98H, 00H, 00H, 00H, 00H    ; 1928 _ ........
-        db 89H, 0ABH, 0CDH, 0EFH, 00H, 00H, 00H, 00H    ; 1930 _ ........
-        db 0F0H, 0E1H, 0D2H, 0C3H, 00H, 00H, 00H, 00H   ; 1938 _ ........
+        db 76H, 54H, 32H, 10H, 00H, 00H, 00H, 00H       ; 1910 _ vT2.....
+        db 0FEH, 0DCH, 0BAH, 98H, 00H, 00H, 00H, 00H    ; 1918 _ ........
+        db 89H, 0ABH, 0CDH, 0EFH, 00H, 00H, 00H, 00H    ; 1920 _ ........
+        db 0F0H, 0E1H, 0D2H, 0C3H, 00H, 00H, 00H, 00H   ; 1928 _ ........
 
 
 SECTION ._TEXT.__cstring align=1 noexecute              ; section number 3, data
 
-        db 25H, 64H, 00H, 25H, 73H, 00H, 25H, 6CH       ; 1940 _ %d.%s.%l
-        db 64H, 0AH, 00H, 25H, 6CH, 64H, 00H, 6EH       ; 1948 _ d..%ld.n
-        db 43H, 68H, 75H, 6EH, 6BH, 20H, 3EH, 20H       ; 1950 _ Chunk > 
-        db 4DH, 41H, 58H, 43H, 48H, 55H, 4EH, 4BH       ; 1958 _ MAXCHUNK
-        db 21H, 00H, 49H, 6EH, 76H, 61H, 6CH, 69H       ; 1960 _ !.Invali
-        db 64H, 20H, 69H, 6EH, 70H, 75H, 74H, 00H       ; 1968 _ d input.
-        db 4EH, 6FH, 74H, 20H, 46H, 6FH, 75H, 6EH       ; 1970 _ Not Foun
-        db 64H, 21H, 00H, 20H, 21H, 22H, 23H, 24H       ; 1978 _ d!. !"#$
-        db 25H, 26H, 27H, 28H, 29H, 2AH, 2BH, 2CH       ; 1980 _ %&'()*+,
-        db 2DH, 2EH, 2FH, 30H, 31H, 32H, 33H, 34H       ; 1988 _ -./01234
-        db 35H, 36H, 37H, 38H, 39H, 3AH, 3BH, 3CH       ; 1990 _ 56789:;<
-        db 3DH, 3EH, 3FH, 40H, 41H, 42H, 43H, 44H       ; 1998 _ =>?@ABCD
-        db 45H, 46H, 47H, 48H, 49H, 4AH, 4BH, 4CH       ; 19A0 _ EFGHIJKL
-        db 4DH, 4EH, 4FH, 50H, 51H, 52H, 53H, 54H       ; 19A8 _ MNOPQRST
-        db 55H, 56H, 57H, 58H, 59H, 5AH, 5BH, 5CH       ; 19B0 _ UVWXYZ[\
-        db 5DH, 5EH, 5FH, 60H, 61H, 62H, 63H, 64H       ; 19B8 _ ]^_`abcd
-        db 65H, 66H, 67H, 68H, 69H, 6AH, 6BH, 6CH       ; 19C0 _ efghijkl
-        db 6DH, 6EH, 6FH, 70H, 71H, 72H, 73H, 74H       ; 19C8 _ mnopqrst
-        db 75H, 76H, 77H, 78H, 79H, 7AH, 7BH, 7CH       ; 19D0 _ uvwxyz{|
-        db 7DH, 7EH, 00H                                ; 19D8 _ }~.
+        db 25H, 64H, 00H, 25H, 73H, 00H, 25H, 6CH       ; 1930 _ %d.%s.%l
+        db 64H, 0AH, 00H, 25H, 6CH, 64H, 00H, 6EH       ; 1938 _ d..%ld.n
+        db 43H, 68H, 75H, 6EH, 6BH, 20H, 3EH, 20H       ; 1940 _ Chunk > 
+        db 4DH, 41H, 58H, 43H, 48H, 55H, 4EH, 4BH       ; 1948 _ MAXCHUNK
+        db 21H, 00H, 49H, 6EH, 76H, 61H, 6CH, 69H       ; 1950 _ !.Invali
+        db 64H, 20H, 69H, 6EH, 70H, 75H, 74H, 00H       ; 1958 _ d input.
+        db 4EH, 6FH, 74H, 20H, 46H, 6FH, 75H, 6EH       ; 1960 _ Not Foun
+        db 64H, 21H, 00H, 20H, 21H, 22H, 23H, 24H       ; 1968 _ d!. !"#$
+        db 25H, 26H, 27H, 28H, 29H, 2AH, 2BH, 2CH       ; 1970 _ %&'()*+,
+        db 2DH, 2EH, 2FH, 30H, 31H, 32H, 33H, 34H       ; 1978 _ -./01234
+        db 35H, 36H, 37H, 38H, 39H, 3AH, 3BH, 3CH       ; 1980 _ 56789:;<
+        db 3DH, 3EH, 3FH, 40H, 41H, 42H, 43H, 44H       ; 1988 _ =>?@ABCD
+        db 45H, 46H, 47H, 48H, 49H, 4AH, 4BH, 4CH       ; 1990 _ EFGHIJKL
+        db 4DH, 4EH, 4FH, 50H, 51H, 52H, 53H, 54H       ; 1998 _ MNOPQRST
+        db 55H, 56H, 57H, 58H, 59H, 5AH, 5BH, 5CH       ; 19A0 _ UVWXYZ[\
+        db 5DH, 5EH, 5FH, 60H, 61H, 62H, 63H, 64H       ; 19A8 _ ]^_`abcd
+        db 65H, 66H, 67H, 68H, 69H, 6AH, 6BH, 6CH       ; 19B0 _ efghijkl
+        db 6DH, 6EH, 6FH, 70H, 71H, 72H, 73H, 74H       ; 19B8 _ mnopqrst
+        db 75H, 76H, 77H, 78H, 79H, 7AH, 7BH, 7CH       ; 19C0 _ uvwxyz{|
+        db 7DH, 7EH, 00H                                ; 19C8 _ }~.
 
 

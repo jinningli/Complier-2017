@@ -86,8 +86,11 @@ public class Declarations {
         IRTraverse k = new IRTraverse();
         System.out.println("\n------------- IRBase Traverse -------------\n");
         System.out.println("**********    Grobal Variable    **********");
-        k.setIrstream(root.grobalVarIR);
-        k.traverse();
+        for(VarDecl vd: gvars) {
+            if(vd.irstmts == null) continue;
+            k.setIrstream(vd.irstmts);
+            k.traverse();
+        }
         for(FuncDecl f: funs){
             System.out.println("********** In the Function: " + f.name + " **********");
             k.setIrstream(f.ir);
@@ -119,18 +122,10 @@ public class Declarations {
         //grobalVariable
 
 //        res += ("\n**********    Grobal Variable    **********\n");
-        String grobalInitialize = "";
-        String grobalConstInit = "";
         res += "//Grobal Variable\n";
         for(VarDecl vd: vars){
             if(vd.isGrobal){
                 res += vd.declTranslate();
-                if(vd.ir != null){
-                    if(vd.expr instanceof ConstantExpr){
-                        grobalConstInit += vd.translate() + " = " + vd.ir.translate() + ";\n";
-                    }else
-                        grobalInitialize += vd.translate() + " = " + vd.ir.translate() + ";\n";
-                }
                 res += ";\n";
             }
         }
@@ -154,7 +149,6 @@ public class Declarations {
             res += f.declTranslate() + "{\n";
             if(Objects.equals(f.name, "main")){
                 res += "//Grobal Variable Initialize\n";
-                res += grobalConstInit;
                 for(Declare d: grobalVariable.grobal.root.localVariables()){
                     if(d instanceof VarDecl){
                         if(((VarDecl) d).name == null) continue;
@@ -163,10 +157,11 @@ public class Declarations {
                         }
                     }
                 }
-                for(STMT s: root.grobalVarIR){
-                    res += s.translate() + ";\n";
+                for(VarDecl vd: gvars){
+                    if(vd.irstmts != null){
+                        res += vd.compileIR();
+                    }
                 }
-                res += grobalInitialize;
             }
             res += "//Define Local Variable\n";
             res += defineLocalVariable(f);

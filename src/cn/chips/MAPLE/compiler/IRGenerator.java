@@ -43,17 +43,17 @@ public class IRGenerator {
     }
 
     public IR generate(){
-        stmts = new LinkedList<>();
-        breakStack = new LinkedList<>();
-        continueStack = new LinkedList<>();
         for(VarDecl vd: root.getDecls().gvars){
+
+            stmts = new LinkedList<>();
+            breakStack = new LinkedList<>();
+            continueStack = new LinkedList<>();
             if(vd.expr != null) {
-                EXPR expr = visitExpr(vd.expr);
-                vd.setIR(expr);
-                stmts.add(new ExprStmt(expr));
+                assign(new Var(vd), visitExpr(vd.expr));
+                vd.setIR(stmts);
             }
+
         }
-        root.setGrobalVarIR(stmts);
 
         for(FuncDecl fd: root.getDecls().getFuns()){
 //            adtofunc.clear();
@@ -219,9 +219,8 @@ public class IRGenerator {
 
     public EXPR visit(VarDecl node){
         if(node.expr != null){
-            node.setIR(visitExpr(node.expr));
             EXPR lhs = new Var(node);
-            assign(lhs, node.ir);
+            assign(lhs, visitExpr(node.expr));
         }
         return null;
     }

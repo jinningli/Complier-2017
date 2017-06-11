@@ -16,7 +16,7 @@ public class AST extends Declare {
     public Position pos;
     public List<Declare> DeclList;
     public Declarations decls = new Declarations(this);
-    public List<STMT> grobalVarIR;
+//    public List<STMT> grobalVarIR;
 
     public AST(){
         name = "AST";
@@ -58,7 +58,7 @@ public class AST extends Declare {
     public Declarations getDecls(){
         return decls;
     }
-    public void setGrobalVarIR(List<STMT> gvr){
-        grobalVarIR = gvr;
-    }
+//    public void setGrobalVarIR(List<STMT> gvr){
+//        grobalVarIR = gvr;
+//    }
 }

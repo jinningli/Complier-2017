@@ -4,11 +4,13 @@ import cn.chips.MAPLE.asm.Oprand.ImmediateValue;
 import cn.chips.MAPLE.asm.Oprand.MemoryReference;
 import cn.chips.MAPLE.ir.EXPR;
 import cn.chips.MAPLE.ir.Entity;
+import cn.chips.MAPLE.ir.STMT;
 import cn.chips.MAPLE.utils.*;
 import cn.chips.MAPLE.exception.*;
 import cn.chips.MAPLE.ast.expression.*;
 import cn.chips.MAPLE.ast.type.*;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -22,7 +24,7 @@ public class VarDecl extends Declare implements Entity{
     public Position pos;
     public Type type;
     public Expr expr = null;
-    public EXPR ir = null;
+    public List<STMT> irstmts = null;
     public long offset = 0;
     public boolean isClassMember = false;
     public boolean isGrobal = false;
@@ -49,8 +51,16 @@ public class VarDecl extends Declare implements Entity{
         expr = _e;
     }
 
-    public void setIR(EXPR _ir){
-        ir = _ir;
+    public void setIR(List<STMT> _irstmts){
+        irstmts = _irstmts;
+    }
+
+    public String compileIR(){
+        String res = "";
+        for(STMT s: irstmts){
+            res += s.translate() + ";\n";
+        }
+        return res;
     }
 
     public void setMemref(MemoryReference _memref){
