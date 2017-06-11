@@ -7,6 +7,7 @@
 
 //Function & Class Declare
 
+long calc(long A);
 long substring(long str, long l, long r);
 long ord(long pos, long str);
 long parseInt(long x);
@@ -25,7 +26,10 @@ long getString();
 void __lib_printlnInt(long null);
 
 //Grobal Variable
-long x_;
+long A_;
+long B_;
+long C_;
+long N_;
 
 //Inside Function
 long substring(long str, long l, long r){
@@ -168,15 +172,92 @@ long toString(long x) {
 }
 
 //Class Body
+long calc(long A){
+//Define Local Variable
+long A_0_ = A;
+long __tmp4_1_;
+long __tmp3_2_;
+long R_3_;
+long len_4_;
+long __tmp0_5_;
+long __tmp2_6_;
+long __tmp1_7_;
+long mid_8_;
+long L_9_;
+long r_10_;
+long __tmp6_11_;
+long __tmp5_12_;
+long l_13_;
+//Function Body
+__tmp0_5_ = strlength((A_0_));
+len_4_ = (__tmp0_5_);
+if(((1) == (len_4_))) goto AsmLabel0; else goto AsmLabel2;;
+AsmLabel0:;
+return (A_0_);
+AsmLabel2:;
+mid_8_ = ((len_4_) / (2));
+__tmp1_7_ = substring((A_0_), (0), ((mid_8_) - (1)));
+__tmp2_6_ = calc((__tmp1_7_));
+L_9_ = (__tmp2_6_);
+__tmp3_2_ = substring((A_0_), (mid_8_), ((len_4_) - (1)));
+__tmp4_1_ = calc((__tmp3_2_));
+R_3_ = (__tmp4_1_);
+if(((L_9_) < (R_3_))) goto AsmLabel4; else goto AsmLabel5;;
+AsmLabel4:;
+return str_add((L_9_), (R_3_));
+goto AsmLabel6;
+AsmLabel5:;
+if(((L_9_) == (R_3_))) goto AsmLabel8; else goto AsmLabel9;;
+AsmLabel8:;
+__tmp5_12_ = ord((L_9_), (0));
+l_13_ = (__tmp5_12_);
+__tmp6_11_ = ord((R_3_), (0));
+r_10_ = (__tmp6_11_);
+if(((l_13_) < (r_10_))) goto AsmLabel12; else goto AsmLabel14;;
+AsmLabel12:;
+return str_add((L_9_), (R_3_));
+AsmLabel14:;
+return str_add((R_3_), (L_9_));
+goto AsmLabel10;
+AsmLabel9:;
+if(((L_9_) > (R_3_))) goto AsmLabel16; else goto AsmLabel18;;
+AsmLabel16:;
+return str_add((R_3_), (L_9_));
+AsmLabel18:;
+AsmLabel10:;
+AsmLabel6:;
+println((toMoStr("Never Ever!")));
+;
+}
 int main(){
 //Grobal Variable Initialize
-(10);
-;
-x_ = (10);
 //Define Local Variable
+long __tmp10_14_;
+long __tmp11_15_;
+long __tmp12_16_;
+long __tmp8_17_;
+long __tmp7_18_;
+long __tmp9_19_;
 //Function Body
-x_ = (20);
-return (x_);
+__tmp7_18_ = getString();
+A_ = (__tmp7_18_);
+__tmp8_17_ = getString();
+B_ = (__tmp8_17_);
+__tmp9_19_ = parseInt((B_));
+N_ = (__tmp9_19_);
+__tmp10_14_ = strlength((A_));
+if(((__tmp10_14_) < (N_))) goto AsmLabel20; else goto AsmLabel22;;
+AsmLabel20:;
+println((toMoStr("length error!")));
+;
+return (0);
+AsmLabel22:;
+__tmp11_15_ = substring((A_), (0), ((N_) - (1)));
+__tmp12_16_ = calc((__tmp11_15_));
+C_ = (__tmp12_16_);
+println((C_));
+;
+return (0);
 }
 
 //------------- IRBase Traverse End -------------
