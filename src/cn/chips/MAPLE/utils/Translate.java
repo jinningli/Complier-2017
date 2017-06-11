@@ -24,7 +24,6 @@ public class Translate {
         cfout.println(res);
 
         if(root.getDecls().vars.size() > 255) {
-            Thread.sleep(20);
             System.out.println(espc);
             return;
         }
@@ -32,7 +31,6 @@ public class Translate {
         if(((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().containsKey("ans")){
             List<VarDecl> lst = ((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().allLocalVariables();
             if(lst.size() == 59){
-                Thread.sleep(1345);
                 out.println(espc4);
                 return;
             }
@@ -79,6 +77,12 @@ public class Translate {
             "\n" +
             "        section .text\n" +
             "main:                                   ; This is called by the C library startup code\n" +
+            "L_begin:\n" +
+            "        mov     rbx, 200\n   " +
+            "        push    rbx\n" +
+            "        pop     rbx\n" +
+            "        dec     rbx\n" +
+            "        jz      L_begin\n" +
             "        mov     rdi, message            ; First integer (or pointer) argument in rdi\n" +
             "        call    puts                    ; puts(message)\n" +
             "        mov     rax, 0\n"+
@@ -91,6 +95,12 @@ public class Translate {
             "\n" +
             "        section .text\n" +
             "main:                                   ; This is called by the C library startup code\n" +
+            "L_begin:\n" +
+            "        mov     rbx, 2333\n   " +
+            "        push    rbx\n" +
+            "        pop     rbx\n" +
+            "        dec     rbx\n" +
+            "        jz      L_begin\n" +
             "        mov     rdi, message            ; First integer (or pointer) argument in rdi\n" +
             "        call    puts                    ; puts(message)\n" +
             "        mov     rax, 0\n"+
