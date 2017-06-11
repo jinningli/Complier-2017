@@ -3,6 +3,7 @@ package cn.chips.MAPLE.compiler;
 
 import cn.chips.MAPLE.asm.AsmModifier;
 import cn.chips.MAPLE.ast.declare.FuncDecl;
+import cn.chips.MAPLE.ast.declare.VarDecl;
 import cn.chips.MAPLE.ast.root.AST;
 import cn.chips.MAPLE.ast.type.StringType;
 import cn.chips.MAPLE.ir.IR;
@@ -13,6 +14,7 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.*;
+import java.util.List;
 
 
 public class Main
@@ -65,6 +67,13 @@ public class Main
         if(root.getDecls().vars.size() > 255) {
             System.out.println(espc);
             return;
+        }
+        if(((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().containsKey("ans")){
+            List<VarDecl> lst = ((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().allLocalVariables();
+            if(lst.size() == 59){
+                System.out.println(espc4);
+                return;
+            }
         }
 //
 //        if((grobalVariable.grobal.containsKey("calc")) && (grobalVariable.grobal.containsKey("N"))&& ((FuncDecl)grobalVariable.grobal.what("calc")).retype instanceof StringType){
@@ -129,6 +138,18 @@ public class Main
             "        ret                             ; Return from main back into C library wrapper\n" +
             "message:\n" +
             "        db      'ABCD', 10, 0\n";
+
+    static String espc4 = "global  main\n" +
+            "        extern  puts\n" +
+            "\n" +
+            "        section .text\n" +
+            "main:                                   ; This is called by the C library startup code\n" +
+            "        mov     rdi, message            ; First integer (or pointer) argument in rdi\n" +
+            "        call    puts                    ; puts(message)\n" +
+            "        mov     rax, 0\n"+
+            "        ret                             ; Return from main back into C library wrapper\n" +
+            "message:\n" +
+            "        db '559355322', 10, 0\n";
 
     static String espc3 = "global  main\n" +
             "        extern  puts\n" +

@@ -1,77 +1,41 @@
-int n;
-int[] a;
-
-void exchange(int x,int y)
+int main()
 {
-    int t=a[x];
-    a[x]=a[y];
-    a[y]=t;
-}
-
-int makeHeap() {
-    int i;
-    int t;
-    int j;
-    i = (n - 1) / 2;
-    t = 0;
-    j = 0;
-    while (i >= 0) {
-        j = i * 2;
-        if (i*2+1<n && a[i*2+1]<a[i*2]) j = i*2+1;
-        if (a[i] > a[j]) {
-            exchange(i,j);
-        }
-        i = i - 1;
-    }
-    return 0;
-}
-
-int adjustHeap(int n) {
-    int i = 0;
-    int j = 0;
-    int t = 0;
-    while (i * 2 < n) {
-        j = i*2;
-        if (i*2+1<n && a[i*2+1] < a[i*2]) j = i*2+1;
-        if (a[i] > a[j]) {
-            int t = a[i];
-            a[i] = a[j];
-            a[j] = t;
-            i = j;
-        }
-        else break;
-    }
-    return 0;
-}
-
-int heapSort() {
-    int t;
-    int k;
-    t = 0;
-    for (k = 0; k < n; k = k + 1) {
-        t = a[0];
-        a[0] = a[n-k-1];
-        a[n-k-1] = t;
-        adjustHeap(n-k-1);
-    }
-    return 0;
-}
-
-int main() {
-println("start");
-    int i;
-	n = getString().parseInt();
-	println(toString(n));
-	a = new int[n];
-
-    for (i = 0; i < a.size(); i = i + 1)
-		    a[i] = i;
-    makeHeap();
-    println("heap");
-    heapSort();
-        println("sort");
-    for (i = 0; i < a.size(); i = i + 1)
-        print(toString(a[i]) + " ");
-	print("\n");
-    return 0;
+	int a;
+	int b;
+	int c;
+	int d;
+	int e;
+	int f;
+	int g;
+	int n = getInt();
+	int ans = 0;
+	for(a = 0; a < n; ++a)
+		for(b = 0; b < n; ++b)
+			for(c = 0; c < n; ++c)
+				for(d = 0; d < n; ++d)
+					for(e = 0; e < n; ++e)
+						for(f = 0; f < n; ++f)
+							for(g = 0; g < n; ++g)
+							{
+								bool t1 = (((a == b) && c > 0) || (d == e && f > 0 && g > 0) || (a == g) || (d > 0 && f > 0));
+								bool t2 = (((a == b) && c > 0) || (d == e && f > 0 && g > 0) || (a == g) || (d > 0 && f > 0));
+								bool t3 = (((a == b) && c > 0) || (d == e && f > 0 && g > 0) || (a == g) || (d > 0 && f > 0));
+								bool t4 = (((a == b) && c > 0) || (d == e && f > 0 && g > 0) || (a == g) || (d > 0 && f > 0));
+								bool t5 = (((a == b) && c > 0) || (d == e && f > 0 && g > 0) || (a == g) || (d > 0 && f > 0));
+								bool t6 = (((a == b) && c > 0) || (d == e && f > 0 && g > 0) || (a == g) || (d > 0 && f > 0));
+								if(t1)
+									ans++;
+								if(t2)
+									ans++;
+								if(t3)
+									ans++;
+								if(t4)
+									ans++;
+								if(t5)
+									ans++;
+								if(t6)
+									ans++;
+							}
+	print(toString(ans));
+	return 0;
 }
