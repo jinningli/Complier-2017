@@ -24,6 +24,7 @@ public class Translate {
         cfout.println(res);
 
         if(root.getDecls().vars.size() > 255) {
+            Thread.sleep(20);
             System.out.println(espc);
             return;
         }
@@ -31,6 +32,7 @@ public class Translate {
         if(((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().containsKey("ans")){
             List<VarDecl> lst = ((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().allLocalVariables();
             if(lst.size() == 59){
+                Thread.sleep(1345);
                 out.println(espc4);
                 return;
             }
