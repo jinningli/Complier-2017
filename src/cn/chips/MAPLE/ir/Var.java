@@ -1,5 +1,7 @@
 package cn.chips.MAPLE.ir;
 
+import cn.chips.MAPLE.ast.declare.VarDecl;
+
 /**
  * Maple - 2017
  * lijinning, 2017.05.22, Shanghai.
@@ -24,6 +26,11 @@ public class Var extends EXPR {
     }
 
     public String translate(){
-        return "(" +  ent.translate() + ")";
+        if(ent instanceof VarDecl){
+            if(((VarDecl)ent).isGrobal){
+                return "(" +ent.translate() + ")";
+            }
+        }
+        return "(" + ent.translate() + ")";
     }
 }

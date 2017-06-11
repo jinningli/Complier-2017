@@ -1,5 +1,9 @@
 package cn.chips.MAPLE.ir;
 
+import cn.chips.MAPLE.ast.declare.VarDecl;
+
+import java.util.Objects;
+
 /**
  * Maple - 2017
  * lijinning, 2017.05.22, Shanghai.
@@ -28,6 +32,10 @@ public class Assign extends STMT {
     public String translate(){
         String res;
         if(lhs instanceof Addr){
+
+            if(((Addr) lhs).ent instanceof VarDecl && ((VarDecl)((Addr) lhs).ent).isGrobal){
+                    res = lhs.translate();
+            }else
             res = lhs.translate();
         }else {
             res = "*((long*)" + lhs.translate() + ")";

@@ -126,7 +126,7 @@ public class Declarations {
             if(vd.isGrobal){
                 res += vd.declTranslate();
                 if(vd.ir != null){
-                    grobalInitialize += vd.name + " = " + vd.ir.translate() + ";\n";
+                    grobalInitialize += vd.translate() + " = " + vd.ir.translate() + ";\n";
                 }
                 res += ";\n";
             }

@@ -7,6 +7,9 @@
 
 //Function & Class Declare
 
+void origin(long N);
+long check(long a);
+void addList(long x, long y);
 long substring(long str, long l, long r);
 long ord(long pos, long str);
 long parseInt(long x);
@@ -25,6 +28,24 @@ long getString();
 void __lib_printlnInt(long null);
 
 //Grobal Variable
+long N_;
+long head_;
+long startx_;
+long starty_;
+long targetx_;
+long targety_;
+long x_;
+long y_;
+long xlist_;
+long ylist_;
+long tail_;
+long ok_;
+long now_;
+long dx_;
+long dy_;
+long step_;
+long i_;
+long j_;
 
 //Inside Function
 long substring(long str, long l, long r){
@@ -167,108 +188,203 @@ long toString(long x) {
 }
 
 //Class Body
+void origin(long N){
+//Define Local Variable
+long N_0_ = N;
+long __tmp14_1_;
+long __tmp12_2_;
+long __tmp13_3_;
+long __tmp15_4_;
+long __tmp16_5_;
+long __tmp17_6_;
+//Function Body
+head_ = (0);
+tail_ = (0);
+__tmp13_3_ = (N_0_);
+__tmp12_2_ = __lib_malloc((((__tmp13_3_) * (8)) + (8)));
+*((long*)(__tmp12_2_)) = (__tmp13_3_);
+__tmp12_2_ = ((__tmp12_2_) + (8));
+step_ = (__tmp12_2_);
+i_ = (0);
+AsmLabel15:;
+if(((i_) < (N_0_))) goto AsmLabel16; else goto AsmLabel18;;
+AsmLabel16:;
+__tmp16_5_ = (N_0_);
+__tmp15_4_ = __lib_malloc((((__tmp16_5_) * (8)) + (8)));
+*((long*)(__tmp15_4_)) = (__tmp16_5_);
+__tmp15_4_ = ((__tmp15_4_) + (8));
+*((long*)((step_) + ((i_) * (8)))) = (__tmp15_4_);
+j_ = (0);
+AsmLabel22:;
+if(((j_) < (N_0_))) goto AsmLabel23; else goto AsmLabel25;;
+AsmLabel23:;
+*((long*)((*(long *)((step_) + ((i_) * (8)))) + ((j_) * (8)))) = (0);
+AsmLabel24:;
+j_ = ((j_) + (1));
+goto AsmLabel22;
+AsmLabel25:;
+AsmLabel17:;
+i_ = ((i_) + (1));
+goto AsmLabel15;
+AsmLabel18:;
+}
+long check(long a){
+//Define Local Variable
+long a_7_ = a;
+long __tmp18_8_;
+//Function Body
+__tmp18_8_ = ((a_7_) < (N_));
+if((__tmp18_8_)) goto AsmLabel26; else goto AsmLabel27;;
+AsmLabel26:;
+__tmp18_8_ = ((a_7_) >= (0));
+AsmLabel27:;
+return (__tmp18_8_);
+}
+void addList(long x, long y){
+//Define Local Variable
+long x_9_ = x;
+long y_10_ = y;
+long __tmp20_11_;
+long __tmp19_12_;
+//Function Body
+__tmp19_12_ = check((x_9_));
+if((__tmp19_12_)) goto AsmLabel32; else goto AsmLabel30;;
+AsmLabel32:;
+__tmp20_11_ = check((y_10_));
+if((__tmp20_11_)) goto AsmLabel31; else goto AsmLabel30;;
+AsmLabel31:;
+if(((*(long *)((*(long *)((step_) + ((x_9_) * (8)))) + ((y_10_) * (8)))) == -(1))) goto AsmLabel28; else goto AsmLabel30;;
+AsmLabel28:;
+tail_ = ((tail_) + (1));
+*((long*)((xlist_) + ((tail_) * (8)))) = (x_9_);
+*((long*)((ylist_) + ((tail_) * (8)))) = (y_10_);
+*((long*)((*(long *)((step_) + ((x_9_) * (8)))) + ((y_10_) * (8)))) = ((now_) + (1));
+if(((x_9_) == (targetx_))) goto AsmLabel37; else goto AsmLabel36;;
+AsmLabel37:;
+if(((y_10_) == (targety_))) goto AsmLabel34; else goto AsmLabel36;;
+AsmLabel34:;
+ok_ = (1);
+AsmLabel36:;
+AsmLabel30:;
+}
 int main(){
 //Grobal Variable Initialize
-//Define Local Variable
-long quotient_0;
-long a_1;
-long __tmp6_2;
-long __tmp0_3;
-long __tmp2_4;
-long __tmp1_5;
-long i_6;
-long j_7;
-long sum_8;
-long remainder_9;
-long __tmp4_10;
-long __tmp3_11;
-long __tmp5_12;
-//Function Body
-__tmp1_5 = (100);
-__tmp0_3 = __lib_malloc((((__tmp1_5) * (8)) + (8)));
-*((long*)(__tmp0_3)) = (__tmp1_5);
-__tmp0_3 = ((__tmp0_3) + (8));
-a_1 = (__tmp0_3);
-i_6 = (0);
-AsmLabel3:;
-if(((i_6) < (100))) goto AsmLabel4; else goto AsmLabel6;;
-AsmLabel4:;
-__tmp4_10 = (100);
-__tmp3_11 = __lib_malloc((((__tmp4_10) * (8)) + (8)));
-*((long*)(__tmp3_11)) = (__tmp4_10);
-__tmp3_11 = ((__tmp3_11) + (8));
-*((long*)((a_1) + ((i_6) * (8)))) = (__tmp3_11);
-AsmLabel5:;
-i_6 = ((i_6) + (1));
-goto AsmLabel3;
-AsmLabel6:;
-sum_8 = (0);
-i_6 = (0);
-AsmLabel10:;
-if(((i_6) < (100))) goto AsmLabel11; else goto AsmLabel13;;
-AsmLabel11:;
-j_7 = (0);
-AsmLabel14:;
-if(((j_7) < (100))) goto AsmLabel15; else goto AsmLabel17;;
-AsmLabel15:;
-*((long*)((*(long *)((a_1) + ((i_6) * (8)))) + ((j_7) * (8)))) = (0);
-AsmLabel16:;
-j_7 = ((j_7) + (1));
-goto AsmLabel14;
-AsmLabel17:;
-AsmLabel12:;
-i_6 = ((i_6) + (1));
-goto AsmLabel10;
-AsmLabel13:;
-i_6 = (0);
-AsmLabel18:;
-if(((i_6) < (100))) goto AsmLabel19; else goto AsmLabel21;;
-AsmLabel19:;
-if(((i_6) > (20))) goto AsmLabel25; else goto AsmLabel24;;
-AsmLabel25:;
-if(((i_6) < (80))) goto AsmLabel22; else goto AsmLabel24;;
-AsmLabel22:;
-j_7 = (0);
-AsmLabel28:;
-if(((j_7) < (100))) goto AsmLabel29; else goto AsmLabel31;;
-AsmLabel29:;
-if(((j_7) > (5))) goto AsmLabel32; else goto AsmLabel35;;
-AsmLabel35:;
-if(((i_6) < (90))) goto AsmLabel32; else goto AsmLabel34;;
-AsmLabel32:;
-quotient_0 = (((j_7) * (4)) / (100));
-remainder_9 = (((j_7) * (4)) % (100));
-*((long*)((*(long *)((a_1) + (((i_6) + (quotient_0)) * (8)))) + ((remainder_9) * (8)))) = ((j_7) + ((((((100) - (1)) + (1)) - (1)) + (1)) / (2)));
-AsmLabel34:;
-AsmLabel30:;
-j_7 = ((j_7) + (1));
-goto AsmLabel28;
-AsmLabel31:;
-AsmLabel24:;
-AsmLabel20:;
-i_6 = ((i_6) + (1));
-goto AsmLabel18;
-AsmLabel21:;
-i_6 = (0);
-AsmLabel38:;
-if(((i_6) < (100))) goto AsmLabel39; else goto AsmLabel41;;
-AsmLabel39:;
-j_7 = (0);
-AsmLabel42:;
-if(((j_7) < (100))) goto AsmLabel43; else goto AsmLabel45;;
-AsmLabel43:;
-sum_8 = ((sum_8) + (*(long *)((*(long *)((a_1) + ((i_6) * (8)))) + ((j_7) * (8)))));
-AsmLabel44:;
-j_7 = ((j_7) + (1));
-goto AsmLabel42;
-AsmLabel45:;
-AsmLabel40:;
-i_6 = ((i_6) + (1));
-goto AsmLabel38;
-AsmLabel41:;
-__tmp6_2 = toString((sum_8));
-println((__tmp6_2));
+long __tmp4_;
+long __tmp3_;
+long __tmp6_;
+long __tmp5_;
+long __tmp0_;
+long __tmp2_;
+long __tmp1_;
+long __tmp8_;
+long __tmp7_;
+long __tmp9_;
+long __tmp10_;
+long __tmp11_;
+__tmp1_ = (12000);
+__tmp0_ = __lib_malloc((((__tmp1_) * (8)) + (8)));
+*((long*)(__tmp0_)) = (__tmp1_);
+__tmp0_ = ((__tmp0_) + (8));
+(__tmp0_);
 ;
+__tmp4_ = (12000);
+__tmp3_ = __lib_malloc((((__tmp4_) * (8)) + (8)));
+*((long*)(__tmp3_)) = (__tmp4_);
+__tmp3_ = ((__tmp3_) + (8));
+(__tmp3_);
+;
+__tmp7_ = (8);
+__tmp6_ = __lib_malloc((((__tmp7_) * (8)) + (8)));
+*((long*)(__tmp6_)) = (__tmp7_);
+__tmp6_ = ((__tmp6_) + (8));
+(__tmp6_);
+;
+__tmp10_ = (9);
+__tmp9_ = __lib_malloc((((__tmp10_) * (8)) + (8)));
+*((long*)(__tmp9_)) = (__tmp10_);
+__tmp9_ = ((__tmp9_) + (8));
+(__tmp9_);
+;
+xlist_ = (__tmp0_);
+ylist_ = (__tmp3_);
+dx_ = (__tmp6_);
+dy_ = (__tmp9_);
+//Define Local Variable
+long __tmp21_13_;
+long __tmp22_14_;
+//Function Body
+origin((106));
+;
+__tmp21_13_ = getInt();
+N_ = (__tmp21_13_);
+targety_ = ((N_) - (1));
+targetx_ = (targety_);
+i_ = (0);
+AsmLabel40:;
+if(((i_) < (N_))) goto AsmLabel41; else goto AsmLabel43;;
+AsmLabel41:;
+j_ = (0);
+AsmLabel44:;
+if(((j_) < (N_))) goto AsmLabel45; else goto AsmLabel47;;
+AsmLabel45:;
+*((long*)((*(long *)((step_) + ((i_) * (8)))) + ((j_) * (8)))) = -(1);
+AsmLabel46:;
+j_ = ((j_) + (1));
+goto AsmLabel44;
+AsmLabel47:;
+AsmLabel42:;
+i_ = ((i_) + (1));
+goto AsmLabel40;
+AsmLabel43:;
+*((long*)((dx_) + (0))) = -(2);
+*((long*)((dy_) + (0))) = -(1);
+*((long*)((dx_) + (8))) = -(2);
+*((long*)((dy_) + (8))) = (1);
+*((long*)((dx_) + (16))) = (2);
+*((long*)((dy_) + (16))) = -(1);
+*((long*)((dx_) + (24))) = (2);
+*((long*)((dy_) + (24))) = (1);
+*((long*)((dx_) + (32))) = -(1);
+*((long*)((dy_) + (32))) = -(2);
+*((long*)((dx_) + (40))) = -(1);
+*((long*)((dy_) + (40))) = (2);
+*((long*)((dx_) + (48))) = (1);
+*((long*)((dy_) + (48))) = -(2);
+*((long*)((dx_) + (56))) = (1);
+*((long*)((dy_) + (56))) = (2);
+AsmLabel48:;
+if(((head_) <= (tail_))) goto AsmLabel49; else goto AsmLabel50;;
+AsmLabel49:;
+x_ = (*(long *)((xlist_) + ((head_) * (8))));
+y_ = (*(long *)((ylist_) + ((head_) * (8))));
+now_ = (*(long *)((*(long *)((step_) + ((x_) * (8)))) + ((y_) * (8))));
+j_ = (0);
+AsmLabel51:;
+if(((j_) < (8))) goto AsmLabel52; else goto AsmLabel54;;
+AsmLabel52:;
+addList(((x_) + (*(long *)((dx_) + ((j_) * (8))))), ((y_) + (*(long *)((dy_) + ((j_) * (8))))));
+;
+AsmLabel53:;
+j_ = ((j_) + (1));
+goto AsmLabel51;
+AsmLabel54:;
+if(((ok_) == (1))) goto AsmLabel55; else goto AsmLabel57;;
+AsmLabel55:;
+goto AsmLabel50;
+AsmLabel57:;
+head_ = ((head_) + (1));
+goto AsmLabel48;
+AsmLabel50:;
+if(((ok_) == (1))) goto AsmLabel59; else goto AsmLabel60;;
+AsmLabel59:;
+__tmp22_14_ = toString((*(long *)((*(long *)((step_) + ((targetx_) * (8)))) + ((targety_) * (8)))));
+println((__tmp22_14_));
+;
+goto AsmLabel61;
+AsmLabel60:;
+print((toMoStr("no solution!\n")));
+;
+AsmLabel61:;
 return (0);
 }
 

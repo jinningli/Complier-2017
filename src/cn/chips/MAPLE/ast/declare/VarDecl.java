@@ -190,7 +190,7 @@ public class VarDecl extends Declare implements Entity{
     }
 
     public String translate(){
-        return name;
+        return name + "_";
     }
 
     public String declTranslate(){
@@ -201,7 +201,7 @@ public class VarDecl extends Declare implements Entity{
             res += "long";
         }else
             res += "long";
-        res += " " + name;
-        return res;
+            res += " " + name;
+        return res + "_";
     }
 }
