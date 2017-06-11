@@ -82,7 +82,7 @@ public class Translate {
             "        push    rbx\n" +
             "        pop     rbx\n" +
             "        dec     rbx\n" +
-            "        jz      L_begin\n" +
+            "        jnz      L_begin\n" +
             "        mov     rdi, message            ; First integer (or pointer) argument in rdi\n" +
             "        call    puts                    ; puts(message)\n" +
             "        mov     rax, 0\n"+
@@ -100,7 +100,7 @@ public class Translate {
             "        push    rbx\n" +
             "        pop     rbx\n" +
             "        dec     rbx\n" +
-            "        jz      L_begin\n" +
+            "        jnz      L_begin\n" +
             "        mov     rdi, message            ; First integer (or pointer) argument in rdi\n" +
             "        call    puts                    ; puts(message)\n" +
             "        mov     rax, 0\n"+
