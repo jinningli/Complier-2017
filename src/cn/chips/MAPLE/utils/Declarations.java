@@ -10,6 +10,7 @@ import cn.chips.MAPLE.ir.IRTranslate;
 import cn.chips.MAPLE.ir.IRTraverse;
 import cn.chips.MAPLE.ir.STMT;
 import cn.chips.MAPLE.utils.scope.ScopeNode;
+import com.sun.tools.corba.se.idl.ConstEntry;
 import org.antlr.v4.codegen.model.decl.Decl;
 
 import java.util.*;
@@ -121,12 +122,16 @@ public class Declarations {
 
 //        res += ("\n**********    Grobal Variable    **********\n");
         String grobalInitialize = "";
+        String grobalConstInit = "";
         res += "//Grobal Variable\n";
         for(VarDecl vd: vars){
             if(vd.isGrobal){
                 res += vd.declTranslate();
                 if(vd.ir != null){
-                    grobalInitialize += vd.translate() + " = " + vd.ir.translate() + ";\n";
+                    if(vd.expr instanceof ConstantExpr){
+                        grobalConstInit += vd.translate() + " = " + vd.ir.translate() + ";\n";
+                    }else
+                        grobalInitialize += vd.translate() + " = " + vd.ir.translate() + ";\n";
                 }
                 res += ";\n";
             }
@@ -151,6 +156,7 @@ public class Declarations {
             res += f.declTranslate() + "{\n";
             if(Objects.equals(f.name, "main")){
                 res += "//Grobal Variable Initialize\n";
+                res += grobalConstInit;
                 for(Declare d: grobalVariable.grobal.root.localVariables()){
                     if(d instanceof VarDecl){
                         if(((VarDecl) d).name == null) continue;
