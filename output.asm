@@ -1,14 +1,14 @@
 ; Disassembly of file: output.o
-; Sun Jun 11 21:32:04 2017
+; Sun Jun 11 21:49:54 2017
 ; Mode: 64 bits
 ; Syntax: YASM/NASM
-; Instruction set: SSE4.1, x64
+; Instruction set: Pentium Pro, x64
 
 default rel
 
 global _str_le
 global _str_eql
-global _strlength
+global _strlength: function
 global _substring
 global _ord
 global _parseInt
@@ -19,269 +19,136 @@ global _toMoStr
 global _str_add
 global ___lib_printlnInt
 global ___lib_printInt
-global ___lib_malloc
-global _println
+global ___lib_malloc: function
+global _println: function
 global _print
-global _toString
-global _hex2int
-global _int2chr
-global _toStringHex: function
-global _rotate_left
-global _add
-global _lohi
-global _sha1: function
-global _computeSHA1: function
-global _nextLetter
-global _nextText
-global _array_equal
-global _crackSHA1: function
+global _toString: function
+global _init: function
+global _Ksm: function
+global _Calculate_p: function
+global _Euler: function
+global _Calculate_q: function
+global _Calculate_Ksm: function
+global _Calculate_G: function
+global _Calculate_Comb: function
 global _main
 
 extern _strlen                                          ; near
-extern _strcpy                                          ; near
 extern _strcmp                                          ; near
 extern _scanf                                           ; near
 extern _puts                                            ; near
 extern _printf                                          ; near
-extern _memcpy                                          ; near
 extern _malloc                                          ; near
-extern _outputBuffer_                                   ; qword
-extern _inputBuffer_                                    ; qword
-extern _chunks_                                         ; qword
-extern _asciiTable_                                     ; qword
-extern _MAXLENGTH_                                      ; qword
-extern _MAXCHUNK_                                       ; qword
+extern ___strcpy_chk                                    ; near
+extern _v_                                              ; qword
+extern _tot_                                            ; qword
+extern _res_                                            ; qword
+extern _q_                                              ; qword
+extern _prime_                                          ; qword
+extern _p_                                              ; qword
+extern _m_                                              ; qword
+extern _ksm_                                            ; qword
+extern _g_                                              ; qword
+extern _fn_                                             ; qword
+extern _fm_                                             ; qword
+extern _fc_                                             ; qword
+extern _b_                                              ; qword
+extern _Sum_                                            ; qword
+extern _N_                                              ; qword
+extern _Mod_                                            ; qword
+extern _M_                                              ; qword
+extern _Comb_                                           ; qword
+extern _C_                                              ; qword
 
 
 SECTION ._TEXT.__text align=16 execute                  ; section number 1, code
 
-ALIGN   16
-_str_le:                                                ; oword
-        db 55H, 48H, 89H, 0E5H, 0E8H                    ; 0000 _ UH...
-        dd _strcmp-$-9H                                 ; 0005 _ 00000000 (rel)
-        dd 5D1FE8C1H                                    ; 0009 _ 1562372289 
-        db 0C3H                                         ; 000D _ .
+_str_le:; Function begin
+        push    rbp                                     ; 0000 _ 55
+        mov     rbp, rsp                                ; 0001 _ 48: 89. E5
+        sub     rsp, 32                                 ; 0004 _ 48: 83. EC, 20
+        mov     qword [rbp-10H], rdi                    ; 0008 _ 48: 89. 7D, F0
+        mov     qword [rbp-18H], rsi                    ; 000C _ 48: 89. 75, E8
+        mov     rdi, qword [rbp-10H]                    ; 0010 _ 48: 8B. 7D, F0
+        mov     rsi, qword [rbp-18H]                    ; 0014 _ 48: 8B. 75, E8
+        call    _strcmp                                 ; 0018 _ E8, 00000000(rel)
+        cmp     eax, 0                                  ; 001D _ 83. F8, 00
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_001                                   ; 0020 _ 0F 8D, 0000000D
+        mov     qword [rbp-8H], 1                       ; 0026 _ 48: C7. 45, F8, 00000001
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_002                                   ; 002E _ E9, 00000008
 
-; Filling space: 2H
-; Filler type: NOP with prefixes
-;       db 66H, 90H
-
-ALIGN   8
-
-_str_eql:
-        push    rbp                                     ; 0010 _ 55
-        mov     rbp, rsp                                ; 0011 _ 48: 89. E5
-        movsxd  r8, dword [rdi-4H]                      ; 0014 _ 4C: 63. 47, FC
-        cmp     r8d, dword [rsi-4H]                     ; 0018 _ 44: 3B. 46, FC
-        jnz     ?_002                                   ; 001C _ 75, 25
-        mov     eax, 1                                  ; 001E _ B8, 00000001
-        test    r8d, r8d                                ; 0023 _ 45: 85. C0
-        jle     ?_003                                   ; 0026 _ 7E, 1D
-        xor     edx, edx                                ; 0028 _ 31. D2
-; Filling space: 6H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-?_001:  movzx   ecx, byte [rdi+rdx]                     ; 0030 _ 0F B6. 0C 17
-        cmp     cl, byte [rsi+rdx]                      ; 0034 _ 3A. 0C 16
-        jnz     ?_002                                   ; 0037 _ 75, 0A
-        inc     rdx                                     ; 0039 _ 48: FF. C2
-        cmp     rdx, r8                                 ; 003C _ 4C: 39. C2
-        jl      ?_001                                   ; 003F _ 7C, EF
-        jmp     ?_003                                   ; 0041 _ EB, 02
-
-?_002:  xor     eax, eax                                ; 0043 _ 31. C0
-?_003:  pop     rbp                                     ; 0045 _ 5D
-        ret                                             ; 0046 _ C3
+?_001:  mov     qword [rbp-8H], 0                       ; 0033 _ 48: C7. 45, F8, 00000000
+?_002:  mov     rax, qword [rbp-8H]                     ; 003B _ 48: 8B. 45, F8
+        add     rsp, 32                                 ; 003F _ 48: 83. C4, 20
+        pop     rbp                                     ; 0043 _ 5D
+        ret                                             ; 0044 _ C3
 ; _str_le End of function
 
-
-_str_eql:; Function begin
-; _str_eql End of function
-
-; Filling space: 9H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 84H, 00H, 00H, 00H, 00H
-;       db 00H
-
-ALIGN   16
-
-_strlength:; Function begin
-        push    rbp                                     ; 0050 _ 55
-        mov     rbp, rsp                                ; 0051 _ 48: 89. E5
-        movsxd  rax, dword [rdi-4H]                     ; 0054 _ 48: 63. 47, FC
-        pop     rbp                                     ; 0058 _ 5D
-        ret                                             ; 0059 _ C3
-; _strlength End of function
-
-; Filling space: 6H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-
-_substring:; Function begin
-        push    rbp                                     ; 0060 _ 55
-        mov     rbp, rsp                                ; 0061 _ 48: 89. E5
-        push    r15                                     ; 0064 _ 41: 57
-        push    r14                                     ; 0066 _ 41: 56
-        push    r12                                     ; 0068 _ 41: 54
-        push    rbx                                     ; 006A _ 53
-        mov     rbx, rdx                                ; 006B _ 48: 89. D3
-        mov     r15, rsi                                ; 006E _ 49: 89. F7
-        mov     r14, rdi                                ; 0071 _ 49: 89. FE
-        mov     rax, rbx                                ; 0074 _ 48: 89. D8
-        sub     rax, r15                                ; 0077 _ 4C: 29. F8
-        inc     rax                                     ; 007A _ 48: FF. C0
-        movsxd  r12, eax                                ; 007D _ 4C: 63. E0
-        lea     rdi, [r12+5H]                           ; 0080 _ 49: 8D. 7C 24, 05
-        call    _malloc                                 ; 0085 _ E8, 00000000(rel)
-        mov     dword [rax], r12d                       ; 008A _ 44: 89. 20
-        add     rax, 4                                  ; 008D _ 48: 83. C0, 04
-        movsxd  rdx, r15d                               ; 0091 _ 49: 63. D7
-        cmp     rdx, rbx                                ; 0094 _ 48: 39. DA
-        jle     ?_004                                   ; 0097 _ 7E, 04
-        xor     ecx, ecx                                ; 0099 _ 31. C9
-        jmp     ?_006                                   ; 009B _ EB, 3F
-
-?_004:  inc     r15d                                    ; 009D _ 41: FF. C7
-        movsxd  rsi, r15d                               ; 00A0 _ 49: 63. F7
-        dec     rsi                                     ; 00A3 _ 48: FF. CE
-        xor     ecx, ecx                                ; 00A6 _ 31. C9
-        mov     r8, qword 100000000H                    ; 00A8 _ 49: B8, 0000000100000000
-        mov     rdi, rax                                ; 00B2 _ 48: 89. C7
 ; Filling space: 0BH
 ; Filler type: Multi-byte NOP
 ;       db 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H
 ;       db 00H, 00H, 00H
 
 ALIGN   16
-?_005:  movzx   edx, byte [r14+rdx]                     ; 00C0 _ 41: 0F B6. 14 16
-        mov     byte [rdi], dl                          ; 00C5 _ 88. 17
-        inc     rsi                                     ; 00C7 _ 48: FF. C6
-        movsxd  rdx, esi                                ; 00CA _ 48: 63. D6
-        inc     rdi                                     ; 00CD _ 48: FF. C7
-        add     rcx, r8                                 ; 00D0 _ 4C: 01. C1
-        cmp     rsi, rbx                                ; 00D3 _ 48: 39. DE
-        jle     ?_005                                   ; 00D6 _ 7E, E8
-        sar     rcx, 32                                 ; 00D8 _ 48: C1. F9, 20
-?_006:  mov     byte [rax+rcx], 0                       ; 00DC _ C6. 04 08, 00
-        pop     rbx                                     ; 00E0 _ 5B
-        pop     r12                                     ; 00E1 _ 41: 5C
-        pop     r14                                     ; 00E3 _ 41: 5E
-        pop     r15                                     ; 00E5 _ 41: 5F
-        pop     rbp                                     ; 00E7 _ 5D
-        ret                                             ; 00E8 _ C3
-; _substring End of function
 
-; Filling space: 7H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 80H, 00H, 00H, 00H, 00H
+_str_eql:; Function begin
+        push    rbp                                     ; 0050 _ 55
+        mov     rbp, rsp                                ; 0051 _ 48: 89. E5
+        sub     rsp, 48                                 ; 0054 _ 48: 83. EC, 30
+        mov     qword [rbp-10H], rdi                    ; 0058 _ 48: 89. 7D, F0
+        mov     qword [rbp-18H], rsi                    ; 005C _ 48: 89. 75, E8
+        mov     rdi, qword [rbp-10H]                    ; 0060 _ 48: 8B. 7D, F0
+        call    _strlength                              ; 0064 _ E8, 00000000(rel)
+        mov     ecx, eax                                ; 0069 _ 89. C1
+        mov     dword [rbp-1CH], ecx                    ; 006B _ 89. 4D, E4
+        mov     rdi, qword [rbp-18H]                    ; 006E _ 48: 8B. 7D, E8
+        call    _strlength                              ; 0072 _ E8, 00000000(rel)
+        mov     ecx, eax                                ; 0077 _ 89. C1
+        mov     dword [rbp-20H], ecx                    ; 0079 _ 89. 4D, E0
+        mov     ecx, dword [rbp-1CH]                    ; 007C _ 8B. 4D, E4
+        cmp     ecx, dword [rbp-20H]                    ; 007F _ 3B. 4D, E0
+; Note: Immediate operand could be made smaller by sign extension
+        je      ?_003                                   ; 0082 _ 0F 84, 0000000D
+        mov     qword [rbp-8H], 0                       ; 0088 _ 48: C7. 45, F8, 00000000
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_008                                   ; 0090 _ E9, 0000005B
 
-ALIGN   8
+?_003:  mov     dword [rbp-24H], 0                      ; 0095 _ C7. 45, DC, 00000000
+?_004:  mov     eax, dword [rbp-24H]                    ; 009C _ 8B. 45, DC
+        cmp     eax, dword [rbp-1CH]                    ; 009F _ 3B. 45, E4
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_007                                   ; 00A2 _ 0F 8D, 00000040
+        movsxd  rax, dword [rbp-24H]                    ; 00A8 _ 48: 63. 45, DC
+        mov     rcx, qword [rbp-10H]                    ; 00AC _ 48: 8B. 4D, F0
+        movsx   edx, byte [rcx+rax]                     ; 00B0 _ 0F BE. 14 01
+        movsxd  rax, dword [rbp-24H]                    ; 00B4 _ 48: 63. 45, DC
+        mov     rcx, qword [rbp-18H]                    ; 00B8 _ 48: 8B. 4D, E8
+        movsx   esi, byte [rcx+rax]                     ; 00BC _ 0F BE. 34 01
+        cmp     edx, esi                                ; 00C0 _ 39. F2
+; Note: Immediate operand could be made smaller by sign extension
+        je      ?_005                                   ; 00C2 _ 0F 84, 0000000D
+        mov     qword [rbp-8H], 0                       ; 00C8 _ 48: C7. 45, F8, 00000000
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_008                                   ; 00D0 _ E9, 0000001B
 
-_ord:   ; Function begin
-        push    rbp                                     ; 00F0 _ 55
-        mov     rbp, rsp                                ; 00F1 _ 48: 89. E5
-        movsx   rax, byte [rdi+rsi]                     ; 00F4 _ 48: 0F BE. 04 37
-        pop     rbp                                     ; 00F9 _ 5D
-        ret                                             ; 00FA _ C3
-; _ord End of function
+?_005:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_006                                   ; 00D5 _ E9, 00000000
 
-; Filling space: 5H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 44H, 00H, 00H
+?_006:  mov     eax, dword [rbp-24H]                    ; 00DA _ 8B. 45, DC
+        add     eax, 1                                  ; 00DD _ 83. C0, 01
+        mov     dword [rbp-24H], eax                    ; 00E0 _ 89. 45, DC
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_004                                   ; 00E3 _ E9, FFFFFFB4
 
-ALIGN   8
-
-_parseInt:; Function begin
-        push    rbp                                     ; 0100 _ 55
-        mov     rbp, rsp                                ; 0101 _ 48: 89. E5
-        movsxd  r8, dword [rdi-4H]                      ; 0104 _ 4C: 63. 47, FC
-        xor     ecx, ecx                                ; 0108 _ 31. C9
-        test    r8, r8                                  ; 010A _ 4D: 85. C0
-        jle     ?_008                                   ; 010D _ 7E, 2C
-        xor     edx, edx                                ; 010F _ 31. D2
-        xor     ecx, ecx                                ; 0111 _ 31. C9
-; Filling space: 0DH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H
-;       db 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
-?_007:  movsx   esi, byte [rdi+rdx]                     ; 0120 _ 0F BE. 34 17
-        mov     eax, esi                                ; 0124 _ 89. F0
-        add     al, -48                                 ; 0126 _ 04, D0
-        cmp     al, 9                                   ; 0128 _ 3C, 09
-        ja      ?_008                                   ; 012A _ 77, 0F
-        lea     eax, [rcx+rcx*4]                        ; 012C _ 8D. 04 89
-        lea     ecx, [rsi+rax*2-30H]                    ; 012F _ 8D. 4C 46, D0
-        inc     rdx                                     ; 0133 _ 48: FF. C2
-        cmp     rdx, r8                                 ; 0136 _ 4C: 39. C2
-        jl      ?_007                                   ; 0139 _ 7C, E5
-?_008:  movsxd  rax, ecx                                ; 013B _ 48: 63. C1
-        pop     rbp                                     ; 013E _ 5D
-        ret                                             ; 013F _ C3
-; _parseInt End of function
-
-_getInt:; Function begin
-        push    rbp                                     ; 0140 _ 55
-        mov     rbp, rsp                                ; 0141 _ 48: 89. E5
-        sub     rsp, 16                                 ; 0144 _ 48: 83. EC, 10
-        mov     dword [rbp-4H], 0                       ; 0148 _ C7. 45, FC, 00000000
-        lea     rdi, [rel _str_le+17DAH]                ; 014F _ 48: 8D. 3D, 000017DA(rel)
-        lea     rsi, [rbp-4H]                           ; 0156 _ 48: 8D. 75, FC
-        xor     eax, eax                                ; 015A _ 31. C0
-        call    _scanf                                  ; 015C _ E8, 00000000(rel)
-        movsxd  rax, dword [rbp-4H]                     ; 0161 _ 48: 63. 45, FC
-        add     rsp, 16                                 ; 0165 _ 48: 83. C4, 10
-        pop     rbp                                     ; 0169 _ 5D
-        ret                                             ; 016A _ C3
-; _getInt End of function
-
-; Filling space: 5H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-
-_getString:; Function begin
-        push    rbp                                     ; 0170 _ 55
-        mov     rbp, rsp                                ; 0171 _ 48: 89. E5
-        push    r14                                     ; 0174 _ 41: 56
-        push    rbx                                     ; 0176 _ 53
-        mov     edi, 2004                               ; 0177 _ BF, 000007D4
-        call    _malloc                                 ; 017C _ E8, 00000000(rel)
-        mov     r14, rax                                ; 0181 _ 49: 89. C6
-        lea     rbx, [r14+4H]                           ; 0184 _ 49: 8D. 5E, 04
-        lea     rdi, [rel _str_le+17A4H]                ; 0188 _ 48: 8D. 3D, 000017A4(rel)
-        xor     eax, eax                                ; 018F _ 31. C0
-        mov     rsi, rbx                                ; 0191 _ 48: 89. DE
-        call    _scanf                                  ; 0194 _ E8, 00000000(rel)
-        mov     rdi, rbx                                ; 0199 _ 48: 89. DF
-        call    _strlen                                 ; 019C _ E8, 00000000(rel)
-        mov     dword [r14], eax                        ; 01A1 _ 41: 89. 06
-        mov     rax, rbx                                ; 01A4 _ 48: 89. D8
-        pop     rbx                                     ; 01A7 _ 5B
-        pop     r14                                     ; 01A8 _ 41: 5E
-        pop     rbp                                     ; 01AA _ 5D
-        ret                                             ; 01AB _ C3
-; _getString End of function
-
-; Filling space: 4H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 40H, 00H
-
-ALIGN   8
-
-_size:  ; Function begin
-        push    rbp                                     ; 01B0 _ 55
-        mov     rbp, rsp                                ; 01B1 _ 48: 89. E5
-        mov     rax, qword [rdi-8H]                     ; 01B4 _ 48: 8B. 47, F8
-        pop     rbp                                     ; 01B8 _ 5D
-        ret                                             ; 01B9 _ C3
-; _size End of function
+?_007:  mov     qword [rbp-8H], 1                       ; 00E8 _ 48: C7. 45, F8, 00000001
+?_008:  mov     rax, qword [rbp-8H]                     ; 00F0 _ 48: 8B. 45, F8
+        add     rsp, 48                                 ; 00F4 _ 48: 83. C4, 30
+        pop     rbp                                     ; 00F8 _ 5D
+        ret                                             ; 00F9 _ C3
+; _str_eql End of function
 
 ; Filling space: 6H
 ; Filler type: Multi-byte NOP
@@ -289,32 +156,194 @@ _size:  ; Function begin
 
 ALIGN   8
 
-_toMoStr:; Function begin
-        push    rbp                                     ; 01C0 _ 55
-        mov     rbp, rsp                                ; 01C1 _ 48: 89. E5
-        push    r15                                     ; 01C4 _ 41: 57
-        push    r14                                     ; 01C6 _ 41: 56
-        push    rbx                                     ; 01C8 _ 53
-        push    rax                                     ; 01C9 _ 50
-        mov     r14, rdi                                ; 01CA _ 49: 89. FE
-        call    _strlen                                 ; 01CD _ E8, 00000000(rel)
-        movsxd  r15, eax                                ; 01D2 _ 4C: 63. F8
-        lea     rdi, [r15+5H]                           ; 01D5 _ 49: 8D. 7F, 05
-        call    _malloc                                 ; 01D9 _ E8, 00000000(rel)
-        mov     rbx, rax                                ; 01DE _ 48: 89. C3
-        mov     dword [rbx], r15d                       ; 01E1 _ 44: 89. 3B
-        add     rbx, 4                                  ; 01E4 _ 48: 83. C3, 04
-        mov     rdi, rbx                                ; 01E8 _ 48: 89. DF
-        mov     rsi, r14                                ; 01EB _ 4C: 89. F6
-        call    _strcpy                                 ; 01EE _ E8, 00000000(rel)
-        mov     rax, rbx                                ; 01F3 _ 48: 89. D8
-        add     rsp, 8                                  ; 01F6 _ 48: 83. C4, 08
-        pop     rbx                                     ; 01FA _ 5B
-        pop     r14                                     ; 01FB _ 41: 5E
-        pop     r15                                     ; 01FD _ 41: 5F
-        pop     rbp                                     ; 01FF _ 5D
-        ret                                             ; 0200 _ C3
-; _toMoStr End of function
+_strlength:; Function begin
+        push    rbp                                     ; 0100 _ 55
+        mov     rbp, rsp                                ; 0101 _ 48: 89. E5
+        mov     qword [rbp-8H], rdi                     ; 0104 _ 48: 89. 7D, F8
+        mov     rdi, qword [rbp-8H]                     ; 0108 _ 48: 8B. 7D, F8
+        sub     rdi, 4                                  ; 010C _ 48: 83. EF, 04
+        mov     eax, dword [rdi]                        ; 0110 _ 8B. 07
+        mov     dword [rbp-0CH], eax                    ; 0112 _ 89. 45, F4
+        movsxd  rax, dword [rbp-0CH]                    ; 0115 _ 48: 63. 45, F4
+        pop     rbp                                     ; 0119 _ 5D
+        ret                                             ; 011A _ C3
+; _strlength End of function
+
+; Filling space: 5H
+; Filler type: Multi-byte NOP
+;       db 0FH, 1FH, 44H, 00H, 00H
+
+ALIGN   8
+
+_substring:; Function begin
+        push    rbp                                     ; 0120 _ 55
+        mov     rbp, rsp                                ; 0121 _ 48: 89. E5
+        sub     rsp, 48                                 ; 0124 _ 48: 83. EC, 30
+        mov     qword [rbp-8H], rdi                     ; 0128 _ 48: 89. 7D, F8
+        mov     qword [rbp-10H], rsi                    ; 012C _ 48: 89. 75, F0
+        mov     qword [rbp-18H], rdx                    ; 0130 _ 48: 89. 55, E8
+        mov     rdx, qword [rbp-18H]                    ; 0134 _ 48: 8B. 55, E8
+        sub     rdx, qword [rbp-10H]                    ; 0138 _ 48: 2B. 55, F0
+        add     rdx, 1                                  ; 013C _ 48: 83. C2, 01
+        mov     eax, edx                                ; 0140 _ 89. D0
+        mov     dword [rbp-1CH], eax                    ; 0142 _ 89. 45, E4
+        movsxd  rdx, dword [rbp-1CH]                    ; 0145 _ 48: 63. 55, E4
+        add     rdx, 4                                  ; 0149 _ 48: 83. C2, 04
+        add     rdx, 1                                  ; 014D _ 48: 83. C2, 01
+        mov     rdi, rdx                                ; 0151 _ 48: 89. D7
+        call    _malloc                                 ; 0154 _ E8, 00000000(rel)
+        mov     qword [rbp-28H], rax                    ; 0159 _ 48: 89. 45, D8
+        mov     ecx, dword [rbp-1CH]                    ; 015D _ 8B. 4D, E4
+        mov     rax, qword [rbp-28H]                    ; 0160 _ 48: 8B. 45, D8
+        mov     dword [rax], ecx                        ; 0164 _ 89. 08
+        mov     rax, qword [rbp-28H]                    ; 0166 _ 48: 8B. 45, D8
+        add     rax, 4                                  ; 016A _ 48: 83. C0, 04
+        mov     qword [rbp-28H], rax                    ; 016E _ 48: 89. 45, D8
+        mov     dword [rbp-2CH], 0                      ; 0172 _ C7. 45, D4, 00000000
+        mov     rax, qword [rbp-10H]                    ; 0179 _ 48: 8B. 45, F0
+        mov     ecx, eax                                ; 017D _ 89. C1
+        mov     dword [rbp-30H], ecx                    ; 017F _ 89. 4D, D0
+?_009:  movsxd  rax, dword [rbp-30H]                    ; 0182 _ 48: 63. 45, D0
+        cmp     rax, qword [rbp-18H]                    ; 0186 _ 48: 3B. 45, E8
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_010                                   ; 018A _ 0F 8F, 0000002E
+        movsxd  rax, dword [rbp-30H]                    ; 0190 _ 48: 63. 45, D0
+        mov     rcx, qword [rbp-8H]                     ; 0194 _ 48: 8B. 4D, F8
+        mov     dl, byte [rcx+rax]                      ; 0198 _ 8A. 14 01
+        mov     esi, dword [rbp-2CH]                    ; 019B _ 8B. 75, D4
+        mov     edi, esi                                ; 019E _ 89. F7
+        add     edi, 1                                  ; 01A0 _ 83. C7, 01
+        mov     dword [rbp-2CH], edi                    ; 01A3 _ 89. 7D, D4
+        movsxd  rax, esi                                ; 01A6 _ 48: 63. C6
+        mov     rcx, qword [rbp-28H]                    ; 01A9 _ 48: 8B. 4D, D8
+        mov     byte [rcx+rax], dl                      ; 01AD _ 88. 14 01
+        mov     eax, dword [rbp-30H]                    ; 01B0 _ 8B. 45, D0
+        add     eax, 1                                  ; 01B3 _ 83. C0, 01
+        mov     dword [rbp-30H], eax                    ; 01B6 _ 89. 45, D0
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_009                                   ; 01B9 _ E9, FFFFFFC4
+; _substring End of function
+
+?_010:  ; Local function
+        movsxd  rax, dword [rbp-2CH]                    ; 01BE _ 48: 63. 45, D4
+        mov     rcx, qword [rbp-28H]                    ; 01C2 _ 48: 8B. 4D, D8
+        mov     byte [rcx+rax], 0                       ; 01C6 _ C6. 04 01, 00
+        mov     rax, qword [rbp-28H]                    ; 01CA _ 48: 8B. 45, D8
+        add     rsp, 48                                 ; 01CE _ 48: 83. C4, 30
+        pop     rbp                                     ; 01D2 _ 5D
+        ret                                             ; 01D3 _ C3
+
+; Filling space: 0CH
+; Filler type: Multi-byte NOP
+;       db 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H
+;       db 00H, 00H, 00H, 00H
+
+ALIGN   16
+
+_ord:   ; Function begin
+        push    rbp                                     ; 01E0 _ 55
+        mov     rbp, rsp                                ; 01E1 _ 48: 89. E5
+        mov     qword [rbp-8H], rdi                     ; 01E4 _ 48: 89. 7D, F8
+        mov     qword [rbp-10H], rsi                    ; 01E8 _ 48: 89. 75, F0
+        mov     rsi, qword [rbp-8H]                     ; 01EC _ 48: 8B. 75, F8
+        add     rsi, qword [rbp-10H]                    ; 01F0 _ 48: 03. 75, F0
+        mov     qword [rbp-18H], rsi                    ; 01F4 _ 48: 89. 75, E8
+        mov     rsi, qword [rbp-18H]                    ; 01F8 _ 48: 8B. 75, E8
+        movsx   rax, byte [rsi]                         ; 01FC _ 48: 0F BE. 06
+        pop     rbp                                     ; 0200 _ 5D
+        ret                                             ; 0201 _ C3
+; _ord End of function
+
+; Filling space: 0EH
+; Filler type: Multi-byte NOP
+;       db 66H, 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH
+;       db 84H, 00H, 00H, 00H, 00H, 00H
+
+ALIGN   16
+
+_parseInt:; Function begin
+        push    rbp                                     ; 0210 _ 55
+        mov     rbp, rsp                                ; 0211 _ 48: 89. E5
+        sub     rsp, 32                                 ; 0214 _ 48: 83. EC, 20
+        mov     qword [rbp-8H], rdi                     ; 0218 _ 48: 89. 7D, F8
+        mov     rdi, qword [rbp-8H]                     ; 021C _ 48: 8B. 7D, F8
+        call    _strlength                              ; 0220 _ E8, 00000000(rel)
+        mov     ecx, eax                                ; 0225 _ 89. C1
+        mov     dword [rbp-0CH], ecx                    ; 0227 _ 89. 4D, F4
+        mov     rax, qword [rbp-8H]                     ; 022A _ 48: 8B. 45, F8
+        mov     qword [rbp-18H], rax                    ; 022E _ 48: 89. 45, E8
+        mov     dword [rbp-1CH], 0                      ; 0232 _ C7. 45, E4, 00000000
+        mov     dword [rbp-20H], 0                      ; 0239 _ C7. 45, E0, 00000000
+?_011:  mov     eax, dword [rbp-20H]                    ; 0240 _ 8B. 45, E0
+        cmp     eax, dword [rbp-0CH]                    ; 0243 _ 3B. 45, F4
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_015                                   ; 0246 _ 0F 8D, 0000005F
+        movsxd  rax, dword [rbp-20H]                    ; 024C _ 48: 63. 45, E0
+        mov     rcx, qword [rbp-18H]                    ; 0250 _ 48: 8B. 4D, E8
+        movsx   edx, byte [rcx+rax]                     ; 0254 _ 0F BE. 14 01
+        cmp     edx, 48                                 ; 0258 _ 83. FA, 30
+; Note: Immediate operand could be made smaller by sign extension
+        jl      ?_012                                   ; 025B _ 0F 8C, 00000032
+        movsxd  rax, dword [rbp-20H]                    ; 0261 _ 48: 63. 45, E0
+        mov     rcx, qword [rbp-18H]                    ; 0265 _ 48: 8B. 4D, E8
+        movsx   edx, byte [rcx+rax]                     ; 0269 _ 0F BE. 14 01
+        cmp     edx, 57                                 ; 026D _ 83. FA, 39
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_012                                   ; 0270 _ 0F 8F, 0000001D
+        imul    eax, dword [rbp-1CH], 10                ; 0276 _ 6B. 45, E4, 0A
+        movsxd  rcx, dword [rbp-20H]                    ; 027A _ 48: 63. 4D, E0
+        mov     rdx, qword [rbp-18H]                    ; 027E _ 48: 8B. 55, E8
+        movsx   esi, byte [rdx+rcx]                     ; 0282 _ 0F BE. 34 0A
+        add     eax, esi                                ; 0286 _ 01. F0
+        sub     eax, 48                                 ; 0288 _ 83. E8, 30
+        mov     dword [rbp-1CH], eax                    ; 028B _ 89. 45, E4
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_013                                   ; 028E _ E9, 00000005
+
+?_012:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_015                                   ; 0293 _ E9, 00000013
+
+?_013:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_014                                   ; 0298 _ E9, 00000000
+
+?_014:  mov     eax, dword [rbp-20H]                    ; 029D _ 8B. 45, E0
+        add     eax, 1                                  ; 02A0 _ 83. C0, 01
+        mov     dword [rbp-20H], eax                    ; 02A3 _ 89. 45, E0
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_011                                   ; 02A6 _ E9, FFFFFF95
+; _parseInt End of function
+
+?_015:  ; Local function
+        movsxd  rax, dword [rbp-1CH]                    ; 02AB _ 48: 63. 45, E4
+        add     rsp, 32                                 ; 02AF _ 48: 83. C4, 20
+        pop     rbp                                     ; 02B3 _ 5D
+        ret                                             ; 02B4 _ C3
+
+; Filling space: 0BH
+; Filler type: Multi-byte NOP
+;       db 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H
+;       db 00H, 00H, 00H
+
+ALIGN   16
+
+_getInt:; Function begin
+        push    rbp                                     ; 02C0 _ 55
+        mov     rbp, rsp                                ; 02C1 _ 48: 89. E5
+        sub     rsp, 16                                 ; 02C4 _ 48: 83. EC, 10
+        lea     rdi, [rel _str_le+2B63H]                ; 02C8 _ 48: 8D. 3D, 00002B63(rel)
+        lea     rsi, [rbp-4H]                           ; 02CF _ 48: 8D. 75, FC
+        mov     dword [rbp-4H], 0                       ; 02D3 _ C7. 45, FC, 00000000
+        mov     al, 0                                   ; 02DA _ B0, 00
+        call    _scanf                                  ; 02DC _ E8, 00000000(rel)
+        movsxd  rsi, dword [rbp-4H]                     ; 02E1 _ 48: 63. 75, FC
+        mov     dword [rbp-8H], eax                     ; 02E5 _ 89. 45, F8
+        mov     rax, rsi                                ; 02E8 _ 48: 89. F0
+        add     rsp, 16                                 ; 02EB _ 48: 83. C4, 10
+        pop     rbp                                     ; 02EF _ 5D
+        ret                                             ; 02F0 _ C3
+; _getInt End of function
 
 ; Filling space: 0FH
 ; Filler type: Multi-byte NOP
@@ -323,206 +352,178 @@ _toMoStr:; Function begin
 
 ALIGN   16
 
-_str_add:; Function begin
-        push    rbp                                     ; 0210 _ 55
-        mov     rbp, rsp                                ; 0211 _ 48: 89. E5
-        push    r15                                     ; 0214 _ 41: 57
-        push    r14                                     ; 0216 _ 41: 56
-        push    r13                                     ; 0218 _ 41: 55
-        push    r12                                     ; 021A _ 41: 54
-        push    rbx                                     ; 021C _ 53
-        push    rax                                     ; 021D _ 50
-        mov     r14, rsi                                ; 021E _ 49: 89. F6
-        mov     r15, rdi                                ; 0221 _ 49: 89. FF
-        movsxd  r13, dword [r15-4H]                     ; 0224 _ 4D: 63. 6F, FC
-        mov     r12d, dword [r14-4H]                    ; 0228 _ 45: 8B. 66, FC
-        lea     eax, [r12+r13]                          ; 022C _ 43: 8D. 04 2C
-        movsxd  rbx, eax                                ; 0230 _ 48: 63. D8
-        lea     rdi, [rbx+5H]                           ; 0233 _ 48: 8D. 7B, 05
-        call    _malloc                                 ; 0237 _ E8, 00000000(rel)
-        mov     r10, rbx                                ; 023C _ 49: 89. DA
-        mov     r8, rax                                 ; 023F _ 49: 89. C0
-        lea     rax, [r8+4H]                            ; 0242 _ 49: 8D. 40, 04
-        test    r13, r13                                ; 0246 _ 4D: 85. ED
-        mov     dword [r8], r10d                        ; 0249 _ 45: 89. 10
-        jle     ?_014                                   ; 024C _ 0F 8E, 000000C2
-        mov     ecx, r13d                               ; 0252 _ 44: 89. E9
-        cmp     r13d, 31                                ; 0255 _ 41: 83. FD, 1F
-        jbe     ?_009                                   ; 0259 _ 76, 2A
-        mov     r9d, ecx                                ; 025B _ 41: 89. C9
-        and     r9d, 1FH                                ; 025E _ 41: 83. E1, 1F
-        mov     rsi, rcx                                ; 0262 _ 48: 89. CE
-        sub     rsi, r9                                 ; 0265 _ 4C: 29. CE
-        jz      ?_009                                   ; 0268 _ 74, 1B
-        lea     rdx, [r15+rcx]                          ; 026A _ 49: 8D. 14 0F
-        cmp     rax, rdx                                ; 026E _ 48: 39. D0
-        jnc     ?_021                                   ; 0271 _ 0F 83, 00000175
-        lea     rdx, [r8+rcx+4H]                        ; 0277 _ 49: 8D. 54 08, 04
-        cmp     r15, rdx                                ; 027C _ 49: 39. D7
-        jnc     ?_021                                   ; 027F _ 0F 83, 00000167
-?_009:  xor     esi, esi                                ; 0285 _ 31. F6
-?_010:  mov     edx, ecx                                ; 0287 _ 89. CA
-        sub     edx, esi                                ; 0289 _ 29. F2
-        lea     rdi, [rcx-1H]                           ; 028B _ 48: 8D. 79, FF
-        sub     rdi, rsi                                ; 028F _ 48: 29. F7
-        and     rdx, 07H                                ; 0292 _ 48: 83. E2, 07
-        jz      ?_012                                   ; 0296 _ 74, 18
-        neg     rdx                                     ; 0298 _ 48: F7. DA
-; Filling space: 5H
+_getString:; Function begin
+        push    rbp                                     ; 0300 _ 55
+        mov     rbp, rsp                                ; 0301 _ 48: 89. E5
+        sub     rsp, 32                                 ; 0304 _ 48: 83. EC, 20
+        mov     eax, 2004                               ; 0308 _ B8, 000007D4
+        mov     edi, eax                                ; 030D _ 89. C7
+        mov     dword [rbp-4H], 0                       ; 030F _ C7. 45, FC, 00000000
+        call    _malloc                                 ; 0316 _ E8, 00000000(rel)
+        lea     rdi, [rel _str_le+2B13H]                ; 031B _ 48: 8D. 3D, 00002B13(rel)
+        mov     qword [rbp-10H], rax                    ; 0322 _ 48: 89. 45, F0
+        mov     rax, qword [rbp-10H]                    ; 0326 _ 48: 8B. 45, F0
+        mov     qword [rbp-18H], rax                    ; 032A _ 48: 89. 45, E8
+        mov     rax, qword [rbp-10H]                    ; 032E _ 48: 8B. 45, F0
+        add     rax, 4                                  ; 0332 _ 48: 83. C0, 04
+        mov     qword [rbp-10H], rax                    ; 0336 _ 48: 89. 45, F0
+        mov     rsi, qword [rbp-10H]                    ; 033A _ 48: 8B. 75, F0
+        mov     al, 0                                   ; 033E _ B0, 00
+        call    _scanf                                  ; 0340 _ E8, 00000000(rel)
+        mov     rdi, qword [rbp-10H]                    ; 0345 _ 48: 8B. 7D, F0
+        mov     dword [rbp-1CH], eax                    ; 0349 _ 89. 45, E4
+        call    _strlen                                 ; 034C _ E8, 00000000(rel)
+        mov     ecx, eax                                ; 0351 _ 89. C1
+        mov     dword [rbp-4H], ecx                     ; 0353 _ 89. 4D, FC
+        mov     ecx, dword [rbp-4H]                     ; 0356 _ 8B. 4D, FC
+        mov     rax, qword [rbp-18H]                    ; 0359 _ 48: 8B. 45, E8
+        mov     dword [rax], ecx                        ; 035D _ 89. 08
+        mov     rax, qword [rbp-18H]                    ; 035F _ 48: 8B. 45, E8
+        add     rax, 4                                  ; 0363 _ 48: 83. C0, 04
+        add     rsp, 32                                 ; 0367 _ 48: 83. C4, 20
+        pop     rbp                                     ; 036B _ 5D
+        ret                                             ; 036C _ C3
+; _getString End of function
+
+; Filling space: 3H
 ; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 44H, 00H, 00H
+;       db 0FH, 1FH, 00H
 
 ALIGN   8
-?_011:  movzx   ebx, byte [r15+rsi]                     ; 02A0 _ 41: 0F B6. 1C 37
-        mov     byte [rax+rsi], bl                      ; 02A5 _ 88. 1C 30
-        inc     rsi                                     ; 02A8 _ 48: FF. C6
-        inc     rdx                                     ; 02AB _ 48: FF. C2
-        jnz     ?_011                                   ; 02AE _ 75, F0
-?_012:  cmp     rdi, 7                                  ; 02B0 _ 48: 83. FF, 07
-        jc      ?_014                                   ; 02B4 _ 72, 5E
-        sub     rcx, rsi                                ; 02B6 _ 48: 29. F1
-        lea     rdi, [r8+rsi+0BH]                       ; 02B9 _ 49: 8D. 7C 30, 0B
-        lea     rsi, [r15+rsi+7H]                       ; 02BE _ 49: 8D. 74 37, 07
-; Filling space: 0DH
+
+_size:  ; Function begin
+        push    rbp                                     ; 0370 _ 55
+        mov     rbp, rsp                                ; 0371 _ 48: 89. E5
+        mov     qword [rbp-8H], rdi                     ; 0374 _ 48: 89. 7D, F8
+        mov     rdi, qword [rbp-8H]                     ; 0378 _ 48: 8B. 7D, F8
+        sub     rdi, 8                                  ; 037C _ 48: 83. EF, 08
+        mov     rdi, qword [rdi]                        ; 0380 _ 48: 8B. 3F
+        mov     qword [rbp-10H], rdi                    ; 0383 _ 48: 89. 7D, F0
+        mov     rax, qword [rbp-10H]                    ; 0387 _ 48: 8B. 45, F0
+        pop     rbp                                     ; 038B _ 5D
+        ret                                             ; 038C _ C3
+; _size End of function
+
+; Filling space: 3H
 ; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H
-;       db 00H, 00H, 00H, 00H, 00H
+;       db 0FH, 1FH, 00H
 
-ALIGN   16
-?_013:  movzx   edx, byte [rsi-7H]                      ; 02D0 _ 0F B6. 56, F9
-        mov     byte [rdi-7H], dl                       ; 02D4 _ 88. 57, F9
-        movzx   edx, byte [rsi-6H]                      ; 02D7 _ 0F B6. 56, FA
-        mov     byte [rdi-6H], dl                       ; 02DB _ 88. 57, FA
-        movzx   edx, byte [rsi-5H]                      ; 02DE _ 0F B6. 56, FB
-        mov     byte [rdi-5H], dl                       ; 02E2 _ 88. 57, FB
-        movzx   edx, byte [rsi-4H]                      ; 02E5 _ 0F B6. 56, FC
-        mov     byte [rdi-4H], dl                       ; 02E9 _ 88. 57, FC
-        movzx   edx, byte [rsi-3H]                      ; 02EC _ 0F B6. 56, FD
-        mov     byte [rdi-3H], dl                       ; 02F0 _ 88. 57, FD
-        movzx   edx, byte [rsi-2H]                      ; 02F3 _ 0F B6. 56, FE
-        mov     byte [rdi-2H], dl                       ; 02F7 _ 88. 57, FE
-        movzx   edx, byte [rsi-1H]                      ; 02FA _ 0F B6. 56, FF
-        mov     byte [rdi-1H], dl                       ; 02FE _ 88. 57, FF
-        movzx   edx, byte [rsi]                         ; 0301 _ 0F B6. 16
-        mov     byte [rdi], dl                          ; 0304 _ 88. 17
-        add     rdi, 8                                  ; 0306 _ 48: 83. C7, 08
-        add     rsi, 8                                  ; 030A _ 48: 83. C6, 08
-        add     rcx, -8                                 ; 030E _ 48: 83. C1, F8
-        jnz     ?_013                                   ; 0312 _ 75, BC
-?_014:  test    r12d, r12d                              ; 0314 _ 45: 85. E4
-        jle     ?_020                                   ; 0317 _ 0F 8E, 000000BB
-        cmp     r12d, 31                                ; 031D _ 41: 83. FC, 1F
-        jbe     ?_015                                   ; 0321 _ 76, 33
-        mov     esi, r12d                               ; 0323 _ 44: 89. E6
-        and     esi, 1FH                                ; 0326 _ 83. E6, 1F
-        mov     rdx, r12                                ; 0329 _ 4C: 89. E2
-        sub     rdx, rsi                                ; 032C _ 48: 29. F2
-        jz      ?_015                                   ; 032F _ 74, 25
-        lea     rcx, [r8+r13+4H]                        ; 0331 _ 4B: 8D. 4C 28, 04
-        lea     rdi, [r14+r12]                          ; 0336 _ 4B: 8D. 3C 26
-        cmp     rcx, rdi                                ; 033A _ 48: 39. F9
-        jnc     ?_023                                   ; 033D _ 0F 83, 000000E7
-        lea     rcx, [r13+r12]                          ; 0343 _ 4B: 8D. 4C 25, 00
-        lea     rcx, [r8+rcx+4H]                        ; 0348 _ 49: 8D. 4C 08, 04
-        cmp     r14, rcx                                ; 034D _ 49: 39. CE
-        jnc     ?_023                                   ; 0350 _ 0F 83, 000000D4
-?_015:  xor     edx, edx                                ; 0356 _ 31. D2
-?_016:  mov     edi, r12d                               ; 0358 _ 44: 89. E7
-        sub     edi, edx                                ; 035B _ 29. D7
-        lea     rsi, [r12-1H]                           ; 035D _ 49: 8D. 74 24, FF
-        sub     rsi, rdx                                ; 0362 _ 48: 29. D6
-        and     rdi, 03H                                ; 0365 _ 48: 83. E7, 03
-        jz      ?_018                                   ; 0369 _ 74, 25
-        lea     rcx, [r8+r13+4H]                        ; 036B _ 4B: 8D. 4C 28, 04
-        neg     rdi                                     ; 0370 _ 48: F7. DF
-; Filling space: 0DH
+ALIGN   8
+
+_toMoStr:; Function begin
+        push    rbp                                     ; 0390 _ 55
+        mov     rbp, rsp                                ; 0391 _ 48: 89. E5
+        sub     rsp, 32                                 ; 0394 _ 48: 83. EC, 20
+        mov     qword [rbp-8H], rdi                     ; 0398 _ 48: 89. 7D, F8
+        mov     rdi, qword [rbp-8H]                     ; 039C _ 48: 8B. 7D, F8
+        call    _strlen                                 ; 03A0 _ E8, 00000000(rel)
+        mov     ecx, eax                                ; 03A5 _ 89. C1
+        mov     dword [rbp-0CH], ecx                    ; 03A7 _ 89. 4D, F4
+        movsxd  rax, dword [rbp-0CH]                    ; 03AA _ 48: 63. 45, F4
+        add     rax, 4                                  ; 03AE _ 48: 83. C0, 04
+        add     rax, 1                                  ; 03B2 _ 48: 83. C0, 01
+        mov     rdi, rax                                ; 03B6 _ 48: 89. C7
+        call    _malloc                                 ; 03B9 _ E8, 00000000(rel)
+        mov     rdx, -1                                 ; 03BE _ 48: C7. C2, FFFFFFFF
+        mov     qword [rbp-18H], rax                    ; 03C5 _ 48: 89. 45, E8
+        mov     ecx, dword [rbp-0CH]                    ; 03C9 _ 8B. 4D, F4
+        mov     rax, qword [rbp-18H]                    ; 03CC _ 48: 8B. 45, E8
+        mov     dword [rax], ecx                        ; 03D0 _ 89. 08
+        mov     rax, qword [rbp-18H]                    ; 03D2 _ 48: 8B. 45, E8
+        add     rax, 4                                  ; 03D6 _ 48: 83. C0, 04
+        mov     qword [rbp-18H], rax                    ; 03DA _ 48: 89. 45, E8
+        mov     rdi, qword [rbp-18H]                    ; 03DE _ 48: 8B. 7D, E8
+        mov     rsi, qword [rbp-8H]                     ; 03E2 _ 48: 8B. 75, F8
+        call    ___strcpy_chk                           ; 03E6 _ E8, 00000000(rel)
+        mov     rdx, qword [rbp-18H]                    ; 03EB _ 48: 8B. 55, E8
+        mov     qword [rbp-20H], rax                    ; 03EF _ 48: 89. 45, E0
+        mov     rax, rdx                                ; 03F3 _ 48: 89. D0
+        add     rsp, 32                                 ; 03F6 _ 48: 83. C4, 20
+        pop     rbp                                     ; 03FA _ 5D
+        ret                                             ; 03FB _ C3
+; _toMoStr End of function
+
+; Filling space: 4H
 ; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H
-;       db 00H, 00H, 00H, 00H, 00H
+;       db 0FH, 1FH, 40H, 00H
 
-ALIGN   16
-?_017:  movzx   ebx, byte [r14+rdx]                     ; 0380 _ 41: 0F B6. 1C 16
-        mov     byte [rcx+rdx], bl                      ; 0385 _ 88. 1C 11
-        inc     rdx                                     ; 0388 _ 48: FF. C2
-        inc     rdi                                     ; 038B _ 48: FF. C7
-        jnz     ?_017                                   ; 038E _ 75, F0
-?_018:  cmp     rsi, 3                                  ; 0390 _ 48: 83. FE, 03
-        jc      ?_020                                   ; 0394 _ 72, 42
-        sub     r12, rdx                                ; 0396 _ 49: 29. D4
-        add     r13, rdx                                ; 0399 _ 49: 01. D5
-        lea     rcx, [r8+r13+7H]                        ; 039C _ 4B: 8D. 4C 28, 07
-        lea     rdx, [r14+rdx+3H]                       ; 03A1 _ 49: 8D. 54 16, 03
-; Filling space: 0AH
-; Filler type: Multi-byte NOP
-;       db 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H, 00H
-;       db 00H, 00H
+ALIGN   8
 
-ALIGN   16
-?_019:  movzx   ebx, byte [rdx-3H]                      ; 03B0 _ 0F B6. 5A, FD
-        mov     byte [rcx-3H], bl                       ; 03B4 _ 88. 59, FD
-        movzx   ebx, byte [rdx-2H]                      ; 03B7 _ 0F B6. 5A, FE
-        mov     byte [rcx-2H], bl                       ; 03BB _ 88. 59, FE
-        movzx   ebx, byte [rdx-1H]                      ; 03BE _ 0F B6. 5A, FF
-        mov     byte [rcx-1H], bl                       ; 03C2 _ 88. 59, FF
-        movzx   ebx, byte [rdx]                         ; 03C5 _ 0F B6. 1A
-        mov     byte [rcx], bl                          ; 03C8 _ 88. 19
-        add     rcx, 4                                  ; 03CA _ 48: 83. C1, 04
-        add     rdx, 4                                  ; 03CE _ 48: 83. C2, 04
-        add     r12, -4                                 ; 03D2 _ 49: 83. C4, FC
-        jnz     ?_019                                   ; 03D6 _ 75, D8
-?_020:  mov     byte [rax+r10], 0                       ; 03D8 _ 42: C6. 04 10, 00
-        add     rsp, 8                                  ; 03DD _ 48: 83. C4, 08
-        pop     rbx                                     ; 03E1 _ 5B
-        pop     r12                                     ; 03E2 _ 41: 5C
-        pop     r13                                     ; 03E4 _ 41: 5D
-        pop     r14                                     ; 03E6 _ 41: 5E
-        pop     r15                                     ; 03E8 _ 41: 5F
-        pop     rbp                                     ; 03EA _ 5D
-        ret                                             ; 03EB _ C3
-
-?_021:  lea     rdx, [r15+10H]                          ; 03EC _ 49: 8D. 57, 10
-        lea     rdi, [r8+14H]                           ; 03F0 _ 49: 8D. 78, 14
-        mov     rbx, rsi                                ; 03F4 _ 48: 89. F3
-; Filling space: 9H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 84H, 00H, 00H, 00H, 00H
-;       db 00H
-
-ALIGN   16
-?_022:  movups  xmm0, oword [rdx-10H]                   ; 0400 _ 0F 10. 42, F0
-        movups  xmm1, oword [rdx]                       ; 0404 _ 0F 10. 0A
-        movups  oword [rdi-10H], xmm0                   ; 0407 _ 0F 11. 47, F0
-        movups  oword [rdi], xmm1                       ; 040B _ 0F 11. 0F
-        add     rdx, 32                                 ; 040E _ 48: 83. C2, 20
-        add     rdi, 32                                 ; 0412 _ 48: 83. C7, 20
-        add     rbx, -32                                ; 0416 _ 48: 83. C3, E0
-        jnz     ?_022                                   ; 041A _ 75, E4
-        test    r9d, r9d                                ; 041C _ 45: 85. C9
-        jne     ?_010                                   ; 041F _ 0F 85, FFFFFE62
-        jmp     ?_014                                   ; 0425 _ E9, FFFFFEEA
+_str_add:; Function begin
+        push    rbp                                     ; 0400 _ 55
+        mov     rbp, rsp                                ; 0401 _ 48: 89. E5
+        sub     rsp, 48                                 ; 0404 _ 48: 83. EC, 30
+        mov     qword [rbp-8H], rdi                     ; 0408 _ 48: 89. 7D, F8
+        mov     qword [rbp-10H], rsi                    ; 040C _ 48: 89. 75, F0
+        mov     rsi, qword [rbp-8H]                     ; 0410 _ 48: 8B. 75, F8
+        sub     rsi, 4                                  ; 0414 _ 48: 83. EE, 04
+        mov     eax, dword [rsi]                        ; 0418 _ 8B. 06
+        mov     dword [rbp-14H], eax                    ; 041A _ 89. 45, EC
+        mov     rsi, qword [rbp-10H]                    ; 041D _ 48: 8B. 75, F0
+        sub     rsi, 4                                  ; 0421 _ 48: 83. EE, 04
+        mov     eax, dword [rsi]                        ; 0425 _ 8B. 06
+        mov     dword [rbp-18H], eax                    ; 0427 _ 89. 45, E8
+        mov     eax, dword [rbp-14H]                    ; 042A _ 8B. 45, EC
+        add     eax, dword [rbp-18H]                    ; 042D _ 03. 45, E8
+        mov     dword [rbp-1CH], eax                    ; 0430 _ 89. 45, E4
+        movsxd  rsi, dword [rbp-1CH]                    ; 0433 _ 48: 63. 75, E4
+        add     rsi, 4                                  ; 0437 _ 48: 83. C6, 04
+        add     rsi, 1                                  ; 043B _ 48: 83. C6, 01
+        mov     rdi, rsi                                ; 043F _ 48: 89. F7
+        call    _malloc                                 ; 0442 _ E8, 00000000(rel)
+        mov     qword [rbp-28H], rax                    ; 0447 _ 48: 89. 45, D8
+        mov     ecx, dword [rbp-1CH]                    ; 044B _ 8B. 4D, E4
+        mov     rax, qword [rbp-28H]                    ; 044E _ 48: 8B. 45, D8
+        mov     dword [rax], ecx                        ; 0452 _ 89. 08
+        mov     rax, qword [rbp-28H]                    ; 0454 _ 48: 8B. 45, D8
+        add     rax, 4                                  ; 0458 _ 48: 83. C0, 04
+        mov     qword [rbp-28H], rax                    ; 045C _ 48: 89. 45, D8
+        mov     dword [rbp-2CH], 0                      ; 0460 _ C7. 45, D4, 00000000
+?_016:  mov     eax, dword [rbp-2CH]                    ; 0467 _ 8B. 45, D4
+        cmp     eax, dword [rbp-14H]                    ; 046A _ 3B. 45, EC
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_017                                   ; 046D _ 0F 8D, 00000024
+        movsxd  rax, dword [rbp-2CH]                    ; 0473 _ 48: 63. 45, D4
+        mov     rcx, qword [rbp-8H]                     ; 0477 _ 48: 8B. 4D, F8
+        mov     dl, byte [rcx+rax]                      ; 047B _ 8A. 14 01
+        movsxd  rax, dword [rbp-2CH]                    ; 047E _ 48: 63. 45, D4
+        mov     rcx, qword [rbp-28H]                    ; 0482 _ 48: 8B. 4D, D8
+        mov     byte [rcx+rax], dl                      ; 0486 _ 88. 14 01
+        mov     eax, dword [rbp-2CH]                    ; 0489 _ 8B. 45, D4
+        add     eax, 1                                  ; 048C _ 83. C0, 01
+        mov     dword [rbp-2CH], eax                    ; 048F _ 89. 45, D4
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_016                                   ; 0492 _ E9, FFFFFFD0
 ; _str_add End of function
 
-?_023:  ; Local function
-        lea     rcx, [r8+r13+14H]                       ; 042A _ 4B: 8D. 4C 28, 14
-        lea     rdi, [r14+10H]                          ; 042F _ 49: 8D. 7E, 10
-        mov     rbx, rdx                                ; 0433 _ 48: 89. D3
-; Filling space: 0AH
-; Filler type: Multi-byte NOP
-;       db 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H, 00H
-;       db 00H, 00H
+?_017:  ; Local function
+        mov     dword [rbp-30H], 0                      ; 0497 _ C7. 45, D0, 00000000
+?_018:  mov     eax, dword [rbp-30H]                    ; 049E _ 8B. 45, D0
+        cmp     eax, dword [rbp-18H]                    ; 04A1 _ 3B. 45, E8
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_019                                   ; 04A4 _ 0F 8D, 00000029
+        movsxd  rax, dword [rbp-30H]                    ; 04AA _ 48: 63. 45, D0
+        mov     rcx, qword [rbp-10H]                    ; 04AE _ 48: 8B. 4D, F0
+        mov     dl, byte [rcx+rax]                      ; 04B2 _ 8A. 14 01
+        mov     esi, dword [rbp-30H]                    ; 04B5 _ 8B. 75, D0
+        add     esi, dword [rbp-14H]                    ; 04B8 _ 03. 75, EC
+        movsxd  rax, esi                                ; 04BB _ 48: 63. C6
+        mov     rcx, qword [rbp-28H]                    ; 04BE _ 48: 8B. 4D, D8
+        mov     byte [rcx+rax], dl                      ; 04C2 _ 88. 14 01
+        mov     eax, dword [rbp-30H]                    ; 04C5 _ 8B. 45, D0
+        add     eax, 1                                  ; 04C8 _ 83. C0, 01
+        mov     dword [rbp-30H], eax                    ; 04CB _ 89. 45, D0
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_018                                   ; 04CE _ E9, FFFFFFCB
 
-ALIGN   16
-?_024:  movups  xmm0, oword [rdi-10H]                   ; 0440 _ 0F 10. 47, F0
-        movups  xmm1, oword [rdi]                       ; 0444 _ 0F 10. 0F
-        movups  oword [rcx-10H], xmm0                   ; 0447 _ 0F 11. 41, F0
-        movups  oword [rcx], xmm1                       ; 044B _ 0F 11. 09
-        add     rcx, 32                                 ; 044E _ 48: 83. C1, 20
-        add     rdi, 32                                 ; 0452 _ 48: 83. C7, 20
-        add     rbx, -32                                ; 0456 _ 48: 83. C3, E0
-        jnz     ?_024                                   ; 045A _ 75, E4
-        test    esi, esi                                ; 045C _ 85. F6
-        jne     ?_016                                   ; 045E _ 0F 85, FFFFFEF4
-        jmp     ?_020                                   ; 0464 _ E9, FFFFFF6F
+?_019:  ; Local function
+        movsxd  rax, dword [rbp-1CH]                    ; 04D3 _ 48: 63. 45, E4
+        mov     rcx, qword [rbp-28H]                    ; 04D7 _ 48: 8B. 4D, D8
+        mov     byte [rcx+rax], 0                       ; 04DB _ C6. 04 01, 00
+        mov     rax, qword [rbp-28H]                    ; 04DF _ 48: 8B. 45, D8
+        add     rsp, 48                                 ; 04E3 _ 48: 83. C4, 30
+        pop     rbp                                     ; 04E7 _ 5D
+        ret                                             ; 04E8 _ C3
 
 ; Filling space: 7H
 ; Filler type: Multi-byte NOP
@@ -531,226 +532,1278 @@ ALIGN   16
 ALIGN   8
 
 ___lib_printlnInt:; Function begin
-        push    rbp                                     ; 0470 _ 55
-        mov     rbp, rsp                                ; 0471 _ 48: 89. E5
-        mov     rcx, rdi                                ; 0474 _ 48: 89. F9
-        lea     rdi, [rel _str_le+14B8H]                ; 0477 _ 48: 8D. 3D, 000014B8(rel)
-        xor     eax, eax                                ; 047E _ 31. C0
-        mov     rsi, rcx                                ; 0480 _ 48: 89. CE
-        pop     rbp                                     ; 0483 _ 5D
-        jmp     _printf                                 ; 0484 _ E9, 00000000(rel)
+        push    rbp                                     ; 04F0 _ 55
+        mov     rbp, rsp                                ; 04F1 _ 48: 89. E5
+        sub     rsp, 16                                 ; 04F4 _ 48: 83. EC, 10
+        lea     rax, [rel _str_le+2939H]                ; 04F8 _ 48: 8D. 05, 00002939(rel)
+        mov     qword [rbp-8H], rdi                     ; 04FF _ 48: 89. 7D, F8
+        mov     rsi, qword [rbp-8H]                     ; 0503 _ 48: 8B. 75, F8
+        mov     rdi, rax                                ; 0507 _ 48: 89. C7
+        mov     al, 0                                   ; 050A _ B0, 00
+        call    _printf                                 ; 050C _ E8, 00000000(rel)
+        mov     dword [rbp-0CH], eax                    ; 0511 _ 89. 45, F4
+        add     rsp, 16                                 ; 0514 _ 48: 83. C4, 10
+        pop     rbp                                     ; 0518 _ 5D
+        ret                                             ; 0519 _ C3
 ; ___lib_printlnInt End of function
 
-; Filling space: 7H
+; Filling space: 6H
 ; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 80H, 00H, 00H, 00H, 00H
+;       db 66H, 0FH, 1FH, 44H, 00H, 00H
 
 ALIGN   8
 
 ___lib_printInt:; Function begin
-        push    rbp                                     ; 0490 _ 55
-        mov     rbp, rsp                                ; 0491 _ 48: 89. E5
-        mov     rcx, rdi                                ; 0494 _ 48: 89. F9
-        lea     rdi, [rel _str_le+149DH]                ; 0497 _ 48: 8D. 3D, 0000149D(rel)
-        xor     eax, eax                                ; 049E _ 31. C0
-        mov     rsi, rcx                                ; 04A0 _ 48: 89. CE
-        pop     rbp                                     ; 04A3 _ 5D
-        jmp     _printf                                 ; 04A4 _ E9, 00000000(rel)
+        push    rbp                                     ; 0520 _ 55
+        mov     rbp, rsp                                ; 0521 _ 48: 89. E5
+        sub     rsp, 16                                 ; 0524 _ 48: 83. EC, 10
+        lea     rax, [rel _str_le+290EH]                ; 0528 _ 48: 8D. 05, 0000290E(rel)
+        mov     qword [rbp-8H], rdi                     ; 052F _ 48: 89. 7D, F8
+        mov     rsi, qword [rbp-8H]                     ; 0533 _ 48: 8B. 75, F8
+        mov     rdi, rax                                ; 0537 _ 48: 89. C7
+        mov     al, 0                                   ; 053A _ B0, 00
+        call    _printf                                 ; 053C _ E8, 00000000(rel)
+        mov     dword [rbp-0CH], eax                    ; 0541 _ 89. 45, F4
+        add     rsp, 16                                 ; 0544 _ 48: 83. C4, 10
+        pop     rbp                                     ; 0548 _ 5D
+        ret                                             ; 0549 _ C3
 ; ___lib_printInt End of function
 
-; Filling space: 7H
+; Filling space: 6H
 ; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 80H, 00H, 00H, 00H, 00H
+;       db 66H, 0FH, 1FH, 44H, 00H, 00H
 
 ALIGN   8
 
 ___lib_malloc:; Function begin
-        push    rbp                                     ; 04B0 _ 55
-        mov     rbp, rsp                                ; 04B1 _ 48: 89. E5
-        pop     rbp                                     ; 04B4 _ 5D
-        jmp     _malloc                                 ; 04B5 _ E9, 00000000(rel)
+        push    rbp                                     ; 0550 _ 55
+        mov     rbp, rsp                                ; 0551 _ 48: 89. E5
+        sub     rsp, 16                                 ; 0554 _ 48: 83. EC, 10
+        mov     qword [rbp-8H], rdi                     ; 0558 _ 48: 89. 7D, F8
+        mov     rdi, qword [rbp-8H]                     ; 055C _ 48: 8B. 7D, F8
+        call    _malloc                                 ; 0560 _ E8, 00000000(rel)
+        add     rsp, 16                                 ; 0565 _ 48: 83. C4, 10
+        pop     rbp                                     ; 0569 _ 5D
+        ret                                             ; 056A _ C3
 ; ___lib_malloc End of function
 
-; Filling space: 6H
+; Filling space: 5H
 ; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
+;       db 0FH, 1FH, 44H, 00H, 00H
 
 ALIGN   8
 
 _println:; Function begin
-        push    rbp                                     ; 04C0 _ 55
-        mov     rbp, rsp                                ; 04C1 _ 48: 89. E5
-        pop     rbp                                     ; 04C4 _ 5D
-        jmp     _puts                                   ; 04C5 _ E9, 00000000(rel)
+        push    rbp                                     ; 0570 _ 55
+        mov     rbp, rsp                                ; 0571 _ 48: 89. E5
+        sub     rsp, 16                                 ; 0574 _ 48: 83. EC, 10
+        mov     qword [rbp-8H], rdi                     ; 0578 _ 48: 89. 7D, F8
+        mov     rdi, qword [rbp-8H]                     ; 057C _ 48: 8B. 7D, F8
+        call    _puts                                   ; 0580 _ E8, 00000000(rel)
+        mov     dword [rbp-0CH], eax                    ; 0585 _ 89. 45, F4
+        add     rsp, 16                                 ; 0588 _ 48: 83. C4, 10
+        pop     rbp                                     ; 058C _ 5D
+        ret                                             ; 058D _ C3
 ; _println End of function
 
-; Filling space: 6H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
+; Filling space: 2H
+; Filler type: NOP with prefixes
+;       db 66H, 90H
 
 ALIGN   8
 
 _print: ; Function begin
-        push    rbp                                     ; 04D0 _ 55
-        mov     rbp, rsp                                ; 04D1 _ 48: 89. E5
-        mov     rcx, rdi                                ; 04D4 _ 48: 89. F9
-        lea     rdi, [rel _str_le+1455H]                ; 04D7 _ 48: 8D. 3D, 00001455(rel)
-        xor     eax, eax                                ; 04DE _ 31. C0
-        mov     rsi, rcx                                ; 04E0 _ 48: 89. CE
-        pop     rbp                                     ; 04E3 _ 5D
-        jmp     _printf                                 ; 04E4 _ E9, 00000000(rel)
+        push    rbp                                     ; 0590 _ 55
+        mov     rbp, rsp                                ; 0591 _ 48: 89. E5
+        sub     rsp, 16                                 ; 0594 _ 48: 83. EC, 10
+        lea     rax, [rel ?_246]                        ; 0598 _ 48: 8D. 05, 00002896(rel)
+        mov     qword [rbp-8H], rdi                     ; 059F _ 48: 89. 7D, F8
+        mov     rsi, qword [rbp-8H]                     ; 05A3 _ 48: 8B. 75, F8
+        mov     rdi, rax                                ; 05A7 _ 48: 89. C7
+        mov     al, 0                                   ; 05AA _ B0, 00
+        call    _printf                                 ; 05AC _ E8, 00000000(rel)
+        mov     dword [rbp-0CH], eax                    ; 05B1 _ 89. 45, F4
+        add     rsp, 16                                 ; 05B4 _ 48: 83. C4, 10
+        pop     rbp                                     ; 05B8 _ 5D
+        ret                                             ; 05B9 _ C3
 ; _print End of function
 
-; Filling space: 7H
+; Filling space: 6H
 ; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 80H, 00H, 00H, 00H, 00H
+;       db 66H, 0FH, 1FH, 44H, 00H, 00H
 
 ALIGN   8
 
 _toString:; Function begin
-        push    rbp                                     ; 04F0 _ 55
-        mov     rbp, rsp                                ; 04F1 _ 48: 89. E5
-        push    rbx                                     ; 04F4 _ 53
-        push    rax                                     ; 04F5 _ 50
-        mov     rbx, rdi                                ; 04F6 _ 48: 89. FB
-        mov     edi, 16                                 ; 04F9 _ BF, 00000010
-        call    _malloc                                 ; 04FE _ E8, 00000000(rel)
-        mov     r9, rax                                 ; 0503 _ 49: 89. C1
-        lea     r8, [r9+4H]                             ; 0506 _ 4D: 8D. 41, 04
-        test    rbx, rbx                                ; 050A _ 48: 85. DB
-        js      ?_025                                   ; 050D _ 78, 05
-        mov     rcx, r8                                 ; 050F _ 4C: 89. C1
-        jmp     ?_026                                   ; 0512 _ EB, 0F
-
-?_025:  mov     rcx, r9                                 ; 0514 _ 4C: 89. C9
-        add     rcx, 5                                  ; 0517 _ 48: 83. C1, 05
-        mov     byte [r9+4H], 45                        ; 051B _ 41: C6. 41, 04, 2D
-        neg     rbx                                     ; 0520 _ 48: F7. DB
-?_026:  test    rbx, rbx                                ; 0523 _ 48: 85. DB
-        jz      ?_028                                   ; 0526 _ 74, 4E
-        mov     rsi, qword 6666666666666667H            ; 0528 _ 48: BE, 6666666666666667
-        mov     rdi, rcx                                ; 0532 _ 48: 89. CF
-; Filling space: 0BH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H
-;       db 00H, 00H, 00H
-
-ALIGN   16
-?_027:  mov     rax, rbx                                ; 0540 _ 48: 89. D8
-        imul    rsi                                     ; 0543 _ 48: F7. EE
-        mov     rax, rdx                                ; 0546 _ 48: 89. D0
-        shr     rax, 63                                 ; 0549 _ 48: C1. E8, 3F
-        sar     rdx, 2                                  ; 054D _ 48: C1. FA, 02
-        add     rdx, rax                                ; 0551 _ 48: 01. C2
-        add     ebx, 48                                 ; 0554 _ 83. C3, 30
-        mov     rax, rdx                                ; 0557 _ 48: 89. D0
-        shl     rax, 33                                 ; 055A _ 48: C1. E0, 21
-        lea     rax, [rax+rax*4]                        ; 055E _ 48: 8D. 04 80
-        shr     rax, 32                                 ; 0562 _ 48: C1. E8, 20
-        sub     ebx, eax                                ; 0566 _ 29. C3
-        mov     byte [rdi], bl                          ; 0568 _ 88. 1F
-        inc     rdi                                     ; 056A _ 48: FF. C7
-        movsxd  rbx, edx                                ; 056D _ 48: 63. DA
-        test    edx, edx                                ; 0570 _ 85. D2
-        jnz     ?_027                                   ; 0572 _ 75, CC
-        jmp     ?_029                                   ; 0574 _ EB, 09
-
-?_028:  mov     byte [rcx], 48                          ; 0576 _ C6. 01, 30
-        inc     rcx                                     ; 0579 _ 48: FF. C1
-        mov     rdi, rcx                                ; 057C _ 48: 89. CF
-?_029:  mov     byte [rdi], 0                           ; 057F _ C6. 07, 00
-        mov     eax, edi                                ; 0582 _ 89. F8
-        sub     eax, r8d                                ; 0584 _ 44: 29. C0
-        mov     dword [r9], eax                         ; 0587 _ 41: 89. 01
-        dec     rdi                                     ; 058A _ 48: FF. CF
-        cmp     rcx, rdi                                ; 058D _ 48: 39. F9
-        ja      ?_031                                   ; 0590 _ 77, 26
-        inc     rcx                                     ; 0592 _ 48: FF. C1
-; Filling space: 0BH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H
-;       db 00H, 00H, 00H
-
-ALIGN   16
-?_030:  movzx   eax, byte [rcx-1H]                      ; 05A0 _ 0F B6. 41, FF
-        movzx   edx, byte [rdi]                         ; 05A4 _ 0F B6. 17
-        mov     byte [rcx-1H], dl                       ; 05A7 _ 88. 51, FF
-        mov     byte [rdi], al                          ; 05AA _ 88. 07
-        dec     rdi                                     ; 05AC _ 48: FF. CF
-        cmp     rcx, rdi                                ; 05AF _ 48: 39. F9
-        lea     rcx, [rcx+1H]                           ; 05B2 _ 48: 8D. 49, 01
-        jbe     ?_030                                   ; 05B6 _ 76, E8
-?_031:  mov     rax, r8                                 ; 05B8 _ 4C: 89. C0
-        add     rsp, 8                                  ; 05BB _ 48: 83. C4, 08
-        pop     rbx                                     ; 05BF _ 5B
-        pop     rbp                                     ; 05C0 _ 5D
-        ret                                             ; 05C1 _ C3
+        push    rbp                                     ; 05C0 _ 55
+        mov     rbp, rsp                                ; 05C1 _ 48: 89. E5
+        sub     rsp, 48                                 ; 05C4 _ 48: 83. EC, 30
+        mov     eax, 16                                 ; 05C8 _ B8, 00000010
+        mov     ecx, eax                                ; 05CD _ 89. C1
+        mov     qword [rbp-8H], rdi                     ; 05CF _ 48: 89. 7D, F8
+        mov     rdi, rcx                                ; 05D3 _ 48: 89. CF
+        call    _malloc                                 ; 05D6 _ E8, 00000000(rel)
+        mov     qword [rbp-10H], rax                    ; 05DB _ 48: 89. 45, F0
+        mov     rax, qword [rbp-10H]                    ; 05DF _ 48: 8B. 45, F0
+        add     rax, 4                                  ; 05E3 _ 48: 83. C0, 04
+        mov     qword [rbp-10H], rax                    ; 05E7 _ 48: 89. 45, F0
+        mov     rax, qword [rbp-10H]                    ; 05EB _ 48: 8B. 45, F0
+        mov     qword [rbp-18H], rax                    ; 05EF _ 48: 89. 45, E8
+        cmp     qword [rbp-8H], 0                       ; 05F3 _ 48: 83. 7D, F8, 00
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_020                                   ; 05F8 _ 0F 8D, 0000001E
+        xor     eax, eax                                ; 05FE _ 31. C0
+        mov     ecx, eax                                ; 0600 _ 89. C1
+        mov     rdx, qword [rbp-18H]                    ; 0602 _ 48: 8B. 55, E8
+        mov     rsi, rdx                                ; 0606 _ 48: 89. D6
+        add     rsi, 1                                  ; 0609 _ 48: 83. C6, 01
+        mov     qword [rbp-18H], rsi                    ; 060D _ 48: 89. 75, E8
+        mov     byte [rdx], 45                          ; 0611 _ C6. 02, 2D
+        sub     rcx, qword [rbp-8H]                     ; 0614 _ 48: 2B. 4D, F8
+        mov     qword [rbp-8H], rcx                     ; 0618 _ 48: 89. 4D, F8
+?_020:  cmp     qword [rbp-8H], 0                       ; 061C _ 48: 83. 7D, F8, 00
+; Note: Immediate operand could be made smaller by sign extension
+        jne     ?_021                                   ; 0621 _ 0F 85, 00000012
+        mov     rax, qword [rbp-18H]                    ; 0627 _ 48: 8B. 45, E8
+        mov     rcx, rax                                ; 062B _ 48: 89. C1
+        add     rcx, 1                                  ; 062E _ 48: 83. C1, 01
+        mov     qword [rbp-18H], rcx                    ; 0632 _ 48: 89. 4D, E8
+        mov     byte [rax], 48                          ; 0636 _ C6. 00, 30
+?_021:  mov     rax, qword [rbp-18H]                    ; 0639 _ 48: 8B. 45, E8
+        mov     qword [rbp-20H], rax                    ; 063D _ 48: 89. 45, E0
+?_022:  cmp     qword [rbp-8H], 0                       ; 0641 _ 48: 83. 7D, F8, 00
+; Note: Immediate operand could be made smaller by sign extension
+        je      ?_023                                   ; 0646 _ 0F 84, 00000049
+        mov     eax, 10                                 ; 064C _ B8, 0000000A
+        mov     ecx, eax                                ; 0651 _ 89. C1
+        mov     rax, qword [rbp-8H]                     ; 0653 _ 48: 8B. 45, F8
+        cqo                                             ; 0657 _ 48: 99
+        idiv    rcx                                     ; 0659 _ 48: F7. F9
+        mov     esi, eax                                ; 065C _ 89. C6
+        mov     dword [rbp-24H], esi                    ; 065E _ 89. 75, DC
+        mov     rax, qword [rbp-8H]                     ; 0661 _ 48: 8B. 45, F8
+        add     rax, 48                                 ; 0665 _ 48: 83. C0, 30
+        imul    esi, dword [rbp-24H], 10                ; 0669 _ 6B. 75, DC, 0A
+        movsxd  rcx, esi                                ; 066D _ 48: 63. CE
+        sub     rax, rcx                                ; 0670 _ 48: 29. C8
+        mov     dil, al                                 ; 0673 _ 40: 88. C7
+        mov     rax, qword [rbp-18H]                    ; 0676 _ 48: 8B. 45, E8
+        mov     rcx, rax                                ; 067A _ 48: 89. C1
+        add     rcx, 1                                  ; 067D _ 48: 83. C1, 01
+        mov     qword [rbp-18H], rcx                    ; 0681 _ 48: 89. 4D, E8
+        mov     byte [rax], dil                         ; 0685 _ 40: 88. 38
+        movsxd  rax, dword [rbp-24H]                    ; 0688 _ 48: 63. 45, DC
+        mov     qword [rbp-8H], rax                     ; 068C _ 48: 89. 45, F8
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_022                                   ; 0690 _ E9, FFFFFFAC
 ; _toString End of function
 
-; Filling space: 0EH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH
-;       db 84H, 00H, 00H, 00H, 00H, 00H
+?_023:  ; Local function
+        mov     rax, qword [rbp-18H]                    ; 0695 _ 48: 8B. 45, E8
+        mov     byte [rax], 0                           ; 0699 _ C6. 00, 00
+        mov     rax, qword [rbp-18H]                    ; 069C _ 48: 8B. 45, E8
+        mov     rcx, qword [rbp-10H]                    ; 06A0 _ 48: 8B. 4D, F0
+        sub     rax, rcx                                ; 06A4 _ 48: 29. C8
+        mov     edx, eax                                ; 06A7 _ 89. C2
+        mov     rax, qword [rbp-10H]                    ; 06A9 _ 48: 8B. 45, F0
+        mov     dword [rax-4H], edx                     ; 06AD _ 89. 50, FC
+        mov     rax, qword [rbp-18H]                    ; 06B0 _ 48: 8B. 45, E8
+        add     rax, -1                                 ; 06B4 _ 48: 83. C0, FF
+        mov     qword [rbp-18H], rax                    ; 06B8 _ 48: 89. 45, E8
+?_024:  mov     rax, qword [rbp-20H]                    ; 06BC _ 48: 8B. 45, E0
+        cmp     rax, qword [rbp-18H]                    ; 06C0 _ 48: 3B. 45, E8
+; Note: Immediate operand could be made smaller by sign extension
+        ja      ?_025                                   ; 06C4 _ 0F 87, 0000003B
+        mov     rax, qword [rbp-20H]                    ; 06CA _ 48: 8B. 45, E0
+        mov     cl, byte [rax]                          ; 06CE _ 8A. 08
+        mov     byte [rbp-25H], cl                      ; 06D0 _ 88. 4D, DB
+        mov     rax, qword [rbp-18H]                    ; 06D3 _ 48: 8B. 45, E8
+        mov     cl, byte [rax]                          ; 06D7 _ 8A. 08
+        mov     rax, qword [rbp-20H]                    ; 06D9 _ 48: 8B. 45, E0
+        mov     byte [rax], cl                          ; 06DD _ 88. 08
+        mov     cl, byte [rbp-25H]                      ; 06DF _ 8A. 4D, DB
+        mov     rax, qword [rbp-18H]                    ; 06E2 _ 48: 8B. 45, E8
+        mov     byte [rax], cl                          ; 06E6 _ 88. 08
+        mov     rax, qword [rbp-20H]                    ; 06E8 _ 48: 8B. 45, E0
+        add     rax, 1                                  ; 06EC _ 48: 83. C0, 01
+        mov     qword [rbp-20H], rax                    ; 06F0 _ 48: 89. 45, E0
+        mov     rax, qword [rbp-18H]                    ; 06F4 _ 48: 8B. 45, E8
+        add     rax, -1                                 ; 06F8 _ 48: 83. C0, FF
+        mov     qword [rbp-18H], rax                    ; 06FC _ 48: 89. 45, E8
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_024                                   ; 0700 _ E9, FFFFFFB7
+
+?_025:  ; Local function
+        mov     rax, qword [rbp-10H]                    ; 0705 _ 48: 8B. 45, F0
+        add     rsp, 48                                 ; 0709 _ 48: 83. C4, 30
+        pop     rbp                                     ; 070D _ 5D
+        ret                                             ; 070E _ C3
+
+        nop                                             ; 070F _ 90
 
 ALIGN   16
+_init:  ; Function begin
+        push    rbp                                     ; 0710 _ 55
+        mov     rbp, rsp                                ; 0711 _ 48: 89. E5
+        sub     rsp, 576                                ; 0714 _ 48: 81. EC, 00000240
+        mov     rax, qword [rel _N_]                    ; 071B _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _M_]                    ; 0722 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rel _C_]                    ; 0729 _ 48: 8B. 15, 00000000(GOT r)
+        mov     rsi, qword [rel _tot_]                  ; 0730 _ 48: 8B. 35, 00000000(GOT r)
+        mov     qword [rsi], 0                          ; 0737 _ 48: C7. 06, 00000000
+        mov     qword [rdx], 0                          ; 073E _ 48: C7. 02, 00000000
+        mov     qword [rcx], 0                          ; 0745 _ 48: C7. 01, 00000000
+        mov     qword [rax], 0                          ; 074C _ 48: C7. 00, 00000000
+        mov     qword [rbp-58H], 6                      ; 0753 _ 48: C7. 45, A8, 00000006
+        mov     rax, qword [rbp-58H]                    ; 075B _ 48: 8B. 45, A8
+        shl     rax, 3                                  ; 075F _ 48: C1. E0, 03
+        add     rax, 8                                  ; 0763 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 0767 _ 48: 89. C7
+        call    ___lib_malloc                           ; 076A _ E8, 00000000(rel)
+        mov     rcx, qword [rel _g_]                    ; 076F _ 48: 8B. 0D, 00000000(GOT r)
+        mov     qword [rbp-20H], rax                    ; 0776 _ 48: 89. 45, E0
+        mov     rax, qword [rbp-58H]                    ; 077A _ 48: 8B. 45, A8
+        mov     rdx, qword [rbp-20H]                    ; 077E _ 48: 8B. 55, E0
+        mov     qword [rdx], rax                        ; 0782 _ 48: 89. 02
+        mov     rax, qword [rbp-20H]                    ; 0785 _ 48: 8B. 45, E0
+        add     rax, 8                                  ; 0789 _ 48: 83. C0, 08
+        mov     qword [rbp-20H], rax                    ; 078D _ 48: 89. 45, E0
+        mov     rax, qword [rbp-20H]                    ; 0791 _ 48: 8B. 45, E0
+        mov     qword [rcx], rax                        ; 0795 _ 48: 89. 01
+        mov     qword [rbp-0B0H], 0                     ; 0798 _ 48: C7. 85, FFFFFF50, 00000000
+?_026:  cmp     qword [rbp-0B0H], 6                     ; 07A3 _ 48: 83. BD, FFFFFF50, 06
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_027                                   ; 07AB _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_028                                   ; 07B1 _ E9, 00000005
 
-_hex2int:; Function begin
-        push    rbp                                     ; 05D0 _ 55
-        mov     rbp, rsp                                ; 05D1 _ 48: 89. E5
-        movsxd  r8, dword [rdi-4H]                      ; 05D4 _ 4C: 63. 47, FC
-        xor     eax, eax                                ; 05D8 _ 31. C0
-        test    r8, r8                                  ; 05DA _ 4D: 85. C0
-        jle     ?_036                                   ; 05DD _ 7E, 6E
-        xor     edx, edx                                ; 05DF _ 31. D2
-; Filling space: 0FH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 66H, 66H, 2EH, 0FH
-;       db 1FH, 84H, 00H, 00H, 00H, 00H, 00H
+?_027:  jmp     ?_039                                   ; 07B6 _ E9, 000001C6
+
+?_028:  mov     qword [rbp-170H], 100001                ; 07BB _ 48: C7. 85, FFFFFE90, 000186A1
+        mov     rax, qword [rbp-170H]                   ; 07C6 _ 48: 8B. 85, FFFFFE90
+        shl     rax, 3                                  ; 07CD _ 48: C1. E0, 03
+        add     rax, 8                                  ; 07D1 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 07D5 _ 48: 89. C7
+        call    ___lib_malloc                           ; 07D8 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _g_]                    ; 07DD _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-178H], rax                   ; 07E4 _ 48: 89. 85, FFFFFE88
+        mov     rax, qword [rbp-170H]                   ; 07EB _ 48: 8B. 85, FFFFFE90
+        mov     rcx, qword [rbp-178H]                   ; 07F2 _ 48: 8B. 8D, FFFFFE88
+        mov     qword [rcx], rax                        ; 07F9 _ 48: 89. 01
+        mov     rax, qword [rbp-178H]                   ; 07FC _ 48: 8B. 85, FFFFFE88
+        add     rax, 8                                  ; 0803 _ 48: 83. C0, 08
+        mov     qword [rbp-178H], rax                   ; 0807 _ 48: 89. 85, FFFFFE88
+        mov     rax, qword [rbp-178H]                   ; 080E _ 48: 8B. 85, FFFFFE88
+        mov     rcx, qword [rdi]                        ; 0815 _ 48: 8B. 0F
+        mov     rdi, qword [rbp-0B0H]                   ; 0818 _ 48: 8B. BD, FFFFFF50
+        shl     rdi, 3                                  ; 081F _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 0823 _ 48: 01. F9
+        mov     qword [rcx], rax                        ; 0826 _ 48: 89. 01
+        mov     qword [rbp-0B8H], 0                     ; 0829 _ 48: C7. 85, FFFFFF48, 00000000
+?_029:  cmp     qword [rbp-0B8H], 100001                ; 0834 _ 48: 81. BD, FFFFFF48, 000186A1
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_030                                   ; 083F _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_031                                   ; 0845 _ E9, 00000005
+
+?_030:  jmp     ?_037                                   ; 084A _ E9, 00000116
+
+?_031:  mov     qword [rbp-198H], 15                    ; 084F _ 48: C7. 85, FFFFFE68, 0000000F
+        mov     rax, qword [rbp-198H]                   ; 085A _ 48: 8B. 85, FFFFFE68
+        shl     rax, 3                                  ; 0861 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 0865 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 0869 _ 48: 89. C7
+        call    ___lib_malloc                           ; 086C _ E8, 00000000(rel)
+        mov     rdi, qword [rel _g_]                    ; 0871 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-188H], rax                   ; 0878 _ 48: 89. 85, FFFFFE78
+        mov     rax, qword [rbp-198H]                   ; 087F _ 48: 8B. 85, FFFFFE68
+        mov     rcx, qword [rbp-188H]                   ; 0886 _ 48: 8B. 8D, FFFFFE78
+        mov     qword [rcx], rax                        ; 088D _ 48: 89. 01
+        mov     rax, qword [rbp-188H]                   ; 0890 _ 48: 8B. 85, FFFFFE78
+        add     rax, 8                                  ; 0897 _ 48: 83. C0, 08
+        mov     qword [rbp-188H], rax                   ; 089B _ 48: 89. 85, FFFFFE78
+        mov     rax, qword [rbp-188H]                   ; 08A2 _ 48: 8B. 85, FFFFFE78
+        mov     rcx, qword [rdi]                        ; 08A9 _ 48: 8B. 0F
+        mov     rdi, qword [rbp-0B0H]                   ; 08AC _ 48: 8B. BD, FFFFFF50
+        shl     rdi, 3                                  ; 08B3 _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 08B7 _ 48: 01. F9
+        mov     rcx, qword [rcx]                        ; 08BA _ 48: 8B. 09
+        mov     rdi, qword [rbp-0B8H]                   ; 08BD _ 48: 8B. BD, FFFFFF48
+        shl     rdi, 3                                  ; 08C4 _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 08C8 _ 48: 01. F9
+        mov     qword [rcx], rax                        ; 08CB _ 48: 89. 01
+        mov     qword [rbp-0C0H], 0                     ; 08CE _ 48: C7. 85, FFFFFF40, 00000000
+?_032:  cmp     qword [rbp-0C0H], 15                    ; 08D9 _ 48: 83. BD, FFFFFF40, 0F
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_033                                   ; 08E1 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_034                                   ; 08E7 _ E9, 00000005
+
+?_033:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_035                                   ; 08EC _ E9, 00000058
+
+?_034:  mov     rax, qword [rel _g_]                    ; 08F1 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 08F8 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 08FB _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 0902 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0906 _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 0909 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B8H]                   ; 090C _ 48: 8B. 8D, FFFFFF48
+        shl     rcx, 3                                  ; 0913 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0917 _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 091A _ 48: 8B. 00
+        mov     rcx, qword [rbp-0C0H]                   ; 091D _ 48: 8B. 8D, FFFFFF40
+        shl     rcx, 3                                  ; 0924 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0928 _ 48: 01. C8
+        mov     qword [rax], 0                          ; 092B _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0C0H]                   ; 0932 _ 48: 8B. 85, FFFFFF40
+        add     rax, 1                                  ; 0939 _ 48: 83. C0, 01
+        mov     qword [rbp-0C0H], rax                   ; 093D _ 48: 89. 85, FFFFFF40
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_032                                   ; 0944 _ E9, FFFFFF90
+
+?_035:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_036                                   ; 0949 _ E9, 00000000
+
+?_036:  mov     rax, qword [rbp-0B8H]                   ; 094E _ 48: 8B. 85, FFFFFF48
+        add     rax, 1                                  ; 0955 _ 48: 83. C0, 01
+        mov     qword [rbp-0B8H], rax                   ; 0959 _ 48: 89. 85, FFFFFF48
+        jmp     ?_029                                   ; 0960 _ E9, FFFFFECF
+
+?_037:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_038                                   ; 0965 _ E9, 00000000
+
+?_038:  mov     rax, qword [rbp-0B0H]                   ; 096A _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 0971 _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 0975 _ 48: 89. 85, FFFFFF50
+        jmp     ?_026                                   ; 097C _ E9, FFFFFE22
+; _init End of function
+
+?_039:  ; Local function
+        mov     qword [rbp-0E0H], 6                     ; 0981 _ 48: C7. 85, FFFFFF20, 00000006
+        mov     rax, qword [rbp-0E0H]                   ; 098C _ 48: 8B. 85, FFFFFF20
+        shl     rax, 3                                  ; 0993 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 0997 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 099B _ 48: 89. C7
+        call    ___lib_malloc                           ; 099E _ E8, 00000000(rel)
+        mov     rdi, qword [rel _Sum_]                  ; 09A3 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-0C8H], rax                   ; 09AA _ 48: 89. 85, FFFFFF38
+        mov     rax, qword [rbp-0E0H]                   ; 09B1 _ 48: 8B. 85, FFFFFF20
+        mov     rcx, qword [rbp-0C8H]                   ; 09B8 _ 48: 8B. 8D, FFFFFF38
+        mov     qword [rcx], rax                        ; 09BF _ 48: 89. 01
+        mov     rax, qword [rbp-0C8H]                   ; 09C2 _ 48: 8B. 85, FFFFFF38
+        add     rax, 8                                  ; 09C9 _ 48: 83. C0, 08
+        mov     qword [rbp-0C8H], rax                   ; 09CD _ 48: 89. 85, FFFFFF38
+        mov     rax, qword [rbp-0C8H]                   ; 09D4 _ 48: 8B. 85, FFFFFF38
+        mov     qword [rdi], rax                        ; 09DB _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 09DE _ 48: C7. 85, FFFFFF50, 00000000
+?_040:  cmp     qword [rbp-0B0H], 6                     ; 09E9 _ 48: 83. BD, FFFFFF50, 06
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_041                                   ; 09F1 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_042                                   ; 09F7 _ E9, 00000005
+
+?_041:  jmp     ?_053                                   ; 09FC _ E9, 000001C6
+
+?_042:  mov     qword [rbp-1B0H], 100001                ; 0A01 _ 48: C7. 85, FFFFFE50, 000186A1
+        mov     rax, qword [rbp-1B0H]                   ; 0A0C _ 48: 8B. 85, FFFFFE50
+        shl     rax, 3                                  ; 0A13 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 0A17 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 0A1B _ 48: 89. C7
+        call    ___lib_malloc                           ; 0A1E _ E8, 00000000(rel)
+        mov     rdi, qword [rel _Sum_]                  ; 0A23 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-1A8H], rax                   ; 0A2A _ 48: 89. 85, FFFFFE58
+        mov     rax, qword [rbp-1B0H]                   ; 0A31 _ 48: 8B. 85, FFFFFE50
+        mov     rcx, qword [rbp-1A8H]                   ; 0A38 _ 48: 8B. 8D, FFFFFE58
+        mov     qword [rcx], rax                        ; 0A3F _ 48: 89. 01
+        mov     rax, qword [rbp-1A8H]                   ; 0A42 _ 48: 8B. 85, FFFFFE58
+        add     rax, 8                                  ; 0A49 _ 48: 83. C0, 08
+        mov     qword [rbp-1A8H], rax                   ; 0A4D _ 48: 89. 85, FFFFFE58
+        mov     rax, qword [rbp-1A8H]                   ; 0A54 _ 48: 8B. 85, FFFFFE58
+        mov     rcx, qword [rdi]                        ; 0A5B _ 48: 8B. 0F
+        mov     rdi, qword [rbp-0B0H]                   ; 0A5E _ 48: 8B. BD, FFFFFF50
+        shl     rdi, 3                                  ; 0A65 _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 0A69 _ 48: 01. F9
+        mov     qword [rcx], rax                        ; 0A6C _ 48: 89. 01
+        mov     qword [rbp-0B8H], 0                     ; 0A6F _ 48: C7. 85, FFFFFF48, 00000000
+?_043:  cmp     qword [rbp-0B8H], 100001                ; 0A7A _ 48: 81. BD, FFFFFF48, 000186A1
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_044                                   ; 0A85 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_045                                   ; 0A8B _ E9, 00000005
+
+?_044:  jmp     ?_051                                   ; 0A90 _ E9, 00000116
+
+?_045:  mov     qword [rbp-1C0H], 15                    ; 0A95 _ 48: C7. 85, FFFFFE40, 0000000F
+        mov     rax, qword [rbp-1C0H]                   ; 0AA0 _ 48: 8B. 85, FFFFFE40
+        shl     rax, 3                                  ; 0AA7 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 0AAB _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 0AAF _ 48: 89. C7
+        call    ___lib_malloc                           ; 0AB2 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _Sum_]                  ; 0AB7 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-1B8H], rax                   ; 0ABE _ 48: 89. 85, FFFFFE48
+        mov     rax, qword [rbp-1C0H]                   ; 0AC5 _ 48: 8B. 85, FFFFFE40
+        mov     rcx, qword [rbp-1B8H]                   ; 0ACC _ 48: 8B. 8D, FFFFFE48
+        mov     qword [rcx], rax                        ; 0AD3 _ 48: 89. 01
+        mov     rax, qword [rbp-1B8H]                   ; 0AD6 _ 48: 8B. 85, FFFFFE48
+        add     rax, 8                                  ; 0ADD _ 48: 83. C0, 08
+        mov     qword [rbp-1B8H], rax                   ; 0AE1 _ 48: 89. 85, FFFFFE48
+        mov     rax, qword [rbp-1B8H]                   ; 0AE8 _ 48: 8B. 85, FFFFFE48
+        mov     rcx, qword [rdi]                        ; 0AEF _ 48: 8B. 0F
+        mov     rdi, qword [rbp-0B0H]                   ; 0AF2 _ 48: 8B. BD, FFFFFF50
+        shl     rdi, 3                                  ; 0AF9 _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 0AFD _ 48: 01. F9
+        mov     rcx, qword [rcx]                        ; 0B00 _ 48: 8B. 09
+        mov     rdi, qword [rbp-0B8H]                   ; 0B03 _ 48: 8B. BD, FFFFFF48
+        shl     rdi, 3                                  ; 0B0A _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 0B0E _ 48: 01. F9
+        mov     qword [rcx], rax                        ; 0B11 _ 48: 89. 01
+        mov     qword [rbp-0C0H], 0                     ; 0B14 _ 48: C7. 85, FFFFFF40, 00000000
+?_046:  cmp     qword [rbp-0C0H], 15                    ; 0B1F _ 48: 83. BD, FFFFFF40, 0F
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_047                                   ; 0B27 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_048                                   ; 0B2D _ E9, 00000005
+
+?_047:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_049                                   ; 0B32 _ E9, 00000058
+
+?_048:  mov     rax, qword [rel _Sum_]                  ; 0B37 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 0B3E _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 0B41 _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 0B48 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0B4C _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 0B4F _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B8H]                   ; 0B52 _ 48: 8B. 8D, FFFFFF48
+        shl     rcx, 3                                  ; 0B59 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0B5D _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 0B60 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0C0H]                   ; 0B63 _ 48: 8B. 8D, FFFFFF40
+        shl     rcx, 3                                  ; 0B6A _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0B6E _ 48: 01. C8
+        mov     qword [rax], 0                          ; 0B71 _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0C0H]                   ; 0B78 _ 48: 8B. 85, FFFFFF40
+        add     rax, 1                                  ; 0B7F _ 48: 83. C0, 01
+        mov     qword [rbp-0C0H], rax                   ; 0B83 _ 48: 89. 85, FFFFFF40
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_046                                   ; 0B8A _ E9, FFFFFF90
+
+?_049:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_050                                   ; 0B8F _ E9, 00000000
+
+?_050:  mov     rax, qword [rbp-0B8H]                   ; 0B94 _ 48: 8B. 85, FFFFFF48
+        add     rax, 1                                  ; 0B9B _ 48: 83. C0, 01
+        mov     qword [rbp-0B8H], rax                   ; 0B9F _ 48: 89. 85, FFFFFF48
+        jmp     ?_043                                   ; 0BA6 _ E9, FFFFFECF
+
+?_051:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_052                                   ; 0BAB _ E9, 00000000
+
+?_052:  mov     rax, qword [rbp-0B0H]                   ; 0BB0 _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 0BB7 _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 0BBB _ 48: 89. 85, FFFFFF50
+        jmp     ?_040                                   ; 0BC2 _ E9, FFFFFE22
+
+?_053:  ; Local function
+        mov     qword [rbp-160H], 1001                  ; 0BC7 _ 48: C7. 85, FFFFFEA0, 000003E9
+        mov     rax, qword [rbp-160H]                   ; 0BD2 _ 48: 8B. 85, FFFFFEA0
+        shl     rax, 3                                  ; 0BD9 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 0BDD _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 0BE1 _ 48: 89. C7
+        call    ___lib_malloc                           ; 0BE4 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _fm_]                   ; 0BE9 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-158H], rax                   ; 0BF0 _ 48: 89. 85, FFFFFEA8
+        mov     rax, qword [rbp-160H]                   ; 0BF7 _ 48: 8B. 85, FFFFFEA0
+        mov     rcx, qword [rbp-158H]                   ; 0BFE _ 48: 8B. 8D, FFFFFEA8
+        mov     qword [rcx], rax                        ; 0C05 _ 48: 89. 01
+        mov     rax, qword [rbp-158H]                   ; 0C08 _ 48: 8B. 85, FFFFFEA8
+        add     rax, 8                                  ; 0C0F _ 48: 83. C0, 08
+        mov     qword [rbp-158H], rax                   ; 0C13 _ 48: 89. 85, FFFFFEA8
+        mov     rax, qword [rbp-158H]                   ; 0C1A _ 48: 8B. 85, FFFFFEA8
+        mov     qword [rdi], rax                        ; 0C21 _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 0C24 _ 48: C7. 85, FFFFFF50, 00000000
+?_054:  cmp     qword [rbp-0B0H], 1001                  ; 0C2F _ 48: 81. BD, FFFFFF50, 000003E9
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_055                                   ; 0C3A _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_056                                   ; 0C40 _ E9, 00000005
+
+?_055:  jmp     ?_062                                   ; 0C45 _ E9, 000000F4
+
+?_056:  mov     qword [rbp-1D8H], 13                    ; 0C4A _ 48: C7. 85, FFFFFE28, 0000000D
+        mov     rax, qword [rbp-1D8H]                   ; 0C55 _ 48: 8B. 85, FFFFFE28
+        shl     rax, 3                                  ; 0C5C _ 48: C1. E0, 03
+        add     rax, 8                                  ; 0C60 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 0C64 _ 48: 89. C7
+        call    ___lib_malloc                           ; 0C67 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _fm_]                   ; 0C6C _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-1D0H], rax                   ; 0C73 _ 48: 89. 85, FFFFFE30
+        mov     rax, qword [rbp-1D8H]                   ; 0C7A _ 48: 8B. 85, FFFFFE28
+        mov     rcx, qword [rbp-1D0H]                   ; 0C81 _ 48: 8B. 8D, FFFFFE30
+        mov     qword [rcx], rax                        ; 0C88 _ 48: 89. 01
+        mov     rax, qword [rbp-1D0H]                   ; 0C8B _ 48: 8B. 85, FFFFFE30
+        add     rax, 8                                  ; 0C92 _ 48: 83. C0, 08
+        mov     qword [rbp-1D0H], rax                   ; 0C96 _ 48: 89. 85, FFFFFE30
+        mov     rax, qword [rbp-1D0H]                   ; 0C9D _ 48: 8B. 85, FFFFFE30
+        mov     rcx, qword [rdi]                        ; 0CA4 _ 48: 8B. 0F
+        mov     rdi, qword [rbp-0B0H]                   ; 0CA7 _ 48: 8B. BD, FFFFFF50
+        shl     rdi, 3                                  ; 0CAE _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 0CB2 _ 48: 01. F9
+        mov     qword [rcx], rax                        ; 0CB5 _ 48: 89. 01
+        mov     qword [rbp-0B8H], 0                     ; 0CB8 _ 48: C7. 85, FFFFFF48, 00000000
+?_057:  cmp     qword [rbp-0B8H], 13                    ; 0CC3 _ 48: 83. BD, FFFFFF48, 0D
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_058                                   ; 0CCB _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_059                                   ; 0CD1 _ E9, 00000005
+
+?_058:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_060                                   ; 0CD6 _ E9, 00000047
+
+?_059:  mov     rax, qword [rel _fm_]                   ; 0CDB _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 0CE2 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 0CE5 _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 0CEC _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0CF0 _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 0CF3 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B8H]                   ; 0CF6 _ 48: 8B. 8D, FFFFFF48
+        shl     rcx, 3                                  ; 0CFD _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0D01 _ 48: 01. C8
+        mov     qword [rax], 0                          ; 0D04 _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B8H]                   ; 0D0B _ 48: 8B. 85, FFFFFF48
+        add     rax, 1                                  ; 0D12 _ 48: 83. C0, 01
+        mov     qword [rbp-0B8H], rax                   ; 0D16 _ 48: 89. 85, FFFFFF48
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_057                                   ; 0D1D _ E9, FFFFFFA1
+
+?_060:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_061                                   ; 0D22 _ E9, 00000000
+
+?_061:  mov     rax, qword [rbp-0B0H]                   ; 0D27 _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 0D2E _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 0D32 _ 48: 89. 85, FFFFFF50
+        jmp     ?_054                                   ; 0D39 _ E9, FFFFFEF1
+
+?_062:  ; Local function
+        mov     qword [rbp-78H], 100001                 ; 0D3E _ 48: C7. 45, 88, 000186A1
+        mov     rax, qword [rbp-78H]                    ; 0D46 _ 48: 8B. 45, 88
+        shl     rax, 3                                  ; 0D4A _ 48: C1. E0, 03
+        add     rax, 8                                  ; 0D4E _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 0D52 _ 48: 89. C7
+        call    ___lib_malloc                           ; 0D55 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _ksm_]                  ; 0D5A _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-98H], rax                    ; 0D61 _ 48: 89. 85, FFFFFF68
+        mov     rax, qword [rbp-78H]                    ; 0D68 _ 48: 8B. 45, 88
+        mov     rcx, qword [rbp-98H]                    ; 0D6C _ 48: 8B. 8D, FFFFFF68
+        mov     qword [rcx], rax                        ; 0D73 _ 48: 89. 01
+        mov     rax, qword [rbp-98H]                    ; 0D76 _ 48: 8B. 85, FFFFFF68
+        add     rax, 8                                  ; 0D7D _ 48: 83. C0, 08
+        mov     qword [rbp-98H], rax                    ; 0D81 _ 48: 89. 85, FFFFFF68
+        mov     rax, qword [rbp-98H]                    ; 0D88 _ 48: 8B. 85, FFFFFF68
+        mov     qword [rdi], rax                        ; 0D8F _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 0D92 _ 48: C7. 85, FFFFFF50, 00000000
+?_063:  cmp     qword [rbp-0B0H], 100001                ; 0D9D _ 48: 81. BD, FFFFFF50, 000186A1
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_064                                   ; 0DA8 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_065                                   ; 0DAE _ E9, 00000005
+
+?_064:  jmp     ?_071                                   ; 0DB3 _ E9, 000000F4
+
+?_065:  mov     qword [rbp-1F8H], 21                    ; 0DB8 _ 48: C7. 85, FFFFFE08, 00000015
+        mov     rax, qword [rbp-1F8H]                   ; 0DC3 _ 48: 8B. 85, FFFFFE08
+        shl     rax, 3                                  ; 0DCA _ 48: C1. E0, 03
+        add     rax, 8                                  ; 0DCE _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 0DD2 _ 48: 89. C7
+        call    ___lib_malloc                           ; 0DD5 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _ksm_]                  ; 0DDA _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-1F0H], rax                   ; 0DE1 _ 48: 89. 85, FFFFFE10
+        mov     rax, qword [rbp-1F8H]                   ; 0DE8 _ 48: 8B. 85, FFFFFE08
+        mov     rcx, qword [rbp-1F0H]                   ; 0DEF _ 48: 8B. 8D, FFFFFE10
+        mov     qword [rcx], rax                        ; 0DF6 _ 48: 89. 01
+        mov     rax, qword [rbp-1F0H]                   ; 0DF9 _ 48: 8B. 85, FFFFFE10
+        add     rax, 8                                  ; 0E00 _ 48: 83. C0, 08
+        mov     qword [rbp-1F0H], rax                   ; 0E04 _ 48: 89. 85, FFFFFE10
+        mov     rax, qword [rbp-1F0H]                   ; 0E0B _ 48: 8B. 85, FFFFFE10
+        mov     rcx, qword [rdi]                        ; 0E12 _ 48: 8B. 0F
+        mov     rdi, qword [rbp-0B0H]                   ; 0E15 _ 48: 8B. BD, FFFFFF50
+        shl     rdi, 3                                  ; 0E1C _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 0E20 _ 48: 01. F9
+        mov     qword [rcx], rax                        ; 0E23 _ 48: 89. 01
+        mov     qword [rbp-0B8H], 0                     ; 0E26 _ 48: C7. 85, FFFFFF48, 00000000
+?_066:  cmp     qword [rbp-0B8H], 21                    ; 0E31 _ 48: 83. BD, FFFFFF48, 15
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_067                                   ; 0E39 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_068                                   ; 0E3F _ E9, 00000005
+
+?_067:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_069                                   ; 0E44 _ E9, 00000047
+
+?_068:  mov     rax, qword [rel _ksm_]                  ; 0E49 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 0E50 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 0E53 _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 0E5A _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0E5E _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 0E61 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B8H]                   ; 0E64 _ 48: 8B. 8D, FFFFFF48
+        shl     rcx, 3                                  ; 0E6B _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0E6F _ 48: 01. C8
+        mov     qword [rax], 0                          ; 0E72 _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B8H]                   ; 0E79 _ 48: 8B. 85, FFFFFF48
+        add     rax, 1                                  ; 0E80 _ 48: 83. C0, 01
+        mov     qword [rbp-0B8H], rax                   ; 0E84 _ 48: 89. 85, FFFFFF48
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_066                                   ; 0E8B _ E9, FFFFFFA1
+
+?_069:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_070                                   ; 0E90 _ E9, 00000000
+
+?_070:  mov     rax, qword [rbp-0B0H]                   ; 0E95 _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 0E9C _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 0EA0 _ 48: 89. 85, FFFFFF50
+        jmp     ?_063                                   ; 0EA7 _ E9, FFFFFEF1
+
+?_071:  ; Local function
+        mov     qword [rbp-118H], 21                    ; 0EAC _ 48: C7. 85, FFFFFEE8, 00000015
+        mov     rax, qword [rbp-118H]                   ; 0EB7 _ 48: 8B. 85, FFFFFEE8
+        shl     rax, 3                                  ; 0EBE _ 48: C1. E0, 03
+        add     rax, 8                                  ; 0EC2 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 0EC6 _ 48: 89. C7
+        call    ___lib_malloc                           ; 0EC9 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _p_]                    ; 0ECE _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-108H], rax                   ; 0ED5 _ 48: 89. 85, FFFFFEF8
+        mov     rax, qword [rbp-118H]                   ; 0EDC _ 48: 8B. 85, FFFFFEE8
+        mov     rcx, qword [rbp-108H]                   ; 0EE3 _ 48: 8B. 8D, FFFFFEF8
+        mov     qword [rcx], rax                        ; 0EEA _ 48: 89. 01
+        mov     rax, qword [rbp-108H]                   ; 0EED _ 48: 8B. 85, FFFFFEF8
+        add     rax, 8                                  ; 0EF4 _ 48: 83. C0, 08
+        mov     qword [rbp-108H], rax                   ; 0EF8 _ 48: 89. 85, FFFFFEF8
+        mov     rax, qword [rbp-108H]                   ; 0EFF _ 48: 8B. 85, FFFFFEF8
+        mov     qword [rdi], rax                        ; 0F06 _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 0F09 _ 48: C7. 85, FFFFFF50, 00000000
+?_072:  cmp     qword [rbp-0B0H], 21                    ; 0F14 _ 48: 83. BD, FFFFFF50, 15
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_073                                   ; 0F1C _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_074                                   ; 0F22 _ E9, 00000005
+
+?_073:  jmp     ?_080                                   ; 0F27 _ E9, 000000F4
+
+?_074:  mov     qword [rbp-208H], 21                    ; 0F2C _ 48: C7. 85, FFFFFDF8, 00000015
+        mov     rax, qword [rbp-208H]                   ; 0F37 _ 48: 8B. 85, FFFFFDF8
+        shl     rax, 3                                  ; 0F3E _ 48: C1. E0, 03
+        add     rax, 8                                  ; 0F42 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 0F46 _ 48: 89. C7
+        call    ___lib_malloc                           ; 0F49 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _p_]                    ; 0F4E _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-200H], rax                   ; 0F55 _ 48: 89. 85, FFFFFE00
+        mov     rax, qword [rbp-208H]                   ; 0F5C _ 48: 8B. 85, FFFFFDF8
+        mov     rcx, qword [rbp-200H]                   ; 0F63 _ 48: 8B. 8D, FFFFFE00
+        mov     qword [rcx], rax                        ; 0F6A _ 48: 89. 01
+        mov     rax, qword [rbp-200H]                   ; 0F6D _ 48: 8B. 85, FFFFFE00
+        add     rax, 8                                  ; 0F74 _ 48: 83. C0, 08
+        mov     qword [rbp-200H], rax                   ; 0F78 _ 48: 89. 85, FFFFFE00
+        mov     rax, qword [rbp-200H]                   ; 0F7F _ 48: 8B. 85, FFFFFE00
+        mov     rcx, qword [rdi]                        ; 0F86 _ 48: 8B. 0F
+        mov     rdi, qword [rbp-0B0H]                   ; 0F89 _ 48: 8B. BD, FFFFFF50
+        shl     rdi, 3                                  ; 0F90 _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 0F94 _ 48: 01. F9
+        mov     qword [rcx], rax                        ; 0F97 _ 48: 89. 01
+        mov     qword [rbp-0B8H], 0                     ; 0F9A _ 48: C7. 85, FFFFFF48, 00000000
+?_075:  cmp     qword [rbp-0B8H], 21                    ; 0FA5 _ 48: 83. BD, FFFFFF48, 15
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_076                                   ; 0FAD _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_077                                   ; 0FB3 _ E9, 00000005
+
+?_076:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_078                                   ; 0FB8 _ E9, 00000047
+
+?_077:  mov     rax, qword [rel _p_]                    ; 0FBD _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 0FC4 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 0FC7 _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 0FCE _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0FD2 _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 0FD5 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B8H]                   ; 0FD8 _ 48: 8B. 8D, FFFFFF48
+        shl     rcx, 3                                  ; 0FDF _ 48: C1. E1, 03
+        add     rax, rcx                                ; 0FE3 _ 48: 01. C8
+        mov     qword [rax], 0                          ; 0FE6 _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B8H]                   ; 0FED _ 48: 8B. 85, FFFFFF48
+        add     rax, 1                                  ; 0FF4 _ 48: 83. C0, 01
+        mov     qword [rbp-0B8H], rax                   ; 0FF8 _ 48: 89. 85, FFFFFF48
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_075                                   ; 0FFF _ E9, FFFFFFA1
+
+?_078:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_079                                   ; 1004 _ E9, 00000000
+
+?_079:  mov     rax, qword [rbp-0B0H]                   ; 1009 _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 1010 _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 1014 _ 48: 89. 85, FFFFFF50
+        jmp     ?_072                                   ; 101B _ E9, FFFFFEF4
+
+?_080:  ; Local function
+        mov     qword [rbp-138H], 21                    ; 1020 _ 48: C7. 85, FFFFFEC8, 00000015
+        mov     rax, qword [rbp-138H]                   ; 102B _ 48: 8B. 85, FFFFFEC8
+        shl     rax, 3                                  ; 1032 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 1036 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 103A _ 48: 89. C7
+        call    ___lib_malloc                           ; 103D _ E8, 00000000(rel)
+        mov     rdi, qword [rel _q_]                    ; 1042 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-128H], rax                   ; 1049 _ 48: 89. 85, FFFFFED8
+        mov     rax, qword [rbp-138H]                   ; 1050 _ 48: 8B. 85, FFFFFEC8
+        mov     rcx, qword [rbp-128H]                   ; 1057 _ 48: 8B. 8D, FFFFFED8
+        mov     qword [rcx], rax                        ; 105E _ 48: 89. 01
+        mov     rax, qword [rbp-128H]                   ; 1061 _ 48: 8B. 85, FFFFFED8
+        add     rax, 8                                  ; 1068 _ 48: 83. C0, 08
+        mov     qword [rbp-128H], rax                   ; 106C _ 48: 89. 85, FFFFFED8
+        mov     rax, qword [rbp-128H]                   ; 1073 _ 48: 8B. 85, FFFFFED8
+        mov     qword [rdi], rax                        ; 107A _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 107D _ 48: C7. 85, FFFFFF50, 00000000
+?_081:  cmp     qword [rbp-0B0H], 21                    ; 1088 _ 48: 83. BD, FFFFFF50, 15
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_082                                   ; 1090 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_083                                   ; 1096 _ E9, 00000005
+
+?_082:  jmp     ?_089                                   ; 109B _ E9, 000000F7
+
+?_083:  mov     qword [rbp-218H], 100001                ; 10A0 _ 48: C7. 85, FFFFFDE8, 000186A1
+        mov     rax, qword [rbp-218H]                   ; 10AB _ 48: 8B. 85, FFFFFDE8
+        shl     rax, 3                                  ; 10B2 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 10B6 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 10BA _ 48: 89. C7
+        call    ___lib_malloc                           ; 10BD _ E8, 00000000(rel)
+        mov     rdi, qword [rel _q_]                    ; 10C2 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-228H], rax                   ; 10C9 _ 48: 89. 85, FFFFFDD8
+        mov     rax, qword [rbp-218H]                   ; 10D0 _ 48: 8B. 85, FFFFFDE8
+        mov     rcx, qword [rbp-228H]                   ; 10D7 _ 48: 8B. 8D, FFFFFDD8
+        mov     qword [rcx], rax                        ; 10DE _ 48: 89. 01
+        mov     rax, qword [rbp-228H]                   ; 10E1 _ 48: 8B. 85, FFFFFDD8
+        add     rax, 8                                  ; 10E8 _ 48: 83. C0, 08
+        mov     qword [rbp-228H], rax                   ; 10EC _ 48: 89. 85, FFFFFDD8
+        mov     rax, qword [rbp-228H]                   ; 10F3 _ 48: 8B. 85, FFFFFDD8
+        mov     rcx, qword [rdi]                        ; 10FA _ 48: 8B. 0F
+        mov     rdi, qword [rbp-0B0H]                   ; 10FD _ 48: 8B. BD, FFFFFF50
+        shl     rdi, 3                                  ; 1104 _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 1108 _ 48: 01. F9
+        mov     qword [rcx], rax                        ; 110B _ 48: 89. 01
+        mov     qword [rbp-0B8H], 0                     ; 110E _ 48: C7. 85, FFFFFF48, 00000000
+?_084:  cmp     qword [rbp-0B8H], 100001                ; 1119 _ 48: 81. BD, FFFFFF48, 000186A1
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_085                                   ; 1124 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_086                                   ; 112A _ E9, 00000005
+
+?_085:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_087                                   ; 112F _ E9, 00000047
+
+?_086:  mov     rax, qword [rel _q_]                    ; 1134 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 113B _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 113E _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 1145 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 1149 _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 114C _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B8H]                   ; 114F _ 48: 8B. 8D, FFFFFF48
+        shl     rcx, 3                                  ; 1156 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 115A _ 48: 01. C8
+        mov     qword [rax], 0                          ; 115D _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B8H]                   ; 1164 _ 48: 8B. 85, FFFFFF48
+        add     rax, 1                                  ; 116B _ 48: 83. C0, 01
+        mov     qword [rbp-0B8H], rax                   ; 116F _ 48: 89. 85, FFFFFF48
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_084                                   ; 1176 _ E9, FFFFFF9E
+
+?_087:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_088                                   ; 117B _ E9, 00000000
+
+?_088:  mov     rax, qword [rbp-0B0H]                   ; 1180 _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 1187 _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 118B _ 48: 89. 85, FFFFFF50
+        jmp     ?_081                                   ; 1192 _ E9, FFFFFEF1
+
+?_089:  ; Local function
+        mov     qword [rbp-28H], 100001                 ; 1197 _ 48: C7. 45, D8, 000186A1
+        mov     rax, qword [rbp-28H]                    ; 119F _ 48: 8B. 45, D8
+        shl     rax, 3                                  ; 11A3 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 11A7 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 11AB _ 48: 89. C7
+        call    ___lib_malloc                           ; 11AE _ E8, 00000000(rel)
+        mov     rdi, qword [rel _Comb_]                 ; 11B3 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-68H], rax                    ; 11BA _ 48: 89. 45, 98
+        mov     rax, qword [rbp-28H]                    ; 11BE _ 48: 8B. 45, D8
+        mov     rcx, qword [rbp-68H]                    ; 11C2 _ 48: 8B. 4D, 98
+        mov     qword [rcx], rax                        ; 11C6 _ 48: 89. 01
+        mov     rax, qword [rbp-68H]                    ; 11C9 _ 48: 8B. 45, 98
+        add     rax, 8                                  ; 11CD _ 48: 83. C0, 08
+        mov     qword [rbp-68H], rax                    ; 11D1 _ 48: 89. 45, 98
+        mov     rax, qword [rbp-68H]                    ; 11D5 _ 48: 8B. 45, 98
+        mov     qword [rdi], rax                        ; 11D9 _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 11DC _ 48: C7. 85, FFFFFF50, 00000000
+?_090:  cmp     qword [rbp-0B0H], 100001                ; 11E7 _ 48: 81. BD, FFFFFF50, 000186A1
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_091                                   ; 11F2 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_092                                   ; 11F8 _ E9, 00000005
+
+?_091:  jmp     ?_098                                   ; 11FD _ E9, 000000F4
+
+?_092:  mov     qword [rbp-240H], 21                    ; 1202 _ 48: C7. 85, FFFFFDC0, 00000015
+        mov     rax, qword [rbp-240H]                   ; 120D _ 48: 8B. 85, FFFFFDC0
+        shl     rax, 3                                  ; 1214 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 1218 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 121C _ 48: 89. C7
+        call    ___lib_malloc                           ; 121F _ E8, 00000000(rel)
+        mov     rdi, qword [rel _Comb_]                 ; 1224 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-238H], rax                   ; 122B _ 48: 89. 85, FFFFFDC8
+        mov     rax, qword [rbp-240H]                   ; 1232 _ 48: 8B. 85, FFFFFDC0
+        mov     rcx, qword [rbp-238H]                   ; 1239 _ 48: 8B. 8D, FFFFFDC8
+        mov     qword [rcx], rax                        ; 1240 _ 48: 89. 01
+        mov     rax, qword [rbp-238H]                   ; 1243 _ 48: 8B. 85, FFFFFDC8
+        add     rax, 8                                  ; 124A _ 48: 83. C0, 08
+        mov     qword [rbp-238H], rax                   ; 124E _ 48: 89. 85, FFFFFDC8
+        mov     rax, qword [rbp-238H]                   ; 1255 _ 48: 8B. 85, FFFFFDC8
+        mov     rcx, qword [rdi]                        ; 125C _ 48: 8B. 0F
+        mov     rdi, qword [rbp-0B0H]                   ; 125F _ 48: 8B. BD, FFFFFF50
+        shl     rdi, 3                                  ; 1266 _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 126A _ 48: 01. F9
+        mov     qword [rcx], rax                        ; 126D _ 48: 89. 01
+        mov     qword [rbp-0B8H], 0                     ; 1270 _ 48: C7. 85, FFFFFF48, 00000000
+?_093:  cmp     qword [rbp-0B8H], 21                    ; 127B _ 48: 83. BD, FFFFFF48, 15
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_094                                   ; 1283 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_095                                   ; 1289 _ E9, 00000005
+
+?_094:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_096                                   ; 128E _ E9, 00000047
+
+?_095:  mov     rax, qword [rel _Comb_]                 ; 1293 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 129A _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 129D _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 12A4 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 12A8 _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 12AB _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B8H]                   ; 12AE _ 48: 8B. 8D, FFFFFF48
+        shl     rcx, 3                                  ; 12B5 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 12B9 _ 48: 01. C8
+        mov     qword [rax], 0                          ; 12BC _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B8H]                   ; 12C3 _ 48: 8B. 85, FFFFFF48
+        add     rax, 1                                  ; 12CA _ 48: 83. C0, 01
+        mov     qword [rbp-0B8H], rax                   ; 12CE _ 48: 89. 85, FFFFFF48
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_093                                   ; 12D5 _ E9, FFFFFFA1
+
+?_096:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_097                                   ; 12DA _ E9, 00000000
+
+?_097:  mov     rax, qword [rbp-0B0H]                   ; 12DF _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 12E6 _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 12EA _ 48: 89. 85, FFFFFF50
+        jmp     ?_090                                   ; 12F1 _ E9, FFFFFEF1
+
+?_098:  ; Local function
+        mov     qword [rbp-0A8H], 1001                  ; 12F6 _ 48: C7. 85, FFFFFF58, 000003E9
+        mov     rax, qword [rbp-0A8H]                   ; 1301 _ 48: 8B. 85, FFFFFF58
+        shl     rax, 3                                  ; 1308 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 130C _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 1310 _ 48: 89. C7
+        call    ___lib_malloc                           ; 1313 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _fn_]                   ; 1318 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-88H], rax                    ; 131F _ 48: 89. 85, FFFFFF78
+        mov     rax, qword [rbp-0A8H]                   ; 1326 _ 48: 8B. 85, FFFFFF58
+        mov     rcx, qword [rbp-88H]                    ; 132D _ 48: 8B. 8D, FFFFFF78
+        mov     qword [rcx], rax                        ; 1334 _ 48: 89. 01
+        mov     rax, qword [rbp-88H]                    ; 1337 _ 48: 8B. 85, FFFFFF78
+        add     rax, 8                                  ; 133E _ 48: 83. C0, 08
+        mov     qword [rbp-88H], rax                    ; 1342 _ 48: 89. 85, FFFFFF78
+        mov     rax, qword [rbp-88H]                    ; 1349 _ 48: 8B. 85, FFFFFF78
+        mov     qword [rdi], rax                        ; 1350 _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 1353 _ 48: C7. 85, FFFFFF50, 00000000
+?_099:  cmp     qword [rbp-0B0H], 1001                  ; 135E _ 48: 81. BD, FFFFFF50, 000003E9
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_100                                   ; 1369 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_101                                   ; 136F _ E9, 00000005
+
+?_100:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_102                                   ; 1374 _ E9, 00000036
+
+?_101:  mov     rax, qword [rel _fn_]                   ; 1379 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 1380 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 1383 _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 138A _ 48: C1. E1, 03
+        add     rax, rcx                                ; 138E _ 48: 01. C8
+        mov     qword [rax], 0                          ; 1391 _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B0H]                   ; 1398 _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 139F _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 13A3 _ 48: 89. 85, FFFFFF50
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_099                                   ; 13AA _ E9, FFFFFFAF
+
+?_102:  ; Local function
+        mov     qword [rbp-110H], 1001                  ; 13AF _ 48: C7. 85, FFFFFEF0, 000003E9
+        mov     rax, qword [rbp-110H]                   ; 13BA _ 48: 8B. 85, FFFFFEF0
+        shl     rax, 3                                  ; 13C1 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 13C5 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 13C9 _ 48: 89. C7
+        call    ___lib_malloc                           ; 13CC _ E8, 00000000(rel)
+        mov     rdi, qword [rel _fc_]                   ; 13D1 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-0D8H], rax                   ; 13D8 _ 48: 89. 85, FFFFFF28
+        mov     rax, qword [rbp-110H]                   ; 13DF _ 48: 8B. 85, FFFFFEF0
+        mov     rcx, qword [rbp-0D8H]                   ; 13E6 _ 48: 8B. 8D, FFFFFF28
+        mov     qword [rcx], rax                        ; 13ED _ 48: 89. 01
+        mov     rax, qword [rbp-0D8H]                   ; 13F0 _ 48: 8B. 85, FFFFFF28
+        add     rax, 8                                  ; 13F7 _ 48: 83. C0, 08
+        mov     qword [rbp-0D8H], rax                   ; 13FB _ 48: 89. 85, FFFFFF28
+        mov     rax, qword [rbp-0D8H]                   ; 1402 _ 48: 8B. 85, FFFFFF28
+        mov     qword [rdi], rax                        ; 1409 _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 140C _ 48: C7. 85, FFFFFF50, 00000000
+?_103:  cmp     qword [rbp-0B0H], 1001                  ; 1417 _ 48: 81. BD, FFFFFF50, 000003E9
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_104                                   ; 1422 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_105                                   ; 1428 _ E9, 00000005
+
+?_104:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_106                                   ; 142D _ E9, 00000036
+
+?_105:  mov     rax, qword [rel _fc_]                   ; 1432 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 1439 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 143C _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 1443 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 1447 _ 48: 01. C8
+        mov     qword [rax], 0                          ; 144A _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B0H]                   ; 1451 _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 1458 _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 145C _ 48: 89. 85, FFFFFF50
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_103                                   ; 1463 _ E9, FFFFFFAF
+
+?_106:  ; Local function
+        mov     qword [rbp-100H], 1001                  ; 1468 _ 48: C7. 85, FFFFFF00, 000003E9
+        mov     rax, qword [rbp-100H]                   ; 1473 _ 48: 8B. 85, FFFFFF00
+        shl     rax, 3                                  ; 147A _ 48: C1. E0, 03
+        add     rax, 8                                  ; 147E _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 1482 _ 48: 89. C7
+        call    ___lib_malloc                           ; 1485 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _m_]                    ; 148A _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-0F0H], rax                   ; 1491 _ 48: 89. 85, FFFFFF10
+        mov     rax, qword [rbp-100H]                   ; 1498 _ 48: 8B. 85, FFFFFF00
+        mov     rcx, qword [rbp-0F0H]                   ; 149F _ 48: 8B. 8D, FFFFFF10
+        mov     qword [rcx], rax                        ; 14A6 _ 48: 89. 01
+        mov     rax, qword [rbp-0F0H]                   ; 14A9 _ 48: 8B. 85, FFFFFF10
+        add     rax, 8                                  ; 14B0 _ 48: 83. C0, 08
+        mov     qword [rbp-0F0H], rax                   ; 14B4 _ 48: 89. 85, FFFFFF10
+        mov     rax, qword [rbp-0F0H]                   ; 14BB _ 48: 8B. 85, FFFFFF10
+        mov     qword [rdi], rax                        ; 14C2 _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 14C5 _ 48: C7. 85, FFFFFF50, 00000000
+?_107:  cmp     qword [rbp-0B0H], 1001                  ; 14D0 _ 48: 81. BD, FFFFFF50, 000003E9
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_108                                   ; 14DB _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_109                                   ; 14E1 _ E9, 00000005
+
+?_108:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_110                                   ; 14E6 _ E9, 00000036
+
+?_109:  mov     rax, qword [rel _m_]                    ; 14EB _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 14F2 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 14F5 _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 14FC _ 48: C1. E1, 03
+        add     rax, rcx                                ; 1500 _ 48: 01. C8
+        mov     qword [rax], 0                          ; 1503 _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B0H]                   ; 150A _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 1511 _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 1515 _ 48: 89. 85, FFFFFF50
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_107                                   ; 151C _ E9, FFFFFFAF
+
+?_110:  ; Local function
+        mov     qword [rbp-130H], 1001                  ; 1521 _ 48: C7. 85, FFFFFED0, 000003E9
+        mov     rax, qword [rbp-130H]                   ; 152C _ 48: 8B. 85, FFFFFED0
+        shl     rax, 3                                  ; 1533 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 1537 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 153B _ 48: 89. C7
+        call    ___lib_malloc                           ; 153E _ E8, 00000000(rel)
+        mov     rdi, qword [rel _res_]                  ; 1543 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-150H], rax                   ; 154A _ 48: 89. 85, FFFFFEB0
+        mov     rax, qword [rbp-130H]                   ; 1551 _ 48: 8B. 85, FFFFFED0
+        mov     rcx, qword [rbp-150H]                   ; 1558 _ 48: 8B. 8D, FFFFFEB0
+        mov     qword [rcx], rax                        ; 155F _ 48: 89. 01
+        mov     rax, qword [rbp-150H]                   ; 1562 _ 48: 8B. 85, FFFFFEB0
+        add     rax, 8                                  ; 1569 _ 48: 83. C0, 08
+        mov     qword [rbp-150H], rax                   ; 156D _ 48: 89. 85, FFFFFEB0
+        mov     rax, qword [rbp-150H]                   ; 1574 _ 48: 8B. 85, FFFFFEB0
+        mov     qword [rdi], rax                        ; 157B _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 157E _ 48: C7. 85, FFFFFF50, 00000000
+?_111:  cmp     qword [rbp-0B0H], 1001                  ; 1589 _ 48: 81. BD, FFFFFF50, 000003E9
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_112                                   ; 1594 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_113                                   ; 159A _ E9, 00000005
+
+?_112:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_114                                   ; 159F _ E9, 00000036
+
+?_113:  mov     rax, qword [rel _res_]                  ; 15A4 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 15AB _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 15AE _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 15B5 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 15B9 _ 48: 01. C8
+        mov     qword [rax], 0                          ; 15BC _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B0H]                   ; 15C3 _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 15CA _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 15CE _ 48: 89. 85, FFFFFF50
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_111                                   ; 15D5 _ E9, FFFFFFAF
+
+?_114:  ; Local function
+        mov     qword [rbp-8H], 1001                    ; 15DA _ 48: C7. 45, F8, 000003E9
+        mov     rax, qword [rbp-8H]                     ; 15E2 _ 48: 8B. 45, F8
+        shl     rax, 3                                  ; 15E6 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 15EA _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 15EE _ 48: 89. C7
+        call    ___lib_malloc                           ; 15F1 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _b_]                    ; 15F6 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-18H], rax                    ; 15FD _ 48: 89. 45, E8
+        mov     rax, qword [rbp-8H]                     ; 1601 _ 48: 8B. 45, F8
+        mov     rcx, qword [rbp-18H]                    ; 1605 _ 48: 8B. 4D, E8
+        mov     qword [rcx], rax                        ; 1609 _ 48: 89. 01
+        mov     rax, qword [rbp-18H]                    ; 160C _ 48: 8B. 45, E8
+        add     rax, 8                                  ; 1610 _ 48: 83. C0, 08
+        mov     qword [rbp-18H], rax                    ; 1614 _ 48: 89. 45, E8
+        mov     rax, qword [rbp-18H]                    ; 1618 _ 48: 8B. 45, E8
+        mov     qword [rdi], rax                        ; 161C _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 161F _ 48: C7. 85, FFFFFF50, 00000000
+?_115:  cmp     qword [rbp-0B0H], 1001                  ; 162A _ 48: 81. BD, FFFFFF50, 000003E9
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_116                                   ; 1635 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_117                                   ; 163B _ E9, 00000005
+
+?_116:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_118                                   ; 1640 _ E9, 00000036
+
+?_117:  mov     rax, qword [rel _b_]                    ; 1645 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 164C _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 164F _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 1656 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 165A _ 48: 01. C8
+        mov     qword [rax], 0                          ; 165D _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B0H]                   ; 1664 _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 166B _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 166F _ 48: 89. 85, FFFFFF50
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_115                                   ; 1676 _ E9, FFFFFFAF
+
+?_118:  ; Local function
+        mov     qword [rbp-70H], 100001                 ; 167B _ 48: C7. 45, 90, 000186A1
+        mov     rax, qword [rbp-70H]                    ; 1683 _ 48: 8B. 45, 90
+        shl     rax, 3                                  ; 1687 _ 48: C1. E0, 03
+        add     rax, 8                                  ; 168B _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 168F _ 48: 89. C7
+        call    ___lib_malloc                           ; 1692 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _v_]                    ; 1697 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-50H], rax                    ; 169E _ 48: 89. 45, B0
+        mov     rax, qword [rbp-70H]                    ; 16A2 _ 48: 8B. 45, 90
+        mov     rcx, qword [rbp-50H]                    ; 16A6 _ 48: 8B. 4D, B0
+        mov     qword [rcx], rax                        ; 16AA _ 48: 89. 01
+        mov     rax, qword [rbp-50H]                    ; 16AD _ 48: 8B. 45, B0
+        add     rax, 8                                  ; 16B1 _ 48: 83. C0, 08
+        mov     qword [rbp-50H], rax                    ; 16B5 _ 48: 89. 45, B0
+        mov     rax, qword [rbp-50H]                    ; 16B9 _ 48: 8B. 45, B0
+        mov     qword [rdi], rax                        ; 16BD _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 16C0 _ 48: C7. 85, FFFFFF50, 00000000
+?_119:  cmp     qword [rbp-0B0H], 100001                ; 16CB _ 48: 81. BD, FFFFFF50, 000186A1
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_120                                   ; 16D6 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_121                                   ; 16DC _ E9, 00000005
+
+?_120:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_122                                   ; 16E1 _ E9, 00000036
+
+?_121:  mov     rax, qword [rel _v_]                    ; 16E6 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 16ED _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 16F0 _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 16F7 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 16FB _ 48: 01. C8
+        mov     qword [rax], 0                          ; 16FE _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B0H]                   ; 1705 _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 170C _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 1710 _ 48: 89. 85, FFFFFF50
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_119                                   ; 1717 _ E9, FFFFFFAF
+
+?_122:  ; Local function
+        mov     qword [rbp-90H], 100001                 ; 171C _ 48: C7. 85, FFFFFF70, 000186A1
+        mov     rax, qword [rbp-90H]                    ; 1727 _ 48: 8B. 85, FFFFFF70
+        shl     rax, 3                                  ; 172E _ 48: C1. E0, 03
+        add     rax, 8                                  ; 1732 _ 48: 83. C0, 08
+        mov     rdi, rax                                ; 1736 _ 48: 89. C7
+        call    ___lib_malloc                           ; 1739 _ E8, 00000000(rel)
+        mov     rdi, qword [rel _prime_]                ; 173E _ 48: 8B. 3D, 00000000(GOT r)
+        mov     qword [rbp-40H], rax                    ; 1745 _ 48: 89. 45, C0
+        mov     rax, qword [rbp-90H]                    ; 1749 _ 48: 8B. 85, FFFFFF70
+        mov     rcx, qword [rbp-40H]                    ; 1750 _ 48: 8B. 4D, C0
+        mov     qword [rcx], rax                        ; 1754 _ 48: 89. 01
+        mov     rax, qword [rbp-40H]                    ; 1757 _ 48: 8B. 45, C0
+        add     rax, 8                                  ; 175B _ 48: 83. C0, 08
+        mov     qword [rbp-40H], rax                    ; 175F _ 48: 89. 45, C0
+        mov     rax, qword [rbp-40H]                    ; 1763 _ 48: 8B. 45, C0
+        mov     qword [rdi], rax                        ; 1767 _ 48: 89. 07
+        mov     qword [rbp-0B0H], 0                     ; 176A _ 48: C7. 85, FFFFFF50, 00000000
+?_123:  cmp     qword [rbp-0B0H], 100001                ; 1775 _ 48: 81. BD, FFFFFF50, 000186A1
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_124                                   ; 1780 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_125                                   ; 1786 _ E9, 00000005
+
+?_124:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_126                                   ; 178B _ E9, 00000036
+
+?_125:  mov     rax, qword [rel _prime_]                ; 1790 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 1797 _ 48: 8B. 00
+        mov     rcx, qword [rbp-0B0H]                   ; 179A _ 48: 8B. 8D, FFFFFF50
+        shl     rcx, 3                                  ; 17A1 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 17A5 _ 48: 01. C8
+        mov     qword [rax], 0                          ; 17A8 _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-0B0H]                   ; 17AF _ 48: 8B. 85, FFFFFF50
+        add     rax, 1                                  ; 17B6 _ 48: 83. C0, 01
+        mov     qword [rbp-0B0H], rax                   ; 17BA _ 48: 89. 85, FFFFFF50
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_123                                   ; 17C1 _ E9, FFFFFFAF
+
+?_126:  ; Local function
+        add     rsp, 576                                ; 17C6 _ 48: 81. C4, 00000240
+        pop     rbp                                     ; 17CD _ 5D
+        ret                                             ; 17CE _ C3
+
+        nop                                             ; 17CF _ 90
 
 ALIGN   16
-?_032:  movsx   rsi, byte [rdi+rdx]                     ; 05F0 _ 48: 0F BE. 34 17
-        lea     rcx, [rsi-30H]                          ; 05F5 _ 48: 8D. 4E, D0
-        cmp     rcx, 9                                  ; 05F9 _ 48: 83. F9, 09
-        ja      ?_033                                   ; 05FD _ 77, 11
-        shl     rax, 4                                  ; 05FF _ 48: C1. E0, 04
-        add     rax, -48                                ; 0603 _ 48: 83. C0, D0
-        jmp     ?_035                                   ; 0607 _ EB, 39
+_Ksm:   ; Function begin
+        push    rbp                                     ; 17D0 _ 55
+        mov     rbp, rsp                                ; 17D1 _ 48: 89. E5
+        sub     rsp, 80                                 ; 17D4 _ 48: 83. EC, 50
+        mov     qword [rbp-10H], rdi                    ; 17D8 _ 48: 89. 7D, F0
+        mov     qword [rbp-18H], rsi                    ; 17DC _ 48: 89. 75, E8
+        mov     rsi, qword [rbp-10H]                    ; 17E0 _ 48: 8B. 75, F0
+        mov     qword [rbp-20H], rsi                    ; 17E4 _ 48: 89. 75, E0
+        mov     rsi, qword [rbp-18H]                    ; 17E8 _ 48: 8B. 75, E8
+        mov     qword [rbp-28H], rsi                    ; 17EC _ 48: 89. 75, D8
+        cmp     qword [rbp-28H], 0                      ; 17F0 _ 48: 83. 7D, D8, 00
+; Note: Immediate operand could be made smaller by sign extension
+        jne     ?_127                                   ; 17F5 _ 0F 85, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_128                                   ; 17FB _ E9, 00000005
 
-; Filling space: 7H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 80H, 00H, 00H, 00H, 00H
+?_127:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_129                                   ; 1800 _ E9, 0000000D
 
-ALIGN   8
-?_033:  lea     rcx, [rsi-41H]                          ; 0610 _ 48: 8D. 4E, BF
-        cmp     rcx, 5                                  ; 0614 _ 48: 83. F9, 05
-        ja      ?_034                                   ; 0618 _ 77, 16
-        shl     rax, 4                                  ; 061A _ 48: C1. E0, 04
-        add     rax, -55                                ; 061E _ 48: 83. C0, C9
-        jmp     ?_035                                   ; 0622 _ EB, 1E
+?_128:  mov     qword [rbp-8H], 1                       ; 1805 _ 48: C7. 45, F8, 00000001
+        jmp     ?_136                                   ; 180D _ E9, 000000D7
 
-; Filling space: 0CH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H
-;       db 00H, 00H, 00H, 00H
+?_129:  cmp     qword [rbp-28H], 1                      ; 1812 _ 48: 83. 7D, D8, 01
+; Note: Immediate operand could be made smaller by sign extension
+        jne     ?_130                                   ; 1817 _ 0F 85, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_131                                   ; 181D _ E9, 00000005
 
-ALIGN   16
-?_034:  lea     rcx, [rsi-61H]                          ; 0630 _ 48: 8D. 4E, 9F
-        cmp     rcx, 5                                  ; 0634 _ 48: 83. F9, 05
-        ja      ?_037                                   ; 0638 _ 77, 15
-        shl     rax, 4                                  ; 063A _ 48: C1. E0, 04
-        add     rax, -87                                ; 063E _ 48: 83. C0, A9
-?_035:  add     rax, rsi                                ; 0642 _ 48: 01. F0
-        inc     rdx                                     ; 0645 _ 48: FF. C2
-        cmp     rdx, r8                                 ; 0648 _ 4C: 39. C2
-        jl      ?_032                                   ; 064B _ 7C, A3
-?_036:  pop     rbp                                     ; 064D _ 5D
-        ret                                             ; 064E _ C3
-; _hex2int End of function
+?_130:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_132                                   ; 1822 _ E9, 00000024
 
-?_037:  ; Local function
-        xor     eax, eax                                ; 064F _ 31. C0
-        pop     rbp                                     ; 0651 _ 5D
-        ret                                             ; 0652 _ C3
+?_131:  mov     rax, qword [rel _Mod_]                  ; 1827 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-20H]                    ; 182E _ 48: 8B. 4D, E0
+        mov     qword [rbp-40H], rax                    ; 1832 _ 48: 89. 45, C0
+        mov     rax, rcx                                ; 1836 _ 48: 89. C8
+        cqo                                             ; 1839 _ 48: 99
+        mov     rcx, qword [rbp-40H]                    ; 183B _ 48: 8B. 4D, C0
+        idiv    qword [rcx]                             ; 183F _ 48: F7. 39
+        mov     qword [rbp-8H], rdx                     ; 1842 _ 48: 89. 55, F8
+        jmp     ?_136                                   ; 1846 _ E9, 0000009E
+
+?_132:  mov     rdi, qword [rbp-20H]                    ; 184B _ 48: 8B. 7D, E0
+        mov     rax, qword [rbp-28H]                    ; 184F _ 48: 8B. 45, D8
+        sar     rax, 1                                  ; 1853 _ 48: C1. F8, 01
+        mov     rsi, rax                                ; 1857 _ 48: 89. C6
+        call    _Ksm                                    ; 185A _ E8, FFFFFF71
+        mov     ecx, 2                                  ; 185F _ B9, 00000002
+        mov     esi, ecx                                ; 1864 _ 89. CE
+        mov     qword [rbp-38H], rax                    ; 1866 _ 48: 89. 45, C8
+        mov     rax, qword [rbp-38H]                    ; 186A _ 48: 8B. 45, C8
+        mov     qword [rbp-30H], rax                    ; 186E _ 48: 89. 45, D0
+        mov     rax, qword [rbp-28H]                    ; 1872 _ 48: 8B. 45, D8
+        cqo                                             ; 1876 _ 48: 99
+        idiv    rsi                                     ; 1878 _ 48: F7. FE
+        cmp     rdx, 1                                  ; 187B _ 48: 83. FA, 01
+; Note: Immediate operand could be made smaller by sign extension
+        jne     ?_133                                   ; 187F _ 0F 85, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_134                                   ; 1885 _ E9, 00000005
+
+?_133:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_135                                   ; 188A _ E9, 00000036
+
+?_134:  mov     rax, qword [rel _Mod_]                  ; 188F _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-30H]                    ; 1896 _ 48: 8B. 4D, D0
+        imul    rcx, qword [rbp-30H]                    ; 189A _ 48: 0F AF. 4D, D0
+        mov     qword [rbp-48H], rax                    ; 189F _ 48: 89. 45, B8
+        mov     rax, rcx                                ; 18A3 _ 48: 89. C8
+        cqo                                             ; 18A6 _ 48: 99
+        mov     rcx, qword [rbp-48H]                    ; 18A8 _ 48: 8B. 4D, B8
+        idiv    qword [rcx]                             ; 18AC _ 48: F7. 39
+        imul    rdx, qword [rbp-20H]                    ; 18AF _ 48: 0F AF. 55, E0
+        mov     rax, rdx                                ; 18B4 _ 48: 89. D0
+        cqo                                             ; 18B7 _ 48: 99
+        idiv    qword [rcx]                             ; 18B9 _ 48: F7. 39
+        mov     qword [rbp-8H], rdx                     ; 18BC _ 48: 89. 55, F8
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_136                                   ; 18C0 _ E9, 00000024
+
+?_135:  mov     rax, qword [rel _Mod_]                  ; 18C5 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-30H]                    ; 18CC _ 48: 8B. 4D, D0
+        imul    rcx, qword [rbp-30H]                    ; 18D0 _ 48: 0F AF. 4D, D0
+        mov     qword [rbp-50H], rax                    ; 18D5 _ 48: 89. 45, B0
+        mov     rax, rcx                                ; 18D9 _ 48: 89. C8
+        cqo                                             ; 18DC _ 48: 99
+        mov     rcx, qword [rbp-50H]                    ; 18DE _ 48: 8B. 4D, B0
+        idiv    qword [rcx]                             ; 18E2 _ 48: F7. 39
+        mov     qword [rbp-8H], rdx                     ; 18E5 _ 48: 89. 55, F8
+?_136:  mov     rax, qword [rbp-8H]                     ; 18E9 _ 48: 8B. 45, F8
+        add     rsp, 80                                 ; 18ED _ 48: 83. C4, 50
+        pop     rbp                                     ; 18F1 _ 5D
+        ret                                             ; 18F2 _ C3
+; _Ksm End of function
 
 ; Filling space: 0DH
 ; Filler type: Multi-byte NOP
@@ -759,55 +1812,487 @@ ALIGN   16
 
 ALIGN   16
 
-_int2chr:; Function begin
-        push    rbp                                     ; 0660 _ 55
-        mov     rbp, rsp                                ; 0661 _ 48: 89. E5
-        push    r14                                     ; 0664 _ 41: 56
-        push    rbx                                     ; 0666 _ 53
-        mov     rbx, rdi                                ; 0667 _ 48: 89. FB
-        add     rbx, -32                                ; 066A _ 48: 83. C3, E0
-        cmp     rbx, 94                                 ; 066E _ 48: 83. FB, 5E
-        ja      ?_038                                   ; 0672 _ 77, 2A
-        mov     rax, qword [rel _asciiTable_]           ; 0674 _ 48: 8B. 05, 00000000(GOT r)
-        mov     r14, qword [rax]                        ; 067B _ 4C: 8B. 30
-        mov     edi, 6                                  ; 067E _ BF, 00000006
-        call    _malloc                                 ; 0683 _ E8, 00000000(rel)
-        mov     dword [rax], 1                          ; 0688 _ C7. 00, 00000001
-        add     rax, 4                                  ; 068E _ 48: 83. C0, 04
-        movsxd  rdx, ebx                                ; 0692 _ 48: 63. D3
-        cmp     rdx, rbx                                ; 0695 _ 48: 39. DA
-        jle     ?_039                                   ; 0698 _ 7E, 1E
-        xor     ecx, ecx                                ; 069A _ 31. C9
-        jmp     ?_041                                   ; 069C _ EB, 4E
+_Calculate_p:; Function begin
+        push    rbp                                     ; 1900 _ 55
+        mov     rbp, rsp                                ; 1901 _ 48: 89. E5
+        sub     rsp, 48                                 ; 1904 _ 48: 83. EC, 30
+        mov     rax, qword [rel _p_]                    ; 1908 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Mod_]                  ; 190F _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rax]                        ; 1916 _ 48: 8B. 10
+        mov     rdx, qword [rdx]                        ; 1919 _ 48: 8B. 12
+        mov     qword [rdx], 1                          ; 191C _ 48: C7. 02, 00000001
+        mov     rdx, qword [rax]                        ; 1923 _ 48: 8B. 10
+        mov     rdx, qword [rdx+8H]                     ; 1926 _ 48: 8B. 52, 08
+        mov     qword [rdx+8H], 1                       ; 192A _ 48: C7. 42, 08, 00000001
+        mov     rcx, qword [rcx]                        ; 1932 _ 48: 8B. 09
+        sub     rcx, 1                                  ; 1935 _ 48: 83. E9, 01
+        mov     rax, qword [rax]                        ; 1939 _ 48: 8B. 00
+        mov     rax, qword [rax+8H]                     ; 193C _ 48: 8B. 40, 08
+        mov     qword [rax], rcx                        ; 1940 _ 48: 89. 08
+        mov     qword [rbp-8H], 2                       ; 1943 _ 48: C7. 45, F8, 00000002
+?_137:  mov     rax, qword [rel _C_]                    ; 194B _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-8H]                     ; 1952 _ 48: 8B. 4D, F8
+        mov     rax, qword [rax]                        ; 1956 _ 48: 8B. 00
+        sub     rax, 2                                  ; 1959 _ 48: 83. E8, 02
+        cmp     rcx, rax                                ; 195D _ 48: 39. C1
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_138                                   ; 1960 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_139                                   ; 1966 _ E9, 00000005
 
-?_038:  mov     edi, 5                                  ; 069E _ BF, 00000005
-        call    _malloc                                 ; 06A3 _ E8, 00000000(rel)
-        mov     dword [rax], 0                          ; 06A8 _ C7. 00, 00000000
-        mov     byte [rax+4H], 0                        ; 06AE _ C6. 40, 04, 00
-        add     rax, 4                                  ; 06B2 _ 48: 83. C0, 04
-        jmp     ?_042                                   ; 06B6 _ EB, 38
+?_138:  jmp     ?_149                                   ; 196B _ E9, 0000018A
 
-?_039:  lea     ecx, [rbx+1H]                           ; 06B8 _ 8D. 4B, 01
-        movsxd  rsi, ecx                                ; 06BB _ 48: 63. F1
-        dec     rsi                                     ; 06BE _ 48: FF. CE
-        xor     ecx, ecx                                ; 06C1 _ 31. C9
-        mov     r8, qword 100000000H                    ; 06C3 _ 49: B8, 0000000100000000
-        mov     rdi, rax                                ; 06CD _ 48: 89. C7
-?_040:  movzx   edx, byte [r14+rdx]                     ; 06D0 _ 41: 0F B6. 14 16
-        mov     byte [rdi], dl                          ; 06D5 _ 88. 17
-        inc     rsi                                     ; 06D7 _ 48: FF. C6
-        movsxd  rdx, esi                                ; 06DA _ 48: 63. D6
-        inc     rdi                                     ; 06DD _ 48: FF. C7
-        add     rcx, r8                                 ; 06E0 _ 4C: 01. C1
-        cmp     rsi, rbx                                ; 06E3 _ 48: 39. DE
-        jle     ?_040                                   ; 06E6 _ 7E, E8
-        sar     rcx, 32                                 ; 06E8 _ 48: C1. F9, 20
-?_041:  mov     byte [rax+rcx], 0                       ; 06EC _ C6. 04 08, 00
-?_042:  pop     rbx                                     ; 06F0 _ 5B
-        pop     r14                                     ; 06F1 _ 41: 5E
-        pop     rbp                                     ; 06F3 _ 5D
-        ret                                             ; 06F4 _ C3
-; _int2chr End of function
+?_139:  mov     rax, qword [rel _Mod_]                  ; 1970 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rdi, qword [rbp-8H]                     ; 1977 _ 48: 8B. 7D, F8
+        mov     rax, qword [rax]                        ; 197B _ 48: 8B. 00
+        sub     rax, 2                                  ; 197E _ 48: 83. E8, 02
+        mov     rsi, rax                                ; 1982 _ 48: 89. C6
+        call    _Ksm                                    ; 1985 _ E8, 00000000(rel)
+        mov     qword [rbp-18H], rax                    ; 198A _ 48: 89. 45, E8
+        mov     rax, qword [rbp-18H]                    ; 198E _ 48: 8B. 45, E8
+        mov     qword [rbp-20H], rax                    ; 1992 _ 48: 89. 45, E0
+        mov     qword [rbp-10H], 0                      ; 1996 _ 48: C7. 45, F0, 00000000
+?_140:  mov     rax, qword [rbp-10H]                    ; 199E _ 48: 8B. 45, F0
+        cmp     rax, qword [rbp-8H]                     ; 19A2 _ 48: 3B. 45, F8
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_141                                   ; 19A6 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_142                                   ; 19AC _ E9, 00000005
+
+?_141:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_143                                   ; 19B1 _ E9, 0000005E
+
+?_142:  mov     rax, qword [rel _p_]                    ; 19B6 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rax]                        ; 19BD _ 48: 8B. 08
+        mov     rdx, qword [rbp-8H]                     ; 19C0 _ 48: 8B. 55, F8
+        sub     rdx, 1                                  ; 19C4 _ 48: 83. EA, 01
+        shl     rdx, 3                                  ; 19C8 _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 19CC _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 19CF _ 48: 8B. 09
+        mov     rdx, qword [rbp-10H]                    ; 19D2 _ 48: 8B. 55, F0
+        shl     rdx, 3                                  ; 19D6 _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 19DA _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 19DD _ 48: 8B. 09
+        mov     rax, qword [rax]                        ; 19E0 _ 48: 8B. 00
+        mov     rdx, qword [rbp-8H]                     ; 19E3 _ 48: 8B. 55, F8
+        shl     rdx, 3                                  ; 19E7 _ 48: C1. E2, 03
+        add     rax, rdx                                ; 19EB _ 48: 01. D0
+        mov     rax, qword [rax]                        ; 19EE _ 48: 8B. 00
+        mov     rdx, qword [rbp-10H]                    ; 19F1 _ 48: 8B. 55, F0
+        add     rdx, 1                                  ; 19F5 _ 48: 83. C2, 01
+        shl     rdx, 3                                  ; 19F9 _ 48: C1. E2, 03
+        add     rax, rdx                                ; 19FD _ 48: 01. D0
+        mov     qword [rax], rcx                        ; 1A00 _ 48: 89. 08
+        mov     rax, qword [rbp-10H]                    ; 1A03 _ 48: 8B. 45, F0
+        add     rax, 1                                  ; 1A07 _ 48: 83. C0, 01
+        mov     qword [rbp-10H], rax                    ; 1A0B _ 48: 89. 45, F0
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_140                                   ; 1A0F _ E9, FFFFFF8A
+
+?_143:  mov     qword [rbp-10H], 0                      ; 1A14 _ 48: C7. 45, F0, 00000000
+?_144:  mov     rax, qword [rbp-10H]                    ; 1A1C _ 48: 8B. 45, F0
+        cmp     rax, qword [rbp-8H]                     ; 1A20 _ 48: 3B. 45, F8
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_145                                   ; 1A24 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_146                                   ; 1A2A _ E9, 00000005
+
+?_145:  jmp     ?_147                                   ; 1A2F _ E9, 000000B0
+
+?_146:  mov     rax, qword [rel _p_]                    ; 1A34 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Mod_]                  ; 1A3B _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rax]                        ; 1A42 _ 48: 8B. 10
+        mov     rsi, qword [rbp-8H]                     ; 1A45 _ 48: 8B. 75, F8
+        shl     rsi, 3                                  ; 1A49 _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 1A4D _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 1A50 _ 48: 8B. 12
+        mov     rsi, qword [rbp-10H]                    ; 1A53 _ 48: 8B. 75, F0
+        shl     rsi, 3                                  ; 1A57 _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 1A5B _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 1A5E _ 48: 8B. 12
+        mov     rsi, qword [rax]                        ; 1A61 _ 48: 8B. 30
+        mov     rdi, qword [rbp-8H]                     ; 1A64 _ 48: 8B. 7D, F8
+        sub     rdi, 1                                  ; 1A68 _ 48: 83. EF, 01
+        shl     rdi, 3                                  ; 1A6C _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 1A70 _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 1A73 _ 48: 8B. 36
+        mov     rdi, qword [rbp-10H]                    ; 1A76 _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 1A7A _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 1A7E _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 1A81 _ 48: 8B. 36
+        imul    rsi, qword [rbp-8H]                     ; 1A84 _ 48: 0F AF. 75, F8
+        mov     qword [rbp-28H], rax                    ; 1A89 _ 48: 89. 45, D8
+        mov     rax, rsi                                ; 1A8D _ 48: 89. F0
+        mov     qword [rbp-30H], rdx                    ; 1A90 _ 48: 89. 55, D0
+        cqo                                             ; 1A94 _ 48: 99
+        idiv    qword [rcx]                             ; 1A96 _ 48: F7. 39
+        mov     rsi, qword [rbp-30H]                    ; 1A99 _ 48: 8B. 75, D0
+        sub     rsi, rdx                                ; 1A9D _ 48: 29. D6
+        add     rsi, qword [rcx]                        ; 1AA0 _ 48: 03. 31
+        imul    rsi, qword [rbp-20H]                    ; 1AA3 _ 48: 0F AF. 75, E0
+        mov     rax, rsi                                ; 1AA8 _ 48: 89. F0
+        cqo                                             ; 1AAB _ 48: 99
+        idiv    qword [rcx]                             ; 1AAD _ 48: F7. 39
+        mov     rcx, qword [rbp-28H]                    ; 1AB0 _ 48: 8B. 4D, D8
+        mov     rsi, qword [rcx]                        ; 1AB4 _ 48: 8B. 31
+        mov     rdi, qword [rbp-8H]                     ; 1AB7 _ 48: 8B. 7D, F8
+        shl     rdi, 3                                  ; 1ABB _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 1ABF _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 1AC2 _ 48: 8B. 36
+        mov     rdi, qword [rbp-10H]                    ; 1AC5 _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 1AC9 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 1ACD _ 48: 01. FE
+        mov     qword [rsi], rdx                        ; 1AD0 _ 48: 89. 16
+        mov     rax, qword [rbp-10H]                    ; 1AD3 _ 48: 8B. 45, F0
+        add     rax, 1                                  ; 1AD7 _ 48: 83. C0, 01
+        mov     qword [rbp-10H], rax                    ; 1ADB _ 48: 89. 45, F0
+        jmp     ?_144                                   ; 1ADF _ E9, FFFFFF38
+
+?_147:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_148                                   ; 1AE4 _ E9, 00000000
+
+?_148:  mov     rax, qword [rbp-8H]                     ; 1AE9 _ 48: 8B. 45, F8
+        add     rax, 1                                  ; 1AED _ 48: 83. C0, 01
+        mov     qword [rbp-8H], rax                     ; 1AF1 _ 48: 89. 45, F8
+        jmp     ?_137                                   ; 1AF5 _ E9, FFFFFE51
+; _Calculate_p End of function
+
+?_149:  ; Local function
+        add     rsp, 48                                 ; 1AFA _ 48: 83. C4, 30
+        pop     rbp                                     ; 1AFE _ 5D
+        ret                                             ; 1AFF _ C3
+
+_Euler: ; Function begin
+        push    rbp                                     ; 1B00 _ 55
+        mov     rbp, rsp                                ; 1B01 _ 48: 89. E5
+        mov     rax, qword [rel _q_]                    ; 1B04 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _tot_]                  ; 1B0B _ 48: 8B. 0D, 00000000(GOT r)
+        mov     qword [rbp-8H], rdi                     ; 1B12 _ 48: 89. 7D, F8
+        mov     rdi, qword [rbp-8H]                     ; 1B16 _ 48: 8B. 7D, F8
+        mov     qword [rbp-10H], rdi                    ; 1B1A _ 48: 89. 7D, F0
+        mov     qword [rcx], 0                          ; 1B1E _ 48: C7. 01, 00000000
+        mov     rax, qword [rax]                        ; 1B25 _ 48: 8B. 00
+        mov     rcx, qword [rbp-10H]                    ; 1B28 _ 48: 8B. 4D, F0
+        shl     rcx, 3                                  ; 1B2C _ 48: C1. E1, 03
+        add     rax, rcx                                ; 1B30 _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 1B33 _ 48: 8B. 00
+        mov     qword [rax+8H], 1                       ; 1B36 _ 48: C7. 40, 08, 00000001
+        mov     qword [rbp-18H], 0                      ; 1B3E _ 48: C7. 45, E8, 00000000
+?_150:  cmp     qword [rbp-18H], 100001                 ; 1B46 _ 48: 81. 7D, E8, 000186A1
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_151                                   ; 1B4E _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_152                                   ; 1B54 _ E9, 00000005
+
+?_151:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_153                                   ; 1B59 _ E9, 0000002D
+
+?_152:  mov     rax, qword [rel _v_]                    ; 1B5E _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 1B65 _ 48: 8B. 00
+        mov     rcx, qword [rbp-18H]                    ; 1B68 _ 48: 8B. 4D, E8
+        shl     rcx, 3                                  ; 1B6C _ 48: C1. E1, 03
+        add     rax, rcx                                ; 1B70 _ 48: 01. C8
+        mov     qword [rax], 0                          ; 1B73 _ 48: C7. 00, 00000000
+        mov     rax, qword [rbp-18H]                    ; 1B7A _ 48: 8B. 45, E8
+        add     rax, 1                                  ; 1B7E _ 48: 83. C0, 01
+        mov     qword [rbp-18H], rax                    ; 1B82 _ 48: 89. 45, E8
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_150                                   ; 1B86 _ E9, FFFFFFBB
+; _Euler End of function
+
+?_153:  ; Local function
+        mov     qword [rbp-18H], 2                      ; 1B8B _ 48: C7. 45, E8, 00000002
+?_154:  mov     rax, qword [rel _M_]                    ; 1B93 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-18H]                    ; 1B9A _ 48: 8B. 4D, E8
+        cmp     rcx, qword [rax]                        ; 1B9E _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_155                                   ; 1BA1 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_156                                   ; 1BA7 _ E9, 00000005
+
+?_155:  jmp     ?_172                                   ; 1BAC _ E9, 00000340
+
+?_156:  mov     rax, qword [rel _v_]                    ; 1BB1 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 1BB8 _ 48: 8B. 00
+        mov     rcx, qword [rbp-18H]                    ; 1BBB _ 48: 8B. 4D, E8
+        shl     rcx, 3                                  ; 1BBF _ 48: C1. E1, 03
+        add     rax, rcx                                ; 1BC3 _ 48: 01. C8
+        cmp     qword [rax], 0                          ; 1BC6 _ 48: 83. 38, 00
+; Note: Immediate operand could be made smaller by sign extension
+        jne     ?_157                                   ; 1BCA _ 0F 85, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_158                                   ; 1BD0 _ E9, 00000005
+
+?_157:  jmp     ?_159                                   ; 1BD5 _ E9, 00000096
+
+?_158:  mov     rax, qword [rel _q_]                    ; 1BDA _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Mod_]                  ; 1BE1 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rel _ksm_]                  ; 1BE8 _ 48: 8B. 15, 00000000(GOT r)
+        mov     rsi, qword [rel _tot_]                  ; 1BEF _ 48: 8B. 35, 00000000(GOT r)
+        mov     rdi, qword [rel _prime_]                ; 1BF6 _ 48: 8B. 3D, 00000000(GOT r)
+        mov     r8, qword [rsi]                         ; 1BFD _ 4C: 8B. 06
+        add     r8, 1                                   ; 1C00 _ 49: 83. C0, 01
+        mov     qword [rsi], r8                         ; 1C04 _ 4C: 89. 06
+        mov     r8, qword [rbp-18H]                     ; 1C07 _ 4C: 8B. 45, E8
+        mov     rdi, qword [rdi]                        ; 1C0B _ 48: 8B. 3F
+        mov     rsi, qword [rsi]                        ; 1C0E _ 48: 8B. 36
+        shl     rsi, 3                                  ; 1C11 _ 48: C1. E6, 03
+        add     rdi, rsi                                ; 1C15 _ 48: 01. F7
+        mov     qword [rdi], r8                         ; 1C18 _ 4C: 89. 07
+        mov     rdx, qword [rdx]                        ; 1C1B _ 48: 8B. 12
+        mov     rsi, qword [rbp-18H]                    ; 1C1E _ 48: 8B. 75, E8
+        shl     rsi, 3                                  ; 1C22 _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 1C26 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 1C29 _ 48: 8B. 12
+        mov     rsi, qword [rbp-10H]                    ; 1C2C _ 48: 8B. 75, F0
+        shl     rsi, 3                                  ; 1C30 _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 1C34 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 1C37 _ 48: 8B. 12
+        add     rdx, qword [rcx]                        ; 1C3A _ 48: 03. 11
+        sub     rdx, 1                                  ; 1C3D _ 48: 83. EA, 01
+        mov     qword [rbp-30H], rax                    ; 1C41 _ 48: 89. 45, D0
+        mov     rax, rdx                                ; 1C45 _ 48: 89. D0
+        cqo                                             ; 1C48 _ 48: 99
+        idiv    qword [rcx]                             ; 1C4A _ 48: F7. 39
+        mov     rcx, qword [rbp-30H]                    ; 1C4D _ 48: 8B. 4D, D0
+        mov     rsi, qword [rcx]                        ; 1C51 _ 48: 8B. 31
+        mov     rdi, qword [rbp-10H]                    ; 1C54 _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 1C58 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 1C5C _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 1C5F _ 48: 8B. 36
+        mov     rdi, qword [rbp-18H]                    ; 1C62 _ 48: 8B. 7D, E8
+        shl     rdi, 3                                  ; 1C66 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 1C6A _ 48: 01. FE
+        mov     qword [rsi], rdx                        ; 1C6D _ 48: 89. 16
+?_159:  mov     qword [rbp-20H], 1                      ; 1C70 _ 48: C7. 45, E0, 00000001
+?_160:  mov     rax, qword [rel _tot_]                  ; 1C78 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-20H]                    ; 1C7F _ 48: 8B. 4D, E0
+        cmp     rcx, qword [rax]                        ; 1C83 _ 48: 3B. 08
+        setle   dl                                      ; 1C86 _ 0F 9E. C2
+        and     dl, 01H                                 ; 1C89 _ 80. E2, 01
+        movzx   esi, dl                                 ; 1C8C _ 0F B6. F2
+        movsxd  rax, esi                                ; 1C8F _ 48: 63. C6
+        mov     qword [rbp-28H], rax                    ; 1C92 _ 48: 89. 45, D8
+        cmp     qword [rbp-28H], 0                      ; 1C96 _ 48: 83. 7D, D8, 00
+; Note: Immediate operand could be made smaller by sign extension
+        je      ?_161                                   ; 1C9B _ 0F 84, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_162                                   ; 1CA1 _ E9, 00000005
+
+?_161:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_163                                   ; 1CA6 _ E9, 0000003A
+
+?_162:  mov     rax, qword [rel _M_]                    ; 1CAB _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _prime_]                ; 1CB2 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rcx, qword [rcx]                        ; 1CB9 _ 48: 8B. 09
+        mov     rdx, qword [rbp-20H]                    ; 1CBC _ 48: 8B. 55, E0
+        shl     rdx, 3                                  ; 1CC0 _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 1CC4 _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 1CC7 _ 48: 8B. 09
+        imul    rcx, qword [rbp-18H]                    ; 1CCA _ 48: 0F AF. 4D, E8
+        cmp     rcx, qword [rax]                        ; 1CCF _ 48: 3B. 08
+        setle   sil                                     ; 1CD2 _ 40: 0F 9E. C6
+        and     sil, 01H                                ; 1CD6 _ 40: 80. E6, 01
+        movzx   edi, sil                                ; 1CDA _ 40: 0F B6. FE
+        movsxd  rax, edi                                ; 1CDE _ 48: 63. C7
+        mov     qword [rbp-28H], rax                    ; 1CE1 _ 48: 89. 45, D8
+?_163:  cmp     qword [rbp-28H], 0                      ; 1CE5 _ 48: 83. 7D, D8, 00
+; Note: Immediate operand could be made smaller by sign extension
+        je      ?_164                                   ; 1CEA _ 0F 84, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_165                                   ; 1CF0 _ E9, 00000005
+
+?_164:  jmp     ?_170                                   ; 1CF5 _ E9, 000001E1
+
+?_165:  mov     rax, qword [rel _prime_]                ; 1CFA _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _v_]                    ; 1D01 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rcx, qword [rcx]                        ; 1D08 _ 48: 8B. 09
+        mov     rdx, qword [rax]                        ; 1D0B _ 48: 8B. 10
+        mov     rsi, qword [rbp-20H]                    ; 1D0E _ 48: 8B. 75, E0
+        shl     rsi, 3                                  ; 1D12 _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 1D16 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 1D19 _ 48: 8B. 12
+        imul    rdx, qword [rbp-18H]                    ; 1D1C _ 48: 0F AF. 55, E8
+        shl     rdx, 3                                  ; 1D21 _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 1D25 _ 48: 01. D1
+        mov     qword [rcx], 1                          ; 1D28 _ 48: C7. 01, 00000001
+        mov     rcx, qword [rbp-18H]                    ; 1D2F _ 48: 8B. 4D, E8
+        mov     rax, qword [rax]                        ; 1D33 _ 48: 8B. 00
+        mov     rdx, qword [rbp-20H]                    ; 1D36 _ 48: 8B. 55, E0
+        shl     rdx, 3                                  ; 1D3A _ 48: C1. E2, 03
+        add     rax, rdx                                ; 1D3E _ 48: 01. D0
+        mov     qword [rbp-38H], rax                    ; 1D41 _ 48: 89. 45, C8
+        mov     rax, rcx                                ; 1D45 _ 48: 89. C8
+        cqo                                             ; 1D48 _ 48: 99
+        mov     rcx, qword [rbp-38H]                    ; 1D4A _ 48: 8B. 4D, C8
+        idiv    qword [rcx]                             ; 1D4E _ 48: F7. 39
+        cmp     rdx, 0                                  ; 1D51 _ 48: 83. FA, 00
+; Note: Immediate operand could be made smaller by sign extension
+        jne     ?_166                                   ; 1D55 _ 0F 85, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_167                                   ; 1D5B _ E9, 00000005
+
+?_166:  jmp     ?_168                                   ; 1D60 _ E9, 000000B6
+
+?_167:  mov     rax, qword [rel _prime_]                ; 1D65 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _q_]                    ; 1D6C _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rel _Mod_]                  ; 1D73 _ 48: 8B. 15, 00000000(GOT r)
+        mov     rsi, qword [rel _ksm_]                  ; 1D7A _ 48: 8B. 35, 00000000(GOT r)
+        mov     rdi, qword [rcx]                        ; 1D81 _ 48: 8B. 39
+        mov     r8, qword [rbp-10H]                     ; 1D84 _ 4C: 8B. 45, F0
+        shl     r8, 3                                   ; 1D88 _ 49: C1. E0, 03
+        add     rdi, r8                                 ; 1D8C _ 4C: 01. C7
+        mov     rdi, qword [rdi]                        ; 1D8F _ 48: 8B. 3F
+        mov     r8, qword [rbp-18H]                     ; 1D92 _ 4C: 8B. 45, E8
+        shl     r8, 3                                   ; 1D96 _ 49: C1. E0, 03
+        add     rdi, r8                                 ; 1D9A _ 4C: 01. C7
+        mov     rdi, qword [rdi]                        ; 1D9D _ 48: 8B. 3F
+        mov     rsi, qword [rsi]                        ; 1DA0 _ 48: 8B. 36
+        mov     r8, qword [rax]                         ; 1DA3 _ 4C: 8B. 00
+        mov     r9, qword [rbp-20H]                     ; 1DA6 _ 4C: 8B. 4D, E0
+        shl     r9, 3                                   ; 1DAA _ 49: C1. E1, 03
+        add     r8, r9                                  ; 1DAE _ 4D: 01. C8
+        mov     r8, qword [r8]                          ; 1DB1 _ 4D: 8B. 00
+        shl     r8, 3                                   ; 1DB4 _ 49: C1. E0, 03
+        add     rsi, r8                                 ; 1DB8 _ 4C: 01. C6
+        mov     rsi, qword [rsi]                        ; 1DBB _ 48: 8B. 36
+        mov     r8, qword [rbp-10H]                     ; 1DBE _ 4C: 8B. 45, F0
+        shl     r8, 3                                   ; 1DC2 _ 49: C1. E0, 03
+        add     rsi, r8                                 ; 1DC6 _ 4C: 01. C6
+        imul    rdi, qword [rsi]                        ; 1DC9 _ 48: 0F AF. 3E
+        mov     qword [rbp-40H], rax                    ; 1DCD _ 48: 89. 45, C0
+        mov     rax, rdi                                ; 1DD1 _ 48: 89. F8
+        mov     qword [rbp-48H], rdx                    ; 1DD4 _ 48: 89. 55, B8
+        cqo                                             ; 1DD8 _ 48: 99
+        mov     rsi, qword [rbp-48H]                    ; 1DDA _ 48: 8B. 75, B8
+        idiv    qword [rsi]                             ; 1DDE _ 48: F7. 3E
+        mov     rcx, qword [rcx]                        ; 1DE1 _ 48: 8B. 09
+        mov     rdi, qword [rbp-10H]                    ; 1DE4 _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 1DE8 _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 1DEC _ 48: 01. F9
+        mov     rcx, qword [rcx]                        ; 1DEF _ 48: 8B. 09
+        mov     rdi, qword [rbp-18H]                    ; 1DF2 _ 48: 8B. 7D, E8
+        mov     r8, qword [rbp-40H]                     ; 1DF6 _ 4C: 8B. 45, C0
+        mov     r9, qword [r8]                          ; 1DFA _ 4D: 8B. 08
+        mov     r10, qword [rbp-20H]                    ; 1DFD _ 4C: 8B. 55, E0
+        shl     r10, 3                                  ; 1E01 _ 49: C1. E2, 03
+        add     r9, r10                                 ; 1E05 _ 4D: 01. D1
+        imul    rdi, qword [r9]                         ; 1E08 _ 49: 0F AF. 39
+        shl     rdi, 3                                  ; 1E0C _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 1E10 _ 48: 01. F9
+        mov     qword [rcx], rdx                        ; 1E13 _ 48: 89. 11
+        jmp     ?_170                                   ; 1E16 _ E9, 000000C0
+
+?_168:  mov     rax, qword [rel _prime_]                ; 1E1B _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _q_]                    ; 1E22 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rel _Mod_]                  ; 1E29 _ 48: 8B. 15, 00000000(GOT r)
+        mov     rsi, qword [rcx]                        ; 1E30 _ 48: 8B. 31
+        mov     rdi, qword [rbp-10H]                    ; 1E33 _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 1E37 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 1E3B _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 1E3E _ 48: 8B. 36
+        mov     rdi, qword [rbp-18H]                    ; 1E41 _ 48: 8B. 7D, E8
+        shl     rdi, 3                                  ; 1E45 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 1E49 _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 1E4C _ 48: 8B. 36
+        mov     rdi, qword [rcx]                        ; 1E4F _ 48: 8B. 39
+        mov     r8, qword [rbp-10H]                     ; 1E52 _ 4C: 8B. 45, F0
+        shl     r8, 3                                   ; 1E56 _ 49: C1. E0, 03
+        add     rdi, r8                                 ; 1E5A _ 4C: 01. C7
+        mov     rdi, qword [rdi]                        ; 1E5D _ 48: 8B. 3F
+        mov     r8, qword [rax]                         ; 1E60 _ 4C: 8B. 00
+        mov     r9, qword [rbp-20H]                     ; 1E63 _ 4C: 8B. 4D, E0
+        shl     r9, 3                                   ; 1E67 _ 49: C1. E1, 03
+        add     r8, r9                                  ; 1E6B _ 4D: 01. C8
+        mov     r8, qword [r8]                          ; 1E6E _ 4D: 8B. 00
+        shl     r8, 3                                   ; 1E71 _ 49: C1. E0, 03
+        add     rdi, r8                                 ; 1E75 _ 4C: 01. C7
+        imul    rsi, qword [rdi]                        ; 1E78 _ 48: 0F AF. 37
+        mov     qword [rbp-50H], rax                    ; 1E7C _ 48: 89. 45, B0
+        mov     rax, rsi                                ; 1E80 _ 48: 89. F0
+        mov     qword [rbp-58H], rdx                    ; 1E83 _ 48: 89. 55, A8
+        cqo                                             ; 1E87 _ 48: 99
+        mov     rsi, qword [rbp-58H]                    ; 1E89 _ 48: 8B. 75, A8
+        idiv    qword [rsi]                             ; 1E8D _ 48: F7. 3E
+        mov     rcx, qword [rcx]                        ; 1E90 _ 48: 8B. 09
+        mov     rdi, qword [rbp-10H]                    ; 1E93 _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 1E97 _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 1E9B _ 48: 01. F9
+        mov     rcx, qword [rcx]                        ; 1E9E _ 48: 8B. 09
+        mov     rdi, qword [rbp-18H]                    ; 1EA1 _ 48: 8B. 7D, E8
+        mov     r8, qword [rbp-50H]                     ; 1EA5 _ 4C: 8B. 45, B0
+        mov     r9, qword [r8]                          ; 1EA9 _ 4D: 8B. 08
+        mov     r10, qword [rbp-20H]                    ; 1EAC _ 4C: 8B. 55, E0
+        shl     r10, 3                                  ; 1EB0 _ 49: C1. E2, 03
+        add     r9, r10                                 ; 1EB4 _ 4D: 01. D1
+        imul    rdi, qword [r9]                         ; 1EB7 _ 49: 0F AF. 39
+        shl     rdi, 3                                  ; 1EBB _ 48: C1. E7, 03
+        add     rcx, rdi                                ; 1EBF _ 48: 01. F9
+        mov     qword [rcx], rdx                        ; 1EC2 _ 48: 89. 11
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_169                                   ; 1EC5 _ E9, 00000000
+
+?_169:  mov     rax, qword [rbp-20H]                    ; 1ECA _ 48: 8B. 45, E0
+        add     rax, 1                                  ; 1ECE _ 48: 83. C0, 01
+        mov     qword [rbp-20H], rax                    ; 1ED2 _ 48: 89. 45, E0
+        jmp     ?_160                                   ; 1ED6 _ E9, FFFFFD9D
+
+?_170:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_171                                   ; 1EDB _ E9, 00000000
+
+?_171:  mov     rax, qword [rbp-18H]                    ; 1EE0 _ 48: 8B. 45, E8
+        add     rax, 1                                  ; 1EE4 _ 48: 83. C0, 01
+        mov     qword [rbp-18H], rax                    ; 1EE8 _ 48: 89. 45, E8
+        jmp     ?_154                                   ; 1EEC _ E9, FFFFFCA2
+
+?_172:  ; Local function
+        pop     rbp                                     ; 1EF1 _ 5D
+        ret                                             ; 1EF2 _ C3
+
+; Filling space: 0DH
+; Filler type: Multi-byte NOP
+;       db 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H
+;       db 00H, 00H, 00H, 00H, 00H
+
+ALIGN   16
+
+_Calculate_q:; Function begin
+        push    rbp                                     ; 1F00 _ 55
+        mov     rbp, rsp                                ; 1F01 _ 48: 89. E5
+        sub     rsp, 16                                 ; 1F04 _ 48: 83. EC, 10
+        mov     qword [rbp-8H], 0                       ; 1F08 _ 48: C7. 45, F8, 00000000
+?_173:  mov     rax, qword [rel _C_]                    ; 1F10 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-8H]                     ; 1F17 _ 48: 8B. 4D, F8
+        mov     rax, qword [rax]                        ; 1F1B _ 48: 8B. 00
+        sub     rax, 2                                  ; 1F1E _ 48: 83. E8, 02
+        cmp     rcx, rax                                ; 1F22 _ 48: 39. C1
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_174                                   ; 1F25 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_175                                   ; 1F2B _ E9, 00000005
+
+?_174:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_176                                   ; 1F30 _ E9, 0000001A
+
+?_175:  mov     rdi, qword [rbp-8H]                     ; 1F35 _ 48: 8B. 7D, F8
+        call    _Euler                                  ; 1F39 _ E8, 00000000(rel)
+        mov     rax, qword [rbp-8H]                     ; 1F3E _ 48: 8B. 45, F8
+        add     rax, 1                                  ; 1F42 _ 48: 83. C0, 01
+        mov     qword [rbp-8H], rax                     ; 1F46 _ 48: 89. 45, F8
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_173                                   ; 1F4A _ E9, FFFFFFC1
+; _Calculate_q End of function
+
+?_176:  ; Local function
+        add     rsp, 16                                 ; 1F4F _ 48: 83. C4, 10
+        pop     rbp                                     ; 1F53 _ 5D
+        ret                                             ; 1F54 _ C3
 
 ; Filling space: 0BH
 ; Filler type: Multi-byte NOP
@@ -816,1071 +2301,87 @@ _int2chr:; Function begin
 
 ALIGN   16
 
-_toStringHex:; Function begin
-        push    rbp                                     ; 0700 _ 55
-        mov     rbp, rsp                                ; 0701 _ 48: 89. E5
-        push    r15                                     ; 0704 _ 41: 57
-        push    r14                                     ; 0706 _ 41: 56
-        push    r13                                     ; 0708 _ 41: 55
-        push    r12                                     ; 070A _ 41: 54
-        push    rbx                                     ; 070C _ 53
-        sub     rsp, 40                                 ; 070D _ 48: 83. EC, 28
-        mov     qword [rbp-48H], rdi                    ; 0711 _ 48: 89. 7D, B8
-        mov     edi, 5                                  ; 0715 _ BF, 00000005
-        call    _malloc                                 ; 071A _ E8, 00000000(rel)
-        mov     r15, rax                                ; 071F _ 49: 89. C7
-        mov     dword [r15], 0                          ; 0722 _ 41: C7. 07, 00000000
-        mov     byte [r15+4H], 0                        ; 0729 _ 41: C6. 47, 04, 00
-        add     r15, 4                                  ; 072E _ 49: 83. C7, 04
-        mov     ecx, 28                                 ; 0732 _ B9, 0000001C
-        jmp     ?_047                                   ; 0737 _ E9, 00000084
-
-?_043:  lea     rdi, [r15+10H]                          ; 073C _ 49: 8D. 7F, 10
-        lea     rsi, [rax+14H]                          ; 0740 _ 48: 8D. 70, 14
-        mov     rbx, rdx                                ; 0744 _ 48: 89. D3
-; Filling space: 9H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 84H, 00H, 00H, 00H, 00H
-;       db 00H
-
-ALIGN   16
-?_044:  movups  xmm0, oword [rdi-10H]                   ; 0750 _ 0F 10. 47, F0
-        movups  xmm1, oword [rdi]                       ; 0754 _ 0F 10. 0F
-        movups  oword [rsi-10H], xmm0                   ; 0757 _ 0F 11. 46, F0
-        movups  oword [rsi], xmm1                       ; 075B _ 0F 11. 0E
-        add     rdi, 32                                 ; 075E _ 48: 83. C7, 20
-        add     rsi, 32                                 ; 0762 _ 48: 83. C6, 20
-        add     rbx, -32                                ; 0766 _ 48: 83. C3, E0
-        jnz     ?_044                                   ; 076A _ 75, E4
-        test    r8d, r8d                                ; 076C _ 45: 85. C0
-        jne     ?_049                                   ; 076F _ 0F 85, 000000FD
-        jmp     ?_053                                   ; 0775 _ E9, 0000018A
-
-?_045:  lea     rdi, [r15+10H]                          ; 077A _ 49: 8D. 7F, 10
-        lea     rbx, [rax+14H]                          ; 077E _ 48: 8D. 58, 14
-        mov     rsi, rdx                                ; 0782 _ 48: 89. D6
-; Filling space: 0BH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H
-;       db 00H, 00H, 00H
-
-ALIGN   16
-?_046:  movups  xmm0, oword [rdi-10H]                   ; 0790 _ 0F 10. 47, F0
-        movups  xmm1, oword [rdi]                       ; 0794 _ 0F 10. 0F
-        movups  oword [rbx-10H], xmm0                   ; 0797 _ 0F 11. 43, F0
-        movups  oword [rbx], xmm1                       ; 079B _ 0F 11. 0B
-        add     rdi, 32                                 ; 079E _ 48: 83. C7, 20
-        add     rbx, 32                                 ; 07A2 _ 48: 83. C3, 20
-        add     rsi, -32                                ; 07A6 _ 48: 83. C6, E0
-        jnz     ?_046                                   ; 07AA _ 75, E4
-        test    r8d, r8d                                ; 07AC _ 45: 85. C0
-        jne     ?_057                                   ; 07AF _ 0F 85, 0000022D
-        jmp     ?_061                                   ; 07B5 _ E9, 000002BA
-
-; Filling space: 6H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-?_047:  mov     rbx, qword [rbp-48H]                    ; 07C0 _ 48: 8B. 5D, B8
-        sar     rbx, cl                                 ; 07C4 _ 48: D3. FB
-        and     ebx, 0FH                                ; 07C7 _ 83. E3, 0F
-        cmp     rbx, 9                                  ; 07CA _ 48: 83. FB, 09
-        mov     qword [rbp-40H], rcx                    ; 07CE _ 48: 89. 4D, C0
-        ja      ?_054                                   ; 07D2 _ 0F 87, 00000148
-        or      rbx, 30H                                ; 07D8 _ 48: 83. CB, 30
-        mov     rax, qword [rel _asciiTable_]           ; 07DC _ 48: 8B. 05, 00000000(GOT r)
-        mov     r14, qword [rax]                        ; 07E3 _ 4C: 8B. 30
-        mov     edi, 6                                  ; 07E6 _ BF, 00000006
-        call    _malloc                                 ; 07EB _ E8, 00000000(rel)
-        mov     r12, rax                                ; 07F0 _ 49: 89. C4
-        mov     dword [r12], 1                          ; 07F3 _ 41: C7. 04 24, 00000001
-        mov     al, byte [r14+rbx-20H]                  ; 07FB _ 41: 8A. 44 1E, E0
-        mov     byte [r12+4H], al                       ; 0800 _ 41: 88. 44 24, 04
-        mov     byte [r12+5H], 0                        ; 0805 _ 41: C6. 44 24, 05, 00
-        movsxd  r13, dword [r15-4H]                     ; 080B _ 4D: 63. 6F, FC
-        mov     eax, dword [r12]                        ; 080F _ 41: 8B. 04 24
-        mov     qword [rbp-38H], rax                    ; 0813 _ 48: 89. 45, C8
-        lea     eax, [rax+r13]                          ; 0817 _ 42: 8D. 04 28
-        movsxd  rbx, eax                                ; 081B _ 48: 63. D8
-        lea     rdi, [rbx+5H]                           ; 081E _ 48: 8D. 7B, 05
-        call    _malloc                                 ; 0822 _ E8, 00000000(rel)
-        lea     r14, [rax+4H]                           ; 0827 _ 4C: 8D. 70, 04
-        test    r13, r13                                ; 082B _ 4D: 85. ED
-        mov     rcx, rbx                                ; 082E _ 48: 89. D9
-        mov     qword [rbp-30H], rcx                    ; 0831 _ 48: 89. 4D, D0
-        mov     dword [rax], ebx                        ; 0835 _ 89. 18
-        jle     ?_053                                   ; 0837 _ 0F 8E, 000000C7
-        mov     ecx, r13d                               ; 083D _ 44: 89. E9
-        cmp     r13d, 31                                ; 0840 _ 41: 83. FD, 1F
-        jbe     ?_048                                   ; 0844 _ 76, 2A
-        mov     r8d, r13d                               ; 0846 _ 45: 89. E8
-        and     r8d, 1FH                                ; 0849 _ 41: 83. E0, 1F
-        mov     rdx, rcx                                ; 084D _ 48: 89. CA
-        sub     rdx, r8                                 ; 0850 _ 4C: 29. C2
-        jz      ?_048                                   ; 0853 _ 74, 1B
-        lea     rsi, [r15+rcx]                          ; 0855 _ 49: 8D. 34 0F
-        cmp     r14, rsi                                ; 0859 _ 49: 39. F6
-        jnc     ?_043                                   ; 085C _ 0F 83, FFFFFEDA
-        lea     rsi, [rax+rcx+4H]                       ; 0862 _ 48: 8D. 74 08, 04
-        cmp     r15, rsi                                ; 0867 _ 49: 39. F7
-        jnc     ?_043                                   ; 086A _ 0F 83, FFFFFECC
-?_048:  xor     edx, edx                                ; 0870 _ 31. D2
-?_049:  mov     edi, ecx                                ; 0872 _ 89. CF
-        sub     edi, edx                                ; 0874 _ 29. D7
-        lea     rsi, [rcx-1H]                           ; 0876 _ 48: 8D. 71, FF
-        sub     rsi, rdx                                ; 087A _ 48: 29. D6
-        and     rdi, 07H                                ; 087D _ 48: 83. E7, 07
-        jz      ?_051                                   ; 0881 _ 74, 1E
-        neg     rdi                                     ; 0883 _ 48: F7. DF
-; Filling space: 0AH
-; Filler type: Multi-byte NOP
-;       db 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H, 00H
-;       db 00H, 00H
-
-ALIGN   16
-?_050:  movzx   ebx, byte [r15+rdx]                     ; 0890 _ 41: 0F B6. 1C 17
-        mov     byte [r14+rdx], bl                      ; 0895 _ 41: 88. 1C 16
-        inc     rdx                                     ; 0899 _ 48: FF. C2
-        inc     rdi                                     ; 089C _ 48: FF. C7
-        jnz     ?_050                                   ; 089F _ 75, EF
-?_051:  cmp     rsi, 7                                  ; 08A1 _ 48: 83. FE, 07
-        jc      ?_053                                   ; 08A5 _ 72, 5D
-        sub     rcx, rdx                                ; 08A7 _ 48: 29. D1
-        lea     rax, [rax+rdx+0BH]                      ; 08AA _ 48: 8D. 44 10, 0B
-        lea     rdx, [r15+rdx+7H]                       ; 08AF _ 49: 8D. 54 17, 07
-; Filling space: 0CH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H
-;       db 00H, 00H, 00H, 00H
-
-ALIGN   16
-?_052:  movzx   ebx, byte [rdx-7H]                      ; 08C0 _ 0F B6. 5A, F9
-        mov     byte [rax-7H], bl                       ; 08C4 _ 88. 58, F9
-        movzx   ebx, byte [rdx-6H]                      ; 08C7 _ 0F B6. 5A, FA
-        mov     byte [rax-6H], bl                       ; 08CB _ 88. 58, FA
-        movzx   ebx, byte [rdx-5H]                      ; 08CE _ 0F B6. 5A, FB
-        mov     byte [rax-5H], bl                       ; 08D2 _ 88. 58, FB
-        movzx   ebx, byte [rdx-4H]                      ; 08D5 _ 0F B6. 5A, FC
-        mov     byte [rax-4H], bl                       ; 08D9 _ 88. 58, FC
-        movzx   ebx, byte [rdx-3H]                      ; 08DC _ 0F B6. 5A, FD
-        mov     byte [rax-3H], bl                       ; 08E0 _ 88. 58, FD
-        movzx   ebx, byte [rdx-2H]                      ; 08E3 _ 0F B6. 5A, FE
-        mov     byte [rax-2H], bl                       ; 08E7 _ 88. 58, FE
-        movzx   ebx, byte [rdx-1H]                      ; 08EA _ 0F B6. 5A, FF
-        mov     byte [rax-1H], bl                       ; 08EE _ 88. 58, FF
-        movzx   ebx, byte [rdx]                         ; 08F1 _ 0F B6. 1A
-        mov     byte [rax], bl                          ; 08F4 _ 88. 18
-        add     rax, 8                                  ; 08F6 _ 48: 83. C0, 08
-        add     rdx, 8                                  ; 08FA _ 48: 83. C2, 08
-        add     rcx, -8                                 ; 08FE _ 48: 83. C1, F8
-        jnz     ?_052                                   ; 0902 _ 75, BC
-?_053:  mov     rdx, qword [rbp-38H]                    ; 0904 _ 48: 8B. 55, C8
-        test    edx, edx                                ; 0908 _ 85. D2
-        jle     ?_063                                   ; 090A _ 0F 8E, 0000017A
-        add     r12, 4                                  ; 0910 _ 49: 83. C4, 04
-        jmp     ?_062                                   ; 0914 _ E9, 00000163
-
-; Filling space: 7H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 80H, 00H, 00H, 00H, 00H
-
-ALIGN   8
-?_054:  add     rbx, 23                                 ; 0920 _ 48: 83. C3, 17
-        mov     rax, qword [rel _asciiTable_]           ; 0924 _ 48: 8B. 05, 00000000(GOT r)
-        mov     r14, qword [rax]                        ; 092B _ 4C: 8B. 30
-        mov     edi, 6                                  ; 092E _ BF, 00000006
-        call    _malloc                                 ; 0933 _ E8, 00000000(rel)
-        mov     r12, rax                                ; 0938 _ 49: 89. C4
-        mov     dword [r12], 1                          ; 093B _ 41: C7. 04 24, 00000001
-        add     r12, 4                                  ; 0943 _ 49: 83. C4, 04
-        lea     eax, [rbx+1H]                           ; 0947 _ 8D. 43, 01
-        dec     rax                                     ; 094A _ 48: FF. C8
-        mov     rcx, r12                                ; 094D _ 4C: 89. E1
-        mov     rdx, rbx                                ; 0950 _ 48: 89. DA
-; Filling space: 0DH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H
-;       db 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
-?_055:  movzx   edx, byte [r14+rdx]                     ; 0960 _ 41: 0F B6. 14 16
-        mov     byte [rcx], dl                          ; 0965 _ 88. 11
-        inc     rax                                     ; 0967 _ 48: FF. C0
-        movsxd  rdx, eax                                ; 096A _ 48: 63. D0
-        inc     rcx                                     ; 096D _ 48: FF. C1
-        cmp     rax, rbx                                ; 0970 _ 48: 39. D8
-        jle     ?_055                                   ; 0973 _ 7E, EB
-        mov     byte [rcx], 0                           ; 0975 _ C6. 01, 00
-        movsxd  r13, dword [r15-4H]                     ; 0978 _ 4D: 63. 6F, FC
-        mov     eax, dword [r12-4H]                     ; 097C _ 41: 8B. 44 24, FC
-        mov     qword [rbp-38H], rax                    ; 0981 _ 48: 89. 45, C8
-        lea     eax, [rax+r13]                          ; 0985 _ 42: 8D. 04 28
-        movsxd  rbx, eax                                ; 0989 _ 48: 63. D8
-        lea     rdi, [rbx+5H]                           ; 098C _ 48: 8D. 7B, 05
-        call    _malloc                                 ; 0990 _ E8, 00000000(rel)
-        lea     r14, [rax+4H]                           ; 0995 _ 4C: 8D. 70, 04
-        test    r13, r13                                ; 0999 _ 4D: 85. ED
-        mov     rcx, rbx                                ; 099C _ 48: 89. D9
-        mov     qword [rbp-30H], rcx                    ; 099F _ 48: 89. 4D, D0
-        mov     dword [rax], ebx                        ; 09A3 _ 89. 18
-        jle     ?_061                                   ; 09A5 _ 0F 8E, 000000C9
-        mov     ecx, r13d                               ; 09AB _ 44: 89. E9
-        cmp     r13d, 31                                ; 09AE _ 41: 83. FD, 1F
-        jbe     ?_056                                   ; 09B2 _ 76, 2C
-        mov     r8d, r13d                               ; 09B4 _ 45: 89. E8
-        and     r8d, 1FH                                ; 09B7 _ 41: 83. E0, 1F
-        mov     rdx, rcx                                ; 09BB _ 48: 89. CA
-        sub     rdx, r8                                 ; 09BE _ 4C: 29. C2
-        jz      ?_056                                   ; 09C1 _ 74, 1D
-        lea     rsi, [r15+rcx]                          ; 09C3 _ 49: 8D. 34 0F
-        cmp     r14, rsi                                ; 09C7 _ 49: 39. F6
-        jnc     ?_045                                   ; 09CA _ 0F 83, FFFFFDAA
-        lea     rsi, [rax+rcx+4H]                       ; 09D0 _ 48: 8D. 74 08, 04
-        cmp     r15, rsi                                ; 09D5 _ 49: 39. F7
-        jnc     ?_045                                   ; 09D8 _ 0F 83, FFFFFD9C
-; Filling space: 2H
-; Filler type: NOP with prefixes
-;       db 66H, 90H
-
-ALIGN   8
-?_056:  xor     edx, edx                                ; 09E0 _ 31. D2
-?_057:  mov     edi, ecx                                ; 09E2 _ 89. CF
-        sub     edi, edx                                ; 09E4 _ 29. D7
-        lea     rsi, [rcx-1H]                           ; 09E6 _ 48: 8D. 71, FF
-        sub     rsi, rdx                                ; 09EA _ 48: 29. D6
-        and     rdi, 07H                                ; 09ED _ 48: 83. E7, 07
-        jz      ?_059                                   ; 09F1 _ 74, 1E
-        neg     rdi                                     ; 09F3 _ 48: F7. DF
-; Filling space: 0AH
-; Filler type: Multi-byte NOP
-;       db 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H, 00H
-;       db 00H, 00H
-
-ALIGN   16
-?_058:  movzx   ebx, byte [r15+rdx]                     ; 0A00 _ 41: 0F B6. 1C 17
-        mov     byte [r14+rdx], bl                      ; 0A05 _ 41: 88. 1C 16
-        inc     rdx                                     ; 0A09 _ 48: FF. C2
-        inc     rdi                                     ; 0A0C _ 48: FF. C7
-        jnz     ?_058                                   ; 0A0F _ 75, EF
-?_059:  cmp     rsi, 7                                  ; 0A11 _ 48: 83. FE, 07
-        jc      ?_061                                   ; 0A15 _ 72, 5D
-        sub     rcx, rdx                                ; 0A17 _ 48: 29. D1
-        lea     rax, [rax+rdx+0BH]                      ; 0A1A _ 48: 8D. 44 10, 0B
-        lea     rdx, [r15+rdx+7H]                       ; 0A1F _ 49: 8D. 54 17, 07
-; Filling space: 0CH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H
-;       db 00H, 00H, 00H, 00H
-
-ALIGN   16
-?_060:  movzx   ebx, byte [rdx-7H]                      ; 0A30 _ 0F B6. 5A, F9
-        mov     byte [rax-7H], bl                       ; 0A34 _ 88. 58, F9
-        movzx   ebx, byte [rdx-6H]                      ; 0A37 _ 0F B6. 5A, FA
-        mov     byte [rax-6H], bl                       ; 0A3B _ 88. 58, FA
-        movzx   ebx, byte [rdx-5H]                      ; 0A3E _ 0F B6. 5A, FB
-        mov     byte [rax-5H], bl                       ; 0A42 _ 88. 58, FB
-        movzx   ebx, byte [rdx-4H]                      ; 0A45 _ 0F B6. 5A, FC
-        mov     byte [rax-4H], bl                       ; 0A49 _ 88. 58, FC
-        movzx   ebx, byte [rdx-3H]                      ; 0A4C _ 0F B6. 5A, FD
-        mov     byte [rax-3H], bl                       ; 0A50 _ 88. 58, FD
-        movzx   ebx, byte [rdx-2H]                      ; 0A53 _ 0F B6. 5A, FE
-        mov     byte [rax-2H], bl                       ; 0A57 _ 88. 58, FE
-        movzx   ebx, byte [rdx-1H]                      ; 0A5A _ 0F B6. 5A, FF
-        mov     byte [rax-1H], bl                       ; 0A5E _ 88. 58, FF
-        movzx   ebx, byte [rdx]                         ; 0A61 _ 0F B6. 1A
-        mov     byte [rax], bl                          ; 0A64 _ 88. 18
-        add     rax, 8                                  ; 0A66 _ 48: 83. C0, 08
-        add     rdx, 8                                  ; 0A6A _ 48: 83. C2, 08
-        add     rcx, -8                                 ; 0A6E _ 48: 83. C1, F8
-        jnz     ?_060                                   ; 0A72 _ 75, BC
-?_061:  mov     rdx, qword [rbp-38H]                    ; 0A74 _ 48: 8B. 55, C8
-        test    edx, edx                                ; 0A78 _ 85. D2
-        jle     ?_063                                   ; 0A7A _ 7E, 0E
-?_062:  add     r13, r14                                ; 0A7C _ 4D: 01. F5
-        mov     rdi, r13                                ; 0A7F _ 4C: 89. EF
-        mov     rsi, r12                                ; 0A82 _ 4C: 89. E6
-        call    _memcpy                                 ; 0A85 _ E8, 00000000(rel)
-?_063:  mov     rax, qword [rbp-30H]                    ; 0A8A _ 48: 8B. 45, D0
-        mov     byte [r14+rax], 0                       ; 0A8E _ 41: C6. 04 06, 00
-        mov     r15, r14                                ; 0A93 _ 4D: 89. F7
-        mov     rcx, qword [rbp-40H]                    ; 0A96 _ 48: 8B. 4D, C0
-        add     rcx, -4                                 ; 0A9A _ 48: 83. C1, FC
-        jns     ?_047                                   ; 0A9E _ 0F 89, FFFFFD1C
-        mov     rax, r15                                ; 0AA4 _ 4C: 89. F8
-        add     rsp, 40                                 ; 0AA7 _ 48: 83. C4, 28
-        pop     rbx                                     ; 0AAB _ 5B
-        pop     r12                                     ; 0AAC _ 41: 5C
-        pop     r13                                     ; 0AAE _ 41: 5D
-        pop     r14                                     ; 0AB0 _ 41: 5E
-        pop     r15                                     ; 0AB2 _ 41: 5F
-        pop     rbp                                     ; 0AB4 _ 5D
-        ret                                             ; 0AB5 _ C3
-; _toStringHex End of function
-
-; Filling space: 0AH
-; Filler type: Multi-byte NOP
-;       db 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H, 00H
-;       db 00H, 00H
-
-ALIGN   16
-
-_rotate_left:; Function begin
-        push    rbp                                     ; 0AC0 _ 55
-        mov     rbp, rsp                                ; 0AC1 _ 48: 89. E5
-        cmp     rsi, 31                                 ; 0AC4 _ 48: 83. FE, 1F
-        jz      ?_064                                   ; 0AC8 _ 74, 16
-        cmp     rsi, 1                                  ; 0ACA _ 48: 83. FE, 01
-        jnz     ?_065                                   ; 0ACE _ 75, 22
-        mov     eax, edi                                ; 0AD0 _ 89. F8
-        and     eax, 7FFFFFFFH                          ; 0AD2 _ 25, 7FFFFFFF
-        shr     edi, 31                                 ; 0AD7 _ C1. EF, 1F
-        lea     rdi, [rdi+rax*2]                        ; 0ADA _ 48: 8D. 3C 47
-        jmp     ?_066                                   ; 0ADE _ EB, 4E
-
-?_064:  mov     rax, rdi                                ; 0AE0 _ 48: 89. F8
-        and     rax, 01H                                ; 0AE3 _ 48: 83. E0, 01
-        shl     rax, 31                                 ; 0AE7 _ 48: C1. E0, 1F
-        shr     edi, 1                                  ; 0AEB _ D1. EF
-        or      rdi, rax                                ; 0AED _ 48: 09. C7
-        jmp     ?_066                                   ; 0AF0 _ EB, 3C
-
-?_065:  mov     r8d, 32                                 ; 0AF2 _ 41: B8, 00000020
-        sub     r8d, esi                                ; 0AF8 _ 41: 29. F0
-        mov     edx, 1                                  ; 0AFB _ BA, 00000001
-        mov     eax, 1                                  ; 0B00 _ B8, 00000001
-        mov     ecx, r8d                                ; 0B05 _ 44: 89. C1
-        shl     eax, cl                                 ; 0B08 _ D3. E0
-        dec     eax                                     ; 0B0A _ FF. C8
-        cdqe                                            ; 0B0C _ 48: 98
-        and     rax, rdi                                ; 0B0E _ 48: 21. F8
-        mov     ecx, esi                                ; 0B11 _ 89. F1
-        shl     rax, cl                                 ; 0B13 _ 48: D3. E0
-        mov     ecx, r8d                                ; 0B16 _ 44: 89. C1
-        sar     rdi, cl                                 ; 0B19 _ 48: D3. FF
-        mov     ecx, esi                                ; 0B1C _ 89. F1
-        shl     edx, cl                                 ; 0B1E _ D3. E2
-        dec     edx                                     ; 0B20 _ FF. CA
-        movsxd  rcx, edx                                ; 0B22 _ 48: 63. CA
-        and     rcx, rdi                                ; 0B25 _ 48: 21. F9
-        or      rcx, rax                                ; 0B28 _ 48: 09. C1
-        mov     rdi, rcx                                ; 0B2B _ 48: 89. CF
-?_066:  mov     rax, rdi                                ; 0B2E _ 48: 89. F8
-        pop     rbp                                     ; 0B31 _ 5D
-        ret                                             ; 0B32 _ C3
-; _rotate_left End of function
-
-; Filling space: 0DH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H
-;       db 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
-
-_add:   ; Function begin
-        push    rbp                                     ; 0B40 _ 55
-        mov     rbp, rsp                                ; 0B41 _ 48: 89. E5
-        movzx   eax, di                                 ; 0B44 _ 0F B7. C7
-        movzx   ecx, si                                 ; 0B47 _ 0F B7. CE
-        add     ecx, eax                                ; 0B4A _ 01. C1
-        mov     eax, edi                                ; 0B4C _ 89. F8
-        and     eax, 0FFFF0000H                         ; 0B4E _ 25, FFFF0000
-        add     eax, esi                                ; 0B53 _ 01. F0
-        and     eax, 0FFFF0000H                         ; 0B55 _ 25, FFFF0000
-        add     ecx, eax                                ; 0B5A _ 01. C1
-        and     ecx, 0FFFF0000H                         ; 0B5C _ 81. E1, FFFF0000
-        add     esi, edi                                ; 0B62 _ 01. FE
-        movzx   eax, si                                 ; 0B64 _ 0F B7. C6
-        or      rax, rcx                                ; 0B67 _ 48: 09. C8
-        pop     rbp                                     ; 0B6A _ 5D
-        ret                                             ; 0B6B _ C3
-; _add End of function
-
-; Filling space: 4H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 40H, 00H
-
-ALIGN   8
-
-_lohi:  ; Function begin
-        push    rbp                                     ; 0B70 _ 55
-        mov     rbp, rsp                                ; 0B71 _ 48: 89. E5
-        shl     rsi, 16                                 ; 0B74 _ 48: C1. E6, 10
-        or      rsi, rdi                                ; 0B78 _ 48: 09. FE
-        mov     rax, rsi                                ; 0B7B _ 48: 89. F0
-        pop     rbp                                     ; 0B7E _ 5D
-        ret                                             ; 0B7F _ C3
-; _lohi End of function
-
-_sha1:  ; Function begin
-        push    rbp                                     ; 0B80 _ 55
-        mov     rbp, rsp                                ; 0B81 _ 48: 89. E5
-        push    r15                                     ; 0B84 _ 41: 57
-        push    r14                                     ; 0B86 _ 41: 56
-        push    r13                                     ; 0B88 _ 41: 55
-        push    r12                                     ; 0B8A _ 41: 54
-        push    rbx                                     ; 0B8C _ 53
-        sub     rsp, 24                                 ; 0B8D _ 48: 83. EC, 18
-        lea     r10, [rsi+8H]                           ; 0B91 _ 4C: 8D. 56, 08
-        mov     rax, r10                                ; 0B95 _ 4C: 89. D0
-        sar     rax, 63                                 ; 0B98 _ 48: C1. F8, 3F
-        shr     rax, 58                                 ; 0B9C _ 48: C1. E8, 3A
-        lea     r12, [rsi+rax+8H]                       ; 0BA0 _ 4C: 8D. 64 06, 08
-        sar     r12, 6                                  ; 0BA5 _ 49: C1. FC, 06
-        mov     rax, qword [rel _MAXCHUNK_]             ; 0BA9 _ 48: 8B. 05, 00000000(GOT r)
-        cmp     r12, qword [rax]                        ; 0BB0 _ 4C: 3B. 20
-        jge     ?_072                                   ; 0BB3 _ 0F 8D, 0000015D
-        cmp     r10, -63                                ; 0BB9 _ 49: 83. FA, C1
-        jl      ?_069                                   ; 0BBD _ 7C, 56
-        xor     eax, eax                                ; 0BBF _ 31. C0
-        mov     rcx, qword [rel _chunks_]               ; 0BC1 _ 48: 8B. 0D, 00000000(GOT r)
-; Filling space: 8H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 84H, 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
-?_067:  mov     edx, 8                                  ; 0BD0 _ BA, 00000008
-; Filling space: 0BH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H
-;       db 00H, 00H, 00H
-
-ALIGN   16
-?_068:  mov     rbx, qword [rcx]                        ; 0BE0 _ 48: 8B. 19
-        mov     rbx, qword [rbx+rax*8]                  ; 0BE3 _ 48: 8B. 1C C3
-        mov     qword [rdx+rbx-8H], 0                   ; 0BE7 _ 48: C7. 44 1A, F8, 00000000
-        mov     rbx, qword [rcx]                        ; 0BF0 _ 48: 8B. 19
-        mov     rbx, qword [rbx+rax*8]                  ; 0BF3 _ 48: 8B. 1C C3
-        mov     qword [rdx+rbx], 0                      ; 0BF7 _ 48: C7. 04 1A, 00000000
-        add     rdx, 16                                 ; 0BFF _ 48: 83. C2, 10
-        cmp     rdx, 648                                ; 0C03 _ 48: 81. FA, 00000288
-        jnz     ?_068                                   ; 0C0A _ 75, D4
-        cmp     rax, r12                                ; 0C0C _ 4C: 39. E0
-        lea     rax, [rax+1H]                           ; 0C0F _ 48: 8D. 40, 01
-        jl      ?_067                                   ; 0C13 _ 7C, BB
-?_069:  xor     r14d, r14d                              ; 0C15 _ 45: 31. F6
-        mov     r11, qword [rel _chunks_]               ; 0C18 _ 4C: 8B. 1D, 00000000(GOT r)
-        jmp     ?_071                                   ; 0C1F _ EB, 3C
-
-; Filling space: 0FH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 66H, 66H, 2EH, 0FH
-;       db 1FH, 84H, 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
-?_070:  mov     r15, qword [rdi]                        ; 0C30 _ 4C: 8B. 3F
-        shr     rdx, 62                                 ; 0C33 _ 48: C1. EA, 3E
-        add     edx, r14d                               ; 0C37 _ 44: 01. F2
-        and     edx, 1CH                                ; 0C3A _ 83. E2, 1C
-        mov     ebx, r14d                               ; 0C3D _ 44: 89. F3
-        sub     ebx, edx                                ; 0C40 _ 29. D3
-        mov     ecx, 3                                  ; 0C42 _ B9, 00000003
-        sub     ecx, ebx                                ; 0C47 _ 29. D9
-        shl     cl, 3                                   ; 0C49 _ C0. E1, 03
-        shl     r15, cl                                 ; 0C4C _ 49: D3. E7
-        or      r15, r9                                 ; 0C4F _ 4D: 09. CF
-        mov     qword [r8+rax*8], r15                   ; 0C52 _ 4D: 89. 3C C0
-        inc     r14                                     ; 0C56 _ 49: FF. C6
-        add     rdi, 8                                  ; 0C59 _ 48: 83. C7, 08
-?_071:  mov     r8, qword [r11]                         ; 0C5D _ 4D: 8B. 03
-        mov     rdx, r14                                ; 0C60 _ 4C: 89. F2
-        sar     rdx, 63                                 ; 0C63 _ 48: C1. FA, 3F
-        mov     rcx, rdx                                ; 0C67 _ 48: 89. D1
-        shr     rcx, 58                                 ; 0C6A _ 48: C1. E9, 3A
-        add     rcx, r14                                ; 0C6E _ 4C: 01. F1
-        mov     rax, rcx                                ; 0C71 _ 48: 89. C8
-        and     rax, 0FFFFFFFFFFFFFFC0H                 ; 0C74 _ 48: 83. E0, C0
-        sar     rcx, 6                                  ; 0C78 _ 48: C1. F9, 06
-        mov     r8, qword [r8+rcx*8]                    ; 0C7C _ 4D: 8B. 04 C8
-        mov     rcx, r14                                ; 0C80 _ 4C: 89. F1
-        sub     rcx, rax                                ; 0C83 _ 48: 29. C1
-        mov     rax, rcx                                ; 0C86 _ 48: 89. C8
-        sar     rax, 63                                 ; 0C89 _ 48: C1. F8, 3F
-        shr     rax, 62                                 ; 0C8D _ 48: C1. E8, 3E
-        add     rax, rcx                                ; 0C91 _ 48: 01. C8
-        sar     rax, 2                                  ; 0C94 _ 48: C1. F8, 02
-        mov     r9, qword [r8+rax*8]                    ; 0C98 _ 4D: 8B. 0C C0
-        cmp     r14, rsi                                ; 0C9C _ 49: 39. F6
-        jl      ?_070                                   ; 0C9F _ 7C, 8F
-        shr     rdx, 62                                 ; 0CA1 _ 48: C1. EA, 3E
-        add     edx, r14d                               ; 0CA5 _ 44: 01. F2
-        and     edx, 1CH                                ; 0CA8 _ 83. E2, 1C
-        sub     r14d, edx                               ; 0CAB _ 41: 29. D6
-        mov     ecx, 3                                  ; 0CAE _ B9, 00000003
-        sub     ecx, r14d                               ; 0CB3 _ 44: 29. F1
-        shl     cl, 3                                   ; 0CB6 _ C0. E1, 03
-        mov     edx, 128                                ; 0CB9 _ BA, 00000080
-        shl     edx, cl                                 ; 0CBE _ D3. E2
-        movsxd  rcx, edx                                ; 0CC0 _ 48: 63. CA
-        or      rcx, r9                                 ; 0CC3 _ 4C: 09. C9
-        lea     rdx, [rsi*8]                            ; 0CC6 _ 48: 8D. 14 F5, 00000000
-        shr     esi, 29                                 ; 0CCE _ C1. EE, 1D
-        mov     edi, 2400959708                         ; 0CD1 _ BF, 8F1BBCDC
-        cmp     r10, -63                                ; 0CD6 _ 49: 83. FA, C1
-        mov     qword [r8+rax*8], rcx                   ; 0CDA _ 49: 89. 0C C0
-        mov     rax, qword [r11]                        ; 0CDE _ 49: 8B. 03
-        mov     rax, qword [rax+r12*8]                  ; 0CE1 _ 4A: 8B. 04 E0
-        mov     qword [rax+78H], rdx                    ; 0CE5 _ 48: 89. 50, 78
-        mov     rax, qword [r11]                        ; 0CE9 _ 49: 8B. 03
-        mov     rax, qword [rax+r12*8]                  ; 0CEC _ 4A: 8B. 04 E0
-        mov     qword [rax+70H], rsi                    ; 0CF0 _ 48: 89. 70, 70
-        jge     ?_073                                   ; 0CF4 _ 7D, 66
-        lea     rax, [rdi+34B72514H]                    ; 0CF6 _ 48: 8D. 87, 34B72514
-        add     rdi, 1622273709                         ; 0CFD _ 48: 81. C7, 60B1EEAD
-; Note: Alignment fault. Memory operand must be aligned
-        movdqa  xmm0, oword [rel _str_le+0C04H]         ; 0D04 _ 66: 0F 6F. 05, 00000C04(rel)
-        mov     ebx, 1732584193                         ; 0D0C _ BB, 67452301
-        jmp     ?_081                                   ; 0D11 _ E9, 0000033C
-
-?_072:  mov     edi, 23                                 ; 0D16 _ BF, 00000017
-        call    _malloc                                 ; 0D1B _ E8, 00000000(rel)
-        mov     dword [rax], 18                         ; 0D20 _ C7. 00, 00000012
-        mov     rcx, qword 4E55484358414D20H            ; 0D26 _ 48: B9, 4E55484358414D20
-        mov     qword [rax+0CH], rcx                    ; 0D30 _ 48: 89. 48, 0C
-        mov     rcx, qword 3E206B6E7568436EH            ; 0D34 _ 48: B9, 3E206B6E7568436E
-        mov     qword [rax+4H], rcx                     ; 0D3E _ 48: 89. 48, 04
-        mov     byte [rax+16H], 0                       ; 0D42 _ C6. 40, 16, 00
-; Note: Length-changing prefix causes delay on Intel processors
-        mov     word [rax+14H], 8523                    ; 0D46 _ 66: C7. 40, 14, 214B
-        lea     rdi, [rax+4H]                           ; 0D4C _ 48: 8D. 78, 04
-        call    _puts                                   ; 0D50 _ E8, 00000000(rel)
-        xor     eax, eax                                ; 0D55 _ 31. C0
-        jmp     ?_082                                   ; 0D57 _ E9, 00000327
-
-?_073:
-; Note: Alignment fault. Memory operand must be aligned
-        movdqa  xmm1, oword [rel _str_le+0BBCH]         ; 0D5C _ 66: 0F 6F. 0D, 00000BBC(rel)
-; Note: Alignment fault. Memory operand must be aligned
-        movdqa  xmm0, oword [rel _str_le+0BA4H]         ; 0D64 _ 66: 0F 6F. 05, 00000BA4(rel)
-        xor     r14d, r14d                              ; 0D6C _ 45: 31. F6
-        mov     ebx, 1732584193                         ; 0D6F _ BB, 67452301
-        pxor    xmm2, xmm2                              ; 0D74 _ 66: 0F EF. D2
-        mov     qword [rbp-30H], r12                    ; 0D78 _ 4C: 89. 65, D0
-; Filling space: 4H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 40H, 00H
-
-ALIGN   8
-?_074:  xor     eax, eax                                ; 0D80 _ 31. C0
-; Filling space: 0EH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH
-;       db 84H, 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
-?_075:  mov     rcx, qword [r11]                        ; 0D90 _ 49: 8B. 0B
-        mov     rcx, qword [rcx+r14*8]                  ; 0D93 _ 4A: 8B. 0C F1
-        mov     rdx, qword [rax+rcx+40H]                ; 0D97 _ 48: 8B. 54 08, 40
-        xor     rdx, qword [rax+rcx+68H]                ; 0D9C _ 48: 33. 54 08, 68
-        xor     rdx, qword [rax+rcx+10H]                ; 0DA1 _ 48: 33. 54 08, 10
-        xor     rdx, qword [rax+rcx]                    ; 0DA6 _ 48: 33. 14 08
-        mov     esi, edx                                ; 0DAA _ 89. D6
-        and     esi, 7FFFFFFFH                          ; 0DAC _ 81. E6, 7FFFFFFF
-        shr     edx, 31                                 ; 0DB2 _ C1. EA, 1F
-        lea     rdx, [rdx+rsi*2]                        ; 0DB5 _ 48: 8D. 14 72
-        mov     qword [rax+rcx+80H], rdx                ; 0DB9 _ 48: 89. 94 08, 00000080
-        add     rax, 8                                  ; 0DC1 _ 48: 83. C0, 08
-        cmp     rax, 512                                ; 0DC5 _ 48: 3D, 00000200
-        jnz     ?_075                                   ; 0DCB _ 75, C3
-        mov     rax, qword [r11]                        ; 0DCD _ 49: 8B. 03
-        mov     r12, qword [rax+r14*8]                  ; 0DD0 _ 4E: 8B. 24 F0
-        pextrq  rdi, xmm0, 01H                          ; 0DD4 _ 66 48: 0F 3A 16. C7, 01
-        mov     qword [rbp-38H], rbx                    ; 0DDB _ 48: 89. 5D, C8
-        movq    xmm5, rbx                               ; 0DDF _ 66 48: 0F 6E. EB
-        punpcklqdq xmm5, xmm0                           ; 0DE4 _ 66: 0F 6C. E8
-        movq    r9, xmm1                                ; 0DE8 _ 66 49: 0F 7E. C9
-        pextrq  rdx, xmm1, 01H                          ; 0DED _ 66 48: 0F 3A 16. CA, 01
-        mov     r10d, 0                                 ; 0DF4 _ 41: BA, 00000000
-; Filling space: 6H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-?_076:  movdqa  xmm3, xmm5                              ; 0E00 _ 66: 0F 6F. DD
-        mov     r15, rdi                                ; 0E04 _ 49: 89. FF
-        mov     rax, r9                                 ; 0E07 _ 4C: 89. C8
-        cmp     r10, 19                                 ; 0E0A _ 49: 83. FA, 13
-        jg      ?_077                                   ; 0E0E _ 7F, 20
-        mov     rcx, rax                                ; 0E10 _ 48: 89. C1
-        and     rcx, r15                                ; 0E13 _ 4C: 21. F9
-        mov     rsi, rax                                ; 0E16 _ 48: 89. C6
-        not     rsi                                     ; 0E19 _ 48: F7. D6
-        pextrq  rdi, xmm3, 01H                          ; 0E1C _ 66 48: 0F 3A 16. DF, 01
-        and     rdi, rsi                                ; 0E23 _ 48: 21. F7
-        or      rdi, rcx                                ; 0E26 _ 48: 09. CF
-        mov     ebx, 1518500249                         ; 0E29 _ BB, 5A827999
-        jmp     ?_080                                   ; 0E2E _ EB, 50
-
-?_077:  pextrq  rdi, xmm3, 01H                          ; 0E30 _ 66 48: 0F 3A 16. DF, 01
-        cmp     r10, 39                                 ; 0E37 _ 49: 83. FA, 27
-        jg      ?_078                                   ; 0E3B _ 7F, 13
-        xor     rdi, r15                                ; 0E3D _ 4C: 31. FF
-        xor     rdi, rax                                ; 0E40 _ 48: 31. C7
-        mov     ebx, 1859775393                         ; 0E43 _ BB, 6ED9EBA1
-        jmp     ?_080                                   ; 0E48 _ EB, 36
-
-; Filling space: 6H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-?_078:  cmp     r10, 59                                 ; 0E50 _ 49: 83. FA, 3B
-        jg      ?_079                                   ; 0E54 _ 7F, 16
-        mov     rcx, r15                                ; 0E56 _ 4C: 89. F9
-        or      rcx, rdi                                ; 0E59 _ 48: 09. F9
-        and     rcx, rax                                ; 0E5C _ 48: 21. C1
-        and     rdi, r15                                ; 0E5F _ 4C: 21. FF
-        or      rdi, rcx                                ; 0E62 _ 48: 09. CF
-        mov     ebx, 2400959708                         ; 0E65 _ BB, 8F1BBCDC
-        jmp     ?_080                                   ; 0E6A _ EB, 14
-
-?_079:  xor     rdi, r15                                ; 0E6C _ 4C: 31. FF
-        xor     rdi, rax                                ; 0E6F _ 48: 31. C7
-        mov     ecx, 2400959708                         ; 0E72 _ B9, 8F1BBCDC
-        lea     rbx, [rcx+3B4704FAH]                    ; 0E77 _ 48: 8D. 99, 3B4704FA
-; Filling space: 2H
-; Filler type: NOP with prefixes
-;       db 66H, 90H
-
-ALIGN   8
-?_080:  movq    r9, xmm3                                ; 0E80 _ 66 49: 0F 7E. D9
-        mov     r8, r9                                  ; 0E85 _ 4D: 89. C8
-        shl     r8, 5                                   ; 0E88 _ 49: C1. E0, 05
-        mov     ecx, r8d                                ; 0E8C _ 44: 89. C1
-        mov     r13d, r9d                               ; 0E8F _ 45: 89. CD
-        shr     r13d, 27                                ; 0E92 _ 41: C1. ED, 1B
-        or      r13, rcx                                ; 0E96 _ 49: 09. CD
-        movzx   ecx, r13w                               ; 0E99 _ 41: 0F B7. CD
-        movzx   esi, dx                                 ; 0E9D _ 0F B7. F2
-        add     esi, ecx                                ; 0EA0 _ 01. CE
-        and     r8d, 0FFFF0000H                         ; 0EA2 _ 41: 81. E0, FFFF0000
-        add     r8d, edx                                ; 0EA9 _ 41: 01. D0
-        and     r8d, 0FFFF0000H                         ; 0EAC _ 41: 81. E0, FFFF0000
-        add     r8d, esi                                ; 0EB3 _ 41: 01. F0
-        and     r8d, 0FFFF0000H                         ; 0EB6 _ 41: 81. E0, FFFF0000
-        add     r13, rdx                                ; 0EBD _ 49: 01. D5
-        movzx   edx, r13w                               ; 0EC0 _ 41: 0F B7. D5
-        movzx   ecx, di                                 ; 0EC4 _ 0F B7. CF
-        movzx   esi, bx                                 ; 0EC7 _ 0F B7. F3
-        add     esi, ecx                                ; 0ECA _ 01. CE
-        mov     ecx, edi                                ; 0ECC _ 89. F9
-        and     ecx, 0FFFF0000H                         ; 0ECE _ 81. E1, FFFF0000
-        add     ecx, ebx                                ; 0ED4 _ 01. D9
-        and     ecx, 0FFFF0000H                         ; 0ED6 _ 81. E1, FFFF0000
-        add     ecx, esi                                ; 0EDC _ 01. F1
-        and     ecx, 0FFFF0000H                         ; 0EDE _ 81. E1, FFFF0000
-        add     rbx, rdi                                ; 0EE4 _ 48: 01. FB
-        movzx   esi, bx                                 ; 0EE7 _ 0F B7. F3
-        or      ecx, esi                                ; 0EEA _ 09. F1
-        add     edx, esi                                ; 0EEC _ 01. F2
-        add     ecx, r8d                                ; 0EEE _ 44: 01. C1
-        and     ecx, 0FFFF0000H                         ; 0EF1 _ 81. E1, FFFF0000
-        add     ecx, edx                                ; 0EF7 _ 01. D1
-        and     ecx, 0FFFF0000H                         ; 0EF9 _ 81. E1, FFFF0000
-        add     rbx, r13                                ; 0EFF _ 4C: 01. EB
-        movzx   edx, bx                                 ; 0F02 _ 0F B7. D3
-        mov     rsi, qword [r12]                        ; 0F05 _ 49: 8B. 34 24
-        movzx   edi, si                                 ; 0F09 _ 0F B7. FE
-        add     edi, edx                                ; 0F0C _ 01. D7
-        add     ecx, esi                                ; 0F0E _ 01. F1
-        and     ecx, 0FFFF0000H                         ; 0F10 _ 81. E1, FFFF0000
-        add     ecx, edi                                ; 0F16 _ 01. F9
-        and     ecx, 0FFFF0000H                         ; 0F18 _ 81. E1, FFFF0000
-        add     rbx, rsi                                ; 0F1E _ 48: 01. F3
-        movzx   esi, bx                                 ; 0F21 _ 0F B7. F3
-        or      rcx, rsi                                ; 0F24 _ 48: 09. F1
-        mov     rdx, rax                                ; 0F27 _ 48: 89. C2
-        and     rdx, 03H                                ; 0F2A _ 48: 83. E2, 03
-        shl     rdx, 30                                 ; 0F2E _ 48: C1. E2, 1E
-        shr     rax, 2                                  ; 0F32 _ 48: C1. E8, 02
-        mov     edi, eax                                ; 0F36 _ 89. C7
-        and     edi, 3FFFFFFFH                          ; 0F38 _ 81. E7, 3FFFFFFF
-        or      rdi, rdx                                ; 0F3E _ 48: 09. D7
-        inc     r10                                     ; 0F41 _ 49: FF. C2
-        movq    xmm5, rcx                               ; 0F44 _ 66 48: 0F 6E. E9
-        movq    xmm4, r15                               ; 0F49 _ 66 49: 0F 6E. E7
-        punpcklqdq xmm5, xmm4                           ; 0F4E _ 66: 0F 6C. EC
-        pextrq  rdx, xmm3, 01H                          ; 0F52 _ 66 48: 0F 3A 16. DA, 01
-        add     r12, 8                                  ; 0F59 _ 49: 83. C4, 08
-        cmp     r10, 80                                 ; 0F5D _ 49: 83. FA, 50
-        jne     ?_076                                   ; 0F61 _ 0F 85, FFFFFE99
-        mov     r8, qword [rbp-38H]                     ; 0F67 _ 4C: 8B. 45, C8
-        movzx   edx, r8w                                ; 0F6B _ 41: 0F B7. D0
-        add     esi, edx                                ; 0F6F _ 01. D6
-        add     ebx, r8d                                ; 0F71 _ 44: 01. C3
-        mov     edx, r8d                                ; 0F74 _ 44: 89. C2
-        and     edx, 0FFFF0000H                         ; 0F77 _ 81. E2, FFFF0000
-        add     ecx, edx                                ; 0F7D _ 01. D1
-        and     ecx, 0FFFF0000H                         ; 0F7F _ 81. E1, FFFF0000
-        add     ecx, esi                                ; 0F85 _ 01. F1
-        and     ecx, 0FFFF0000H                         ; 0F87 _ 81. E1, FFFF0000
-        movzx   ebx, bx                                 ; 0F8D _ 0F B7. DB
-        or      rbx, rcx                                ; 0F90 _ 48: 09. CB
-        pxor    xmm5, xmm5                              ; 0F93 _ 66: 0F EF. ED
-        pblendw xmm5, xmm0, 11H                         ; 0F97 _ 66: 0F 3A 0E. E8, 11
-        movdqa  xmm6, xmm4                              ; 0F9D _ 66: 0F 6F. F4
-        pinsrq  xmm6, rax, 1                            ; 0FA1 _ 66 48: 0F 3A 22. F0, 01
-        pxor    xmm7, xmm7                              ; 0FA8 _ 66: 0F EF. FF
-        pblendw xmm7, xmm6, 11H                         ; 0FAC _ 66: 0F 3A 0E. FE, 11
-        paddq   xmm7, xmm5                              ; 0FB2 _ 66: 0F D4. FD
-        pxor    xmm5, xmm5                              ; 0FB6 _ 66: 0F EF. ED
-        pblendw xmm5, xmm0, 22H                         ; 0FBA _ 66: 0F 3A 0E. E8, 22
-        pinsrq  xmm4, rdi, 1                            ; 0FC0 _ 66 48: 0F 3A 22. E7, 01
-        paddq   xmm4, xmm5                              ; 0FC7 _ 66: 0F D4. E5
-        pblendw xmm4, xmm2, 0DDH                        ; 0FCB _ 66: 0F 3A 0E. E2, DD
-        paddq   xmm4, xmm7                              ; 0FD1 _ 66: 0F D4. E7
-        pblendw xmm4, xmm2, 0DDH                        ; 0FD5 _ 66: 0F 3A 0E. E2, DD
-        paddq   xmm6, xmm0                              ; 0FDB _ 66: 0F D4. F0
-        pblendw xmm6, xmm2, 0EEH                        ; 0FDF _ 66: 0F 3A 0E. F2, EE
-        movdqa  xmm0, xmm6                              ; 0FE5 _ 66: 0F 6F. C6
-        por     xmm0, xmm4                              ; 0FE9 _ 66: 0F EB. C4
-        pxor    xmm4, xmm4                              ; 0FED _ 66: 0F EF. E4
-        pblendw xmm4, xmm1, 11H                         ; 0FF1 _ 66: 0F 3A 0E. E1, 11
-        pxor    xmm5, xmm5                              ; 0FF7 _ 66: 0F EF. ED
-        pblendw xmm5, xmm3, 11H                         ; 0FFB _ 66: 0F 3A 0E. EB, 11
-        paddq   xmm5, xmm4                              ; 1001 _ 66: 0F D4. EC
-        pxor    xmm4, xmm4                              ; 1005 _ 66: 0F EF. E4
-        pblendw xmm4, xmm1, 22H                         ; 1009 _ 66: 0F 3A 0E. E1, 22
-        paddq   xmm4, xmm3                              ; 100F _ 66: 0F D4. E3
-        pblendw xmm4, xmm2, 0DDH                        ; 1013 _ 66: 0F 3A 0E. E2, DD
-        paddq   xmm4, xmm5                              ; 1019 _ 66: 0F D4. E5
-        pblendw xmm4, xmm2, 0DDH                        ; 101D _ 66: 0F 3A 0E. E2, DD
-        paddq   xmm3, xmm1                              ; 1023 _ 66: 0F D4. D9
-        pblendw xmm3, xmm2, 0EEH                        ; 1027 _ 66: 0F 3A 0E. DA, EE
-        movdqa  xmm1, xmm3                              ; 102D _ 66: 0F 6F. CB
-        por     xmm1, xmm4                              ; 1031 _ 66: 0F EB. CC
-        mov     r12, qword [rbp-30H]                    ; 1035 _ 4C: 8B. 65, D0
-        cmp     r14, r12                                ; 1039 _ 4D: 39. E6
-        lea     r14, [r14+1H]                           ; 103C _ 4D: 8D. 76, 01
-        jl      ?_074                                   ; 1040 _ 0F 8C, FFFFFD3A
-        movq    rdi, xmm1                               ; 1046 _ 66 48: 0F 7E. CF
-        pextrq  rax, xmm1, 01H                          ; 104B _ 66 48: 0F 3A 16. C8, 01
-?_081:  mov     rcx, qword [rel _outputBuffer_]         ; 1052 _ 48: 8B. 0D, 00000000(GOT r)
-        mov     rdx, qword [rcx]                        ; 1059 _ 48: 8B. 11
-        mov     qword [rdx], rbx                        ; 105C _ 48: 89. 1A
-        mov     rdx, qword [rcx]                        ; 105F _ 48: 8B. 11
-        mov     qword [rdx+8H], rdi                     ; 1062 _ 48: 89. 7A, 08
-        mov     rdx, qword [rcx]                        ; 1066 _ 48: 8B. 11
-        pextrq  qword [rdx+10H], xmm0, 01H              ; 1069 _ 66 48: 0F 3A 16. 42, 10, 01
-        mov     rdx, qword [rcx]                        ; 1071 _ 48: 8B. 11
-        movq    qword [rdx+18H], xmm0                   ; 1074 _ 66: 0F D6. 42, 18
-        mov     rdx, qword [rcx]                        ; 1079 _ 48: 8B. 11
-        mov     qword [rdx+20H], rax                    ; 107C _ 48: 89. 42, 20
-        mov     rax, qword [rcx]                        ; 1080 _ 48: 8B. 01
-?_082:  add     rsp, 24                                 ; 1083 _ 48: 83. C4, 18
-        pop     rbx                                     ; 1087 _ 5B
-        pop     r12                                     ; 1088 _ 41: 5C
-        pop     r13                                     ; 108A _ 41: 5D
-        pop     r14                                     ; 108C _ 41: 5E
-        pop     r15                                     ; 108E _ 41: 5F
-        pop     rbp                                     ; 1090 _ 5D
-        ret                                             ; 1091 _ C3
-; _sha1 End of function
-
-; Filling space: 0EH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH
-;       db 84H, 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
-
-_computeSHA1:; Function begin
-        push    rbp                                     ; 10A0 _ 55
-        mov     rbp, rsp                                ; 10A1 _ 48: 89. E5
-        push    r15                                     ; 10A4 _ 41: 57
-        push    r14                                     ; 10A6 _ 41: 56
-        push    r12                                     ; 10A8 _ 41: 54
-        push    rbx                                     ; 10AA _ 53
-        movsxd  rsi, dword [rdi-4H]                     ; 10AB _ 48: 63. 77, FC
-        test    rsi, rsi                                ; 10AF _ 48: 85. F6
-        jle     ?_086                                   ; 10B2 _ 7E, 63
-        test    sil, 01H                                ; 10B4 _ 40: F6. C6, 01
-        jnz     ?_083                                   ; 10B8 _ 75, 04
-        xor     eax, eax                                ; 10BA _ 31. C0
-        jmp     ?_084                                   ; 10BC _ EB, 16
-
-?_083:  movsx   rax, byte [rdi]                         ; 10BE _ 48: 0F BE. 07
-        mov     rcx, qword [rel _inputBuffer_]          ; 10C2 _ 48: 8B. 0D, 00000000(GOT r)
-        mov     rcx, qword [rcx]                        ; 10C9 _ 48: 8B. 09
-        mov     qword [rcx], rax                        ; 10CC _ 48: 89. 01
-        mov     eax, 1                                  ; 10CF _ B8, 00000001
-?_084:  cmp     esi, 1                                  ; 10D4 _ 83. FE, 01
-        jz      ?_086                                   ; 10D7 _ 74, 3E
-        lea     rcx, [rax*8]                            ; 10D9 _ 48: 8D. 0C C5, 00000000
-        mov     r8, qword [rel _inputBuffer_]           ; 10E1 _ 4C: 8B. 05, 00000000(GOT r)
-; Filling space: 8H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 84H, 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
-?_085:  movsx   rbx, byte [rdi+rax]                     ; 10F0 _ 48: 0F BE. 1C 07
-        mov     rdx, qword [r8]                         ; 10F5 _ 49: 8B. 10
-        mov     qword [rcx+rdx], rbx                    ; 10F8 _ 48: 89. 1C 11
-        movsx   rdx, byte [rdi+rax+1H]                  ; 10FC _ 48: 0F BE. 54 07, 01
-        mov     rbx, qword [r8]                         ; 1102 _ 49: 8B. 18
-        mov     qword [rcx+rbx+8H], rdx                 ; 1105 _ 48: 89. 54 19, 08
-        add     rax, 2                                  ; 110A _ 48: 83. C0, 02
-        add     rcx, 16                                 ; 110E _ 48: 83. C1, 10
-        cmp     rax, rsi                                ; 1112 _ 48: 39. F0
-        jl      ?_085                                   ; 1115 _ 7C, D9
-?_086:  mov     rax, qword [rel _inputBuffer_]          ; 1117 _ 48: 8B. 05, 00000000(GOT r)
-        mov     rdi, qword [rax]                        ; 111E _ 48: 8B. 38
-        call    _sha1                                   ; 1121 _ E8, 00000000(rel)
-        mov     r15, rax                                ; 1126 _ 49: 89. C7
-        cmp     qword [r15-8H], 0                       ; 1129 _ 49: 83. 7F, F8, 00
-        jle     ?_088                                   ; 112E _ 7E, 36
-        lea     r14, [rel _str_le+7FCH]                 ; 1130 _ 4C: 8D. 35, 000007FC(rel)
-        mov     r12, r15                                ; 1137 _ 4D: 89. FC
-        xor     ebx, ebx                                ; 113A _ 31. DB
-; Filling space: 4H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 40H, 00H
-
-ALIGN   8
-?_087:  mov     rdi, qword [r12]                        ; 1140 _ 49: 8B. 3C 24
-        call    _toStringHex                            ; 1144 _ E8, 00000000(rel)
-        mov     rcx, rax                                ; 1149 _ 48: 89. C1
-        xor     eax, eax                                ; 114C _ 31. C0
-        mov     rdi, r14                                ; 114E _ 4C: 89. F7
-        mov     rsi, rcx                                ; 1151 _ 48: 89. CE
-        call    _printf                                 ; 1154 _ E8, 00000000(rel)
-        inc     rbx                                     ; 1159 _ 48: FF. C3
-        add     r12, 8                                  ; 115C _ 49: 83. C4, 08
-        cmp     rbx, qword [r15-8H]                     ; 1160 _ 49: 3B. 5F, F8
-        jl      ?_087                                   ; 1164 _ 7C, DA
-?_088:  mov     edi, 5                                  ; 1166 _ BF, 00000005
-        call    _malloc                                 ; 116B _ E8, 00000000(rel)
-        mov     dword [rax], 0                          ; 1170 _ C7. 00, 00000000
-        mov     byte [rax+4H], 0                        ; 1176 _ C6. 40, 04, 00
-        lea     rdi, [rax+4H]                           ; 117A _ 48: 8D. 78, 04
-        pop     rbx                                     ; 117E _ 5B
-        pop     r12                                     ; 117F _ 41: 5C
-        pop     r14                                     ; 1181 _ 41: 5E
-        pop     r15                                     ; 1183 _ 41: 5F
-        pop     rbp                                     ; 1185 _ 5D
-        jmp     _puts                                   ; 1186 _ E9, 00000000(rel)
-; _computeSHA1 End of function
-
-; Filling space: 5H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-
-_nextLetter:; Function begin
-        push    rbp                                     ; 1190 _ 55
-        mov     rbp, rsp                                ; 1191 _ 48: 89. E5
-        cmp     rdi, 57                                 ; 1194 _ 48: 83. FF, 39
-        jz      ?_089                                   ; 1198 _ 74, 1A
-        mov     rax, -1                                 ; 119A _ 48: C7. C0, FFFFFFFF
-        cmp     rdi, 122                                ; 11A1 _ 48: 83. FF, 7A
-        jz      ?_091                                   ; 11A5 _ 74, 1A
-        cmp     rdi, 90                                 ; 11A7 _ 48: 83. FF, 5A
-        jnz     ?_090                                   ; 11AB _ 75, 0E
-        mov     eax, 97                                 ; 11AD _ B8, 00000061
-        pop     rbp                                     ; 11B2 _ 5D
-        ret                                             ; 11B3 _ C3
-
-?_089:  mov     eax, 65                                 ; 11B4 _ B8, 00000041
-        pop     rbp                                     ; 11B9 _ 5D
-        ret                                             ; 11BA _ C3
-
-?_090:  inc     rdi                                     ; 11BB _ 48: FF. C7
-        mov     rax, rdi                                ; 11BE _ 48: 89. F8
-?_091:  pop     rbp                                     ; 11C1 _ 5D
-        ret                                             ; 11C2 _ C3
-; _nextLetter End of function
-
-; Filling space: 0DH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H
-;       db 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
-
-_nextText:; Function begin
-        push    rbp                                     ; 11D0 _ 55
-        mov     rbp, rsp                                ; 11D1 _ 48: 89. E5
-        test    rsi, rsi                                ; 11D4 _ 48: 85. F6
-        jle     ?_095                                   ; 11D7 _ 7E, 62
-        lea     rcx, [rdi+rsi*8-8H]                     ; 11D9 _ 48: 8D. 4C F7, F8
-        inc     rsi                                     ; 11DE _ 48: FF. C6
-        mov     edx, 65                                 ; 11E1 _ BA, 00000041
-        mov     eax, 1                                  ; 11E6 _ B8, 00000001
-; Filling space: 5H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-?_092:  mov     rdi, qword [rcx]                        ; 11F0 _ 48: 8B. 39
-        cmp     rdi, 122                                ; 11F3 _ 48: 83. FF, 7A
-        jz      ?_093                                   ; 11F7 _ 74, 27
-        cmp     rdi, 57                                 ; 11F9 _ 48: 83. FF, 39
-        jz      ?_098                                   ; 11FD _ 74, 45
-        cmp     rdi, 90                                 ; 11FF _ 48: 83. FF, 5A
-        jz      ?_097                                   ; 1203 _ 74, 3A
-        inc     rdi                                     ; 1205 _ 48: FF. C7
-        mov     qword [rcx], rdi                        ; 1208 _ 48: 89. 39
-        cmp     rdi, -1                                 ; 120B _ 48: 83. FF, FF
-        jz      ?_094                                   ; 120F _ 74, 16
-        jmp     ?_096                                   ; 1211 _ EB, 2A
-
-; Filling space: 0DH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H
-;       db 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
-?_093:  mov     qword [rcx], -1                         ; 1220 _ 48: C7. 01, FFFFFFFF
-?_094:  mov     qword [rcx], 48                         ; 1227 _ 48: C7. 01, 00000030
-        dec     rsi                                     ; 122E _ 48: FF. CE
-        add     rcx, -8                                 ; 1231 _ 48: 83. C1, F8
-        cmp     rsi, 1                                  ; 1235 _ 48: 83. FE, 01
-        jg      ?_092                                   ; 1239 _ 7F, B5
-?_095:  xor     eax, eax                                ; 123B _ 31. C0
-?_096:  pop     rbp                                     ; 123D _ 5D
-        ret                                             ; 123E _ C3
-
-?_097:  mov     edx, 97                                 ; 123F _ BA, 00000061
-?_098:  mov     qword [rcx], rdx                        ; 1244 _ 48: 89. 11
-        mov     eax, 1                                  ; 1247 _ B8, 00000001
-        pop     rbp                                     ; 124C _ 5D
-        ret                                             ; 124D _ C3
-; _nextText End of function
-
-; Filling space: 2H
-; Filler type: NOP with prefixes
-;       db 66H, 90H
-
-ALIGN   8
-
-_array_equal:; Function begin
-        push    rbp                                     ; 1250 _ 55
-        mov     rbp, rsp                                ; 1251 _ 48: 89. E5
-        mov     r8, qword [rdi-8H]                      ; 1254 _ 4C: 8B. 47, F8
-        cmp     r8, qword [rsi-8H]                      ; 1258 _ 4C: 3B. 46, F8
-        jnz     ?_100                                   ; 125C _ 75, 2C
-        mov     eax, 1                                  ; 125E _ B8, 00000001
-        test    r8, r8                                  ; 1263 _ 4D: 85. C0
-        jle     ?_101                                   ; 1266 _ 7E, 24
-        xor     edx, edx                                ; 1268 _ 31. D2
-; Filling space: 6H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-?_099:  mov     rcx, qword [rdi]                        ; 1270 _ 48: 8B. 0F
-        cmp     rcx, qword [rsi]                        ; 1273 _ 48: 3B. 0E
-        jnz     ?_100                                   ; 1276 _ 75, 12
-        inc     rdx                                     ; 1278 _ 48: FF. C2
-        add     rsi, 8                                  ; 127B _ 48: 83. C6, 08
-        add     rdi, 8                                  ; 127F _ 48: 83. C7, 08
-        cmp     rdx, r8                                 ; 1283 _ 4C: 39. C2
-        jl      ?_099                                   ; 1286 _ 7C, E8
-        jmp     ?_101                                   ; 1288 _ EB, 02
-
-?_100:  xor     eax, eax                                ; 128A _ 31. C0
-?_101:  pop     rbp                                     ; 128C _ 5D
-        ret                                             ; 128D _ C3
-; _array_equal End of function
-
-; Filling space: 2H
-; Filler type: NOP with prefixes
-;       db 66H, 90H
-
-ALIGN   8
-
-_crackSHA1:; Function begin
-        push    rbp                                     ; 1290 _ 55
-        mov     rbp, rsp                                ; 1291 _ 48: 89. E5
-        push    r15                                     ; 1294 _ 41: 57
-        push    r14                                     ; 1296 _ 41: 56
-        push    r13                                     ; 1298 _ 41: 55
-        push    r12                                     ; 129A _ 41: 54
-        push    rbx                                     ; 129C _ 53
-        sub     rsp, 24                                 ; 129D _ 48: 83. EC, 18
-        mov     r14, rdi                                ; 12A1 _ 49: 89. FE
-        mov     edi, 48                                 ; 12A4 _ BF, 00000030
-        call    _malloc                                 ; 12A9 _ E8, 00000000(rel)
-        mov     qword [rax], 5                          ; 12AE _ 48: C7. 00, 00000005
-        cmp     dword [r14-4H], 40                      ; 12B5 _ 41: 83. 7E, FC, 28
-        jne     ?_125                                   ; 12BA _ 0F 85, 00000353
-        mov     r15, rax                                ; 12C0 _ 49: 89. C7
-        add     r15, 8                                  ; 12C3 _ 49: 83. C7, 08
-        mov     qword [rax+8H], 0                       ; 12C7 _ 48: C7. 40, 08, 00000000
-        mov     qword [rax+10H], 0                      ; 12CF _ 48: C7. 40, 10, 00000000
-        mov     qword [rax+18H], 0                      ; 12D7 _ 48: C7. 40, 18, 00000000
-        mov     qword [rax+20H], 0                      ; 12DF _ 48: C7. 40, 20, 00000000
-        mov     qword [rbp-40H], rax                    ; 12E7 _ 48: 89. 45, C0
-        mov     qword [rax+28H], 0                      ; 12EB _ 48: C7. 40, 28, 00000000
-        xor     r12d, r12d                              ; 12F3 _ 45: 31. E4
-; Filling space: 0AH
-; Filler type: Multi-byte NOP
-;       db 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H, 00H
-;       db 00H, 00H
-
-ALIGN   16
-?_102:  mov     rbx, r12                                ; 1300 _ 4C: 89. E3
-        or      rbx, 03H                                ; 1303 _ 48: 83. CB, 03
-        mov     rax, rbx                                ; 1307 _ 48: 89. D8
-        sub     rax, r12                                ; 130A _ 4C: 29. E0
-        inc     rax                                     ; 130D _ 48: FF. C0
-        movsxd  r13, eax                                ; 1310 _ 4C: 63. E8
-        lea     rdi, [r13+5H]                           ; 1313 _ 49: 8D. 7D, 05
-        call    _malloc                                 ; 1317 _ E8, 00000000(rel)
-        mov     dword [rax], r13d                       ; 131C _ 44: 89. 28
-        movsxd  rcx, r12d                               ; 131F _ 49: 63. CC
-        cmp     rcx, rbx                                ; 1322 _ 48: 39. D9
-        jle     ?_103                                   ; 1325 _ 7E, 09
-        xor     ecx, ecx                                ; 1327 _ 31. C9
-        jmp     ?_104                                   ; 1329 _ EB, 2E
-
-; Filling space: 5H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-?_103:  mov     cl, byte [r14+r12]                      ; 1330 _ 43: 8A. 0C 26
-        mov     byte [rax+4H], cl                       ; 1334 _ 88. 48, 04
-        mov     rcx, r12                                ; 1337 _ 4C: 89. E1
-        or      rcx, 01H                                ; 133A _ 48: 83. C9, 01
-        mov     dl, byte [r14+rcx]                      ; 133E _ 41: 8A. 14 0E
-        mov     byte [rax+5H], dl                       ; 1342 _ 88. 50, 05
-        mov     cl, byte [r14+rcx+1H]                   ; 1345 _ 41: 8A. 4C 0E, 01
-        mov     byte [rax+6H], cl                       ; 134A _ 88. 48, 06
-        mov     cl, byte [r14+rbx]                      ; 134D _ 41: 8A. 0C 1E
-        mov     byte [rax+7H], cl                       ; 1351 _ 88. 48, 07
-        mov     ecx, 4                                  ; 1354 _ B9, 00000004
-?_104:  mov     byte [rax+rcx+4H], 0                    ; 1359 _ C6. 44 08, 04, 00
-        movsxd  rcx, dword [rax]                        ; 135E _ 48: 63. 08
-        xor     edx, edx                                ; 1361 _ 31. D2
-        test    rcx, rcx                                ; 1363 _ 48: 85. C9
-        jle     ?_110                                   ; 1366 _ 7E, 78
-        xor     esi, esi                                ; 1368 _ 31. F6
-; Filling space: 6H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-?_105:  movsx   rdi, byte [rax+rsi+4H]                  ; 1370 _ 48: 0F BE. 7C 30, 04
-        lea     rbx, [rdi-30H]                          ; 1376 _ 48: 8D. 5F, D0
-        cmp     rbx, 9                                  ; 137A _ 48: 83. FB, 09
-        ja      ?_106                                   ; 137E _ 77, 10
-        shl     rdx, 4                                  ; 1380 _ 48: C1. E2, 04
-        add     rdx, -48                                ; 1384 _ 48: 83. C2, D0
-        jmp     ?_108                                   ; 1388 _ EB, 38
-
-; Filling space: 6H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
-
-ALIGN   8
-?_106:  lea     rbx, [rdi-41H]                          ; 1390 _ 48: 8D. 5F, BF
-        cmp     rbx, 5                                  ; 1394 _ 48: 83. FB, 05
-        ja      ?_107                                   ; 1398 _ 77, 16
-        shl     rdx, 4                                  ; 139A _ 48: C1. E2, 04
-        add     rdx, -55                                ; 139E _ 48: 83. C2, C9
-        jmp     ?_108                                   ; 13A2 _ EB, 1E
+_Calculate_Ksm:; Function begin
+        push    rbp                                     ; 1F60 _ 55
+        mov     rbp, rsp                                ; 1F61 _ 48: 89. E5
+        mov     qword [rbp-8H], 1                       ; 1F64 _ 48: C7. 45, F8, 00000001
+?_177:  mov     rax, qword [rel _M_]                    ; 1F6C _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-8H]                     ; 1F73 _ 48: 8B. 4D, F8
+        cmp     rcx, qword [rax]                        ; 1F77 _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_178                                   ; 1F7A _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_179                                   ; 1F80 _ E9, 00000005
+
+?_178:  jmp     ?_185                                   ; 1F85 _ E9, 000000D8
+
+?_179:  mov     rax, qword [rel _ksm_]                  ; 1F8A _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 1F91 _ 48: 8B. 00
+        mov     rcx, qword [rbp-8H]                     ; 1F94 _ 48: 8B. 4D, F8
+        shl     rcx, 3                                  ; 1F98 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 1F9C _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 1F9F _ 48: 8B. 00
+        mov     qword [rax], 1                          ; 1FA2 _ 48: C7. 00, 00000001
+        mov     qword [rbp-10H], 1                      ; 1FA9 _ 48: C7. 45, F0, 00000001
+?_180:  mov     rax, qword [rel _C_]                    ; 1FB1 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-10H]                    ; 1FB8 _ 48: 8B. 4D, F0
+        mov     rax, qword [rax]                        ; 1FBC _ 48: 8B. 00
+        sub     rax, 2                                  ; 1FBF _ 48: 83. E8, 02
+        cmp     rcx, rax                                ; 1FC3 _ 48: 39. C1
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_181                                   ; 1FC6 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_182                                   ; 1FCC _ E9, 00000005
+
+?_181:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_183                                   ; 1FD1 _ E9, 00000076
+
+?_182:  mov     rax, qword [rel _ksm_]                  ; 1FD6 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Mod_]                  ; 1FDD _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rax]                        ; 1FE4 _ 48: 8B. 10
+        mov     rsi, qword [rbp-8H]                     ; 1FE7 _ 48: 8B. 75, F8
+        shl     rsi, 3                                  ; 1FEB _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 1FEF _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 1FF2 _ 48: 8B. 12
+        mov     rsi, qword [rbp-10H]                    ; 1FF5 _ 48: 8B. 75, F0
+        sub     rsi, 1                                  ; 1FF9 _ 48: 83. EE, 01
+        shl     rsi, 3                                  ; 1FFD _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 2001 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 2004 _ 48: 8B. 12
+        imul    rdx, qword [rbp-8H]                     ; 2007 _ 48: 0F AF. 55, F8
+        mov     qword [rbp-18H], rax                    ; 200C _ 48: 89. 45, E8
+        mov     rax, rdx                                ; 2010 _ 48: 89. D0
+        cqo                                             ; 2013 _ 48: 99
+        idiv    qword [rcx]                             ; 2015 _ 48: F7. 39
+        mov     rcx, qword [rbp-18H]                    ; 2018 _ 48: 8B. 4D, E8
+        mov     rsi, qword [rcx]                        ; 201C _ 48: 8B. 31
+        mov     rdi, qword [rbp-8H]                     ; 201F _ 48: 8B. 7D, F8
+        shl     rdi, 3                                  ; 2023 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2027 _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 202A _ 48: 8B. 36
+        mov     rdi, qword [rbp-10H]                    ; 202D _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 2031 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2035 _ 48: 01. FE
+        mov     qword [rsi], rdx                        ; 2038 _ 48: 89. 16
+        mov     rax, qword [rbp-10H]                    ; 203B _ 48: 8B. 45, F0
+        add     rax, 1                                  ; 203F _ 48: 83. C0, 01
+        mov     qword [rbp-10H], rax                    ; 2043 _ 48: 89. 45, F0
+        jmp     ?_180                                   ; 2047 _ E9, FFFFFF65
+
+?_183:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_184                                   ; 204C _ E9, 00000000
+
+?_184:  mov     rax, qword [rbp-8H]                     ; 2051 _ 48: 8B. 45, F8
+        add     rax, 1                                  ; 2055 _ 48: 83. C0, 01
+        mov     qword [rbp-8H], rax                     ; 2059 _ 48: 89. 45, F8
+        jmp     ?_177                                   ; 205D _ E9, FFFFFF0A
+; _Calculate_Ksm End of function
+
+?_185:  ; Local function
+        pop     rbp                                     ; 2062 _ 5D
+        ret                                             ; 2063 _ C3
 
 ; Filling space: 0CH
 ; Filler type: Multi-byte NOP
@@ -1888,301 +2389,485 @@ ALIGN   8
 ;       db 00H, 00H, 00H, 00H
 
 ALIGN   16
-?_107:  lea     rbx, [rdi-61H]                          ; 13B0 _ 48: 8D. 5F, 9F
-        cmp     rbx, 5                                  ; 13B4 _ 48: 83. FB, 05
-        ja      ?_109                                   ; 13B8 _ 77, 15
-        shl     rdx, 4                                  ; 13BA _ 48: C1. E2, 04
-        add     rdx, -87                                ; 13BE _ 48: 83. C2, A9
-?_108:  add     rdx, rdi                                ; 13C2 _ 48: 01. FA
-        inc     rsi                                     ; 13C5 _ 48: FF. C6
-        cmp     rsi, rcx                                ; 13C8 _ 48: 39. CE
-        jl      ?_105                                   ; 13CB _ 7C, A3
-        jmp     ?_110                                   ; 13CD _ EB, 11
 
-?_109:  xor     edx, edx                                ; 13CF _ 31. D2
-; Filling space: 0FH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 66H, 66H, 2EH, 0FH
-;       db 1FH, 84H, 00H, 00H, 00H, 00H, 00H
+_Calculate_G:; Function begin
+        push    rbp                                     ; 2070 _ 55
+        mov     rbp, rsp                                ; 2071 _ 48: 89. E5
+        sub     rsp, 48                                 ; 2074 _ 48: 83. EC, 30
+        call    _Calculate_Ksm                          ; 2078 _ E8, 00000000(rel)
+        call    _Calculate_p                            ; 207D _ E8, 00000000(rel)
+        call    _Calculate_q                            ; 2082 _ E8, 00000000(rel)
+        mov     qword [rbp-8H], 1                       ; 2087 _ 48: C7. 45, F8, 00000001
+?_186:  mov     rax, qword [rel _M_]                    ; 208F _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-8H]                     ; 2096 _ 48: 8B. 4D, F8
+        cmp     rcx, qword [rax]                        ; 209A _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_187                                   ; 209D _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_188                                   ; 20A3 _ E9, 00000005
 
-ALIGN   16
-?_110:  mov     rax, r12                                ; 13E0 _ 4C: 89. E0
-        sar     rax, 63                                 ; 13E3 _ 48: C1. F8, 3F
-        mov     rsi, rax                                ; 13E7 _ 48: 89. C6
-        shr     rsi, 61                                 ; 13EA _ 48: C1. EE, 3D
-        add     rsi, r12                                ; 13EE _ 4C: 01. E6
-        and     rsi, 0FFFFFFFFFFFFFFF8H                 ; 13F1 _ 48: 83. E6, F8
-        shr     rax, 62                                 ; 13F5 _ 48: C1. E8, 3E
-        add     rax, r12                                ; 13F9 _ 4C: 01. E0
-        mov     rdi, rax                                ; 13FC _ 48: 89. C7
-        shr     rdi, 2                                  ; 13FF _ 48: C1. EF, 02
-        shr     rax, 63                                 ; 1403 _ 48: C1. E8, 3F
-        add     eax, edi                                ; 1407 _ 01. F8
-        and     eax, 0EH                                ; 1409 _ 83. E0, 0E
-        sub     edi, eax                                ; 140C _ 29. C7
-        mov     ecx, 1                                  ; 140E _ B9, 00000001
-        sub     ecx, edi                                ; 1413 _ 29. F9
-        shl     cl, 4                                   ; 1415 _ C0. E1, 04
-        shl     rdx, cl                                 ; 1418 _ 48: D3. E2
-        or      qword [rsi+r15], rdx                    ; 141B _ 4A: 09. 14 3E
-        add     r12, 4                                  ; 141F _ 49: 83. C4, 04
-        cmp     r12, 40                                 ; 1423 _ 49: 83. FC, 28
-        jl      ?_102                                   ; 1427 _ 0F 8C, FFFFFED3
-        mov     eax, 1                                  ; 142D _ B8, 00000001
-        mov     qword [rbp-30H], rax                    ; 1432 _ 48: 89. 45, D0
-        mov     ebx, 2                                  ; 1436 _ BB, 00000002
-        xor     eax, eax                                ; 143B _ 31. C0
-        mov     qword [rbp-38H], rax                    ; 143D _ 48: 89. 45, C8
-        mov     r13, qword [rel _inputBuffer_]          ; 1441 _ 4C: 8B. 2D, 00000000(GOT r)
-        xor     r14d, r14d                              ; 1448 _ 45: 31. F6
-        mov     r12, qword [rbp-40H]                    ; 144B _ 4C: 8B. 65, C0
-?_111:  lea     eax, [r14+1H]                           ; 144F _ 41: 8D. 46, 01
-        test    al, 03H                                 ; 1453 _ A8, 03
-        jz      ?_113                                   ; 1455 _ 74, 39
-        mov     rcx, qword [rbp-30H]                    ; 1457 _ 48: 8B. 4D, D0
-        and     ecx, 03H                                ; 145B _ 83. E1, 03
-        xor     edx, edx                                ; 145E _ 31. D2
-        xor     eax, eax                                ; 1460 _ 31. C0
-; Filling space: 0EH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH
-;       db 84H, 00H, 00H, 00H, 00H, 00H
+?_187:  jmp     ?_203                                   ; 20A8 _ E9, 000001F8
 
-ALIGN   16
-?_112:  mov     rsi, qword [r13]                        ; 1470 _ 49: 8B. 75, 00
-        mov     qword [rdx+rsi], 48                     ; 1474 _ 48: C7. 04 32, 00000030
-        inc     rax                                     ; 147C _ 48: FF. C0
-        add     rdx, 8                                  ; 147F _ 48: 83. C2, 08
-        cmp     rcx, rax                                ; 1483 _ 48: 39. C1
-        jnz     ?_112                                   ; 1486 _ 75, E8
-        jmp     ?_114                                   ; 1488 _ EB, 08
+?_188:  mov     qword [rbp-10H], 2                      ; 20AD _ 48: C7. 45, F0, 00000002
+?_189:  mov     rax, qword [rel _C_]                    ; 20B5 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-10H]                    ; 20BC _ 48: 8B. 4D, F0
+        cmp     rcx, qword [rax]                        ; 20C0 _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_190                                   ; 20C3 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_191                                   ; 20C9 _ E9, 00000005
+
+?_190:  jmp     ?_201                                   ; 20CE _ E9, 000001BC
+
+?_191:  mov     qword [rbp-18H], 0                      ; 20D3 _ 48: C7. 45, E8, 00000000
+?_192:  mov     rax, qword [rbp-18H]                    ; 20DB _ 48: 8B. 45, E8
+        mov     rcx, qword [rbp-10H]                    ; 20DF _ 48: 8B. 4D, F0
+        sub     rcx, 2                                  ; 20E3 _ 48: 83. E9, 02
+        cmp     rax, rcx                                ; 20E7 _ 48: 39. C8
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_193                                   ; 20EA _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_194                                   ; 20F0 _ E9, 00000005
+
+?_193:  jmp     ?_195                                   ; 20F5 _ E9, 000000C7
+
+?_194:  mov     rax, qword [rel _g_]                    ; 20FA _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Mod_]                  ; 2101 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rel _q_]                    ; 2108 _ 48: 8B. 15, 00000000(GOT r)
+        mov     rsi, qword [rel _p_]                    ; 210F _ 48: 8B. 35, 00000000(GOT r)
+        mov     rdi, qword [rax]                        ; 2116 _ 48: 8B. 38
+        mov     rdi, qword [rdi]                        ; 2119 _ 48: 8B. 3F
+        mov     r8, qword [rbp-8H]                      ; 211C _ 4C: 8B. 45, F8
+        shl     r8, 3                                   ; 2120 _ 49: C1. E0, 03
+        add     rdi, r8                                 ; 2124 _ 4C: 01. C7
+        mov     rdi, qword [rdi]                        ; 2127 _ 48: 8B. 3F
+        mov     r8, qword [rbp-10H]                     ; 212A _ 4C: 8B. 45, F0
+        shl     r8, 3                                   ; 212E _ 49: C1. E0, 03
+        add     rdi, r8                                 ; 2132 _ 4C: 01. C7
+        mov     rdi, qword [rdi]                        ; 2135 _ 48: 8B. 3F
+        mov     rsi, qword [rsi]                        ; 2138 _ 48: 8B. 36
+        mov     r8, qword [rbp-10H]                     ; 213B _ 4C: 8B. 45, F0
+        sub     r8, 2                                   ; 213F _ 49: 83. E8, 02
+        shl     r8, 3                                   ; 2143 _ 49: C1. E0, 03
+        add     rsi, r8                                 ; 2147 _ 4C: 01. C6
+        mov     rsi, qword [rsi]                        ; 214A _ 48: 8B. 36
+        mov     r8, qword [rbp-18H]                     ; 214D _ 4C: 8B. 45, E8
+        shl     r8, 3                                   ; 2151 _ 49: C1. E0, 03
+        add     rsi, r8                                 ; 2155 _ 4C: 01. C6
+        mov     rsi, qword [rsi]                        ; 2158 _ 48: 8B. 36
+        mov     rdx, qword [rdx]                        ; 215B _ 48: 8B. 12
+        mov     r8, qword [rbp-18H]                     ; 215E _ 4C: 8B. 45, E8
+        shl     r8, 3                                   ; 2162 _ 49: C1. E0, 03
+        add     rdx, r8                                 ; 2166 _ 4C: 01. C2
+        mov     rdx, qword [rdx]                        ; 2169 _ 48: 8B. 12
+        mov     r8, qword [rbp-8H]                      ; 216C _ 4C: 8B. 45, F8
+        shl     r8, 3                                   ; 2170 _ 49: C1. E0, 03
+        add     rdx, r8                                 ; 2174 _ 4C: 01. C2
+        imul    rsi, qword [rdx]                        ; 2177 _ 48: 0F AF. 32
+        add     rdi, rsi                                ; 217B _ 48: 01. F7
+        mov     qword [rbp-20H], rax                    ; 217E _ 48: 89. 45, E0
+        mov     rax, rdi                                ; 2182 _ 48: 89. F8
+        cqo                                             ; 2185 _ 48: 99
+        idiv    qword [rcx]                             ; 2187 _ 48: F7. 39
+        mov     rcx, qword [rbp-20H]                    ; 218A _ 48: 8B. 4D, E0
+        mov     rsi, qword [rcx]                        ; 218E _ 48: 8B. 31
+        mov     rsi, qword [rsi]                        ; 2191 _ 48: 8B. 36
+        mov     rdi, qword [rbp-8H]                     ; 2194 _ 48: 8B. 7D, F8
+        shl     rdi, 3                                  ; 2198 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 219C _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 219F _ 48: 8B. 36
+        mov     rdi, qword [rbp-10H]                    ; 21A2 _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 21A6 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 21AA _ 48: 01. FE
+        mov     qword [rsi], rdx                        ; 21AD _ 48: 89. 16
+        mov     rax, qword [rbp-18H]                    ; 21B0 _ 48: 8B. 45, E8
+        add     rax, 1                                  ; 21B4 _ 48: 83. C0, 01
+        mov     qword [rbp-18H], rax                    ; 21B8 _ 48: 89. 45, E8
+        jmp     ?_192                                   ; 21BC _ E9, FFFFFF1A
+
+?_195:  mov     qword [rbp-18H], 1                      ; 21C1 _ 48: C7. 45, E8, 00000001
+?_196:  mov     rax, qword [rel _N_]                    ; 21C9 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-18H]                    ; 21D0 _ 48: 8B. 4D, E8
+        cmp     rcx, qword [rax]                        ; 21D4 _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_197                                   ; 21D7 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_198                                   ; 21DD _ E9, 00000005
+
+?_197:  jmp     ?_199                                   ; 21E2 _ E9, 00000092
+
+?_198:  mov     rax, qword [rel _g_]                    ; 21E7 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Mod_]                  ; 21EE _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rax]                        ; 21F5 _ 48: 8B. 10
+        mov     rsi, qword [rbp-18H]                    ; 21F8 _ 48: 8B. 75, E8
+        sub     rsi, 1                                  ; 21FC _ 48: 83. EE, 01
+        shl     rsi, 3                                  ; 2200 _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 2204 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 2207 _ 48: 8B. 12
+        mov     rsi, qword [rbp-8H]                     ; 220A _ 48: 8B. 75, F8
+        shl     rsi, 3                                  ; 220E _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 2212 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 2215 _ 48: 8B. 12
+        mov     rsi, qword [rbp-10H]                    ; 2218 _ 48: 8B. 75, F0
+        shl     rsi, 3                                  ; 221C _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 2220 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 2223 _ 48: 8B. 12
+        imul    rdx, qword [rbp-8H]                     ; 2226 _ 48: 0F AF. 55, F8
+        mov     qword [rbp-28H], rax                    ; 222B _ 48: 89. 45, D8
+        mov     rax, rdx                                ; 222F _ 48: 89. D0
+        cqo                                             ; 2232 _ 48: 99
+        idiv    qword [rcx]                             ; 2234 _ 48: F7. 39
+        mov     rcx, qword [rbp-28H]                    ; 2237 _ 48: 8B. 4D, D8
+        mov     rsi, qword [rcx]                        ; 223B _ 48: 8B. 31
+        mov     rdi, qword [rbp-18H]                    ; 223E _ 48: 8B. 7D, E8
+        shl     rdi, 3                                  ; 2242 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2246 _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 2249 _ 48: 8B. 36
+        mov     rdi, qword [rbp-8H]                     ; 224C _ 48: 8B. 7D, F8
+        shl     rdi, 3                                  ; 2250 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2254 _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 2257 _ 48: 8B. 36
+        mov     rdi, qword [rbp-10H]                    ; 225A _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 225E _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2262 _ 48: 01. FE
+        mov     qword [rsi], rdx                        ; 2265 _ 48: 89. 16
+        mov     rax, qword [rbp-18H]                    ; 2268 _ 48: 8B. 45, E8
+        add     rax, 1                                  ; 226C _ 48: 83. C0, 01
+        mov     qword [rbp-18H], rax                    ; 2270 _ 48: 89. 45, E8
+        jmp     ?_196                                   ; 2274 _ E9, FFFFFF50
+
+?_199:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_200                                   ; 2279 _ E9, 00000000
+
+?_200:  mov     rax, qword [rbp-10H]                    ; 227E _ 48: 8B. 45, F0
+        add     rax, 1                                  ; 2282 _ 48: 83. C0, 01
+        mov     qword [rbp-10H], rax                    ; 2286 _ 48: 89. 45, F0
+        jmp     ?_189                                   ; 228A _ E9, FFFFFE26
+
+?_201:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_202                                   ; 228F _ E9, 00000000
+
+?_202:  mov     rax, qword [rbp-8H]                     ; 2294 _ 48: 8B. 45, F8
+        add     rax, 1                                  ; 2298 _ 48: 83. C0, 01
+        mov     qword [rbp-8H], rax                     ; 229C _ 48: 89. 45, F8
+        jmp     ?_186                                   ; 22A0 _ E9, FFFFFDEA
+; _Calculate_G End of function
+
+?_203:  ; Local function
+        mov     qword [rbp-18H], 0                      ; 22A5 _ 48: C7. 45, E8, 00000000
+?_204:  mov     rax, qword [rel _N_]                    ; 22AD _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-18H]                    ; 22B4 _ 48: 8B. 4D, E8
+        cmp     rcx, qword [rax]                        ; 22B8 _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_205                                   ; 22BB _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_206                                   ; 22C1 _ E9, 00000005
+
+?_205:  jmp     ?_221                                   ; 22C6 _ E9, 000001D9
+
+?_206:  mov     qword [rbp-8H], 2                       ; 22CB _ 48: C7. 45, F8, 00000002
+?_207:  mov     rax, qword [rel _C_]                    ; 22D3 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-8H]                     ; 22DA _ 48: 8B. 4D, F8
+        cmp     rcx, qword [rax]                        ; 22DE _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_208                                   ; 22E1 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_209                                   ; 22E7 _ E9, 00000005
+
+?_208:  jmp     ?_219                                   ; 22EC _ E9, 0000019D
+
+?_209:  mov     qword [rbp-10H], 1                      ; 22F1 _ 48: C7. 45, F0, 00000001
+?_210:  mov     rax, qword [rel _M_]                    ; 22F9 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-10H]                    ; 2300 _ 48: 8B. 4D, F0
+        cmp     rcx, qword [rax]                        ; 2304 _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_211                                   ; 2307 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_212                                   ; 230D _ E9, 00000005
+
+?_211:  jmp     ?_217                                   ; 2312 _ E9, 00000161
+
+?_212:  mov     rax, qword [rel _Mod_]                  ; 2317 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Sum_]                  ; 231E _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rel _g_]                    ; 2325 _ 48: 8B. 15, 00000000(GOT r)
+        mov     rsi, qword [rcx]                        ; 232C _ 48: 8B. 31
+        mov     rdi, qword [rbp-18H]                    ; 232F _ 48: 8B. 7D, E8
+        shl     rdi, 3                                  ; 2333 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2337 _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 233A _ 48: 8B. 36
+        mov     rdi, qword [rbp-10H]                    ; 233D _ 48: 8B. 7D, F0
+        sub     rdi, 1                                  ; 2341 _ 48: 83. EF, 01
+        shl     rdi, 3                                  ; 2345 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2349 _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 234C _ 48: 8B. 36
+        mov     rdi, qword [rbp-8H]                     ; 234F _ 48: 8B. 7D, F8
+        shl     rdi, 3                                  ; 2353 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2357 _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 235A _ 48: 8B. 36
+        mov     rdx, qword [rdx]                        ; 235D _ 48: 8B. 12
+        mov     rdi, qword [rbp-18H]                    ; 2360 _ 48: 8B. 7D, E8
+        shl     rdi, 3                                  ; 2364 _ 48: C1. E7, 03
+        add     rdx, rdi                                ; 2368 _ 48: 01. FA
+        mov     rdx, qword [rdx]                        ; 236B _ 48: 8B. 12
+        mov     rdi, qword [rbp-10H]                    ; 236E _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 2372 _ 48: C1. E7, 03
+        add     rdx, rdi                                ; 2376 _ 48: 01. FA
+        mov     rdx, qword [rdx]                        ; 2379 _ 48: 8B. 12
+        mov     rdi, qword [rbp-8H]                     ; 237C _ 48: 8B. 7D, F8
+        shl     rdi, 3                                  ; 2380 _ 48: C1. E7, 03
+        add     rdx, rdi                                ; 2384 _ 48: 01. FA
+        add     rsi, qword [rdx]                        ; 2387 _ 48: 03. 32
+        mov     rdx, qword [rcx]                        ; 238A _ 48: 8B. 11
+        mov     rdi, qword [rbp-18H]                    ; 238D _ 48: 8B. 7D, E8
+        shl     rdi, 3                                  ; 2391 _ 48: C1. E7, 03
+        add     rdx, rdi                                ; 2395 _ 48: 01. FA
+        mov     rdx, qword [rdx]                        ; 2398 _ 48: 8B. 12
+        mov     rdi, qword [rbp-10H]                    ; 239B _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 239F _ 48: C1. E7, 03
+        add     rdx, rdi                                ; 23A3 _ 48: 01. FA
+        mov     rdx, qword [rdx]                        ; 23A6 _ 48: 8B. 12
+        mov     rdi, qword [rbp-8H]                     ; 23A9 _ 48: 8B. 7D, F8
+        shl     rdi, 3                                  ; 23AD _ 48: C1. E7, 03
+        add     rdx, rdi                                ; 23B1 _ 48: 01. FA
+        mov     qword [rdx], rsi                        ; 23B4 _ 48: 89. 32
+        mov     rcx, qword [rcx]                        ; 23B7 _ 48: 8B. 09
+        mov     rdx, qword [rbp-18H]                    ; 23BA _ 48: 8B. 55, E8
+        shl     rdx, 3                                  ; 23BE _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 23C2 _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 23C5 _ 48: 8B. 09
+        mov     rdx, qword [rbp-10H]                    ; 23C8 _ 48: 8B. 55, F0
+        shl     rdx, 3                                  ; 23CC _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 23D0 _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 23D3 _ 48: 8B. 09
+        mov     rdx, qword [rbp-8H]                     ; 23D6 _ 48: 8B. 55, F8
+        shl     rdx, 3                                  ; 23DA _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 23DE _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 23E1 _ 48: 8B. 09
+        cmp     rcx, qword [rax]                        ; 23E4 _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jl      ?_213                                   ; 23E7 _ 0F 8C, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_214                                   ; 23ED _ E9, 00000005
+
+?_213:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_215                                   ; 23F2 _ E9, 0000006B
+
+?_214:  mov     rax, qword [rel _Sum_]                  ; 23F7 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Mod_]                  ; 23FE _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rax]                        ; 2405 _ 48: 8B. 10
+        mov     rsi, qword [rbp-18H]                    ; 2408 _ 48: 8B. 75, E8
+        shl     rsi, 3                                  ; 240C _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 2410 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 2413 _ 48: 8B. 12
+        mov     rsi, qword [rbp-10H]                    ; 2416 _ 48: 8B. 75, F0
+        shl     rsi, 3                                  ; 241A _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 241E _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 2421 _ 48: 8B. 12
+        mov     rsi, qword [rbp-8H]                     ; 2424 _ 48: 8B. 75, F8
+        shl     rsi, 3                                  ; 2428 _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 242C _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 242F _ 48: 8B. 12
+        sub     rdx, qword [rcx]                        ; 2432 _ 48: 2B. 11
+        mov     rax, qword [rax]                        ; 2435 _ 48: 8B. 00
+        mov     rcx, qword [rbp-18H]                    ; 2438 _ 48: 8B. 4D, E8
+        shl     rcx, 3                                  ; 243C _ 48: C1. E1, 03
+        add     rax, rcx                                ; 2440 _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 2443 _ 48: 8B. 00
+        mov     rcx, qword [rbp-10H]                    ; 2446 _ 48: 8B. 4D, F0
+        shl     rcx, 3                                  ; 244A _ 48: C1. E1, 03
+        add     rax, rcx                                ; 244E _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 2451 _ 48: 8B. 00
+        mov     rcx, qword [rbp-8H]                     ; 2454 _ 48: 8B. 4D, F8
+        shl     rcx, 3                                  ; 2458 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 245C _ 48: 01. C8
+        mov     qword [rax], rdx                        ; 245F _ 48: 89. 10
+?_215:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_216                                   ; 2462 _ E9, 00000000
+
+?_216:  mov     rax, qword [rbp-10H]                    ; 2467 _ 48: 8B. 45, F0
+        add     rax, 1                                  ; 246B _ 48: 83. C0, 01
+        mov     qword [rbp-10H], rax                    ; 246F _ 48: 89. 45, F0
+        jmp     ?_210                                   ; 2473 _ E9, FFFFFE81
+
+?_217:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_218                                   ; 2478 _ E9, 00000000
+
+?_218:  mov     rax, qword [rbp-8H]                     ; 247D _ 48: 8B. 45, F8
+        add     rax, 1                                  ; 2481 _ 48: 83. C0, 01
+        mov     qword [rbp-8H], rax                     ; 2485 _ 48: 89. 45, F8
+        jmp     ?_207                                   ; 2489 _ E9, FFFFFE45
+
+?_219:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_220                                   ; 248E _ E9, 00000000
+
+?_220:  mov     rax, qword [rbp-18H]                    ; 2493 _ 48: 8B. 45, E8
+        add     rax, 1                                  ; 2497 _ 48: 83. C0, 01
+        mov     qword [rbp-18H], rax                    ; 249B _ 48: 89. 45, E8
+        jmp     ?_204                                   ; 249F _ E9, FFFFFE09
+
+?_221:  ; Local function
+        add     rsp, 48                                 ; 24A4 _ 48: 83. C4, 30
+        pop     rbp                                     ; 24A8 _ 5D
+        ret                                             ; 24A9 _ C3
 
 ; Filling space: 6H
 ; Filler type: Multi-byte NOP
 ;       db 66H, 0FH, 1FH, 44H, 00H, 00H
 
 ALIGN   8
-?_113:  xor     eax, eax                                ; 1490 _ 31. C0
-?_114:  cmp     r14, 3                                  ; 1492 _ 49: 83. FE, 03
-        jc      ?_117                                   ; 1496 _ 72, 68
-        lea     rcx, [rax*8+18H]                        ; 1498 _ 48: 8D. 0C C5, 00000018
-        mov     rdx, qword [rbp-30H]                    ; 14A0 _ 48: 8B. 55, D0
-        sub     rdx, rax                                ; 14A4 _ 48: 29. C2
-; Filling space: 9H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 84H, 00H, 00H, 00H, 00H
-;       db 00H
 
-ALIGN   16
-?_115:  mov     rax, qword [r13]                        ; 14B0 _ 49: 8B. 45, 00
-        mov     qword [rcx+rax-18H], 48                 ; 14B4 _ 48: C7. 44 01, E8, 00000030
-        mov     rax, qword [r13]                        ; 14BD _ 49: 8B. 45, 00
-        mov     qword [rcx+rax-10H], 48                 ; 14C1 _ 48: C7. 44 01, F0, 00000030
-        mov     rax, qword [r13]                        ; 14CA _ 49: 8B. 45, 00
-        mov     qword [rcx+rax-8H], 48                  ; 14CE _ 48: C7. 44 01, F8, 00000030
-        mov     rax, qword [r13]                        ; 14D7 _ 49: 8B. 45, 00
-        mov     qword [rcx+rax], 48                     ; 14DB _ 48: C7. 04 01, 00000030
-        add     rcx, 32                                 ; 14E3 _ 48: 83. C1, 20
-        add     rdx, -4                                 ; 14E7 _ 48: 83. C2, FC
-        jnz     ?_115                                   ; 14EB _ 75, C3
-        jmp     ?_117                                   ; 14ED _ EB, 11
+_Calculate_Comb:; Function begin
+        push    rbp                                     ; 24B0 _ 55
+        mov     rbp, rsp                                ; 24B1 _ 48: 89. E5
+        mov     qword [rbp-8H], 0                       ; 24B4 _ 48: C7. 45, F8, 00000000
+?_222:  mov     rax, qword [rel _M_]                    ; 24BC _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-8H]                     ; 24C3 _ 48: 8B. 4D, F8
+        cmp     rcx, qword [rax]                        ; 24C7 _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_223                                   ; 24CA _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_224                                   ; 24D0 _ E9, 00000005
 
-?_116:  mov     ecx, 97                                 ; 14EF _ B9, 00000061
-        mov     qword [rax], rcx                        ; 14F4 _ 48: 89. 08
-; Filling space: 9H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 84H, 00H, 00H, 00H, 00H
-;       db 00H
+?_223:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_225                                   ; 24D5 _ E9, 00000030
 
-ALIGN   16
-?_117:  mov     rdi, qword [r13]                        ; 1500 _ 49: 8B. 7D, 00
-        mov     rsi, qword [rbp-30H]                    ; 1504 _ 48: 8B. 75, D0
-        call    _sha1                                   ; 1508 _ E8, 00000000(rel)
-        mov     rcx, qword [rax-8H]                     ; 150D _ 48: 8B. 48, F8
-        cmp     rcx, qword [r12]                        ; 1511 _ 49: 3B. 0C 24
-        jnz     ?_119                                   ; 1515 _ 75, 39
-        test    rcx, rcx                                ; 1517 _ 48: 85. C9
-        jle     ?_126                                   ; 151A _ 0F 8E, 00000124
-        mov     rdx, r15                                ; 1520 _ 4C: 89. FA
-        xor     esi, esi                                ; 1523 _ 31. F6
-; Filling space: 0BH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H
-;       db 00H, 00H, 00H
+?_224:  mov     rax, qword [rel _Comb_]                 ; 24DA _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 24E1 _ 48: 8B. 00
+        mov     rcx, qword [rbp-8H]                     ; 24E4 _ 48: 8B. 4D, F8
+        shl     rcx, 3                                  ; 24E8 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 24EC _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 24EF _ 48: 8B. 00
+        mov     qword [rax], 1                          ; 24F2 _ 48: C7. 00, 00000001
+        mov     rax, qword [rbp-8H]                     ; 24F9 _ 48: 8B. 45, F8
+        add     rax, 1                                  ; 24FD _ 48: 83. C0, 01
+        mov     qword [rbp-8H], rax                     ; 2501 _ 48: 89. 45, F8
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_222                                   ; 2505 _ E9, FFFFFFB2
+; _Calculate_Comb End of function
 
-ALIGN   16
-?_118:  mov     rdi, qword [rax]                        ; 1530 _ 48: 8B. 38
-        cmp     rdi, qword [rdx]                        ; 1533 _ 48: 3B. 3A
-        jnz     ?_119                                   ; 1536 _ 75, 18
-        inc     rsi                                     ; 1538 _ 48: FF. C6
-        add     rdx, 8                                  ; 153B _ 48: 83. C2, 08
-        add     rax, 8                                  ; 153F _ 48: 83. C0, 08
-        cmp     rsi, rcx                                ; 1543 _ 48: 39. CE
-        jl      ?_118                                   ; 1546 _ 7C, E8
-        jmp     ?_126                                   ; 1548 _ E9, 000000F7
+?_225:  ; Local function
+        mov     qword [rbp-8H], 1                       ; 250A _ 48: C7. 45, F8, 00000001
+?_226:  mov     rax, qword [rel _M_]                    ; 2512 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-8H]                     ; 2519 _ 48: 8B. 4D, F8
+        cmp     rcx, qword [rax]                        ; 251D _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_227                                   ; 2520 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_228                                   ; 2526 _ E9, 00000005
 
-; Filling space: 3H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 00H
+?_227:  jmp     ?_238                                   ; 252B _ E9, 0000014A
 
-ALIGN   8
-?_119:  mov     rax, qword [r13]                        ; 1550 _ 49: 8B. 45, 00
-        add     rax, qword [rbp-38H]                    ; 1554 _ 48: 03. 45, C8
-        mov     rcx, rbx                                ; 1558 _ 48: 89. D9
-; Filling space: 5H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 44H, 00H, 00H
+?_228:  mov     qword [rbp-10H], 1                      ; 2530 _ 48: C7. 45, F0, 00000001
+?_229:  mov     rax, qword [rel _C_]                    ; 2538 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-10H]                    ; 253F _ 48: 8B. 4D, F0
+        cmp     rcx, qword [rax]                        ; 2543 _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_230                                   ; 2546 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_231                                   ; 254C _ E9, 00000005
 
-ALIGN   8
-?_120:  mov     rdx, qword [rax]                        ; 1560 _ 48: 8B. 10
-        cmp     rdx, 122                                ; 1563 _ 48: 83. FA, 7A
-        jz      ?_121                                   ; 1567 _ 74, 27
-        cmp     rdx, 57                                 ; 1569 _ 48: 83. FA, 39
-        jz      ?_123                                   ; 156D _ 74, 3E
-        cmp     rdx, 90                                 ; 156F _ 48: 83. FA, 5A
-        je      ?_116                                   ; 1573 _ 0F 84, FFFFFF76
-        inc     rdx                                     ; 1579 _ 48: FF. C2
-        mov     qword [rax], rdx                        ; 157C _ 48: 89. 10
-        cmp     rdx, -1                                 ; 157F _ 48: 83. FA, FF
-        jz      ?_122                                   ; 1583 _ 74, 12
-        jmp     ?_117                                   ; 1585 _ E9, FFFFFF76
+?_230:  jmp     ?_236                                   ; 2551 _ E9, 0000010E
 
-; Filling space: 6H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
+?_231:  mov     rax, qword [rel _Mod_]                  ; 2556 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Comb_]                 ; 255D _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rcx]                        ; 2564 _ 48: 8B. 11
+        mov     rsi, qword [rbp-8H]                     ; 2567 _ 48: 8B. 75, F8
+        sub     rsi, 1                                  ; 256B _ 48: 83. EE, 01
+        shl     rsi, 3                                  ; 256F _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 2573 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 2576 _ 48: 8B. 12
+        mov     rsi, qword [rbp-10H]                    ; 2579 _ 48: 8B. 75, F0
+        shl     rsi, 3                                  ; 257D _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 2581 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 2584 _ 48: 8B. 12
+        mov     rsi, qword [rcx]                        ; 2587 _ 48: 8B. 31
+        mov     rdi, qword [rbp-8H]                     ; 258A _ 48: 8B. 7D, F8
+        sub     rdi, 1                                  ; 258E _ 48: 83. EF, 01
+        shl     rdi, 3                                  ; 2592 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2596 _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 2599 _ 48: 8B. 36
+        mov     rdi, qword [rbp-10H]                    ; 259C _ 48: 8B. 7D, F0
+        sub     rdi, 1                                  ; 25A0 _ 48: 83. EF, 01
+        shl     rdi, 3                                  ; 25A4 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 25A8 _ 48: 01. FE
+        add     rdx, qword [rsi]                        ; 25AB _ 48: 03. 16
+        mov     rsi, qword [rcx]                        ; 25AE _ 48: 8B. 31
+        mov     rdi, qword [rbp-8H]                     ; 25B1 _ 48: 8B. 7D, F8
+        shl     rdi, 3                                  ; 25B5 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 25B9 _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 25BC _ 48: 8B. 36
+        mov     rdi, qword [rbp-10H]                    ; 25BF _ 48: 8B. 7D, F0
+        shl     rdi, 3                                  ; 25C3 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 25C7 _ 48: 01. FE
+        mov     qword [rsi], rdx                        ; 25CA _ 48: 89. 16
+        mov     rcx, qword [rcx]                        ; 25CD _ 48: 8B. 09
+        mov     rdx, qword [rbp-8H]                     ; 25D0 _ 48: 8B. 55, F8
+        shl     rdx, 3                                  ; 25D4 _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 25D8 _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 25DB _ 48: 8B. 09
+        mov     rdx, qword [rbp-10H]                    ; 25DE _ 48: 8B. 55, F0
+        shl     rdx, 3                                  ; 25E2 _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 25E6 _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 25E9 _ 48: 8B. 09
+        cmp     rcx, qword [rax]                        ; 25EC _ 48: 3B. 08
+; Note: Immediate operand could be made smaller by sign extension
+        jl      ?_232                                   ; 25EF _ 0F 8C, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_233                                   ; 25F5 _ E9, 00000005
 
-ALIGN   8
-?_121:  mov     qword [rax], -1                         ; 1590 _ 48: C7. 00, FFFFFFFF
-?_122:  mov     qword [rax], 48                         ; 1597 _ 48: C7. 00, 00000030
-        dec     rcx                                     ; 159E _ 48: FF. C9
-        add     rax, -8                                 ; 15A1 _ 48: 83. C0, F8
-        cmp     rcx, 1                                  ; 15A5 _ 48: 83. F9, 01
-        jg      ?_120                                   ; 15A9 _ 7F, B5
-        jmp     ?_124                                   ; 15AB _ EB, 13
+?_232:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_234                                   ; 25FA _ E9, 0000004F
 
-?_123:  mov     ecx, 65                                 ; 15AD _ B9, 00000041
-        mov     qword [rax], rcx                        ; 15B2 _ 48: 89. 08
-        jmp     ?_117                                   ; 15B5 _ E9, FFFFFF46
+?_233:  mov     rax, qword [rel _Comb_]                 ; 25FF _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Mod_]                  ; 2606 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rax]                        ; 260D _ 48: 8B. 10
+        mov     rsi, qword [rbp-8H]                     ; 2610 _ 48: 8B. 75, F8
+        shl     rsi, 3                                  ; 2614 _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 2618 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 261B _ 48: 8B. 12
+        mov     rsi, qword [rbp-10H]                    ; 261E _ 48: 8B. 75, F0
+        shl     rsi, 3                                  ; 2622 _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 2626 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 2629 _ 48: 8B. 12
+        sub     rdx, qword [rcx]                        ; 262C _ 48: 2B. 11
+        mov     rax, qword [rax]                        ; 262F _ 48: 8B. 00
+        mov     rcx, qword [rbp-8H]                     ; 2632 _ 48: 8B. 4D, F8
+        shl     rcx, 3                                  ; 2636 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 263A _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 263D _ 48: 8B. 00
+        mov     rcx, qword [rbp-10H]                    ; 2640 _ 48: 8B. 4D, F0
+        shl     rcx, 3                                  ; 2644 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 2648 _ 48: 01. C8
+        mov     qword [rax], rdx                        ; 264B _ 48: 89. 10
+?_234:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_235                                   ; 264E _ E9, 00000000
 
-; Filling space: 6H
-; Filler type: Multi-byte NOP
-;       db 66H, 0FH, 1FH, 44H, 00H, 00H
+?_235:  mov     rax, qword [rbp-10H]                    ; 2653 _ 48: 8B. 45, F0
+        add     rax, 1                                  ; 2657 _ 48: 83. C0, 01
+        mov     qword [rbp-10H], rax                    ; 265B _ 48: 89. 45, F0
+        jmp     ?_229                                   ; 265F _ E9, FFFFFED4
 
-ALIGN   8
-?_124:  mov     rax, qword [rbp-30H]                    ; 15C0 _ 48: 8B. 45, D0
-        mov     rcx, rax                                ; 15C4 _ 48: 89. C1
-        inc     rcx                                     ; 15C7 _ 48: FF. C1
-        inc     r14                                     ; 15CA _ 49: FF. C6
-        inc     rbx                                     ; 15CD _ 48: FF. C3
-        add     qword [rbp-38H], 8                      ; 15D0 _ 48: 83. 45, C8, 08
-        mov     rax, rcx                                ; 15D5 _ 48: 89. C8
-        mov     qword [rbp-30H], rax                    ; 15D8 _ 48: 89. 45, D0
-        cmp     rcx, 5                                  ; 15DC _ 48: 83. F9, 05
-        jl      ?_111                                   ; 15E0 _ 0F 8C, FFFFFE69
-        mov     edi, 15                                 ; 15E6 _ BF, 0000000F
-        call    _malloc                                 ; 15EB _ E8, 00000000(rel)
-        mov     dword [rax], 10                         ; 15F0 _ C7. 00, 0000000A
-        mov     rcx, qword 6E756F4620746F4EH            ; 15F6 _ 48: B9, 6E756F4620746F4E
-        mov     qword [rax+4H], rcx                     ; 1600 _ 48: 89. 48, 04
-        mov     byte [rax+0EH], 0                       ; 1604 _ C6. 40, 0E, 00
-; Note: Length-changing prefix causes delay on Intel processors
-        mov     word [rax+0CH], 8548                    ; 1608 _ 66: C7. 40, 0C, 2164
-        jmp     ?_134                                   ; 160E _ E9, 00000122
+?_236:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_237                                   ; 2664 _ E9, 00000000
 
-?_125:  mov     edi, 18                                 ; 1613 _ BF, 00000012
-        call    _malloc                                 ; 1618 _ E8, 00000000(rel)
-        mov     dword [rax], 13                         ; 161D _ C7. 00, 0000000D
-        mov     rcx, qword 7475706E692064H              ; 1623 _ 48: B9, 007475706E692064
-        mov     qword [rax+0AH], rcx                    ; 162D _ 48: 89. 48, 0A
-        mov     rcx, qword 2064696C61766E49H            ; 1631 _ 48: B9, 2064696C61766E49
-        mov     qword [rax+4H], rcx                     ; 163B _ 48: 89. 48, 04
-        jmp     ?_134                                   ; 163F _ E9, 000000F1
+?_237:  mov     rax, qword [rbp-8H]                     ; 2669 _ 48: 8B. 45, F8
+        add     rax, 1                                  ; 266D _ 48: 83. C0, 01
+        mov     qword [rbp-8H], rax                     ; 2671 _ 48: 89. 45, F8
+        jmp     ?_226                                   ; 2675 _ E9, FFFFFE98
 
-?_126:  cmp     qword [rbp-30H], 0                      ; 1644 _ 48: 83. 7D, D0, 00
-        jle     ?_133                                   ; 1649 _ 0F 8E, 000000D2
-        mov     rbx, qword 100000000H                   ; 164F _ 48: BB, 0000000100000000
-        lea     r12, [rel _str_le+2D3H]                 ; 1659 _ 4C: 8D. 25, 000002D3(rel)
-        xor     r15d, r15d                              ; 1660 _ 45: 31. FF
-; Filling space: 0DH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 66H, 66H, 2EH, 0FH, 1FH, 84H
-;       db 00H, 00H, 00H, 00H, 00H
-
-ALIGN   16
-?_127:  mov     rax, qword [r13]                        ; 1670 _ 49: 8B. 45, 00
-        mov     r14, qword [rax+r15*8]                  ; 1674 _ 4E: 8B. 34 F8
-        add     r14, -32                                ; 1678 _ 49: 83. C6, E0
-        cmp     r14, 94                                 ; 167C _ 49: 83. FE, 5E
-        ja      ?_128                                   ; 1680 _ 77, 2E
-        mov     rax, qword [rel _asciiTable_]           ; 1682 _ 48: 8B. 05, 00000000(GOT r)
-        mov     r12, qword [rax]                        ; 1689 _ 4C: 8B. 20
-        mov     edi, 6                                  ; 168C _ BF, 00000006
-        call    _malloc                                 ; 1691 _ E8, 00000000(rel)
-        mov     rcx, rax                                ; 1696 _ 48: 89. C1
-        mov     dword [rcx], 1                          ; 1699 _ C7. 01, 00000001
-        add     rcx, 4                                  ; 169F _ 48: 83. C1, 04
-        movsxd  rdx, r14d                               ; 16A3 _ 49: 63. D6
-        cmp     rdx, r14                                ; 16A6 _ 4C: 39. F2
-        jle     ?_129                                   ; 16A9 _ 7E, 25
-        xor     eax, eax                                ; 16AB _ 31. C0
-        jmp     ?_131                                   ; 16AD _ EB, 4D
-
-; Filling space: 1H
-; Filler type: NOP
-;       db 90H
-
-ALIGN   8
-?_128:  mov     edi, 5                                  ; 16B0 _ BF, 00000005
-        call    _malloc                                 ; 16B5 _ E8, 00000000(rel)
-        mov     rcx, rax                                ; 16BA _ 48: 89. C1
-        mov     dword [rcx], 0                          ; 16BD _ C7. 01, 00000000
-        mov     byte [rcx+4H], 0                        ; 16C3 _ C6. 41, 04, 00
-        add     rcx, 4                                  ; 16C7 _ 48: 83. C1, 04
-        jmp     ?_132                                   ; 16CB _ EB, 3A
-
-; Filling space: 3H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 00H
-
-ALIGN   8
-?_129:  lea     eax, [r14+1H]                           ; 16D0 _ 41: 8D. 46, 01
-        movsxd  rsi, eax                                ; 16D4 _ 48: 63. F0
-        dec     rsi                                     ; 16D7 _ 48: FF. CE
-        xor     eax, eax                                ; 16DA _ 31. C0
-        mov     rdi, rcx                                ; 16DC _ 48: 89. CF
-        nop                                             ; 16DF _ 90
-?_130:  movzx   edx, byte [r12+rdx]                     ; 16E0 _ 41: 0F B6. 14 14
-        mov     byte [rdi], dl                          ; 16E5 _ 88. 17
-        inc     rsi                                     ; 16E7 _ 48: FF. C6
-        movsxd  rdx, esi                                ; 16EA _ 48: 63. D6
-        inc     rdi                                     ; 16ED _ 48: FF. C7
-        add     rax, rbx                                ; 16F0 _ 48: 01. D8
-        cmp     rsi, r14                                ; 16F3 _ 4C: 39. F6
-        jle     ?_130                                   ; 16F6 _ 7E, E8
-        sar     rax, 32                                 ; 16F8 _ 48: C1. F8, 20
-?_131:  mov     byte [rcx+rax], 0                       ; 16FC _ C6. 04 01, 00
-        lea     r12, [rel _str_le+22CH]                 ; 1700 _ 4C: 8D. 25, 0000022C(rel)
-?_132:  xor     eax, eax                                ; 1707 _ 31. C0
-        mov     rdi, r12                                ; 1709 _ 4C: 89. E7
-        mov     rsi, rcx                                ; 170C _ 48: 89. CE
-        call    _printf                                 ; 170F _ E8, 00000000(rel)
-        inc     r15                                     ; 1714 _ 49: FF. C7
-        cmp     r15, qword [rbp-30H]                    ; 1717 _ 4C: 3B. 7D, D0
-        jne     ?_127                                   ; 171B _ 0F 85, FFFFFF4F
-?_133:  mov     edi, 5                                  ; 1721 _ BF, 00000005
-        call    _malloc                                 ; 1726 _ E8, 00000000(rel)
-        mov     dword [rax], 0                          ; 172B _ C7. 00, 00000000
-        mov     byte [rax+4H], 0                        ; 1731 _ C6. 40, 04, 00
-?_134:  lea     rdi, [rax+4H]                           ; 1735 _ 48: 8D. 78, 04
-        add     rsp, 24                                 ; 1739 _ 48: 83. C4, 18
-        pop     rbx                                     ; 173D _ 5B
-        pop     r12                                     ; 173E _ 41: 5C
-        pop     r13                                     ; 1740 _ 41: 5D
-        pop     r14                                     ; 1742 _ 41: 5E
-        pop     r15                                     ; 1744 _ 41: 5F
-        pop     rbp                                     ; 1746 _ 5D
-        jmp     _puts                                   ; 1747 _ E9, 00000000(rel)
-; _crackSHA1 End of function
+?_238:  ; Local function
+        pop     rbp                                     ; 267A _ 5D
+        ret                                             ; 267B _ C3
 
 ; Filling space: 4H
 ; Filler type: Multi-byte NOP
@@ -2191,159 +2876,525 @@ ALIGN   8
 ALIGN   8
 
 _main:  ; Function begin
-        push    rbp                                     ; 1750 _ 55
-        mov     rbp, rsp                                ; 1751 _ 48: 89. E5
-        push    r15                                     ; 1754 _ 41: 57
-        push    r14                                     ; 1756 _ 41: 56
-        push    r13                                     ; 1758 _ 41: 55
-        push    r12                                     ; 175A _ 41: 54
-        push    rbx                                     ; 175C _ 53
-        push    rax                                     ; 175D _ 50
-        mov     edi, 100                                ; 175E _ BF, 00000064
-        call    _malloc                                 ; 1763 _ E8, 00000000(rel)
-        mov     rbx, rax                                ; 1768 _ 48: 89. C3
-        mov     dword [rbx], 95                         ; 176B _ C7. 03, 0000005F
-        add     rbx, 4                                  ; 1771 _ 48: 83. C3, 04
-        lea     rsi, [rel _str_le+1EFH]                 ; 1775 _ 48: 8D. 35, 000001EF(rel)
-        mov     edx, 96                                 ; 177C _ BA, 00000060
-        mov     rdi, rbx                                ; 1781 _ 48: 89. DF
-        call    _memcpy                                 ; 1784 _ E8, 00000000(rel)
-        mov     rax, qword [rel _asciiTable_]           ; 1789 _ 48: 8B. 05, 00000000(GOT r)
-        mov     qword [rax], rbx                        ; 1790 _ 48: 89. 18
-        mov     rax, qword [rel _MAXCHUNK_]             ; 1793 _ 48: 8B. 05, 00000000(GOT r)
-        mov     qword [rax], 100                        ; 179A _ 48: C7. 00, 00000064
-        mov     r14, qword [rel _MAXLENGTH_]            ; 17A1 _ 4C: 8B. 35, 00000000(GOT r)
-        mov     qword [r14], 6320                       ; 17A8 _ 49: C7. 06, 000018B0
-        mov     edi, 808                                ; 17AF _ BF, 00000328
-        call    _malloc                                 ; 17B4 _ E8, 00000000(rel)
-        mov     r12, rax                                ; 17B9 _ 49: 89. C4
-        mov     qword [r12], 100                        ; 17BC _ 49: C7. 04 24, 00000064
-        mov     r15, r12                                ; 17C4 _ 4D: 89. E7
-        add     r15, 8                                  ; 17C7 _ 49: 83. C7, 08
-        mov     ebx, 8                                  ; 17CB _ BB, 00000008
-?_135:  mov     edi, 648                                ; 17D0 _ BF, 00000288
-        call    _malloc                                 ; 17D5 _ E8, 00000000(rel)
-        mov     qword [r12+rbx], rax                    ; 17DA _ 49: 89. 04 1C
-        mov     qword [rax], 80                         ; 17DE _ 48: C7. 00, 00000050
-        add     qword [r12+rbx], 8                      ; 17E5 _ 49: 83. 04 1C, 08
-        add     rbx, 8                                  ; 17EA _ 48: 83. C3, 08
-        cmp     rbx, 808                                ; 17EE _ 48: 81. FB, 00000328
-        jnz     ?_135                                   ; 17F5 _ 75, D9
-        mov     rax, qword [rel _chunks_]               ; 17F7 _ 48: 8B. 05, 00000000(GOT r)
-        mov     qword [rax], r15                        ; 17FE _ 4C: 89. 38
-        mov     rbx, qword [r14]                        ; 1801 _ 49: 8B. 1E
-        lea     rdi, [rbx*8+8H]                         ; 1804 _ 48: 8D. 3C DD, 00000008
-        call    _malloc                                 ; 180C _ E8, 00000000(rel)
-        mov     qword [rax], rbx                        ; 1811 _ 48: 89. 18
-        add     rax, 8                                  ; 1814 _ 48: 83. C0, 08
-        mov     rcx, qword [rel _inputBuffer_]          ; 1818 _ 48: 8B. 0D, 00000000(GOT r)
-        mov     qword [rcx], rax                        ; 181F _ 48: 89. 01
-        mov     edi, 48                                 ; 1822 _ BF, 00000030
-        call    _malloc                                 ; 1827 _ E8, 00000000(rel)
-        mov     qword [rax], 5                          ; 182C _ 48: C7. 00, 00000005
-        add     rax, 8                                  ; 1833 _ 48: 83. C0, 08
-        mov     rcx, qword [rel _outputBuffer_]         ; 1837 _ 48: 8B. 0D, 00000000(GOT r)
-        mov     qword [rcx], rax                        ; 183E _ 48: 89. 01
-        lea     r14, [rel _str_le+0E8H]                 ; 1841 _ 4C: 8D. 35, 000000E8(rel)
-        lea     r12, [rbp-2CH]                          ; 1848 _ 4C: 8D. 65, D4
-        lea     r15, [rel _str_le+0E0H]                 ; 184C _ 4C: 8D. 3D, 000000E0(rel)
-        jmp     ?_137                                   ; 1853 _ EB, 3D
+        push    rbp                                     ; 2680 _ 55
+        mov     rbp, rsp                                ; 2681 _ 48: 89. E5
+        sub     rsp, 208                                ; 2684 _ 48: 81. EC, 000000D0
+        mov     dword [rbp-4H], 0                       ; 268B _ C7. 45, FC, 00000000
+        mov     qword [rbp-18H], 3                      ; 2692 _ 48: C7. 45, E8, 00000003
+        call    _init                                   ; 269A _ E8, 00000000(rel)
+        mov     rax, qword [rel _Mod_]                  ; 269F _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _N_]                    ; 26A6 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rel _M_]                    ; 26AD _ 48: 8B. 15, 00000000(GOT r)
+        mov     rsi, qword [rel _C_]                    ; 26B4 _ 48: 8B. 35, 00000000(GOT r)
+        mov     rdi, qword [rel _fm_]                   ; 26BB _ 48: 8B. 3D, 00000000(GOT r)
+        mov     r8, qword [rel _fc_]                    ; 26C2 _ 4C: 8B. 05, 00000000(GOT r)
+        mov     r9, qword [rel _fn_]                    ; 26C9 _ 4C: 8B. 0D, 00000000(GOT r)
+        mov     r10, qword [r9]                         ; 26D0 _ 4D: 8B. 11
+        mov     qword [r10+8H], 2                       ; 26D3 _ 49: C7. 42, 08, 00000002
+        mov     r10, qword [r8]                         ; 26DB _ 4D: 8B. 10
+        mov     qword [r10+8H], 3                       ; 26DE _ 49: C7. 42, 08, 00000003
+        mov     r10, qword [rdi]                        ; 26E6 _ 4C: 8B. 17
+        mov     r10, qword [r10+8H]                     ; 26E9 _ 4D: 8B. 52, 08
+        mov     qword [r10+8H], 3                       ; 26ED _ 49: C7. 42, 08, 00000003
+        mov     r10, qword [rdi]                        ; 26F5 _ 4C: 8B. 17
+        mov     r10, qword [r10+8H]                     ; 26F8 _ 4D: 8B. 52, 08
+        mov     qword [r10+10H], 4                      ; 26FC _ 49: C7. 42, 10, 00000004
+        mov     r10, qword [r9]                         ; 2704 _ 4D: 8B. 11
+        mov     qword [r10+10H], 3                      ; 2707 _ 49: C7. 42, 10, 00000003
+        mov     r10, qword [r8]                         ; 270F _ 4D: 8B. 10
+        mov     qword [r10+10H], 3                      ; 2712 _ 49: C7. 42, 10, 00000003
+        mov     r10, qword [rdi]                        ; 271A _ 4C: 8B. 17
+        mov     r10, qword [r10+10H]                    ; 271D _ 4D: 8B. 52, 10
+        mov     qword [r10+8H], 3                       ; 2721 _ 49: C7. 42, 08, 00000003
+        mov     r10, qword [rdi]                        ; 2729 _ 4C: 8B. 17
+        mov     r10, qword [r10+10H]                    ; 272C _ 4D: 8B. 52, 10
+        mov     qword [r10+10H], 4                      ; 2730 _ 49: C7. 42, 10, 00000004
+        mov     r10, qword [rdi]                        ; 2738 _ 4C: 8B. 17
+        mov     r10, qword [r10+10H]                    ; 273B _ 4D: 8B. 52, 10
+        mov     qword [r10+18H], 4                      ; 273F _ 49: C7. 42, 18, 00000004
+        mov     r9, qword [r9]                          ; 2747 _ 4D: 8B. 09
+        mov     qword [r9+18H], 4                       ; 274A _ 49: C7. 41, 18, 00000004
+        mov     r8, qword [r8]                          ; 2752 _ 4D: 8B. 00
+        mov     qword [r8+18H], 4                       ; 2755 _ 49: C7. 40, 18, 00000004
+        mov     r8, qword [rdi]                         ; 275D _ 4C: 8B. 07
+        mov     r8, qword [r8+18H]                      ; 2760 _ 4D: 8B. 40, 18
+        mov     qword [r8+8H], 5                        ; 2764 _ 49: C7. 40, 08, 00000005
+        mov     r8, qword [rdi]                         ; 276C _ 4C: 8B. 07
+        mov     r8, qword [r8+18H]                      ; 276F _ 4D: 8B. 40, 18
+        mov     qword [r8+10H], 7                       ; 2773 _ 49: C7. 40, 10, 00000007
+        mov     r8, qword [rdi]                         ; 277B _ 4C: 8B. 07
+        mov     r8, qword [r8+18H]                      ; 277E _ 4D: 8B. 40, 18
+        mov     qword [r8+18H], 8                       ; 2782 _ 49: C7. 40, 18, 00000008
+        mov     rdi, qword [rdi]                        ; 278A _ 48: 8B. 3F
+        mov     rdi, qword [rdi+18H]                    ; 278D _ 48: 8B. 7F, 18
+        mov     qword [rdi+20H], 9                      ; 2791 _ 48: C7. 47, 20, 00000009
+        mov     qword [rsi], 4                          ; 2799 _ 48: C7. 06, 00000004
+        mov     qword [rdx], 9                          ; 27A0 _ 48: C7. 02, 00000009
+        mov     qword [rcx], 4                          ; 27A7 _ 48: C7. 01, 00000004
+        mov     qword [rax], 10007                      ; 27AE _ 48: C7. 00, 00002717
+        call    _Calculate_G                            ; 27B5 _ E8, 00000000(rel)
+        call    _Calculate_Comb                         ; 27BA _ E8, 00000000(rel)
+        mov     qword [rbp-28H], 1                      ; 27BF _ 48: C7. 45, D8, 00000001
+?_239:  mov     rax, qword [rbp-28H]                    ; 27C7 _ 48: 8B. 45, D8
+        cmp     rax, qword [rbp-18H]                    ; 27CB _ 48: 3B. 45, E8
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_240                                   ; 27CF _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_241                                   ; 27D5 _ E9, 00000005
 
-; Filling space: 0BH
-; Filler type: Multi-byte NOP
-;       db 66H, 66H, 2EH, 0FH, 1FH, 84H, 00H, 00H
-;       db 00H, 00H, 00H
+?_240:  jmp     ?_290                                   ; 27DA _ E9, 00000648
 
-ALIGN   16
-?_136:  mov     edi, 2004                               ; 1860 _ BF, 000007D4
-        call    _malloc                                 ; 1865 _ E8, 00000000(rel)
-        mov     r13, rax                                ; 186A _ 49: 89. C5
-        lea     rbx, [r13+4H]                           ; 186D _ 49: 8D. 5D, 04
-        xor     eax, eax                                ; 1871 _ 31. C0
-        mov     rdi, r15                                ; 1873 _ 4C: 89. FF
-        mov     rsi, rbx                                ; 1876 _ 48: 89. DE
-        call    _scanf                                  ; 1879 _ E8, 00000000(rel)
-        mov     rdi, rbx                                ; 187E _ 48: 89. DF
-        call    _strlen                                 ; 1881 _ E8, 00000000(rel)
-        mov     dword [r13], eax                        ; 1886 _ 41: 89. 45, 00
-        mov     rdi, rbx                                ; 188A _ 48: 89. DF
-        call    _crackSHA1                              ; 188D _ E8, 00000000(rel)
-?_137:  mov     dword [rbp-2CH], 0                      ; 1892 _ C7. 45, D4, 00000000
-        xor     eax, eax                                ; 1899 _ 31. C0
-        mov     rdi, r14                                ; 189B _ 4C: 89. F7
-        mov     rsi, r12                                ; 189E _ 4C: 89. E6
-        call    _scanf                                  ; 18A1 _ E8, 00000000(rel)
-        movsxd  rax, dword [rbp-2CH]                    ; 18A6 _ 48: 63. 45, D4
-        cmp     rax, 1                                  ; 18AA _ 48: 83. F8, 01
-        jz      ?_138                                   ; 18AE _ 74, 10
-        cmp     rax, 2                                  ; 18B0 _ 48: 83. F8, 02
-        jz      ?_136                                   ; 18B4 _ 74, AA
-        test    rax, rax                                ; 18B6 _ 48: 85. C0
-        jnz     ?_137                                   ; 18B9 _ 75, D7
-        jmp     ?_139                                   ; 18BB _ EB, 37
+?_241:  mov     rax, qword [rel _fc_]                   ; 27DF _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _fn_]                   ; 27E6 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rcx, qword [rcx]                        ; 27ED _ 48: 8B. 09
+        mov     rdx, qword [rbp-28H]                    ; 27F0 _ 48: 8B. 55, D8
+        shl     rdx, 3                                  ; 27F4 _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 27F8 _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 27FB _ 48: 8B. 09
+        mov     qword [rbp-20H], rcx                    ; 27FE _ 48: 89. 4D, E0
+        mov     rax, qword [rax]                        ; 2802 _ 48: 8B. 00
+        mov     rcx, qword [rbp-28H]                    ; 2805 _ 48: 8B. 4D, D8
+        shl     rcx, 3                                  ; 2809 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 280D _ 48: 01. C8
+        mov     rax, qword [rax]                        ; 2810 _ 48: 8B. 00
+        mov     qword [rbp-10H], rax                    ; 2813 _ 48: 89. 45, F0
+        mov     qword [rbp-30H], 1                      ; 2817 _ 48: C7. 45, D0, 00000001
+?_242:  mov     rax, qword [rbp-30H]                    ; 281F _ 48: 8B. 45, D0
+        cmp     rax, qword [rbp-20H]                    ; 2823 _ 48: 3B. 45, E0
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_243                                   ; 2827 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_244                                   ; 282D _ E9, 00000005
 
-; Filling space: 3H
-; Filler type: Multi-byte NOP
-;       db 0FH, 1FH, 00H
+?_243:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_245                                   ; 2832 _ E9, 0000004F
 
-ALIGN   8
-?_138:  mov     edi, 2004                               ; 18C0 _ BF, 000007D4
-        call    _malloc                                 ; 18C5 _ E8, 00000000(rel)
-        mov     r13, rax                                ; 18CA _ 49: 89. C5
-        lea     rbx, [r13+4H]                           ; 18CD _ 49: 8D. 5D, 04
-        xor     eax, eax                                ; 18D1 _ 31. C0
-        mov     rdi, r15                                ; 18D3 _ 4C: 89. FF
-        mov     rsi, rbx                                ; 18D6 _ 48: 89. DE
-        call    _scanf                                  ; 18D9 _ E8, 00000000(rel)
-        mov     rdi, rbx                                ; 18DE _ 48: 89. DF
-        call    _strlen                                 ; 18E1 _ E8, 00000000(rel)
-        mov     dword [r13], eax                        ; 18E6 _ 41: 89. 45, 00
-        mov     rdi, rbx                                ; 18EA _ 48: 89. DF
-        call    _computeSHA1                            ; 18ED _ E8, 00000000(rel)
-        jmp     ?_137                                   ; 18F2 _ EB, 9E
+?_244:  mov     rax, qword [rel _m_]                    ; 2837 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _fm_]                   ; 283E _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rcx, qword [rcx]                        ; 2845 _ 48: 8B. 09
+        mov     rdx, qword [rbp-28H]                    ; 2848 _ 48: 8B. 55, D8
+        shl     rdx, 3                                  ; 284C _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 2850 _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 2853 _ 48: 8B. 09
+        mov     rdx, qword [rbp-30H]                    ; 2856 _ 48: 8B. 55, D0
+        shl     rdx, 3                                  ; 285A _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 285E _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 2861 _ 48: 8B. 09
+        mov     rax, qword [rax]                        ; 2864 _ 48: 8B. 00
+        mov     rdx, qword [rbp-30H]                    ; 2867 _ 48: 8B. 55, D0
+        shl     rdx, 3                                  ; 286B _ 48: C1. E2, 03
+        add     rax, rdx                                ; 286F _ 48: 01. D0
+        mov     qword [rax], rcx                        ; 2872 _ 48: 89. 08
+        mov     rax, qword [rbp-30H]                    ; 2875 _ 48: 8B. 45, D0
+        add     rax, 1                                  ; 2879 _ 48: 83. C0, 01
+        mov     qword [rbp-30H], rax                    ; 287D _ 48: 89. 45, D0
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_242                                   ; 2881 _ E9, FFFFFF99
+
+?_245:  cmp     qword [rbp-20H], 1                      ; 2886 _ 48: 83. 7D, E0, 01
+; Note: Immediate operand could be made smaller by sign extension
+        jne     ?_246                                   ; 288B _ 0F 85, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_247                                   ; 2891 _ E9, 00000005
+
+?_246:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_248                                   ; 2896 _ E9, 00000047
+
+?_247:  mov     rax, qword [rel _m_]                    ; 289B _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Comb_]                 ; 28A2 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rcx, qword [rcx]                        ; 28A9 _ 48: 8B. 09
+        mov     rax, qword [rax]                        ; 28AC _ 48: 8B. 00
+        mov     rax, qword [rax+8H]                     ; 28AF _ 48: 8B. 40, 08
+        shl     rax, 3                                  ; 28B3 _ 48: C1. E0, 03
+        add     rcx, rax                                ; 28B7 _ 48: 01. C1
+        mov     rax, qword [rcx]                        ; 28BA _ 48: 8B. 01
+        mov     rcx, qword [rbp-10H]                    ; 28BD _ 48: 8B. 4D, F0
+        shl     rcx, 3                                  ; 28C1 _ 48: C1. E1, 03
+        add     rax, rcx                                ; 28C5 _ 48: 01. C8
+        mov     rdi, qword [rax]                        ; 28C8 _ 48: 8B. 38
+        call    _toString                               ; 28CB _ E8, 00000000(rel)
+        mov     qword [rbp-38H], rax                    ; 28D0 _ 48: 89. 45, C8
+        mov     rdi, qword [rbp-38H]                    ; 28D4 _ 48: 8B. 7D, C8
+        call    _println                                ; 28D8 _ E8, 00000000(rel)
+        jmp     ?_288                                   ; 28DD _ E9, 0000052F
+
+?_248:  mov     qword [rbp-58H], 0                      ; 28E2 _ 48: C7. 45, A8, 00000000
+        mov     qword [rbp-50H], 0                      ; 28EA _ 48: C7. 45, B0, 00000000
+        mov     qword [rbp-60H], 0                      ; 28F2 _ 48: C7. 45, A0, 00000000
+        mov     qword [rbp-48H], 1                      ; 28FA _ 48: C7. 45, B8, 00000001
+?_249:  mov     rax, qword [rel _m_]                    ; 2902 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-48H]                    ; 2909 _ 48: 8B. 4D, B8
+        mov     rax, qword [rax]                        ; 290D _ 48: 8B. 00
+        cmp     rcx, qword [rax+8H]                     ; 2910 _ 48: 3B. 48, 08
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_250                                   ; 2914 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_251                                   ; 291A _ E9, 00000005
+
+?_250:  jmp     ?_284                                   ; 291F _ E9, 000004B0
+
+?_251:  mov     rax, qword [rel _m_]                    ; 2924 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rax]                        ; 292B _ 48: 8B. 08
+        mov     rcx, qword [rcx+8H]                     ; 292E _ 48: 8B. 49, 08
+        mov     rax, qword [rax]                        ; 2932 _ 48: 8B. 00
+        mov     rax, qword [rax+8H]                     ; 2935 _ 48: 8B. 40, 08
+        cqo                                             ; 2939 _ 48: 99
+        idiv    qword [rbp-48H]                         ; 293B _ 48: F7. 7D, B8
+        mov     qword [rbp-0A0H], rax                   ; 293F _ 48: 89. 85, FFFFFF60
+        mov     rax, rcx                                ; 2946 _ 48: 89. C8
+        cqo                                             ; 2949 _ 48: 99
+        mov     rcx, qword [rbp-0A0H]                   ; 294B _ 48: 8B. 8D, FFFFFF60
+        idiv    rcx                                     ; 2952 _ 48: F7. F9
+        mov     qword [rbp-68H], rax                    ; 2955 _ 48: 89. 45, 98
+        mov     qword [rbp-70H], 2                      ; 2959 _ 48: C7. 45, 90, 00000002
+?_252:  mov     rax, qword [rbp-70H]                    ; 2961 _ 48: 8B. 45, 90
+        cmp     rax, qword [rbp-20H]                    ; 2965 _ 48: 3B. 45, E0
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_253                                   ; 2969 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_254                                   ; 296F _ E9, 00000005
+
+?_253:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_259                                   ; 2974 _ E9, 0000007F
+
+?_254:  mov     rax, qword [rel _m_]                    ; 2979 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rax]                        ; 2980 _ 48: 8B. 08
+        mov     rdx, qword [rbp-70H]                    ; 2983 _ 48: 8B. 55, 90
+        shl     rdx, 3                                  ; 2987 _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 298B _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 298E _ 48: 8B. 09
+        mov     rax, qword [rax]                        ; 2991 _ 48: 8B. 00
+        mov     rdx, qword [rbp-70H]                    ; 2994 _ 48: 8B. 55, 90
+        shl     rdx, 3                                  ; 2998 _ 48: C1. E2, 03
+        add     rax, rdx                                ; 299C _ 48: 01. D0
+        mov     rax, qword [rax]                        ; 299F _ 48: 8B. 00
+        cqo                                             ; 29A2 _ 48: 99
+        idiv    qword [rbp-48H]                         ; 29A4 _ 48: F7. 7D, B8
+        mov     qword [rbp-0A8H], rax                   ; 29A8 _ 48: 89. 85, FFFFFF58
+        mov     rax, rcx                                ; 29AF _ 48: 89. C8
+        cqo                                             ; 29B2 _ 48: 99
+        mov     rcx, qword [rbp-0A8H]                   ; 29B4 _ 48: 8B. 8D, FFFFFF58
+        idiv    rcx                                     ; 29BB _ 48: F7. F9
+        mov     qword [rbp-78H], rax                    ; 29BE _ 48: 89. 45, 88
+        mov     rax, qword [rbp-78H]                    ; 29C2 _ 48: 8B. 45, 88
+        cmp     rax, qword [rbp-68H]                    ; 29C6 _ 48: 3B. 45, 98
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_255                                   ; 29CA _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_256                                   ; 29D0 _ E9, 00000005
+
+?_255:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_257                                   ; 29D5 _ E9, 00000008
+
+?_256:  mov     rax, qword [rbp-78H]                    ; 29DA _ 48: 8B. 45, 88
+        mov     qword [rbp-68H], rax                    ; 29DE _ 48: 89. 45, 98
+?_257:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_258                                   ; 29E2 _ E9, 00000000
+
+?_258:  mov     rax, qword [rbp-70H]                    ; 29E7 _ 48: 8B. 45, 90
+        add     rax, 1                                  ; 29EB _ 48: 83. C0, 01
+        mov     qword [rbp-70H], rax                    ; 29EF _ 48: 89. 45, 90
+        jmp     ?_252                                   ; 29F3 _ E9, FFFFFF69
+
+?_259:  mov     rax, qword [rel _m_]                    ; 29F8 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 29FF _ 48: 8B. 00
+        mov     rax, qword [rax+8H]                     ; 2A02 _ 48: 8B. 40, 08
+        cmp     rax, qword [rbp-68H]                    ; 2A06 _ 48: 3B. 45, 98
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_260                                   ; 2A0A _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_261                                   ; 2A10 _ E9, 00000005
+
+?_260:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_262                                   ; 2A15 _ E9, 00000012
+
+?_261:  mov     rax, qword [rel _m_]                    ; 2A1A _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 2A21 _ 48: 8B. 00
+        mov     rax, qword [rax+8H]                     ; 2A24 _ 48: 8B. 40, 08
+        mov     qword [rbp-68H], rax                    ; 2A28 _ 48: 89. 45, 98
+?_262:  mov     rax, qword [rel _b_]                    ; 2A2C _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-68H]                    ; 2A33 _ 48: 8B. 4D, 98
+        mov     qword [rbp-48H], rcx                    ; 2A37 _ 48: 89. 4D, B8
+        mov     rax, qword [rax]                        ; 2A3B _ 48: 8B. 00
+        mov     qword [rax], 1                          ; 2A3E _ 48: C7. 00, 00000001
+        mov     qword [rbp-70H], 1                      ; 2A45 _ 48: C7. 45, 90, 00000001
+?_263:  mov     rax, qword [rbp-70H]                    ; 2A4D _ 48: 8B. 45, 90
+        cmp     rax, qword [rbp-20H]                    ; 2A51 _ 48: 3B. 45, E0
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_264                                   ; 2A55 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_265                                   ; 2A5B _ E9, 00000005
+
+?_264:  jmp     ?_279                                   ; 2A60 _ E9, 00000280
+
+?_265:  mov     rax, qword [rel _Mod_]                  ; 2A65 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _m_]                    ; 2A6C _ 48: 8B. 0D, 00000000(GOT r)
+        mov     edx, 2                                  ; 2A73 _ BA, 00000002
+        mov     esi, edx                                ; 2A78 _ 89. D6
+        mov     rdi, qword [rcx]                        ; 2A7A _ 48: 8B. 39
+        mov     r8, qword [rbp-70H]                     ; 2A7D _ 4C: 8B. 45, 90
+        shl     r8, 3                                   ; 2A81 _ 49: C1. E0, 03
+        add     rdi, r8                                 ; 2A85 _ 4C: 01. C7
+        mov     rdi, qword [rdi]                        ; 2A88 _ 48: 8B. 3F
+        mov     qword [rbp-0B0H], rax                   ; 2A8B _ 48: 89. 85, FFFFFF50
+        mov     rax, rdi                                ; 2A92 _ 48: 89. F8
+        cqo                                             ; 2A95 _ 48: 99
+        idiv    qword [rbp-48H]                         ; 2A97 _ 48: F7. 7D, B8
+        cqo                                             ; 2A9B _ 48: 99
+        mov     rdi, qword [rbp-0B0H]                   ; 2A9D _ 48: 8B. BD, FFFFFF50
+        idiv    qword [rdi]                             ; 2AA4 _ 48: F7. 3F
+        mov     qword [rbp-90H], rdx                    ; 2AA7 _ 48: 89. 95, FFFFFF70
+        mov     rdx, qword [rbp-90H]                    ; 2AAE _ 48: 8B. 95, FFFFFF70
+        mov     r8, qword [rbp-90H]                     ; 2AB5 _ 4C: 8B. 85, FFFFFF70
+        add     r8, 1                                   ; 2ABC _ 49: 83. C0, 01
+        imul    rdx, r8                                 ; 2AC0 _ 49: 0F AF. D0
+        mov     rax, rdx                                ; 2AC4 _ 48: 89. D0
+        cqo                                             ; 2AC7 _ 48: 99
+        idiv    rsi                                     ; 2AC9 _ 48: F7. FE
+        cqo                                             ; 2ACC _ 48: 99
+        idiv    qword [rdi]                             ; 2ACE _ 48: F7. 3F
+        mov     qword [rbp-98H], rdx                    ; 2AD1 _ 48: 89. 95, FFFFFF68
+        mov     rcx, qword [rcx]                        ; 2AD8 _ 48: 8B. 09
+        mov     rdx, qword [rbp-70H]                    ; 2ADB _ 48: 8B. 55, 90
+        shl     rdx, 3                                  ; 2ADF _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 2AE3 _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 2AE6 _ 48: 8B. 09
+        imul    rcx, qword [rbp-90H]                    ; 2AE9 _ 48: 0F AF. 8D, FFFFFF70
+        mov     rax, rcx                                ; 2AF1 _ 48: 89. C8
+        cqo                                             ; 2AF4 _ 48: 99
+        idiv    qword [rdi]                             ; 2AF6 _ 48: F7. 3F
+        mov     qword [rbp-80H], rdx                    ; 2AF9 _ 48: 89. 55, 80
+        mov     qword [rbp-88H], 0                      ; 2AFD _ 48: C7. 85, FFFFFF78, 00000000
+?_266:  mov     rax, qword [rbp-88H]                    ; 2B08 _ 48: 8B. 85, FFFFFF78
+        cmp     rax, qword [rbp-70H]                    ; 2B0F _ 48: 3B. 45, 90
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_267                                   ; 2B13 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_268                                   ; 2B19 _ E9, 00000005
+
+?_267:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_269                                   ; 2B1E _ E9, 0000007C
+
+?_268:  mov     rax, qword [rel _res_]                  ; 2B23 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Mod_]                  ; 2B2A _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rel _b_]                    ; 2B31 _ 48: 8B. 15, 00000000(GOT r)
+        mov     rdx, qword [rdx]                        ; 2B38 _ 48: 8B. 12
+        mov     rsi, qword [rbp-88H]                    ; 2B3B _ 48: 8B. B5, FFFFFF78
+        shl     rsi, 3                                  ; 2B42 _ 48: C1. E6, 03
+        add     rdx, rsi                                ; 2B46 _ 48: 01. F2
+        mov     rdx, qword [rdx]                        ; 2B49 _ 48: 8B. 12
+        mov     rsi, qword [rcx]                        ; 2B4C _ 48: 8B. 31
+        sub     rsi, qword [rbp-98H]                    ; 2B4F _ 48: 2B. B5, FFFFFF68
+        imul    rdx, rsi                                ; 2B56 _ 48: 0F AF. D6
+        mov     qword [rbp-0B8H], rax                   ; 2B5A _ 48: 89. 85, FFFFFF48
+        mov     rax, rdx                                ; 2B61 _ 48: 89. D0
+        cqo                                             ; 2B64 _ 48: 99
+        idiv    qword [rcx]                             ; 2B66 _ 48: F7. 39
+        mov     rcx, qword [rbp-0B8H]                   ; 2B69 _ 48: 8B. 8D, FFFFFF48
+        mov     rsi, qword [rcx]                        ; 2B70 _ 48: 8B. 31
+        mov     rdi, qword [rbp-88H]                    ; 2B73 _ 48: 8B. BD, FFFFFF78
+        add     rdi, 1                                  ; 2B7A _ 48: 83. C7, 01
+        shl     rdi, 3                                  ; 2B7E _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2B82 _ 48: 01. FE
+        mov     qword [rsi], rdx                        ; 2B85 _ 48: 89. 16
+        mov     rax, qword [rbp-88H]                    ; 2B88 _ 48: 8B. 85, FFFFFF78
+        add     rax, 1                                  ; 2B8F _ 48: 83. C0, 01
+        mov     qword [rbp-88H], rax                    ; 2B93 _ 48: 89. 85, FFFFFF78
+        jmp     ?_266                                   ; 2B9A _ E9, FFFFFF69
+
+?_269:  mov     rax, qword [rel _res_]                  ; 2B9F _ 48: 8B. 05, 00000000(GOT r)
+        mov     rax, qword [rax]                        ; 2BA6 _ 48: 8B. 00
+        mov     qword [rax], 0                          ; 2BA9 _ 48: C7. 00, 00000000
+        mov     qword [rbp-88H], 0                      ; 2BB0 _ 48: C7. 85, FFFFFF78, 00000000
+?_270:  mov     rax, qword [rbp-88H]                    ; 2BBB _ 48: 8B. 85, FFFFFF78
+        cmp     rax, qword [rbp-70H]                    ; 2BC2 _ 48: 3B. 45, 90
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_271                                   ; 2BC6 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_272                                   ; 2BCC _ E9, 00000005
+
+?_271:  jmp     ?_273                                   ; 2BD1 _ E9, 00000086
+
+?_272:  mov     rax, qword [rel _res_]                  ; 2BD6 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Mod_]                  ; 2BDD _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rel _b_]                    ; 2BE4 _ 48: 8B. 15, 00000000(GOT r)
+        mov     rsi, qword [rax]                        ; 2BEB _ 48: 8B. 30
+        mov     rdi, qword [rbp-88H]                    ; 2BEE _ 48: 8B. BD, FFFFFF78
+        shl     rdi, 3                                  ; 2BF5 _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2BF9 _ 48: 01. FE
+        mov     rsi, qword [rsi]                        ; 2BFC _ 48: 8B. 36
+        mov     rdi, qword [rbp-80H]                    ; 2BFF _ 48: 8B. 7D, 80
+        mov     rdx, qword [rdx]                        ; 2C03 _ 48: 8B. 12
+        mov     r8, qword [rbp-88H]                     ; 2C06 _ 4C: 8B. 85, FFFFFF78
+        shl     r8, 3                                   ; 2C0D _ 49: C1. E0, 03
+        add     rdx, r8                                 ; 2C11 _ 4C: 01. C2
+        imul    rdi, qword [rdx]                        ; 2C14 _ 48: 0F AF. 3A
+        add     rsi, rdi                                ; 2C18 _ 48: 01. FE
+        mov     qword [rbp-0C0H], rax                   ; 2C1B _ 48: 89. 85, FFFFFF40
+        mov     rax, rsi                                ; 2C22 _ 48: 89. F0
+        cqo                                             ; 2C25 _ 48: 99
+        idiv    qword [rcx]                             ; 2C27 _ 48: F7. 39
+        mov     rcx, qword [rbp-0C0H]                   ; 2C2A _ 48: 8B. 8D, FFFFFF40
+        mov     rsi, qword [rcx]                        ; 2C31 _ 48: 8B. 31
+        mov     rdi, qword [rbp-88H]                    ; 2C34 _ 48: 8B. BD, FFFFFF78
+        shl     rdi, 3                                  ; 2C3B _ 48: C1. E7, 03
+        add     rsi, rdi                                ; 2C3F _ 48: 01. FE
+        mov     qword [rsi], rdx                        ; 2C42 _ 48: 89. 16
+        mov     rax, qword [rbp-88H]                    ; 2C45 _ 48: 8B. 85, FFFFFF78
+        add     rax, 1                                  ; 2C4C _ 48: 83. C0, 01
+        mov     qword [rbp-88H], rax                    ; 2C50 _ 48: 89. 85, FFFFFF78
+        jmp     ?_270                                   ; 2C57 _ E9, FFFFFF5F
+
+?_273:  mov     qword [rbp-88H], 0                      ; 2C5C _ 48: C7. 85, FFFFFF78, 00000000
+?_274:  mov     rax, qword [rbp-88H]                    ; 2C67 _ 48: 8B. 85, FFFFFF78
+        cmp     rax, qword [rbp-70H]                    ; 2C6E _ 48: 3B. 45, 90
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_275                                   ; 2C72 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_276                                   ; 2C78 _ E9, 00000005
+
+?_275:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_277                                   ; 2C7D _ E9, 0000004D
+
+?_276:  mov     rax, qword [rel _b_]                    ; 2C82 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _res_]                  ; 2C89 _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rcx, qword [rcx]                        ; 2C90 _ 48: 8B. 09
+        mov     rdx, qword [rbp-88H]                    ; 2C93 _ 48: 8B. 95, FFFFFF78
+        shl     rdx, 3                                  ; 2C9A _ 48: C1. E2, 03
+        add     rcx, rdx                                ; 2C9E _ 48: 01. D1
+        mov     rcx, qword [rcx]                        ; 2CA1 _ 48: 8B. 09
+        mov     rax, qword [rax]                        ; 2CA4 _ 48: 8B. 00
+        mov     rdx, qword [rbp-88H]                    ; 2CA7 _ 48: 8B. 95, FFFFFF78
+        shl     rdx, 3                                  ; 2CAE _ 48: C1. E2, 03
+        add     rax, rdx                                ; 2CB2 _ 48: 01. D0
+        mov     qword [rax], rcx                        ; 2CB5 _ 48: 89. 08
+        mov     rax, qword [rbp-88H]                    ; 2CB8 _ 48: 8B. 85, FFFFFF78
+        add     rax, 1                                  ; 2CBF _ 48: 83. C0, 01
+        mov     qword [rbp-88H], rax                    ; 2CC3 _ 48: 89. 85, FFFFFF78
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_274                                   ; 2CCA _ E9, FFFFFF98
+
+?_277:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_278                                   ; 2CCF _ E9, 00000000
+
+?_278:  mov     rax, qword [rbp-70H]                    ; 2CD4 _ 48: 8B. 45, 90
+        add     rax, 1                                  ; 2CD8 _ 48: 83. C0, 01
+        mov     qword [rbp-70H], rax                    ; 2CDC _ 48: 89. 45, 90
+        jmp     ?_263                                   ; 2CE0 _ E9, FFFFFD68
+
+?_279:  mov     qword [rbp-70H], 0                      ; 2CE5 _ 48: C7. 45, 90, 00000000
+?_280:  mov     rax, qword [rbp-70H]                    ; 2CED _ 48: 8B. 45, 90
+        cmp     rax, qword [rbp-20H]                    ; 2CF1 _ 48: 3B. 45, E0
+; Note: Immediate operand could be made smaller by sign extension
+        jg      ?_281                                   ; 2CF5 _ 0F 8F, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_282                                   ; 2CFB _ E9, 00000005
+
+?_281:  jmp     ?_283                                   ; 2D00 _ E9, 000000B6
+
+?_282:  mov     rax, qword [rel _Mod_]                  ; 2D05 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rel _Sum_]                  ; 2D0C _ 48: 8B. 0D, 00000000(GOT r)
+        mov     rdx, qword [rel _b_]                    ; 2D13 _ 48: 8B. 15, 00000000(GOT r)
+        mov     rsi, qword [rbp-58H]                    ; 2D1A _ 48: 8B. 75, A8
+        mov     rdx, qword [rdx]                        ; 2D1E _ 48: 8B. 12
+        mov     rdi, qword [rbp-70H]                    ; 2D21 _ 48: 8B. 7D, 90
+        shl     rdi, 3                                  ; 2D25 _ 48: C1. E7, 03
+        add     rdx, rdi                                ; 2D29 _ 48: 01. FA
+        mov     rdx, qword [rdx]                        ; 2D2C _ 48: 8B. 12
+        mov     rdi, qword [rcx]                        ; 2D2F _ 48: 8B. 39
+        mov     r8, qword [rbp-70H]                     ; 2D32 _ 4C: 8B. 45, 90
+        shl     r8, 3                                   ; 2D36 _ 49: C1. E0, 03
+        add     rdi, r8                                 ; 2D3A _ 4C: 01. C7
+        mov     rdi, qword [rdi]                        ; 2D3D _ 48: 8B. 3F
+        mov     r8, qword [rbp-48H]                     ; 2D40 _ 4C: 8B. 45, B8
+        shl     r8, 3                                   ; 2D44 _ 49: C1. E0, 03
+        add     rdi, r8                                 ; 2D48 _ 4C: 01. C7
+        mov     rdi, qword [rdi]                        ; 2D4B _ 48: 8B. 3F
+        mov     r8, qword [rbp-10H]                     ; 2D4E _ 4C: 8B. 45, F0
+        shl     r8, 3                                   ; 2D52 _ 49: C1. E0, 03
+        add     rdi, r8                                 ; 2D56 _ 4C: 01. C7
+        mov     rdi, qword [rdi]                        ; 2D59 _ 48: 8B. 3F
+        mov     rcx, qword [rcx]                        ; 2D5C _ 48: 8B. 09
+        mov     r8, qword [rbp-70H]                     ; 2D5F _ 4C: 8B. 45, 90
+        shl     r8, 3                                   ; 2D63 _ 49: C1. E0, 03
+        add     rcx, r8                                 ; 2D67 _ 4C: 01. C1
+        mov     rcx, qword [rcx]                        ; 2D6A _ 48: 8B. 09
+        mov     r8, qword [rbp-60H]                     ; 2D6D _ 4C: 8B. 45, A0
+        shl     r8, 3                                   ; 2D71 _ 49: C1. E0, 03
+        add     rcx, r8                                 ; 2D75 _ 4C: 01. C1
+        mov     rcx, qword [rcx]                        ; 2D78 _ 48: 8B. 09
+        mov     r8, qword [rbp-10H]                     ; 2D7B _ 4C: 8B. 45, F0
+        shl     r8, 3                                   ; 2D7F _ 49: C1. E0, 03
+        add     rcx, r8                                 ; 2D83 _ 4C: 01. C1
+        sub     rdi, qword [rcx]                        ; 2D86 _ 48: 2B. 39
+        imul    rdx, rdi                                ; 2D89 _ 48: 0F AF. D7
+        add     rsi, rdx                                ; 2D8D _ 48: 01. D6
+        mov     qword [rbp-0C8H], rax                   ; 2D90 _ 48: 89. 85, FFFFFF38
+        mov     rax, rsi                                ; 2D97 _ 48: 89. F0
+        cqo                                             ; 2D9A _ 48: 99
+        mov     rcx, qword [rbp-0C8H]                   ; 2D9C _ 48: 8B. 8D, FFFFFF38
+        idiv    qword [rcx]                             ; 2DA3 _ 48: F7. 39
+        mov     qword [rbp-58H], rdx                    ; 2DA6 _ 48: 89. 55, A8
+        mov     rax, qword [rbp-70H]                    ; 2DAA _ 48: 8B. 45, 90
+        add     rax, 1                                  ; 2DAE _ 48: 83. C0, 01
+        mov     qword [rbp-70H], rax                    ; 2DB2 _ 48: 89. 45, 90
+        jmp     ?_280                                   ; 2DB6 _ E9, FFFFFF32
+
+?_283:  mov     rax, qword [rbp-48H]                    ; 2DBB _ 48: 8B. 45, B8
+        mov     qword [rbp-60H], rax                    ; 2DBF _ 48: 89. 45, A0
+        mov     rax, qword [rbp-48H]                    ; 2DC3 _ 48: 8B. 45, B8
+        add     rax, 1                                  ; 2DC7 _ 48: 83. C0, 01
+        mov     qword [rbp-48H], rax                    ; 2DCB _ 48: 89. 45, B8
+        jmp     ?_249                                   ; 2DCF _ E9, FFFFFB2E
+
+?_284:  cmp     qword [rbp-58H], 0                      ; 2DD4 _ 48: 83. 7D, A8, 00
+; Note: Immediate operand could be made smaller by sign extension
+        jge     ?_285                                   ; 2DD9 _ 0F 8D, 00000005
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_286                                   ; 2DDF _ E9, 00000005
+
+?_285:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_287                                   ; 2DE4 _ E9, 00000012
+
+?_286:  mov     rax, qword [rel _Mod_]                  ; 2DE9 _ 48: 8B. 05, 00000000(GOT r)
+        mov     rcx, qword [rbp-58H]                    ; 2DF0 _ 48: 8B. 4D, A8
+        add     rcx, qword [rax]                        ; 2DF4 _ 48: 03. 08
+        mov     qword [rbp-58H], rcx                    ; 2DF7 _ 48: 89. 4D, A8
+?_287:  mov     rdi, qword [rbp-58H]                    ; 2DFB _ 48: 8B. 7D, A8
+        call    _toString                               ; 2DFF _ E8, 00000000(rel)
+        mov     qword [rbp-40H], rax                    ; 2E04 _ 48: 89. 45, C0
+        mov     rdi, qword [rbp-40H]                    ; 2E08 _ 48: 8B. 7D, C0
+        call    _println                                ; 2E0C _ E8, 00000000(rel)
+?_288:
+; Note: Immediate operand could be made smaller by sign extension
+        jmp     ?_289                                   ; 2E11 _ E9, 00000000
+
+?_289:  mov     rax, qword [rbp-28H]                    ; 2E16 _ 48: 8B. 45, D8
+        add     rax, 1                                  ; 2E1A _ 48: 83. C0, 01
+        mov     qword [rbp-28H], rax                    ; 2E1E _ 48: 89. 45, D8
+        jmp     ?_239                                   ; 2E22 _ E9, FFFFF9A0
 ; _main End of function
 
-?_139:  ; Local function
-        xor     eax, eax                                ; 18F4 _ 31. C0
-        add     rsp, 8                                  ; 18F6 _ 48: 83. C4, 08
-        pop     rbx                                     ; 18FA _ 5B
-        pop     r12                                     ; 18FB _ 41: 5C
-        pop     r13                                     ; 18FD _ 41: 5D
-        pop     r14                                     ; 18FF _ 41: 5E
-        pop     r15                                     ; 1901 _ 41: 5F
-        pop     rbp                                     ; 1903 _ 5D
-        ret                                             ; 1904 _ C3
+?_290:  ; Local function
+        xor     eax, eax                                ; 2E27 _ 31. C0
+        add     rsp, 208                                ; 2E29 _ 48: 81. C4, 000000D0
+        pop     rbp                                     ; 2E30 _ 5D
+        ret                                             ; 2E31 _ C3
 
 
-SECTION ._TEXT.__literal16 align=16 noexecute           ; section number 2, data
+SECTION ._TEXT.__cstring align=1 noexecute              ; section number 2, data
 
-        db 76H, 54H, 32H, 10H, 00H, 00H, 00H, 00H       ; 1910 _ vT2.....
-        db 0FEH, 0DCH, 0BAH, 98H, 00H, 00H, 00H, 00H    ; 1918 _ ........
-        db 89H, 0ABH, 0CDH, 0EFH, 00H, 00H, 00H, 00H    ; 1920 _ ........
-        db 0F0H, 0E1H, 0D2H, 0C3H, 00H, 00H, 00H, 00H   ; 1928 _ ........
-
-
-SECTION ._TEXT.__cstring align=1 noexecute              ; section number 3, data
-
-        db 25H, 64H, 00H, 25H, 73H, 00H, 25H, 6CH       ; 1930 _ %d.%s.%l
-        db 64H, 0AH, 00H, 25H, 6CH, 64H, 00H, 6EH       ; 1938 _ d..%ld.n
-        db 43H, 68H, 75H, 6EH, 6BH, 20H, 3EH, 20H       ; 1940 _ Chunk > 
-        db 4DH, 41H, 58H, 43H, 48H, 55H, 4EH, 4BH       ; 1948 _ MAXCHUNK
-        db 21H, 00H, 49H, 6EH, 76H, 61H, 6CH, 69H       ; 1950 _ !.Invali
-        db 64H, 20H, 69H, 6EH, 70H, 75H, 74H, 00H       ; 1958 _ d input.
-        db 4EH, 6FH, 74H, 20H, 46H, 6FH, 75H, 6EH       ; 1960 _ Not Foun
-        db 64H, 21H, 00H, 20H, 21H, 22H, 23H, 24H       ; 1968 _ d!. !"#$
-        db 25H, 26H, 27H, 28H, 29H, 2AH, 2BH, 2CH       ; 1970 _ %&'()*+,
-        db 2DH, 2EH, 2FH, 30H, 31H, 32H, 33H, 34H       ; 1978 _ -./01234
-        db 35H, 36H, 37H, 38H, 39H, 3AH, 3BH, 3CH       ; 1980 _ 56789:;<
-        db 3DH, 3EH, 3FH, 40H, 41H, 42H, 43H, 44H       ; 1988 _ =>?@ABCD
-        db 45H, 46H, 47H, 48H, 49H, 4AH, 4BH, 4CH       ; 1990 _ EFGHIJKL
-        db 4DH, 4EH, 4FH, 50H, 51H, 52H, 53H, 54H       ; 1998 _ MNOPQRST
-        db 55H, 56H, 57H, 58H, 59H, 5AH, 5BH, 5CH       ; 19A0 _ UVWXYZ[\
-        db 5DH, 5EH, 5FH, 60H, 61H, 62H, 63H, 64H       ; 19A8 _ ]^_`abcd
-        db 65H, 66H, 67H, 68H, 69H, 6AH, 6BH, 6CH       ; 19B0 _ efghijkl
-        db 6DH, 6EH, 6FH, 70H, 71H, 72H, 73H, 74H       ; 19B8 _ mnopqrst
-        db 75H, 76H, 77H, 78H, 79H, 7AH, 7BH, 7CH       ; 19C0 _ uvwxyz{|
-        db 7DH, 7EH, 00H                                ; 19C8 _ }~.
+        db 25H, 64H, 00H, 25H, 73H, 00H, 25H, 6CH       ; 2E32 _ %d.%s.%l
+        db 64H, 0AH, 00H, 25H, 6CH, 64H, 00H            ; 2E3A _ d..%ld.
 
 

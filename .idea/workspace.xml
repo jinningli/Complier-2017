@@ -10,7 +10,82 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3283450-0471-4350-b335-1bcad0db854d" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output.o" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/asm/AsmModifier.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/asm/AsmModifier.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/ClassDecl.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/ClassDecl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/FuncDecl.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/FuncDecl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/VarDecl.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/VarDecl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/expression/FunctionCall.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/expression/FunctionCall.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/root/AST.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/root/AST.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/statement/ForStatement.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/statement/ForStatement.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/ArrType.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/ArrType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/ClassType.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/ClassType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/IntType.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/IntType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/AstBuilder.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/AstBuilder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$1.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$2.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$3.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$4.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/Main.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/Assign.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/Assign.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/CJump.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/CJump.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/Var.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/Var.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleLexer.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleLexer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ArrIndexContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ArrIndexContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$AssignContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$AssignContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryBitMovContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryBitMovContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryBitOperationContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryBitOperationContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryExpressionContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryExpressionContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BitNotOperationContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BitNotOperationContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockDeclContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockDeclContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockStatementContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ClassDeclContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ClassDeclContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ConstantContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ConstantContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ConstantValueContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ConstantValueContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ControlStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ControlStatementContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$DeclContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$DeclContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprBktContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprBktContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprListContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprListContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprStatementContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprWithBracketContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprWithBracketContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ForStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ForStatementContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ForStmtContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ForStmtContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FuncDeclContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FuncDeclContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FuncListContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FuncListContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FunctionCallContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FunctionCallContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IdentifierContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IdentifierContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IfStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IfStatementContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IfStmtContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IfStmtContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$LogicExpressionContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$LogicExpressionContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$MemberContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$MemberContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$MemberFunctionContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$MemberFunctionContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$NewOperationContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$NewOperationContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$NotOperationContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$NotOperationContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PostSelfOpContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PostSelfOpContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PreSelfOpContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PreSelfOpContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ProgramContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ProgramContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PtrBracketContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PtrBracketContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ReturnStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ReturnStatementContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$SignExpressionContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$SignExpressionContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$StmtContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$StmtContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$TypeContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$TypeContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$TypeProContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$TypeProContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$VarDeclContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$VarDeclContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$VarDeclareContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$VarDeclareContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$WhileStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$WhileStatementContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$WhileStmtContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$WhileStmtContext.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/utils/Declarations.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/utils/Declarations.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/utils/scope/ScopeNode.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/utils/scope/ScopeNode.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/compiler/Main.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/compiler/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.asm" afterPath="$PROJECT_DIR$/output.asm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.c" afterPath="$PROJECT_DIR$/output.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.c" afterPath="$PROJECT_DIR$/test.c" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,7 +139,7 @@
         <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/root/AST.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="465">
-              <caret line="63" column="1" lean-forward="true" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
+              <caret line="63" column="1" lean-forward="false" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -73,8 +148,8 @@
       <file leaf-file-name="test.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="252" column="0" lean-forward="true" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
+            <state relative-caret-position="205">
+              <caret line="236" column="35" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="274" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -103,8 +178,8 @@
       <file leaf-file-name="output.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/output.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2572">
-              <caret line="582" column="15" lean-forward="true" selection-start-line="582" selection-start-column="15" selection-end-line="582" selection-end-column="15" />
+            <state relative-caret-position="225">
+              <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -114,7 +189,7 @@
         <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/utils/Declarations.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="142">
-              <caret line="185" column="0" lean-forward="true" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
+              <caret line="185" column="0" lean-forward="false" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -135,8 +210,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="90" column="79" lean-forward="false" selection-start-line="90" selection-start-column="79" selection-end-line="90" selection-end-column="79" />
+            <state relative-caret-position="128">
+              <caret line="66" column="10" lean-forward="false" selection-start-line="66" selection-start-column="10" selection-end-line="69" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -545,6 +620,61 @@
       <predefined_log_file id="idea.log" enabled="true" />
       <method />
     </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <method />
+    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -568,6 +698,160 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <setting name="launchBrowserUrl" value="" />
+      <method />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -589,12 +873,80 @@
       <patterns />
       <method />
     </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SCRATCH_FILE_ID" value="0" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Maple - 2017" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -623,6 +975,22 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
     <list size="2">
@@ -694,7 +1062,7 @@
       <workItem from="1497072210840" duration="22122000" />
       <workItem from="1497102884406" duration="37953000" />
       <workItem from="1497158317988" duration="9624000" />
-      <workItem from="1497172752334" duration="5772000" />
+      <workItem from="1497172752334" duration="6432000" />
     </task>
     <servers />
   </component>
@@ -710,7 +1078,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="391857000" />
+    <option name="totallyTimeSpent" value="392517000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -735,7 +1103,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39036146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39036146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35783133" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12374821" sideWeight="0.49518073" order="0" side_tool="false" content_ui="combo" />
@@ -1174,7 +1542,7 @@
     <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/ast/root/AST.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
-          <caret line="63" column="1" lean-forward="true" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
+          <caret line="63" column="1" lean-forward="false" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -1198,7 +1566,7 @@
     <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/utils/Declarations.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
-          <caret line="185" column="0" lean-forward="true" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
+          <caret line="185" column="0" lean-forward="false" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1218,24 +1586,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="252" column="0" lean-forward="true" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
+        <state relative-caret-position="205">
+          <caret line="236" column="35" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="274" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/output.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2572">
-          <caret line="582" column="15" lean-forward="true" selection-start-line="582" selection-start-column="15" selection-end-line="582" selection-end-column="15" />
+        <state relative-caret-position="225">
+          <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="90" column="79" lean-forward="false" selection-start-line="90" selection-start-column="79" selection-end-line="90" selection-end-column="79" />
+        <state relative-caret-position="128">
+          <caret line="66" column="10" lean-forward="false" selection-start-line="66" selection-start-column="10" selection-end-line="69" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

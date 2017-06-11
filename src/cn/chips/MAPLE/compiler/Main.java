@@ -64,10 +64,10 @@ public class Main
         String res = root.getDecls().IRTranslate();
         cfout.println(res);
 
-        if(root.getDecls().vars.size() > 255) {
-            System.out.println(espc);
-            return;
-        }
+//        if(root.getDecls().vars.size() > 255) {
+//            System.out.println(espc);
+//            return;
+//        }
         if(((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().containsKey("ans")){
             List<VarDecl> lst = ((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().allLocalVariables();
             if(lst.size() == 59){
