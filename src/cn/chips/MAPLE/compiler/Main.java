@@ -62,20 +62,20 @@ public class Main
         String res = root.getDecls().IRTranslate();
         cfout.println(res);
 
-        if(root.getDecls().vars.size() > 255) {
-            System.out.println(espc);
-            return;
-        }
-
-        if((grobalVariable.grobal.containsKey("calc")) && (grobalVariable.grobal.containsKey("N"))&& ((FuncDecl)grobalVariable.grobal.what("calc")).retype instanceof StringType){
-            System.out.println(espc2);
-            return;
-        }
-
-        if((grobalVariable.grobal.containsKey("makeHeap")) && (grobalVariable.grobal.containsKey("adjustHeap"))){
-            System.out.println(espc3);
-            return;
-        }
+//        if(root.getDecls().vars.size() > 255) {
+//            System.out.println(espc);
+//            return;
+//        }
+//
+//        if((grobalVariable.grobal.containsKey("calc")) && (grobalVariable.grobal.containsKey("N"))&& ((FuncDecl)grobalVariable.grobal.what("calc")).retype instanceof StringType){
+//            System.out.println(espc2);
+//            return;
+//        }
+//
+//        if((grobalVariable.grobal.containsKey("makeHeap")) && (grobalVariable.grobal.containsKey("adjustHeap"))){
+//            System.out.println(espc3);
+//            return;
+//        }
 
 //        System.err.println(res);
 //        Runtime.getRuntime().exec("bash conv/build.sh");

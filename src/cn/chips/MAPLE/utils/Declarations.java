@@ -307,13 +307,8 @@ public class Declarations {
                 "    unsigned char* tmp = (unsigned char*)malloc(2000 + sizeof(int));\n" +
                 "    unsigned char* bak = tmp;\n" +
                 "    tmp += sizeof(int);\n" +
-                "    tmp[size] = (unsigned char)getchar();\n" +
-                "    if(tmp[size] == '\\n')\n" +
-                "        tmp[size] = (unsigned char)getchar();\n" +
-                "    while(tmp[size] !=  '\\n'){\n" +
-                "        tmp[++size] = (unsigned char)getchar();\n" +
-                "    }\n" +
-                "    tmp[size] = '\\0';\n" +
+                "    scanf(\"%s\", tmp);\n" +
+                "    size = strlen((char*)tmp);\n" +
                 "    *((int*) bak) = size;\n" +
                 "    return (long)(bak + sizeof(int));\n" +
                 "}\n" +
