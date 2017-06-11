@@ -10,8 +10,6 @@ import cn.chips.MAPLE.ir.IRTranslate;
 import cn.chips.MAPLE.ir.IRTraverse;
 import cn.chips.MAPLE.ir.STMT;
 import cn.chips.MAPLE.utils.scope.ScopeNode;
-import com.sun.tools.corba.se.idl.ConstEntry;
-import org.antlr.v4.codegen.model.decl.Decl;
 
 import java.util.*;
 
