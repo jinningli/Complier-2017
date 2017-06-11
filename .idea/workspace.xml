@@ -100,8 +100,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1035">
-              <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="77" selection-end-column="11" />
+            <state relative-caret-position="1960">
+              <caret line="142" column="48856" lean-forward="false" selection-start-line="142" selection-start-column="48856" selection-end-line="142" selection-end-column="48856" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -122,8 +122,8 @@
       <file leaf-file-name="chips.asm" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chips.asm">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="150">
+              <caret line="10" column="48842" lean-forward="true" selection-start-line="10" selection-start-column="48842" selection-end-line="10" selection-end-column="48842" />
               <folding />
             </state>
           </provider>
@@ -675,7 +675,7 @@
       <workItem from="1497065897306" duration="4502000" />
       <workItem from="1497072210840" duration="22122000" />
       <workItem from="1497102884406" duration="37953000" />
-      <workItem from="1497158317988" duration="2057000" />
+      <workItem from="1497158317988" duration="2205000" />
     </task>
     <servers />
   </component>
@@ -691,7 +691,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="378518000" />
+    <option name="totallyTimeSpent" value="378666000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1166,6 +1166,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/chips.asm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="48842" lean-forward="true" selection-start-line="10" selection-start-column="48842" selection-end-line="10" selection-end-column="48842" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="715">
@@ -1174,18 +1182,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chips.asm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="77" selection-end-column="11" />
+        <state relative-caret-position="1960">
+          <caret line="142" column="48856" lean-forward="false" selection-start-line="142" selection-start-column="48856" selection-end-line="142" selection-end-column="48856" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
