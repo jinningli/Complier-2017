@@ -1,7 +1,6 @@
 package cn.chips.MAPLE.compiler;
 
 
-import cn.chips.MAPLE.asm.AsmModifier;
 import cn.chips.MAPLE.ast.root.AST;
 import cn.chips.MAPLE.ir.IR;
 import cn.chips.MAPLE.parser.*;
@@ -48,18 +47,20 @@ public class Main
             root.getDecls().IRtraverse();
         }
 
+//
+//        try {
+//            CodeGenerator c = new CodeGenerator(root.getDecls());
+//            c.generate(ir);
+//            if(localtest) {
+//                PrintStream tmpfout = new PrintStream(new FileOutputStream("chips.asm"));
+//                tmpfout.print(c.toSource());
+//            }else
+//                System.err.println(c.toSource());
+//        }catch (Exception e){
+//            return;
+//        }
+
         Translate.operate();
-        try {
-            CodeGenerator c = new CodeGenerator(root.getDecls());
-            c.generate(ir);
-            if(localtest) {
-                PrintStream tmpfout = new PrintStream(new FileOutputStream("chips.asm"));
-                tmpfout.print(c.toSource());
-            }else
-                System.err.println(c.toSource());
-        }catch (Exception e){
-            return;
-        }
     }
 
 
