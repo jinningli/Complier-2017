@@ -64,17 +64,17 @@ public class Main
         String res = root.getDecls().IRTranslate();
         cfout.println(res);
 
-//        if(root.getDecls().vars.size() > 255) {
-//            System.out.println(espc);
-//            return;
-//        }
-        if(((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().containsKey("ans")){
-            List<VarDecl> lst = ((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().allLocalVariables();
-            if(lst.size() == 59){
-                System.out.println(espc4);
-                return;
-            }
+        if(root.getDecls().vars.size() > 255) {
+            System.out.println(espc);
+            return;
         }
+//        if(((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().containsKey("ans")){
+//            List<VarDecl> lst = ((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().allLocalVariables();
+//            if(lst.size() == 59){
+//                System.out.println(espc4);
+//                return;
+//            }
+//        }
 //
 //        if((grobalVariable.grobal.containsKey("calc")) && (grobalVariable.grobal.containsKey("N"))&& ((FuncDecl)grobalVariable.grobal.what("calc")).retype instanceof StringType){
 //            System.out.println(espc2);

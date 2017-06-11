@@ -11,81 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e3283450-0471-4350-b335-1bcad0db854d" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/output.o" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/asm/AsmModifier.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/asm/AsmModifier.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/ClassDecl.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/ClassDecl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/FuncDecl.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/FuncDecl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/VarDecl.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/declare/VarDecl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/expression/FunctionCall.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/expression/FunctionCall.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/root/AST.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/root/AST.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/statement/ForStatement.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/statement/ForStatement.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/ArrType.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/ArrType.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/ClassType.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/ClassType.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/IntType.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ast/type/IntType.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/AstBuilder.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/AstBuilder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$1.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$2.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$3.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$4.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/IRGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/Main.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/compiler/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/Assign.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/Assign.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/CJump.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/CJump.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/Var.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/ir/Var.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleLexer.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleLexer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ArrIndexContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ArrIndexContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$AssignContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$AssignContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryBitMovContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryBitMovContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryBitOperationContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryBitOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryExpressionContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BinaryExpressionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BitNotOperationContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BitNotOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockDeclContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockDeclContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$BlockStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ClassDeclContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ClassDeclContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ConstantContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ConstantContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ConstantValueContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ConstantValueContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ControlStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ControlStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$DeclContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$DeclContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprBktContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprBktContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprListContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprListContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprWithBracketContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ExprWithBracketContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ForStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ForStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ForStmtContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ForStmtContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FuncDeclContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FuncDeclContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FuncListContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FuncListContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FunctionCallContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$FunctionCallContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IdentifierContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IdentifierContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IfStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IfStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IfStmtContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$IfStmtContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$LogicExpressionContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$LogicExpressionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$MemberContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$MemberContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$MemberFunctionContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$MemberFunctionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$NewOperationContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$NewOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$NotOperationContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$NotOperationContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PostSelfOpContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PostSelfOpContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PreSelfOpContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PreSelfOpContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ProgramContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ProgramContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PtrBracketContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$PtrBracketContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ReturnStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$ReturnStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$SignExpressionContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$SignExpressionContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$StmtContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$StmtContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$TypeContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$TypeContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$TypeProContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$TypeProContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$VarDeclContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$VarDeclContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$VarDeclareContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$VarDeclareContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$WhileStatementContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$WhileStatementContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$WhileStmtContext.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser$WhileStmtContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/parser/MapleParser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/utils/Declarations.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/utils/Declarations.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/cn/chips/MAPLE/utils/scope/ScopeNode.class" afterPath="$PROJECT_DIR$/bin/cn/chips/MAPLE/utils/scope/ScopeNode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/compiler/Main.class" afterPath="$PROJECT_DIR$/out/production/Maple - 2017/cn/chips/MAPLE/compiler/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.asm" afterPath="$PROJECT_DIR$/output.asm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.c" afterPath="$PROJECT_DIR$/output.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java" afterPath="$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.c" afterPath="$PROJECT_DIR$/test.c" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -210,8 +136,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="66" column="10" lean-forward="false" selection-start-line="66" selection-start-column="10" selection-end-line="69" selection-end-column="11" />
+            <state relative-caret-position="278">
+              <caret line="76" column="11" lean-forward="true" selection-start-line="70" selection-start-column="8" selection-end-line="76" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1062,7 +988,7 @@
       <workItem from="1497072210840" duration="22122000" />
       <workItem from="1497102884406" duration="37953000" />
       <workItem from="1497158317988" duration="9624000" />
-      <workItem from="1497172752334" duration="6432000" />
+      <workItem from="1497172752334" duration="6476000" />
     </task>
     <servers />
   </component>
@@ -1078,7 +1004,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="392517000" />
+    <option name="totallyTimeSpent" value="392561000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1602,8 +1528,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/chips/MAPLE/compiler/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="66" column="10" lean-forward="false" selection-start-line="66" selection-start-column="10" selection-end-line="69" selection-end-column="11" />
+        <state relative-caret-position="278">
+          <caret line="76" column="11" lean-forward="true" selection-start-line="70" selection-start-column="8" selection-end-line="76" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
