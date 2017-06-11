@@ -80,8 +80,8 @@ public class CodeGenerator {
         func = (FuncDecl) grobalVariable.grobal.what("ord");
         func.setMemref(new MemoryReference(labeltable.diyLabel("ord")));
 
-        func = (FuncDecl) grobalVariable.grobal.what("mallocFunc");
-        func.setMemref(new MemoryReference(labeltable.diyLabel("malloc")));
+        func = (FuncDecl) grobalVariable.grobal.what("__lib_malloc");
+        func.setMemref(new MemoryReference(labeltable.diyLabel("__lib_malloc")));
     }
 
     public void registInit(){
