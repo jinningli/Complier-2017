@@ -4,8 +4,8 @@
 # if you would like to print some debug information, please go to stderr.
 
 set -e
-#cd "$(dirname "$0")"
-#java -cp ./src/cn/chips/MAPLE/lib/*:./bin cn.chips.MAPLE.compiler.Main
+cd "$(dirname "$0")"
+java -cp ./src/cn/chips/MAPLE/lib/*:./bin cn.chips.MAPLE.compiler.Main
 #bash c2nasm.bash output.c -O0  2> err.txt 1> std.txt
-cat chips.asm
+#cat chips.asm
 #java -cp ./cn/chips/MAPLE/lib/*:./bin cn.chips.MAPLE.compiler.Main --add-global
