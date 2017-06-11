@@ -7,7 +7,10 @@
 
 //Function & Class Declare
 
-long calc(long A);
+void exchange(long x, long y);
+long makeHeap();
+long adjustHeap(long n);
+long heapSort();
 long str_le(long str1, long str2);
 long str_eql(long str1, long str2);
 long substring(long str, long l, long r);
@@ -28,10 +31,8 @@ long getString();
 void __lib_printlnInt(long null);
 
 //Grobal Variable
-long A_;
-long B_;
-long C_;
-long N_;
+long n_;
+long a_;
 
 //Inside Function
 long str_le(long str1, long str2){
@@ -192,90 +193,149 @@ long toString(long x) {
 }
 
 //Class Body
-long calc(long A){
+void exchange(long x, long y){
 //Define Local Variable
-long A_0_ = A;
-long __tmp4_1_;
-long __tmp3_2_;
-long R_3_;
-long len_4_;
-long __tmp0_5_;
-long __tmp2_6_;
-long __tmp1_7_;
-long mid_8_;
-long L_9_;
-long r_10_;
-long __tmp6_11_;
-long __tmp5_12_;
-long l_13_;
+long x_0_ = x;
+long y_1_ = y;
+long t_2_;
 //Function Body
-__tmp0_5_ = strlength((A_0_));
-len_4_ = (__tmp0_5_);
-if(((1) == (len_4_))) goto AsmLabel0; else goto AsmLabel2;;
+t_2_ = (*(long *)((a_) + ((x_0_) * (8))));
+*((long*)((a_) + ((x_0_) * (8)))) = (*(long *)((a_) + ((y_1_) * (8))));
+*((long*)((a_) + ((y_1_) * (8)))) = (t_2_);
+}
+long makeHeap(){
+//Define Local Variable
+long t_3_;
+long i_4_;
+long j_5_;
+//Function Body
+i_4_ = (((n_) - (1)) / (2));
+t_3_ = (0);
+j_5_ = (0);
 AsmLabel0:;
-return (A_0_);
-AsmLabel2:;
-mid_8_ = ((len_4_) / (2));
-__tmp1_7_ = substring((A_0_), (0), ((mid_8_) - (1)));
-__tmp2_6_ = calc((__tmp1_7_));
-L_9_ = (__tmp2_6_);
-__tmp3_2_ = substring((A_0_), (mid_8_), ((len_4_) - (1)));
-__tmp4_1_ = calc((__tmp3_2_));
-R_3_ = (__tmp4_1_);
-if(str_le((L_9_), (R_3_))) goto AsmLabel4; else goto AsmLabel5;;
-AsmLabel4:;
-return str_add((L_9_), (R_3_));
-goto AsmLabel6;
-AsmLabel5:;
-if(str_eql((L_9_), (R_3_))) goto AsmLabel8; else goto AsmLabel9;;
-AsmLabel8:;
-__tmp5_12_ = ord((L_9_), (0));
-l_13_ = (__tmp5_12_);
-__tmp6_11_ = ord((R_3_), (0));
-r_10_ = (__tmp6_11_);
-if(((l_13_) < (r_10_))) goto AsmLabel12; else goto AsmLabel14;;
-AsmLabel12:;
-return str_add((L_9_), (R_3_));
-AsmLabel14:;
-return str_add((R_3_), (L_9_));
-goto AsmLabel10;
-AsmLabel9:;
-if(str_le((R_3_), (L_9_))) goto AsmLabel16; else goto AsmLabel18;;
-AsmLabel16:;
-return str_add((R_3_), (L_9_));
-AsmLabel18:;
-AsmLabel10:;
+if(((i_4_) >= (0))) goto AsmLabel1; else goto AsmLabel2;;
+AsmLabel1:;
+j_5_ = ((i_4_) * (2));
+if(((((i_4_) * (2)) + (1)) < (n_))) goto AsmLabel6; else goto AsmLabel5;;
 AsmLabel6:;
-println((toMoStr("Never Ever!")));
+if(((*(long *)((a_) + ((((i_4_) * (2)) + (1)) * (8)))) < (*(long *)((a_) + (((i_4_) * (2)) * (8)))))) goto AsmLabel3; else goto AsmLabel5;;
+AsmLabel3:;
+j_5_ = (((i_4_) * (2)) + (1));
+AsmLabel5:;
+if(((*(long *)((a_) + ((i_4_) * (8)))) > (*(long *)((a_) + ((j_5_) * (8)))))) goto AsmLabel9; else goto AsmLabel11;;
+AsmLabel9:;
+exchange((i_4_), (j_5_));
 ;
+AsmLabel11:;
+i_4_ = ((i_4_) - (1));
+goto AsmLabel0;
+AsmLabel2:;
+return (0);
+}
+long adjustHeap(long n){
+//Define Local Variable
+long n_6_ = n;
+long t_7_;
+long i_8_;
+long j_9_;
+long t_10_;
+//Function Body
+i_8_ = (0);
+j_9_ = (0);
+t_7_ = (0);
+AsmLabel13:;
+if((((i_8_) * (2)) < (n_6_))) goto AsmLabel14; else goto AsmLabel15;;
+AsmLabel14:;
+j_9_ = ((i_8_) * (2));
+if(((((i_8_) * (2)) + (1)) < (n_6_))) goto AsmLabel19; else goto AsmLabel18;;
+AsmLabel19:;
+if(((*(long *)((a_) + ((((i_8_) * (2)) + (1)) * (8)))) < (*(long *)((a_) + (((i_8_) * (2)) * (8)))))) goto AsmLabel16; else goto AsmLabel18;;
+AsmLabel16:;
+j_9_ = (((i_8_) * (2)) + (1));
+AsmLabel18:;
+if(((*(long *)((a_) + ((i_8_) * (8)))) > (*(long *)((a_) + ((j_9_) * (8)))))) goto AsmLabel22; else goto AsmLabel23;;
+AsmLabel22:;
+t_10_ = (*(long *)((a_) + ((i_8_) * (8))));
+*((long*)((a_) + ((i_8_) * (8)))) = (*(long *)((a_) + ((j_9_) * (8))));
+*((long*)((a_) + ((j_9_) * (8)))) = (t_10_);
+i_8_ = (j_9_);
+goto AsmLabel24;
+AsmLabel23:;
+goto AsmLabel15;
+AsmLabel24:;
+goto AsmLabel13;
+AsmLabel15:;
+return (0);
+}
+long heapSort(){
+//Define Local Variable
+long t_11_;
+long k_12_;
+//Function Body
+t_11_ = (0);
+k_12_ = (0);
+AsmLabel26:;
+if(((k_12_) < (n_))) goto AsmLabel27; else goto AsmLabel29;;
+AsmLabel27:;
+t_11_ = (*(long *)((a_) + (0)));
+*((long*)((a_) + (0))) = (*(long *)((a_) + ((((n_) - (k_12_)) - (1)) * (8))));
+*((long*)((a_) + ((((n_) - (k_12_)) - (1)) * (8)))) = (t_11_);
+adjustHeap((((n_) - (k_12_)) - (1)));
+;
+AsmLabel28:;
+k_12_ = ((k_12_) + (1));
+goto AsmLabel26;
+AsmLabel29:;
+return (0);
 }
 int main(){
 //Grobal Variable Initialize
 //Define Local Variable
-long __tmp10_14_;
-long __tmp11_15_;
-long __tmp12_16_;
-long __tmp8_17_;
-long __tmp7_18_;
-long __tmp9_19_;
+long __tmp4_13_;
+long __tmp3_14_;
+long __tmp0_15_;
+long __tmp2_16_;
+long __tmp1_17_;
+long i_18_;
+long __tmp5_19_;
+long __tmp6_20_;
+long __tmp7_21_;
 //Function Body
-__tmp7_18_ = getString();
-A_ = (__tmp7_18_);
-__tmp8_17_ = getString();
-B_ = (__tmp8_17_);
-__tmp9_19_ = parseInt((B_));
-N_ = (__tmp9_19_);
-__tmp10_14_ = strlength((A_));
-if(((__tmp10_14_) < (N_))) goto AsmLabel20; else goto AsmLabel22;;
-AsmLabel20:;
-println((toMoStr("length error!")));
+__tmp0_15_ = getString();
+__tmp1_17_ = parseInt((__tmp0_15_));
+n_ = (__tmp1_17_);
+__tmp3_14_ = (n_);
+__tmp2_16_ = __lib_malloc((((__tmp3_14_) * (8)) + (8)));
+*((long*)(__tmp2_16_)) = (__tmp3_14_);
+__tmp2_16_ = ((__tmp2_16_) + (8));
+a_ = (__tmp2_16_);
+i_18_ = (0);
+AsmLabel33:;
+__tmp5_19_ = size((a_));
+if(((i_18_) < (__tmp5_19_))) goto AsmLabel34; else goto AsmLabel36;;
+AsmLabel34:;
+*((long*)((a_) + ((i_18_) * (8)))) = (i_18_);
+AsmLabel35:;
+i_18_ = ((i_18_) + (1));
+goto AsmLabel33;
+AsmLabel36:;
+makeHeap();
 ;
-return (0);
-AsmLabel22:;
-__tmp11_15_ = substring((A_), (0), ((N_) - (1)));
-__tmp12_16_ = calc((__tmp11_15_));
-C_ = (__tmp12_16_);
-println((C_));
+heapSort();
+;
+i_18_ = (0);
+AsmLabel37:;
+__tmp6_20_ = size((a_));
+if(((i_18_) < (__tmp6_20_))) goto AsmLabel38; else goto AsmLabel40;;
+AsmLabel38:;
+__tmp7_21_ = toString((*(long *)((a_) + ((i_18_) * (8)))));
+print(str_add((__tmp7_21_), (toMoStr(" "))));
+;
+AsmLabel39:;
+i_18_ = ((i_18_) + (1));
+goto AsmLabel37;
+AsmLabel40:;
+print((toMoStr("\n")));
 ;
 return (0);
 }

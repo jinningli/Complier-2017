@@ -1,41 +1,73 @@
-//DCBAE
-//4ssfsdf
-//样例输出：
-//ABCD
+int n;
+int[] a;
 
-string A;
-string B;
-string C;
-int N;
-
-string calc(string A)
+void exchange(int x,int y)
 {
-	int len = A.length();
-	if (1 == len) return A;
-	int mid = len/2;
-	string L = calc(A.substring(0,mid-1));
-	string R = calc(A.substring(mid,len-1));
-	if (L < R) return L + R;
-	else if (L == R) {
-		int l = L.ord(0);
-		int r = R.ord(0);
-		if (l < r) return L + R;
-		return R + L;
-	}
-	else if (L > R) return R + L;
-	println("Never Ever!");
+    int t=a[x];
+    a[x]=a[y];
+    a[y]=t;
 }
 
-int main()
-{
-	A = getString();
-	B = getString();
-	N = B.parseInt();
-	if (A.length() < N) {
-		println("length error!");
-		return 0;
-	}
-	C = calc(A.substring(0,N-1));
-	println(C);
-	return 0;
+int makeHeap() {
+    int i;
+    int t;
+    int j;
+    i = (n - 1) / 2;
+    t = 0;
+    j = 0;
+    while (i >= 0) {
+        j = i * 2;
+        if (i*2+1<n && a[i*2+1]<a[i*2]) j = i*2+1;
+        if (a[i] > a[j]) {
+            exchange(i,j);
+        }
+        i = i - 1;
+    }
+    return 0;
+}
+
+int adjustHeap(int n) {
+    int i = 0;
+    int j = 0;
+    int t = 0;
+    while (i * 2 < n) {
+        j = i*2;
+        if (i*2+1<n && a[i*2+1] < a[i*2]) j = i*2+1;
+        if (a[i] > a[j]) {
+            int t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+            i = j;
+        }
+        else break;
+    }
+    return 0;
+}
+
+int heapSort() {
+    int t;
+    int k;
+    t = 0;
+    for (k = 0; k < n; k = k + 1) {
+        t = a[0];
+        a[0] = a[n-k-1];
+        a[n-k-1] = t;
+        adjustHeap(n-k-1);
+    }
+    return 0;
+}
+
+int main() {
+    int i;
+	n = getString().parseInt();
+	a = new int[n];
+
+    for (i = 0; i < a.size(); i = i + 1)
+		a[i] = i;
+    makeHeap();
+    heapSort();
+    for (i = 0; i < a.size(); i = i + 1)
+        print(toString(a[i]) + " ");
+	print("\n");
+    return 0;
 }
