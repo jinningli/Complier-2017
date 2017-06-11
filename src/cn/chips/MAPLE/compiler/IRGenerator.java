@@ -587,23 +587,22 @@ public class IRGenerator {
         Label thenLabel = new Label();
         Label elseLabel = new Label();
         Label endLabel = new Label();
-        EXPR cond = visitExpr(node.expr);
         if(node.elsebody == null){
             if(node.thenbody == null){
                 return null;
             }
-            cjump(cond, thenLabel, endLabel);
+            addCJump(node.expr, thenLabel, endLabel);
             label(thenLabel);
             visitStmt(node.thenbody);
             label(endLabel);
         }else{
             if(node.thenbody == null){
-                cjump(cond, endLabel, elseLabel);
+                addCJump(node.expr, endLabel, elseLabel);
                 label(elseLabel);
                 visitStmt(node.elsebody);
                 label(endLabel);
             }
-            cjump(cond, thenLabel, elseLabel);
+            addCJump(node.expr, thenLabel, elseLabel);
             label(thenLabel);
             visitStmt(node.thenbody);
             jump(endLabel);
@@ -612,6 +611,33 @@ public class IRGenerator {
             label(endLabel);
         }
         return null;
+    }
+
+    public void addCJump(Expr cond, Label trueLabel, Label falseLabel){
+        if(cond instanceof LogicExpr){
+            LogicExpr be = (LogicExpr) cond;
+            Label goon = new Label();
+            switch (be.opt){
+                case "&&":
+                    addCJump(be.left, goon, falseLabel);
+                    label(goon);
+                    addCJump(be.right, trueLabel, falseLabel);;
+                    break;
+                case "||":
+                    addCJump(be.left, trueLabel, goon);
+                    label(goon);
+                    addCJump(be.right, trueLabel, falseLabel);
+                    break;
+                    default:
+                        exprLevel ++;
+                        stmts.add(new CJump(visitExpr(cond), trueLabel, falseLabel));
+                        exprLevel --;
+            }
+        }else{
+            exprLevel ++;
+            stmts.add(new CJump(visitExpr(cond), trueLabel, falseLabel));
+            exprLevel --;
+        }
     }
 
     public EXPR visit(ReturnStatement node){
