@@ -37,7 +37,7 @@ public class IRGenerator {
 
     public IRGenerator(AST _root){
         root = _root;
-        mallocFunc = (FuncDecl) grobalVariable.grobal.what("__lib_malloc");
+        mallocFunc = (FuncDecl) grobalVariable.grobal.what("malloc");
 //        adtog = new LinkedList<>();
 //        adtofunc = new LinkedList<>();
     }
