@@ -49,7 +49,7 @@ public class AsmModifier {
         List<VarDecl> grobal =  scope.localVariables();
         for(VarDecl vd : grobal){
             if(vd.isGrobal){
-                res.append(vd.name);
+                res.append(vd.translate());
                 res.append(":\n");
                 res.append("\tdq 0,0");
                 res.append("\n");

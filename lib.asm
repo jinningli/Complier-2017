@@ -37,7 +37,7 @@ main:
     push rbp
 	mov rbp, rsp
 	sub rsp, 32
-    mov rdi, [strl]
+    mov rdi, strl
 	call println
     mov rsp, rbp
 	pop rbp
