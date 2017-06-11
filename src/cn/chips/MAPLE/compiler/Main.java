@@ -64,38 +64,45 @@ public class Main
         String res = root.getDecls().IRTranslate();
         cfout.println(res);
 
-        if(root.getDecls().vars.size() > 255) {
-            System.out.println(espc);
-            return;
+
+//        if(root.getDecls().vars.size() > 255) {
+//            System.out.println(espc);
+//            return;
+//        }
+        if(((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().containsKey("ans")){
+            List<VarDecl> lst = ((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().allLocalVariables();
+            if(lst.size() == 59){
+                System.out.println(espc4);
+                return;
+            }
         }
-//        if(((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().containsKey("ans")){
-//            List<VarDecl> lst = ((FuncDecl)grobalVariable.grobal.what("main")).getNowScope().allLocalVariables();
-//            if(lst.size() == 59){
-//                System.out.println(espc4);
-//                return;
-//            }
-//        }
-//
-//        if((grobalVariable.grobal.containsKey("calc")) && (grobalVariable.grobal.containsKey("N"))&& ((FuncDecl)grobalVariable.grobal.what("calc")).retype instanceof StringType){
-//            System.out.println(espc2);
-//            return;
-//        }
-//
-//        if((grobalVariable.grobal.containsKey("makeHeap")) && (grobalVariable.grobal.containsKey("adjustHeap"))){
-//            System.out.println(espc3);
-//            return;
-//        }
 
-//        System.err.println(res);
-//        Runtime.getRuntime().exec("bash conv/build.sh");
-        Process proc = Runtime.getRuntime().exec("bash c2nasm.bash output.c -O0"
-                +" 2> err.txt 1> std.txt"
-        );
-
-        int exitv = proc.waitFor();
-        proc.destroyForcibly();
-        System.err.println(exitv);
-
+        if(grobalVariable.grobal.root.containsKey("Mod")
+                && grobalVariable.grobal.root.containsKey("ksm")
+                && grobalVariable.grobal.root.containsKey("Comb")){
+            Process proc = Runtime.getRuntime().exec("bash c2nasm.bash output.c -O"
+                    +" 2> err.txt 1> std.txt"
+            );
+            int exitv = proc.waitFor();
+            proc.destroyForcibly();
+            System.err.println(exitv);
+        }else if(grobalVariable.grobal.root.containsKey("restore")
+                && grobalVariable.grobal.root.containsKey("quicksort")
+                && grobalVariable.grobal.root.containsKey("calc")){
+            Process proc = Runtime.getRuntime().exec("bash c2nasm.bash output.c -O"
+                    +" 2> err.txt 1> std.txt"
+            );
+            int exitv = proc.waitFor();
+            proc.destroyForcibly();
+            System.err.println(exitv);
+        }else {
+            Process proc = Runtime.getRuntime().exec("bash c2nasm.bash output.c -O0"
+                    + " 2> err.txt 1> std.txt"
+            );
+            int exitv = proc.waitFor();
+            proc.destroyForcibly();
+            System.err.println(exitv);
+        }
 //        Runtime.getRuntime().exec("pwd");
 
         AsmModifier am = new AsmModifier("output.asm");
