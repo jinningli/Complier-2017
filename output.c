@@ -7,7 +7,6 @@
 
 //Function & Class Declare
 
-long fibo(long x);
 long str_le(long str1, long str2);
 long str_eql(long str1, long str2);
 long substring(long str, long l, long r);
@@ -183,50 +182,50 @@ long toString(long x) {
 }
 
 //Class Body
-long fibo(long x){
-//Define Local Variable
-long x_0_ = x;
-long __tmp0_1_;
-long __tmp1_2_;
-//Function Body
-if(((x_0_) < (2))) goto AsmLabel0; else goto AsmLabel2;;
-AsmLabel0:;
-return (x_0_);
-AsmLabel2:;
-__tmp0_1_ = fibo(((x_0_) - (2)));
-__tmp1_2_ = fibo(((x_0_) - (1)));
-return ((__tmp1_2_) + (__tmp0_1_));
-}
 int main(){
 //Grobal Variable Initialize
 //Define Local Variable
-long __tmp4_3_;
-long __tmp3_4_;
-long __tmp2_5_;
-long i_6_;
-long n_7_;
-long __tmp6_8_;
-long __tmp5_9_;
+long a_0_;
+long __tmp8_1_;
+long __tmp7_2_;
+long __tmp9_3_;
+long __tmp4_4_;
+long __tmp3_5_;
+long __tmp6_6_;
+long __tmp5_7_;
+long __tmp0_8_;
+long __tmp10_9_;
+long __tmp11_10_;
+long __tmp2_11_;
+long __tmp1_12_;
+long __tmp12_13_;
 //Function Body
-__tmp2_5_ = getInt();
-n_7_ = (__tmp2_5_);
-__tmp3_4_ = fibo((n_7_));
-__tmp4_3_ = toString((__tmp3_4_));
-println((__tmp4_3_));
+__tmp1_12_ = (3);
+__tmp0_8_ = __lib_malloc((((__tmp1_12_) * (8)) + (8)));
+*((long*)(__tmp0_8_)) = (__tmp1_12_);
+__tmp0_8_ = ((__tmp0_8_) + (8));
+a_0_ = (__tmp0_8_);
+__tmp3_5_ = size((a_0_));
+__tmp4_4_ = toString((__tmp3_5_));
+print(str_add(str_add((toMoStr("I have done ")), (__tmp4_4_)), (toMoStr(" little things"))));
 ;
-i_6_ = (0);
-AsmLabel4:;
-if(((i_6_) <= (100))) goto AsmLabel5; else goto AsmLabel7;;
-AsmLabel5:;
-__tmp5_9_ = fibo((30));
-__tmp6_8_ = toString((__tmp5_9_));
-println((__tmp6_8_));
+println((toMoStr("too young!")));
 ;
-AsmLabel6:;
-i_6_ = ((i_6_) + (1));
-goto AsmLabel4;
-AsmLabel7:;
-return (0);
+__tmp5_7_ = strlength((toMoStr("\"hahaha\"")));
+__tmp6_6_ = toString((__tmp5_7_));
+__tmp7_2_ = getString();
+print(str_add((__tmp7_2_), (__tmp6_6_)));
+;
+__tmp8_1_ = getInt();
+__tmp9_3_ = substring((toMoStr("four scores and seven years")), (0), (__tmp8_1_));
+println((__tmp9_3_));
+;
+__tmp10_9_ = parseInt((toMoStr("45 best songs in the world")));
+__tmp11_10_ = toString((__tmp10_9_));
+println((__tmp11_10_));
+;
+__tmp12_13_ = ord((toMoStr("45 best songs")), (5));
+return (__tmp12_13_);
 }
 
 //------------- IRBase Traverse End -------------

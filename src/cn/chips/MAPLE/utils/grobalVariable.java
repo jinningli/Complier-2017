@@ -19,4 +19,6 @@ public class grobalVariable extends Project {
     public static FuncDecl nowfunc = null;
     public static boolean inClassFunc = false;
     public static AST root = null;
+    public static FunctionConstants funcConst = new FunctionConstants();
+
 }

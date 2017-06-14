@@ -6,6 +6,7 @@ import cn.chips.MAPLE.ir.IR;
 import cn.chips.MAPLE.parser.*;
 
 import cn.chips.MAPLE.utils.Translate;
+import cn.chips.MAPLE.utils.grobalVariable;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -47,18 +48,15 @@ public class Main
             root.getDecls().IRtraverse();
         }
 
-//
-//        try {
-//            CodeGenerator c = new CodeGenerator(root.getDecls());
-//            c.generate(ir);
-//            if(localtest) {
-//                PrintStream tmpfout = new PrintStream(new FileOutputStream("chips.asm"));
-//                tmpfout.print(c.toSource());
-//            }else
-//                System.err.println(c.toSource());
-//        }catch (Exception e){
-//            return;
-//        }
+        try {
+            CodeGenerator c = new CodeGenerator(root.getDecls());
+            if(localtest) {
+                PrintStream tmpfout = new PrintStream(new FileOutputStream("output.asm"));
+                tmpfout.print(c.toSource());
+            }
+        }catch (Exception e){
+            return;
+        }
 
         Translate.operate();
     }

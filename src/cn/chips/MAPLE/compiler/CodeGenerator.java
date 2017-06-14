@@ -17,6 +17,7 @@ import cn.chips.MAPLE.utils.Declarations;
 import cn.chips.MAPLE.utils.grobalVariable;
 import cn.chips.MAPLE.utils.scope.ScopeNode;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -204,6 +205,19 @@ public class CodeGenerator {
 //            visit(s);
 //        }
 //        text._label(temp);
+    }
+
+    public static void addInsideFunction(String str){
+        Process proc = null;
+        try {
+            proc = Runtime.getRuntime().exec(str);
+            proc.waitFor();
+            proc.destroyForcibly();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void collectreg(StackFrameInfo sf){
