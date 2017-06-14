@@ -47,17 +47,7 @@ public class Main
         if(localtest) {
             root.getDecls().IRtraverse();
         }
-
-        try {
-            CodeGenerator c = new CodeGenerator(root.getDecls());
-            if(localtest) {
-                PrintStream tmpfout = new PrintStream(new FileOutputStream("output.asm"));
-                tmpfout.print(c.toSource());
-            }
-        }catch (Exception e){
-            return;
-        }
-
+        
         Translate.operate();
     }
 
