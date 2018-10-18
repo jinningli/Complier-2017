@@ -1,6 +1,8 @@
 # Maple: A Compiler Translate Mx* Language into X86 Assembly
 Project of MS208 Compiler
 
+A PDF to introduce my compiler (written in Chinese): <a href='Presentation.pdf'>Presentation.pdf</a>
+
 Please refer to this course wiki for details:
 <a href='https://acm.sjtu.edu.cn/wiki/Compiler_2017'>https://acm.sjtu.edu.cn/wiki/Compiler_2017</a>
 
