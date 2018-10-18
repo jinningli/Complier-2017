@@ -19,7 +19,7 @@ Documents of `Mx*` Language:
 ```
 cd Maple
 bash codegen.bash
-[Enter Your code]
+[Enter your code]
 [End with control + d]
 ```
 
