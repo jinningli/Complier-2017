@@ -13,15 +13,15 @@ Documents of `Mx*` Language:
 ## Structure
 ### Abstract Syntax Tree
 
-![](ast.png)
+<img src="https://github.com/jinningli/Complier-2017/ast.png">
 
 ### Intermediate language
 
-![](ir.png)
+<img src="https://github.com/jinningli/Complier-2017/ir.png">
 
 ### ASM Generation
 
-![](asm.png)
+<img src="https://github.com/jinningli/Complier-2017/asm.png">
 
 ### Usage
 ```
