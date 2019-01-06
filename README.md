@@ -12,11 +12,17 @@ Documents of `Mx*` Language:
 <a href='M_language_manual.pdf'>M_language_manual.pdf</a>
 ## Structure
 ### Abstract Syntax Tree
+
 ![](ast.png)
+
 ### Intermediate language
+
 ![](ir.png)
+
 ### ASM Generation
+
 ![](asm.png)
+
 ### Usage
 ```
 cd Maple
